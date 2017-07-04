@@ -1,0 +1,94 @@
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">用户管理
+    <small>添加权限</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="/">首页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#/main/user/authListView">权限</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="javascript:;">添加权限</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="tabbable-line boxless tabbable-reversed">
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>填写权限信息
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">名称</label>
+                                <div class="col-md-5">
+                                    <div class="input-icon left">
+                                        <i class="fa fa-user"></i>
+                                        <input type="text" class="form-control" id="FName" placeholder="请输入权限名称">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">描述</label>
+                                <div class="col-md-5">
+                                    <div class="input-icon left">
+                                        <i class="fa fa-envelope"></i>
+                                        <input type="text" class="form-control" id="FDesc" placeholder="请输入描述">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">权限模块</label>
+                                <div class="col-md-5">
+                                    <div class="input-icon left">
+                                        <i class="fa fa-envelope"></i>
+                                        <input type="text" class="form-control" placeholder="请输入权限模块（代码中的Controller）">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">权限动作</label>
+                                <div class="col-md-5">
+                                    <div class="input-icon left">
+                                        <i class="fa fa-sitemap"></i>
+                                        <input type="text" class="form-control" placeholder="请输入权限模块（代码中的Action）">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">菜单ID</label>
+                                <div class="col-md-5">
+                                    <div class="input-icon left">
+                                        <i class="fa fa-sitemap"></i>
+                                        <input type="text" class="form-control" placeholder="请输入菜单ID">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="button" class="btn green" onclick='Alpaca.to("#/main/user/addGroup")'>添加</button>
+                                    <button type="button" class="btn default" onclick='Alpaca.to("#/main/user/groupListView")'>取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+<link href="<?spa echo g_baseUrl ?>sche/assets/admin/pages/css/login.css" rel="stylesheet" type="text/css">
+<div class="login">
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        <a href="\">
+            <img src="<?spa echo g_baseUrl ?>/common/img/logo.png" style="width: 160px;" alt="logo"/>
+        </a>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        <form class="login-form" method="post">
+            <h3 class="form-title">账号登录</h3>
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>请输入用户名与密码. </span>
+            </div>
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">邮箱</label>
+                <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="邮箱" id="FEmail" name="username"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">密码</label>
+                <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" id="FPasswd" name="password"/>
+            </div>
+            <div class="form-actions">
+                <button id="login-form-submit" type="button" class="btn btn-success uppercase">登录</button>
+                <label class="rememberme check">
+                    <input type="checkbox" name="remember" value="1"/>记住账号 </label>
+                <a href="javascript:;" id="forget-password" class="forget-password">忘记密码?</a>
+            </div>
+            <div class="login-options">
+                <h4>使用其他方式登录：<a href="javascript:;" id="login-email" class="">邮件</a></h4>
+            </div>
+            <div class="create-account">
+                <p>
+                    <a href="javascript:;" id="register-btn" class="uppercase">注册新账号</a>
+                </p>
+            </div>
+        </form>
+        <!-- END LOGIN FORM -->
+        <!-- BEGIN FORGOT PASSWORD FORM -->
+        <form class="forget-form" method="post">
+            <h3>密码忘记了?</h3>
+            <p>
+                请在下面的输入框中输入e-mail地址：
+            </p>
+            <div class="form-group">
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="邮箱" name="email"/>
+            </div>
+            <div class="form-actions">
+                <button type="button" id="back-btn" class="btn btn-default">后退</button>
+                <button type="submit" class="btn btn-success uppercase pull-right">提交</button>
+            </div>
+        </form>
+        <!-- END FORGOT PASSWORD FORM -->
+        <!-- BEGIN FORGOT PASSWORD FORM -->
+        <form class="login-form-email" method="post" style="display: none;">
+            <h3>使用邮箱登录</h3>
+            <p>
+                请输入e-mail地址：
+            </p>
+            <div class="form-group">
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="邮箱" name="email"/>
+            </div>
+            <div class="form-actions">
+                <button type="button" id="email-back-btn" class="btn btn-default">后退</button>
+                <button type="submit" class="btn btn-success uppercase pull-right">提交</button>
+            </div>
+        </form>
+        <!-- END FORGOT PASSWORD FORM -->
+        <!-- BEGIN REGISTRATION FORM -->
+        <form class="register-form" action="index.html" method="post">
+            <h3>注册新账号</h3>
+            <p class="hint">
+                请填写您的注册信息:
+            </p>
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">邮箱</label>
+                <div class="input-group">
+                    <input class="form-control placeholder-no-fix" type="text" id="Reg-FEmail" placeholder="邮箱" name="email"/>
+                    <span class="input-group-btn">
+					    <button class="btn btn-success btn-send-email" type="button" style="height: 43px;">发送验证码</button>
+					</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">验证码</label>
+                <input class="form-control placeholder-no-fix" type="text" id="Reg-FToken"placeholder="邮箱验证码" name="code"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">姓名</label>
+                <input class="form-control placeholder-no-fix" type="text" id="Reg-FName" placeholder="姓名" name="fullname"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">密码</label>
+                <input class="form-control placeholder-no-fix" type="password"  id="Reg-FPasswd" autocomplete="off" id="register_password" placeholder="密码" name="password"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">确认密码</label>
+                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="确认密码" name="rpassword"/>
+            </div>
+            <div class="form-group margin-top-20 margin-bottom-20">
+                <label class="check">
+                    <input type="checkbox" name="tnc"/> 我同意 <a href="javascript:;">
+                    网站协议 </a>
+                    & <a href="javascript:;">
+                    腾讯大燕网产品技术部 </a>
+                </label>
+                <div id="register_tnc_error">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" id="register-back-btn" class="btn btn-default">后退</button>
+                <button type="button" id="register-submit-btn" class="btn btn-success uppercase pull-right">提交</button>
+            </div>
+        </form>
+        <!-- END REGISTRATION FORM -->
+    </div>
+    <div class="copyright">
+        2017 © 腾讯-大燕网. 产品技术部.
+    </div>
+</div>
+<script src="<?spa echo g_baseUrl ?>sche/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="<?spa echo g_baseUrl ?>common/js/md5-min.js" type="text/javascript"></script>
+<script>
+
+</script>

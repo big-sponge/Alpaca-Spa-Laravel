@@ -1,0 +1,122 @@
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}common/js/md5-min.js"></script>
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">用户管理（后台）</span> - 编辑用户</h4>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a><i class="icon-home2 position-left"></i> 用户管理（后台）</a></li>
+            <li><a href="#/main/admin/memberListView">用户列表</a></li>
+            <li class="active">编辑用户</li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <!-- Basic responsive configuration -->
+
+    <form id="member-edit">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h5 class="panel-title">编辑用户信息<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group">
+                            <label>用户ID:</label>
+                            <input type="text" class="form-control" placeholder="id" name="id" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label>用户名称:</label>
+                            <input type="text" class="form-control" placeholder="请输入用户名称" name="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>邮箱:</label>
+                            <input type="text" class="form-control" placeholder="请输入邮箱" name="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label>手机号码:</label>
+                            <input type="text" class="form-control" placeholder="请输入手机号码" name="mobile">
+                        </div>
+
+                        <div class="form-group">
+                            <label>密码:</label>
+                            <input type="password" class="form-control" placeholder="请输入密码" name="passwd">
+                        </div>
+
+                        <div class="form-group">
+                            <label>确认密码:</label>
+                            <input type="password" class="form-control" placeholder="请确认密码" name="passwd2">
+                        </div>
+
+                        <div class="form-group">
+                            <label>用户分组:</label>
+                            <select multiple="multiple" class="select" name="group"></select>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary" onclick="submitMember()"><i class="icon-checkmark3 position-left"></i>保存</button>
+                            <button type="button" class="btn btn-default" onclick="cancel()"><i class="icon-undo position-left"></i>取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- /basic responsive configuration -->
+    <!-- Footer -->
+    <div id="page-content-footer"></div>
+    <!-- /footer -->
+</div>
+<!-- /content area -->
+<script>
+
+    /* 提交表单 */
+    var submitMember = function () {
+        var request    = {};
+        request.id     = $('#member-edit input[name ="id"]').val();
+        request.name   = $('#member-edit input[name ="name"]').val();
+        request.email  = $('#member-edit input[name ="email"]').val();
+        request.mobile = $('#member-edit input[name ="mobile"]').val();
+        request.passwd = $('#member-edit input[name ="passwd"]').val();
+        if (request.passwd){
+            request.passwd = hex_md5(request.passwd);
+        }
+        request.groups = $('#member-edit [name ="group"]').val();
+
+        AlpacaAjax({
+            url: g_url + API['admin_member_edit'],
+            data: request,
+            async: false,
+            success: function (data) {
+                console.log(data);
+                Notific(data.msg);
+                if(data.code == 9900){
+                    Alpaca.to("#/main/admin/memberListView");
+                }
+            },
+        });
+    };
+
+    /* 取消 */
+    var cancel = function () {
+        Alpaca.to("#/main/admin/memberListView");
+    }
+
+</script>

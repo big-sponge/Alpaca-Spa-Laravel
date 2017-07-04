@@ -1,0 +1,174 @@
+<style>
+    .user-row:hover {
+        cursor: pointer;
+    }
+
+    .deal-btn-start {
+        color: #44b6ae;
+        border-color: #44b6ae;
+        border-width: 1px;
+    }
+
+    .deal-btn-finish {
+        color: #FF8C00;
+        border-color: #FF8C00;
+        border-width: 1px;
+    }
+
+    .deal-status-doing {
+        color: #44b6ae;
+        font-weight: bold;
+    }
+
+    .deal-status-finish {
+        color: #FF8C00;
+        font-weight: bold;
+    }
+
+    .deal-status-wait {
+        color: #0b79ca;
+        font-weight: bold;
+    }
+
+    .checkbox {
+        font-size:82px;
+        width: 0.6em;
+        height: 0.34em;
+        background-color: #e5e5e5;
+        -webkit-border-radius: 0.34em;
+        -moz-border-radius: 0.34em;
+        border-radius: 0.34em !important;
+        z-index: 0;
+        margin: 0;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        -webkit-transition-duration: 300ms;
+        -moz-transition-duration: 300ms;
+        -ms-transition-duration: 300ms;
+        -o-transition-duration: 300ms;
+        transition-duration: 300ms;
+    }
+    .checkbox:before {
+        font-size:82px;
+        content: "";
+        width: 0.54em;
+        height: 0.28em;
+        background-color: #fff;
+        border: 1px solid #fff;
+        position: absolute;
+        z-index: 1;
+        top: 0.02em;
+        left: 0.02em;
+        border-radius: 0.5em;
+        -webkit-transition-duration: 300ms;
+        transition-duration: 300ms;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    .bg_checkbox {
+        background-color: #4cd964;
+    }
+    .checkbox.change:before {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    .checkbox:after {
+        font-size:82px;
+        content: "";
+        width: 0.3em;
+        height: 0.3em;
+        border-radius: 0.32em;
+        box-shadow: 0 0.02em 0.06em rgba(0, 0, 0, 0.4);
+        position: absolute;
+        background-color: #fff;
+        top: 0.02em;
+        left: 0.02em;
+        z-index: 99;
+        -webkit-transition-duration: 300ms;
+        transition-duration: 300ms;
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+    }
+    .checkbox.move:after {
+        font-size:82px;
+        -webkit-transform: translateX(0.28em);
+        transform: translateX(0.28em);
+    }
+    .chooser{
+        width: 0.2rem;
+        display: none;
+    }
+</style>
+
+<table class="table table-togglable table-hover">
+<thead>
+<tr>
+    <th data-toggle="true">编号</th>
+    <th data-hide="phone">任务名称</th>
+    <th data-hide="phone,tablet">类型</th>
+    <th data-hide="phone,tablet">时间间隔</th>
+    <th data-hide="">开始时间</th>
+    <th data-hide="phone,tablet">结束时间</th>
+    <th data-hide="phone,tablet">上次执行时间</th>
+    <th data-hide="phone,tablet">下次执行时间</th>
+    <th data-hide="phone,tablet">执行任务</th>
+    <th data-hide="phone">状态</th>
+    <th data-hide="phone">操作</th>
+</tr>
+</thead>
+<tbody>
+<?spa foreach(it.task as key => item): ?>
+<?spa var index = key + 1; ?>
+<tr name="<?spa echo index ?>">
+    <td>{{= index }}</td>
+    <td>{{= item.NAME }}</td>
+    <?spa
+        if(item['TYPE'] == 1){
+            item['TYPE_NAME'] = '执行一次';
+            item['INTERVAL'] = '';
+        }else{
+            item['TYPE_NAME'] = '循环执行';
+            }
+    ?>
+    <td><?spa echo item['TYPE_NAME'] ?></td>
+    <td><?spa echo item['INTERVAL'] ?></td>
+    <td><?spa echo item['BEGIN_TIME'] ?></td>
+    <td><?spa echo item['END_TIME'] ?></td>
+    <td><?spa echo item['LAST_TIME'] ?></td>
+    <td><?spa echo item['NEXT_TIME'] ?></td>
+    <td><?spa echo item['ACTION'] ?></td>
+    <td>
+        <input type="hidden"  class="task-status" value="<?spa echo item['STATUS'] ?>" />
+        <input type="checkbox"  class="chooser" />
+        <div class="checkbox bg_checkbox change move" onclick="$(this).prev('.chooser').click()"></div>
+    </td>
+    <td>
+        <button type="button" class="btn btn-default btn-xs" onclick='editTask("{{= index }}")'><i class="icon-hat position-left"></i>编辑</button>
+        <button type="button" class="btn btn-default btn-xs" onclick='deleteTask("{{= index }}")'><i class="icon-cross2 position-left"></i>删除</button>
+    </td>
+</tr>
+<?spa endForeach; ?>
+
+</tbody>
+</table>
+<script>
+    var editTask = function(id){
+        AlpacaAjax({
+            url: g_url + API['crontab_info'],
+            data: {INDEX:id},
+            success: function (data) {
+                if(data.code == 9900){
+                    console.log(data);
+                    data.data['result_data']['INDEX'] = id;
+                    Alpaca.to("#/main/crontab/editView",data.data['result_data']);
+                }
+            },
+        })
+    };
+
+    var deleteTask = function(id){
+        Alpaca.to("#/main/crontab/removeTask/"+id,{id:id});
+    };
+</script>

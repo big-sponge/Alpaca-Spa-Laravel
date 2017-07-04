@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="<?spa echo g_baseUrl ?>main/assets/global/plugins/jstree/dist/themes/default/style.min.css"/>
+<div class="note note-info margin-top-10">
+    <?spa if(it.isReadonly) { ?>
+    <p class="text-muted"> 当前分组拥有以下权限：</p>
+    <?spa }else{ ?>
+    <p class="text-muted"> 请在下面的列表中选择权限：</p>
+    <?spa } ?>
+    <div class="portlet-body">
+        <div id="area-tree" class="tree-demo">
+        </div>
+    </div>
+</div>
+
+<script src="<?spa echo g_baseUrl ?>main/assets/global/plugins/jstree/dist/jstree.min.js"></script>
+<script>
+    var handleAuthArea= function (data) {
+        $('#area-tree').jstree({
+            'plugins': ["wholerow", "checkbox", "types"],
+            'core': {
+                "themes": {
+                    "responsive": false
+                },
+                'data':data,
+            },
+            "types": {
+                "default": {
+                    "icon": "fa fa-folder icon-state-warning icon-lg"
+                },
+                "file": {
+                    "icon": "fa fa-file icon-state-warning icon-lg"
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,106 @@
+<style>
+
+    .avatar-box{
+        padding-left: 10px;
+    }
+
+    .avatar-box img{
+        width: 60px;
+        vertical-align: bottom;
+    }
+
+    .avatar-box span{
+      font-weight: bold;
+    }
+
+    .form-group .form-control-static, .form-group textarea{
+        font-weight: bold
+    }
+
+</style>
+
+{{ console.log(it);  }}
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h5 class="modal-title">个人信息</h5>
+        </div>
+        <hr>
+        <form>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="row avatar-box">
+                        {{ var imgUrl = g_url+API["data_member_avatar"] +"?id="+it.C_ID+"&type=1"; }}
+                        {{ var imgUrlBig = g_url+API["data_member_avatar"] +"?id="+it.C_ID+"$image.jpg"; }}
+                        <div class="thumbnail">
+                            <a href="{{= imgUrlBig }}" target="_blank" data-popup="lightbox" style="display:inline-block;">
+                                <img src="{{= imgUrl }}" alt="" style="width: 60px; vertical-align: bottom; display:inline-block;" />
+                            </a>
+                            <span>{{= it.UserName }}</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>出生日期:</label>
+                            <div class="form-control-static">{{= it.UserBirthday?(it.UserBirthday).substring(0,10):'' }}</div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label>性别:</label>
+                            {{var sex_label = (it.UserSex == 1)? '男':'女'; }}
+                            <div class="form-control-static">{{= sex_label }}</div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label>证件类型:</label>
+                            <div class="form-control-static">{{= it.UserCertifyCardType }}</div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label>证件号码:</label>
+                            <div class="form-control-static">{{= it.UserCertifyCardNo }}</div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>单位:</label>
+                            <div class="form-control-static">{{= it.CardUnit }}</div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label>部门:</label>
+                            <div class="form-control-static">{{= it.CardDepart }}</div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label>职务:</label>
+                            <div class="form-control-static">{{= it.UserCareer }}</div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label>联系电话:</label>
+                            <div class="form-control-static">{{= it.ContactTel }}</div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>备注:</label>
+                            <textarea style="background-color: #fff; resize:none;" rows="5" cols="5" class="form-control" readonly="readonly">{{= it.CardMemo }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,214 @@
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/pages/dashboard.js"></script>
+
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">首页</span> - 实时信息</h4>
+        </div>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+
+    <div class="row">
+        <div class="col-lg-9">
+            <!-- Traffic sources -->
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h4 class="panel-title">固定门禁<a class="heading-elements-toggle"><i class="icon-more"></i></a></h4>
+
+                    <div class="heading-elements">
+
+                        <div class="media-left media-bottom">
+                            <select class="form-control">
+                                <option value="-1">请选择门禁号</option>
+                                <option value="1">门禁DYW-001</option>
+                            </select>
+                        </div>
+
+                        <div class="media-left media-bottom" style="padding-right: 8px;">
+                            <a class="btn border-indigo-400 text-indigo-400 btn-flat btn-rounded btn-xs btn-icon"><i class="icon-trophy3"></i></a>
+                        </div>
+
+                        <div class="media-left" style="padding-right: 0;">
+                            <h5 class="text-semibold no-margin">
+                                1,132
+                                <small class="display-block no-margin">识别总数</small>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <hr style="margin: 0">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">实时监控</h5>
+                            </div>
+                            <div class="panel panel-body">
+                                <video style="width: 100%" src="#" id="monitor_live" poster="{{= g_baseUrl}}main/assets/monitor/images/demo-img1.png" width="auto" height="100%" controls
+                                       autoplay="autoplay" playsinline=true>
+                                    <source src="#" type="application/vnd.apple.mpegurl"/>
+                                </video>
+
+                                <hr>
+                                <h5 class="panel-title">正在识别</h5>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="panel panel-body">
+                                            <img style="width: 100%" src="{{= g_baseUrl}}main/assets/monitor/images/demo-img1.png">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="panel panel-body">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img src="{{= g_baseUrl}}main/assets/monitor/images/profile.jpg" style="width: 70px; height: 70px;" class="img-circle" alt="">
+                                                </div>
+                                                <div class="media-body">
+                                                    <p><strong class="text-muted">姓名</strong>：XXX</p>
+                                                    <p><strong class="text-muted">出入标志</strong>：XXXX</p>
+                                                    <p><strong class="text-muted">证件类型</strong>：XXXX</p>
+                                                    <p><strong class="text-muted">证件编号</strong>：XXXXXXXXXXX</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">识别记录</h5>
+                            </div>
+                            <div class="panel panel-body">
+                                <div class="media">
+                                    <div class="media-header">识别成功 00:00:00</div>
+                                    <hr>
+                                    <div class="media-left">
+                                        <img src="{{= g_baseUrl}}main/assets/monitor/images/profile.jpg" style="width: 70px; height: 70px;" class="img-circle" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p><strong class="text-muted">姓名</strong>：XXX</p>
+                                        <p><strong class="text-muted">出入标志</strong>：XXXX</p>
+                                        <p><strong class="text-muted">证件类型</strong>：XXXX</p>
+                                        <p><strong class="text-muted">证件编号</strong>：XXXXXXXXXXX</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-body">
+                                <div class="media">
+                                    <div class="media-header">识别成功 00:00:00</div>
+                                    <hr>
+                                    <div class="media-left">
+                                        <img src="{{= g_baseUrl}}main/assets/monitor/images/profile.jpg" style="width: 70px; height: 70px;" class="img-circle" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p><strong class="text-muted">姓名</strong>：XXX</p>
+                                        <p><strong class="text-muted">出入标志</strong>：XXXX</p>
+                                        <p><strong class="text-muted">证件类型</strong>：XXXX</p>
+                                        <p><strong class="text-muted">证件编号</strong>：XXXXXXXXXXX</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-body">
+                                <div class="media">
+                                    <div class="media-header">识别失败 00:00:00</div>
+                                    <hr>
+                                    <div class="media-body">
+                                        <img style="width: 100%" src="{{= g_baseUrl}}main/assets/monitor/images/demo-img1.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /traffic sources -->
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <!-- Traffic sources -->
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h4 class="panel-title">移动门禁<a class="heading-elements-toggle"><i class="icon-more"></i></a></h4>
+
+                    <div class="heading-elements">
+                        <div class="media-left media-bottom" style="padding-right: 8px;">
+                            <a class="btn border-indigo-400 text-indigo-400 btn-flat btn-rounded btn-xs btn-icon"><i class="icon-trophy3"></i></a>
+                        </div>
+
+                        <div class="media-left" style="padding-right: 0;">
+                            <h5 class="text-semibold no-margin">
+                                1,132
+                                <small class="display-block no-margin">识别总数</small>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <hr style="margin: 0">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="panel panel-body">
+                            <div class="media">
+                                <div class="media-header">识别成功 00:00:00</div>
+                                <hr>
+                                <div class="media">
+                                    <div class="media-body">
+                                        <img class="img-responsive content-group" src="{{= g_baseUrl}}main/assets/monitor/images/demo-img1.png">
+                                    </div>
+                                </div>
+                                <hr style="margin: 0">
+                                <div class="media">
+                                <div class="media-left">
+                                    <img src="{{= g_baseUrl}}main/assets/monitor/images/profile.jpg" style="width: 70px; height: 70px;" class="img-circle" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <p><strong class="text-muted">姓名</strong>：XXX</p>
+                                    <p><strong class="text-muted">出入标志</strong>：XXXX</p>
+                                    <p><strong class="text-muted">证件类型</strong>：XXXX</p>
+                                    <p><strong class="text-muted">证件编号</strong>：XXXXXXXXXXX</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-body">
+                            <div class="media">
+                                <div class="media-header">识别成功 00:00:00</div>
+                                <hr>
+                                <div class="media">
+                                    <div class="media-body">
+                                        <img class="img-responsive content-group"  src="{{= g_baseUrl}}main/assets/monitor/images/test.jpg">
+                                    </div>
+                                </div>
+                                <hr style="margin: 0">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <img src="{{= g_baseUrl}}main/assets/monitor/images/profile.jpg" style="width: 70px; height: 70px;" class="img-circle" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p><strong class="text-muted">姓名</strong>：XXX</p>
+                                        <p><strong class="text-muted">出入标志</strong>：XXXX</p>
+                                        <p><strong class="text-muted">证件类型</strong>：XXXX</p>
+                                        <p><strong class="text-muted">证件编号</strong>：XXXXXXXXXXX</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /traffic sources -->
+
+            </div>
+        </div>
+    </div>
+    <!-- /main charts -->
+
+    <!-- Footer -->
+    <div id="page-content-footer"></div>
+    <!-- /footer -->
+</div>
+<!-- /content area -->

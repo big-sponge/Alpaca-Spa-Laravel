@@ -1,0 +1,28 @@
+<span>
+    <?spa var count = 0; ?>
+    <?spa for(var index in it){ ?>
+        <?spa if(it[index].isChecked == true){ ?>
+            <?spa count++; ?>
+            <button type="button" class="btn my-group-item-select btn-xs green" name="<?spa echo index ?>"  ><i class="fa fa-times"></i><?spa echo it[index].name ?></button>
+        <?spa } ?>
+    <?spa } ?>
+</span>
+
+<?spa if(count == 0){ ?>
+<button type="button" class="btn btn-xs btn-default">请从下面选择</button>
+<?spa }else{ ?>
+<button type="button" class="btn btn-xs btn-default">可以选择多个</button>
+<?spa } ?>
+<br>
+<br>
+<div class="note note-info ">
+所有分组：
+<br>
+<?spa for(var index in it){ ?>
+    <?spa if(it[index].isChecked == true){ ?>
+        <button type="button" class="my-group-item btn btn-circle btn-xs green" name="<?spa echo index ?>" > <?spa echo it[index].name ?> </button>
+    <?spa }else{ ?>
+        <button type="button" class="my-group-item btn btn-circle btn-xs btn-default" name="<?spa echo index ?>" > <?spa echo it[index].name ?> </button>
+    <?spa } ?>
+<?spa } ?>
+</div>

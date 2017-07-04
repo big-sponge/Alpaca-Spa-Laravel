@@ -1,0 +1,10 @@
+<option value="0">请选择部门</option>
+<?spa for(var i in it.departments){ ?>
+<?spa if(it.departments[i].FId == it.selected){ ?>
+<option value='<?spa echo it.departments[i].FId ?>' selected="true"><?spa echo it.departments[i].FName ?></option>
+<?spa } else{ ?>
+<option value='<?spa echo it.departments[i].FId ?>'><?spa echo it.departments[i].FName ?></option>
+<?spa } ?>
+<?spa } ?>
+
+

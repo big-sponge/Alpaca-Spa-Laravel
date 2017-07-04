@@ -1,0 +1,116 @@
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/core/libraries/jquery_ui/core.min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/core/libraries/jquery_ui/effects.min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/plugins/trees/fancytree_all.min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/plugins/trees/fancytree_childcounter.js"></script>
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">用户管理（后台）</span> - 编辑分组</h4>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a><i class="icon-home2 position-left"></i> 用户管理（后台）</a></li>
+            <li><a href="#/main/admin/groupListView">分组列表</a></li>
+            <li class="active">编辑分组</li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <!-- Basic responsive configuration -->
+
+    <form id="group-edit">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h5 class="panel-title">编辑分组信息<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group">
+                            <label>分组ID:</label>
+                            <input type="text" class="form-control" placeholder="id" name="id" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label>分组名称:</label>
+                            <input type="text" class="form-control" placeholder="请输入分组名称" name="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>描述:</label>
+                            <input type="text" class="form-control" placeholder="请输入分组描述" name="desc">
+                        </div>
+
+                        <div class="form-group">
+                            <label>选择分组权限:</label>
+
+                            <div class="tree-checkbox-hierarchical well border-left-success border-left-lg">
+
+                            </div>
+
+                        </div>
+
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary" onclick="submitGroup()"><i class="icon-checkmark3 position-left"></i>保存</button>
+                            <button type="button" class="btn btn-default" onclick="cancel()"><i class="icon-undo position-left"></i>取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- /basic responsive configuration -->
+    <!-- Footer -->
+    <div id="page-content-footer"></div>
+    <!-- /footer -->
+</div>
+<!-- /content area -->
+
+<script>
+    /* 提交表单 */
+    var submitGroup = function () {
+        var request  = {};
+        request.id   = $('#group-edit input[name ="id"]').val();
+        request.name = $('#group-edit input[name ="name"]').val();
+        request.desc = $('#group-edit input[name ="desc"]').val();
+
+        /*获取选中的key*/
+        var selectedNodes = $(".tree-checkbox-hierarchical").fancytree("getTree").getSelectedNodes(false);
+        var selectKeys    = [];
+        for (var i in selectedNodes) {
+            selectKeys.push(selectedNodes[i]['key']);
+        }
+        request.powers = selectKeys;
+
+        AlpacaAjax({
+            url: g_url + API['admin_group_edit'],
+            data: request,
+            async: false,
+            success: function (data) {
+                console.log(data);
+                Notific(data.msg);
+                if (data.code == 9900) {
+                    Alpaca.to("#/main/admin/groupListView");
+                }
+            },
+        });
+    };
+
+    /* 取消 */
+    var cancel = function () {
+        Alpaca.to("#/main/admin/groupListView");
+    }
+
+</script>

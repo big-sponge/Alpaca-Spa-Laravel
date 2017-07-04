@@ -1,0 +1,51 @@
+<style>
+    .sorting {
+        color: #44b6ae;
+        font-weight: bold;
+        border-color: #44b6ae;
+        border-width: 2px;
+    }
+</style>
+
+<input type="hidden" id="alert-search-keys" value='<?spa echo JSON.stringify(it.keys) ?>'/>
+<input type="hidden" id="alert-search-sorts" value='<?spa echo JSON.stringify(it.sorts) ?>'/>
+<h5 class="bold">查询条件：
+    <?spa for(var i in it.keys){ ?>
+    <button type="button" class="btn btn-search-key btn-xs green" name='<?spa echo i ?>'><i class="fa fa-times"></i><?spa echo it.keys[i]['label'] ?></button>
+    <?spa } ?>
+</h5>
+<div class="note note-info" style="padding-top: 10px; padding-bottom: 10px;">
+    <form action="#" class="form-horizontal">
+        <div class="form-group" style="margin-bottom: 0px;">
+            <div class="col-md-2">
+                <?spa  var dataResult = getDepartList(); var departments = dataResult.departments; ?>
+                <select class="bs-select form-control alert-search-key department" id="FDepartmentId" name="depart">
+                    <option value="0">请选择部门</option>
+                    <?spa for(var index in departments ){ ?>
+                    <option value="<?spa echo departments[index]['FId'] ?>"><?spa echo departments[index]['FName'] ?></option>
+                    <?spa } ?>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <?spa  var dataResult = getGroupList(); var groups = dataResult.groups; ?>
+                <select class="bs-select form-control alert-search-key" id="FGroupId" name="type">
+                    <option value="0">请选择分组</option>
+                    <?spa for(var index in groups ){ ?>
+                    <option value="<?spa echo groups[index]['FId'] ?>"><?spa echo groups[index]['FName'] ?></option>
+                    <?spa } ?>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <input class="form-control" placeholder="查找" size="16" type="text" value="" id="key"/>
+                    <span class="input-group-btn"><a href="javascript:;" class="btn btn-key-search green"><i class="icon-magnifier"></i></a></span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<h5 class="bold hidden">排序条件：
+    <button type="button" class="my-group-item btn btn-xs btn-default btn-my-sorting"  id ="sorts-FCreateTime" name="FCreateTime"><i class="fa fa-sort-numeric-asc"></i> 创建时间</button>
+    <button type="button" class="my-group-item btn btn-xs btn-default btn-my-sorting sorting" id ="sorts-FBeginTime" name="FBeginTime"> <i class="fa fa-sort-numeric-asc"></i> 开始时间</button>
+    <button type="button" class="my-group-item btn btn-xs btn-default btn-my-sorting" id ="sorts-FEndTime" name="FEndTime"> <i class="fa fa-sort-numeric-asc"></i> 完成时间</button>
+</h5>

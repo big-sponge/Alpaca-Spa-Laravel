@@ -1,0 +1,71 @@
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">个人信息</span> - 信息明细</h4>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a><i class="icon-home2 position-left"></i> 个人信息</a></li>
+            <li class="active">信息明细</li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <!-- Main charts -->
+    <div class="panel panel-flat">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <fieldset class="content-group">
+                    <legend class="text-bold">个人信息</legend>
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">用户Id</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" readonly="readonly" value="{{= it.id }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">用户名称</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" readonly="readonly" value="{{= it.name }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">邮箱</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" readonly="readonly" value="{{= it.email }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">手机</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" readonly="readonly" value="{{= it.mobile }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">分组</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" readonly="readonly" value="{{= it.mobile }}">
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary">确认</button>
+                </div>
+            </form>
+        </div>
+    </div></div>
+    <!-- /main charts -->
+
+    <!-- Footer -->
+    <div id="page-content-footer"></div>
+    <!-- /footer -->
+</div>
+<!-- /content area -->

@@ -1,0 +1,94 @@
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">用户管理
+    <small>用户明细</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="/">首页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#/main/user/userListView">用户</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="javascript:;">用户明细</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="tabbable-line boxless tabbable-reversed">
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>用户信息
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal">
+                        <div class="form-body">
+                            <input type="hidden" value='<?spa echo JSON.stringify(it)  ?>' id="user-info-<?spa echo it.id ?>"/>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">用户Id</label>
+                                <div class="col-md-5">
+                                    <p class="form-control-static"><?spa echo it.id ?></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">用户名称</label>
+                                <div class="col-md-5">
+                                    <p class="form-control-static"><?spa echo it.name ?></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">邮箱</label>
+                                <div class="col-md-5">
+                                    <p class="form-control-static"><?spa echo it.email ?></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">手机</label>
+                                <div class="col-md-5">
+                                    <p class="form-control-static"><?spa echo it.mobile ?></p>
+                                </div>
+                            </div>
+                            <div class="form-group hidden">
+                                <label class="col-md-3 control-label">部门</label>
+                                <div class="col-md-5">
+                                    <p class="form-control-static">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">用户分组</label>
+                                <input type="hidden" id="groups" value=''>
+                                <div class="col-md-5 margin-top-10" id="group-area">
+                                    <span>
+                                        <?spa for(var index in it.group){ ?>
+                                        <button type="button" class="btn btn-circle btn-xs green" name='<?spa echo it.group[index].id ?>'> <?spa echo it.group[index].name ?> </button>
+                                        <?spa } ?>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="button" class="btn green" onclick='Alpaca.to("#/main/user/userListView")'>返回</button>
+                                    <button type="button" class="btn green" onclick='Alpaca.to("#/main/user/userEditView/<?spa echo it.id ?>")'>编辑</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

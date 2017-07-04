@@ -1,0 +1,134 @@
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<link rel="stylesheet" type="text/css" href="{{= g_baseUrl}}main/assets/js/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+<link rel="stylesheet" type="text/css" href="{{= g_baseUrl}}main/assets/css/font-awesome/css/font-awesome.min.css"/>
+<style>
+
+    .form-group .form-control-static, .form-group textarea {
+        font-weight: bold
+    }
+
+</style>
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h5 class="modal-title">详细信息</h5>
+        </div>
+        <hr style="margin-bottom: 0px;">
+        <form class="form-horizontal" id='edit-task-form'>
+            <div class="modal-body">
+                <div class="form-group" id="edit-task-form-id">
+                    <label class="control-label col-sm-3">任务序号：</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="id" class="form-control" name="task-index" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">任务名称:</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="请输入任务名称" class="form-control" name="task-name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">类型：</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="run-type">
+                            <option value='1'>执行一次</option>
+                            <option value='2'>循环执行</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">时间间隔</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="周期" name="task-time"/>
+                                <span class="input-group-btn" style="width: 140px;">
+                                    <select class="bs-select form-control" onchange="" name="task-time-unit">
+                                        <option value="second">秒（second）</option>
+                                        <option value="minute">分（minute）</option>
+                                        <option value="hour">小时（hour）</option>
+                                        <option value="day">日（day）</option>
+                                        <option value="month">月（month）</option>
+                                        <option value="year">年（year）</option>
+                                    </select>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">开始时间:</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="请输入开始时间" class="form-control datetime-picker" name="begin-time">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">截止时间:</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="请输入截止时间" class="form-control datetime-picker" name="end-time">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">执行任务:</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="/crontab/index/test" class="form-control" name="task-action">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">状态：</label>
+                    <div class="col-sm-9">
+                        <select class="bs-select form-control" name="task-status">
+                            <option value='1'>开启</option>
+                            <option value='2'>关闭</option>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary" onclick="submitTask()"><i class="icon-checkmark3 position-left"></i>保存</button>
+                    <button type="button" class="btn btn-default" onclick='$(".close").click()'><i class="icon-undo position-left"></i>取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    /* 提交表单 */
+    var submitTask = function () {
+        var request = {};
+
+        /*任务序号*/
+        request['INDEX'] = $('#edit-task-form input[name="task-index"]').val();
+        /*任务名称*/
+        request['NAME'] = $('#edit-task-form input[name="task-name"]').val();
+        /*任务类型*/
+        request['TASK_TYPE'] = $('#edit-task-form select[name="run-type"]').val();
+        /*开始时间*/
+        request['BEGIN_TIME'] = $('#edit-task-form input[name="begin-time"]').val();
+        /*截止*/
+        request['END_TIME'] = $('#edit-task-form input[name="end-time"]').val();
+        /*任务动作*/
+        request['ACTION'] = $('#edit-task-form input[name="task-action"]').val();
+        /*状态*/
+        request['STATUS'] = $('#edit-task-form select[name="task-status"]').val();
+
+        /*时间间隔*/
+        request['INTERVAL'] = $('#edit-task-form input[name="task-time"]').val() + " " + $('#edit-task-form select[name="task-time-unit"]').val();
+
+        AlpacaAjax({
+            url: g_url + API['crontab_edit'],
+            data: request,
+            async: false,
+            success: function (data) {
+                Notific(data.msg);
+                if (data.code == 9900) {
+                    Alpaca.to("#/main/crontab/index");
+                }
+            },
+        });
+    };
+</script>

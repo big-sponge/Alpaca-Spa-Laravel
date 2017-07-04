@@ -1,0 +1,52 @@
+<table class="table table-togglable table-hover" style="word-break: keep-all;">
+<thead>
+<tr >
+    <th data-toggle="true">ID序号</th>
+    <th data-hide="">姓名</th>
+    <th data-hide="phone,tablet">证件类型</th>
+    <th data-hide="phone,tablet">证件编号</th>
+    <th data-hide="phone,tablet">电子标签号</th>
+    <th data-hide="phone,tablet">电子标类型</th>
+    <th data-hide="phone,tablet">卡状态</th>
+    <th data-hide="">组别</th>
+    <th data-hide="phone">启用日期</th>
+    <th data-hide="phone,tablet">失效日期</th>
+    <th data-hide="phone,tablet">创建日期</th>
+    <th data-hide="phone,tablet">最后修改日期</th>
+    <th data-hide="phone">个人信息</th>
+</tr>
+</thead>
+<tbody>
+<?spa for(key in it.list){ var item = it.list[key]; ?>
+<tr>
+    <td>{{= item.C_ID }}</td>
+    <td>{{= item.UserName }}</td>
+    <td>{{= item.UserCertifyCardType }}</td>
+    <td>{{= item.UserCertifyCardNo }}</td>
+    <td>{{= item.CardID }}</td>
+    <td>{{= item.CardType }}</td>
+    <td>{{= item.CardState }}</td>
+    <td>{{= item.CardGroup }}</td>
+    <td>{{= item.StartUseDT }}</td>
+    <td>{{= item.ExpireDT }}</td>
+    <td>{{= item.CreateDT }}</td>
+    <td>{{= item.ModifyDT }}</td>
+    <td><button type="button" class="btn btn-primary btn-member-info" onclick='showMemberInfo("{{= item.C_ID }}")'>详情</button></td>
+</tr>
+<?spa } ?>
+</tbody>
+</table>
+<script>
+    /* 弹窗显示成员信息 */
+    var showMemberInfo = function(id){
+        AlpacaAjax({
+            url: g_url + API['data_member_list'],
+            data: {id:id},
+            success: function (data) {
+                if(data.code == 9900){
+                    Alpaca.to("#/main/data/memberInfoView",data.data.list[0]);
+                }
+            },
+        });
+    };
+</script>

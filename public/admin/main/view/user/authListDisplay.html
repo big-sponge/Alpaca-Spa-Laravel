@@ -1,0 +1,77 @@
+<div id="datatable_orders_wrapper" class="dataTables_wrapper dataTables_extended_wrapper no-footer">
+        <div class="table-scrollable" style="white-space: nowrap">
+            <table class="table table-striped table-bordered table-hover dataTable no-footer" id="datatable_orders" role="grid" aria-describedby="datatable_orders_info">
+                <thead>
+                <tr role="row" class="heading">
+                    <th width="2%" class="sorting_disabled" rowspan="1" colspan="1">
+                        <div class="checker"><span><input type="checkbox" class="group-checkable"></span></div>
+                    </th>
+                    <th width="5%" class="sorting" tabindex="0" rowspan="1" colspan="1">编号</th>
+                    <th width="5%" class="sorting" tabindex="0" rowspan="1" colspan="1">名称</th>
+                    <th width="12%" class="sorting" tabindex="0" rowspan="1" colspan="1">Controller</th>
+                    <th width="3%" class="sorting" tabindex="0" rowspan="1" colspan="1"> Action</th>
+                    <th width="3%" class="sorting" tabindex="0" rowspan="1" colspan="1"> 状态</th>
+                    <th width="40%" class="sorting" tabindex="0" rowspan="1" colspan="1"> 操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?spa var index = 1; ?>
+                <?spa foreach(it.auths as key=>value) ?>
+                <?spa if( (index++)/2 == 1){ ?>
+                <tr role="row" class="even">
+                <?spa }else{ ?>
+                <tr role="row" class="odd">
+                <?spa } ?>
+                    <td>
+                        <div class="checker"><span><input type="checkbox" name="id[]" value="<?spa echo value.FId ?>"></span></div>
+                    </td>
+                    <td><?spa echo value.FId ?></td>
+                    <td><?spa echo value.FName ?></td>
+                    <td><?spa echo value.FController ?></td>
+                    <td><?spa echo value.FAction ?></td>
+                    <td>
+                        <?spa if(value.FDisabled == 1){ ?> 已删除
+                        <?spa }else if(value.FState == 0) { ?>冻结
+                        <?spa }else { ?>正常
+                        <?spa } ?>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0);" onclick='Alpaca.to("#/main/user/authDetailView/<?spa echo value.FId ?>")' class="btn btn-xs blue btn-editable"><i class="fa fa-edit"></i> 详情</a>
+                        <a href="javascript:void(0);" onclick='Alpaca.to("#/main/user/authEditView/<?spa echo value.FId ?>")' class="btn btn-xs blue btn-editable"><i class="fa fa-edit"></i> 编辑</a>
+                        <a href="javascript:void(0);" onclick='Alpaca.to("#/main/user/authDeleteView/<?spa echo value.FId ?>")' class="btn btn-xs default btn-editable"><i class="fa fa-times"></i> 删除</a>
+                    </td>
+                </tr>
+                <?spa endForeach ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+                <div class="dataTables_paginate paging_bootstrap_extended" id="datatable_orders_paginate">
+                    <div class="pagination-panel">
+                        页码 <a href="javascript:;" class="btn btn-sm default prev" title="上一页">
+                        <i class="fa fa-angle-left"></i></a>
+                        <input value="<?spa echo it.num ?>" id="page-num" type="text" class="pagination-panel-input form-control input-mini input-inline input-sm" maxlenght="5" style="text-align:center; margin: 0 5px;"/>
+                        <a href="javascript:;" class="btn btn-sm default next" title="下一页"><i class="fa fa-angle-right"></i></a>
+                        共 <span class="pagination-panel-total" id="total-page"><?spa echo it.totalNum ?>页</span>
+                    </div>
+                </div>
+                <div class="dataTables_length" id="datatable_orders_length">
+                    <label>
+                        <span class="seperator"> - </span>
+                        显示
+                        <select class="form-control input-xsmall input-sm input-inline" id="page-size">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50" >50</option>
+                            <option value="100">100</option>
+                            <option value="150">150</option>
+                            <option value="-1">All</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="dataTables_info" id="total" role="status" aria-live="polite"><span class="seperator">  </span>总数:<?spa echo it.total ?></div>
+            </div>
+            <div class="col-md-4 col-sm-12"></div>
+        </div>
+    </div>

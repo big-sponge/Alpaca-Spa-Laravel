@@ -1,0 +1,68 @@
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">用户管理
+    <small>权限</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="/">首页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">权限设置</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">权限列表</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- Begin: life time stats -->
+        <div class="portlet box green-haze">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-shopping-cart"></i>权限列表
+                </div>
+                <div class="actions">
+                    <a href="javascript:;" class="btn default yellow-stripe" onClick='Alpaca.to("#/main/user/authAddView")'>
+                        <i class="fa fa-plus"></i><span class="hidden-480">新建权限</span>
+                    </a>
+                    <div class="btn-group">
+                        <a class="btn default yellow-stripe dropdown-toggle" href="javascript:;" data-toggle="dropdown">
+                            <i class="fa fa-share"></i>
+									<span class="hidden-480">
+									操作 </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-file-excel-o"></i>导出到Excel </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-print"></i>打印</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="alert alert-success alert-dismissable">
+                    <strong>您好！&nbsp;</strong>&nbsp;如果需要设置用户的操作权限，请在用户分组中选择相应的权限。这里是添加、配置新的权限，开发人员开发后，才可以配置使用。
+                </div>
+                <div class="table-container " id="table-body"> </div>
+            </div>
+        </div>
+        <!-- End: life time stats -->
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+

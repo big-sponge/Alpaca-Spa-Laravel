@@ -1,0 +1,75 @@
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">用户管理
+    <small>用户分组明细</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="/">首页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#/main/user/groupListView">用户分组</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="javascript:;">用户明细</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="tabbable-line boxless tabbable-reversed">
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>用户分组信息
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">用户分组ID</label>
+                                <div class="col-md-5">
+                                    <p class="form-control-static"><?spa echo it.id ?></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">用户分组名称</label>
+                                <div class="col-md-5">
+                                    <p class="form-control-static"><?spa echo it.name ?></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">描述</label>
+                                <div class="col-md-5">
+                                    <p class="form-control-static"><?spa echo it.desc ?></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">权限</label>
+                                <input type="hidden" id="auths" value=''>
+                                <div class="col-md-5" id="auth-area">
+                                    <br><br><br>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="button" class="btn green" onclick='Alpaca.to("#/main/user/groupListView")'>确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

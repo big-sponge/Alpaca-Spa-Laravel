@@ -1,0 +1,95 @@
+<script>
+    var enum_id_type = function(value){
+        if(value == ' 1'){
+            return "身份证";
+        }
+    };
+    var enum_checking_status = function(value){
+        if(value == '0'){
+            return "未认证";
+        }
+        if(value == '1'){
+            return "认证";
+        }
+    };
+</script>
+
+
+<table class="table table-togglable table-hover">
+    <thead>
+    <tr>
+        <!--<th data-toggle="true">编号</th>-->
+        <!-- <th data-hide="phone,tablet">描述</th>-->
+        <th data-hide="">用户id</th>
+        <th data-hide="">用户名称</th>
+        <th data-hide="">真实姓名</th>
+        <th data-hide="">证件种类</th>
+        <th data-hide="">证件号码</th>
+        <th data-hide="">认证状态</th>
+        <th data-hide="">认证时间</th>
+        <th data-hide="">会员头像</th>
+        <th data-hide="">性别 1男 2女</th>
+        <th data-hide="">生日</th>
+        <th data-hide="">密码</th>
+        <th data-hide="">用户级别 0 普通 1 VIP</th>
+        <th data-hide="">手机号</th>
+        <th data-hide="">邮箱</th>
+        <th data-hide="">0未绑定1已绑定</th>
+        <th data-hide="">0未绑定1已绑定</th>
+        <th data-hide="">登录次数</th>
+        <th data-hide="">会员注册时间</th>
+        <th data-hide="">当前登录时间</th>
+        <th data-hide="">登录ip</th>
+        <th data-hide="">上次登录时间</th>
+        <th data-hide="">上次登录ip</th>
+        <th data-hide="">会员积分</th>
+        <th data-hide="">状态 1为正常 0为冻结</th>
+        <th data-hide="">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{ foreach(it.list as key => item): }}
+        <tr>
+           <td>{{= item.id }}</td>
+           <td>{{= item.name }}</td>
+           <td>{{= item.real_name }}</td>
+           <td>{{ var enum_text = enum_id_type(item.id_type); }} {{= enum_text }}</td>
+           <td>{{= item.id_no }}</td>
+           <td>{{ var enum_text = enum_checking_status(item.checking_status); }} {{= enum_text }}</td>
+           <td>{{= item.checking_time }}</td>
+           <td>{{= item.avatar }}</td>
+           <td>{{= item.sex }}</td>
+           <td>{{= item.birthday }}</td>
+           <td>{{= item.passwd }}</td>
+           <td>{{= item.member_level }}</td>
+           <td>{{= item.mobile }}</td>
+           <td>{{= item.email }}</td>
+           <td>{{= item.mobile_bind }}</td>
+           <td>{{= item.email_bind }}</td>
+           <td>{{= item.login_times }}</td>
+           <td>{{= item.reg_time }}</td>
+           <td>{{= item.login_time }}</td>
+           <td>{{= item.login_ip }}</td>
+           <td>{{= item.last_login_time }}</td>
+           <td>{{= item.last_login_ip }}</td>
+           <td>{{= item.score }}</td>
+           <td>{{= item.status }}</td>
+            <td>
+                <button type="button" class="btn btn-default btn-xs" onclick='editAdminMember("{{= item.id }}")'><i class="icon-hat position-left"></i>编辑</button>
+                <button type="button" class="btn btn-default btn-xs" onclick='deleteAdminMember("{{= item.id }}")'><i class="icon-cross2 position-left"></i>删除</button>
+            </td>
+        </tr>
+    {{ endForeach; }}
+    </tbody>
+</table>
+
+<script>
+    var editGroup = function(id){
+        Alpaca.to("#/"+id,{id:id});
+    };
+
+    var deleteGroup= function(id){
+        Alpaca.to("#/"+id,{id:id});
+    };
+
+</script>
