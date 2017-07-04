@@ -176,11 +176,11 @@ Alpaca.MainModule.CrontabController = {
                     success: function (data) {
                         if (data.code == "9900") {
                             if (status == 2) {
-                                dom.nextElementSibling.classList.add("bg_checkbox", "change", "move");
-                                $(dom).prev('.task-status').val(1);
-                            } else {
                                 dom.nextElementSibling.classList.remove("bg_checkbox", "change", "move");
                                 $(dom).prev('.task-status').val(2);
+                            } else {
+                                dom.nextElementSibling.classList.add("bg_checkbox", "change", "move");
+                                $(dom).prev('.task-status').val(1);
                             }
                         }
                     },
@@ -191,7 +191,8 @@ Alpaca.MainModule.CrontabController = {
             $(".chooser").change(function () {
                 var index  = $(this).parent('td').parent('tr').attr('name');
                 var status = $(this).prev('.task-status').val();
-                setTaskStatus(index, status,this);
+                var newStatus = (status==2) ? 1:2;
+                setTaskStatus(index, newStatus, this);
             });
 
             //初始化按钮状态
