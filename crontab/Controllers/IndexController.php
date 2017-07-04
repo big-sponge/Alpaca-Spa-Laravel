@@ -24,7 +24,7 @@ class IndexController extends BaseController
      */
     protected function withoutLoginActions()
     {
-        $this->isNoLogin = true;
+
     }
 
     /**

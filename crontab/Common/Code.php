@@ -22,4 +22,6 @@ class Code
     const SYSTEM_ERROR_USER_DENY        = 9908;    //当前用户没有操作权限
     const SYSTEM_IMAGE_OVER_SIZE        = 9909;    //上传图片尺寸超出最大值
     const SYSTEM_ERROR                  = 9999;    //系统错误
+
+    const USER_LOGIN_NULL           = 112;     //用户没有登录
 }

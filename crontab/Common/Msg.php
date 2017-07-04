@@ -24,4 +24,6 @@ class Msg
     const SYSTEM_ERROR_USER_DENY        = '当前用户没有操作权限';
     const SYSTEM_IMAGE_OVER_SIZE        = '上传图片尺寸超出最大值[%s]';
     const SYSTEM_ERROR                  = '系统错误';
+
+    const USER_LOGIN_NULL           = '用户没有登录';
 }

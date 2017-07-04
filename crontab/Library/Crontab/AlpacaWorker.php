@@ -16,7 +16,7 @@ class AlpacaWorker
     {
         if(!self::$instance){
             self::$instance = new self();
-            self::$instance->accessToken= '999999';
+            self::$instance->accessToken= 'VyKfohBbwlkTOqp2jvIWPW92';
         }
         return self::$instance;
     }

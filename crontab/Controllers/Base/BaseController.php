@@ -88,7 +88,6 @@ class BaseController extends Controller
         //检查登录权限
         $authResult = $this->auth();
         if ($authResult !== true) {
-            //return $authResult;
             return $this->ajaxReturn($authResult);
         }
         return parent::callAction($method, $parameters);
@@ -129,6 +128,14 @@ class BaseController extends Controller
             return true;
         }
 
+        //获取访问token
+        $this->requestData['token'] =$this->input('accessToken', null);
+        /* 2 检查用户是否有权限访问 */
+        $accessToken = 'VyKfohBbwlkTOqp2jvIWPW92';
+        if ($this->requestData['token'] == $accessToken) {
+            return true;
+        }
+
         // [3] 当前动作需要登录，返回 false,用户未登录，不容许访问
         $result["code"] = Code::USER_LOGIN_NULL;
         $result["msg"]  = Msg::USER_LOGIN_NULL;
@@ -147,7 +154,7 @@ class BaseController extends Controller
     {
         $value = Input::get($key, $value);
         if (isset($value)) {
-            clean_xss($value);
+            clean_xss($value,true);
         }
         return $value;
     }
