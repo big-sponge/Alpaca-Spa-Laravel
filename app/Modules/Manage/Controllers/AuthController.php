@@ -55,7 +55,7 @@ class AuthController extends BaseController
         //0 判断是否已经有账号登录，
         if (!empty($_SESSION[Auth::LOGIN_MEMBER])) {
             //注销当前账号
-            Auth::auth()->logout();
+            Auth::auth()->logClear();
         }
 
         //1 获取输入参数,email 手机号码,passwd 密码
