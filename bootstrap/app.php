@@ -25,7 +25,7 @@ if($mode == "PRODUCTION"){
     $app->loadEnvironmentFrom('.env.test');
 }elseif($mode == "DEVELOPMENT"){
     /*开发环境*/
-    $app->loadEnvironmentFrom('.env');
+    $app->loadEnvironmentFrom('.env.development');
 }else{
     /*默认环境-加载.env*/
 }
