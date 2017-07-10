@@ -9,7 +9,9 @@
 
 ### 演示地址
 
-http://full.tkc8.com
+Alpaca-Spa-Laravel :   http://full.tkc8.com
+
+Alpaca-Spa :   http://www.tkc8.com
 
 登录账号是一个测试帐号，权限只有浏览功能，没有编辑等修改功能。
 
