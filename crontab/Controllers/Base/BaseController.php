@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Crontab\Common\Code;
 use Crontab\Common\Msg;
+use Illuminate\Support\Facades\Log;
 
 /**
  * 模块控制器父类
@@ -129,7 +130,7 @@ class BaseController extends Controller
         }
 
         //获取访问token
-        $this->requestData['token'] =$this->input('accessToken', null);
+        $this->requestData['token'] = $this->input('accessToken', null);
         /* 2 检查用户是否有权限访问 */
         $accessToken = 'VyKfohBbwlkTOqp2jvIWPW92';
         if ($this->requestData['token'] == $accessToken) {
@@ -154,7 +155,7 @@ class BaseController extends Controller
     {
         $value = Input::get($key, $value);
         if (isset($value)) {
-            clean_xss($value,true);
+            clean_xss($value, true);
         }
         return $value;
     }
@@ -172,14 +173,14 @@ class BaseController extends Controller
         switch (strtoupper($type)) {
             case 'JSON' :
                 // 返回JSON数据格式到客户端 包含状态信息
-                return response()->json($data,200,[],JSON_UNESCAPED_UNICODE);
+                return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
             case 'XML'  :
                 // 返回xml格式数据
                 header('Content-Type:text/xml; charset=utf-8');
                 return (xml_encode($data));
             case 'JSONP':
                 // 返回JSON数据格式到客户端 包含状态信息
-                return response()->json($data,200,[],JSON_UNESCAPED_UNICODE)->withCallback($this->input('callback'));
+                return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE)->withCallback($this->input('callback'));
             case 'EVAL' :
                 // 返回可执行的js脚本
                 header('Content-Type:text/html; charset=utf-8');

@@ -34,6 +34,7 @@ class IndexController extends BaseController
      */
     public function start()
     {
+
         //开始守护进程
         $result['code'] = Code::SYSTEM_OK;
         $result['msg']  = Msg::SYSTEM_OK;
