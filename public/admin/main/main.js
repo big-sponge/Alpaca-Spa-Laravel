@@ -330,33 +330,6 @@ Alpaca.MainModule = {
                     }
                 });
             });
-
-            return;
-
-
-            for (var i in groups) {
-                if (groups[i]['id'] == 1) {
-                    $('.page-sidebar-menu li').removeClass("hidden");
-                    $('.page-sidebar-menu li li').removeClass("hidden");
-                    return;
-                }
-            }
-            if (userInfo['member']['id'] == 1) {
-                $('.page-sidebar-menu li').removeClass("hidden");
-                $('.page-sidebar-menu li li').removeClass("hidden");
-                return;
-            }
-
-            if (!userInfo['member']['auth']) {
-                return;
-            }
-            var auths = userInfo['member']['auth'];
-            for (var j in auths) {
-                if (auths[j]['menu_id']) {
-                    $('#menu-id-' + auths[j]['menu_id']).removeClass("hidden");
-                    $('#menu-id-' + auths[j]['menu_id']).parent('ul').parent('li').removeClass("hidden");
-                }
-            }
         });
 
         //布局
