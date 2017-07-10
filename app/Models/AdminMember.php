@@ -105,7 +105,7 @@ class AdminMember extends BaseModel
         }
 
         //分页查找
-        $info = $query->with('group')->get();
+        $info = $query->with('group')->get()->makeHidden('passwd');
 
         //返回结果，查找数据列表，总数
         $result          = array();

@@ -296,7 +296,7 @@ Alpaca.MainModule = {
                 }
             });
             $('.' + mName + '-' + cName + '-' + aName).addClass("active");
-            return;
+
 
             //3 获取用户权限
             var userInfo = Alpaca.MainModule.getUserInfo();
@@ -306,7 +306,34 @@ Alpaca.MainModule = {
                 return;
             }
             var groups = userInfo['member']['group'];
-            $('.page-sidebar-menu li li').addClass("hidden");
+
+            // 首先 隐藏所有子菜单
+            $('.power-menu').addClass("hidden");
+            var auth = userInfo['member']['auth'];
+
+            // 根据权限显示子菜单  --
+            if(auth[100]){
+                $('.power-menu-1').removeClass("hidden");
+            }
+
+            // 控制 父级菜单以及菜单标题 显示状态
+            $('.navigation-header').each(function(){
+                var pheader = this;
+                $(pheader).addClass("hidden");
+                $(pheader).next().addClass("hidden");
+                var s = $(this).next().find('a');
+                s.each(function(){
+                    if( $(this).attr('href') && !$(this).hasClass('hidden')){
+                        $(pheader).removeClass("hidden");
+                        $(pheader).next().removeClass("hidden");
+                        return false;
+                    }
+                });
+            });
+
+            return;
+
+
             for (var i in groups) {
                 if (groups[i]['id'] == 1) {
                     $('.page-sidebar-menu li').removeClass("hidden");
