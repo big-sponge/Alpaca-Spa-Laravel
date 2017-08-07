@@ -24,7 +24,7 @@ class AdminController extends BaseController
      * @date   2016年10月23日 20:39:25
      * @return array
      */
-    protected function withoutLoginActions()
+    protected function noLogin()
     {
         // 以下Action不需要登录权限
         return [];
@@ -36,7 +36,7 @@ class AdminController extends BaseController
      * @date   2016年10月23日 20:39:25
      * @return array
      */
-    protected function withoutAuthActions()
+    protected function noAuth()
     {
         // 以下Action不需要角色权限
         return [];
@@ -68,6 +68,7 @@ class AdminController extends BaseController
         $this->requestData['name']          = $this->input('name', null);
         $this->requestData['group_id']      = $this->input('groupId', null);
         $this->requestData['department_id'] = $this->input('departmentId', null);
+        $this->requestData['key']           = $this->input('key', null);
 
         //2.1 查找用户信息
         $data = AdminMember::model()->getPageList($this->requestData);
@@ -197,6 +198,7 @@ class AdminController extends BaseController
         $this->requestData['pageSize'] = $this->input('pageSize', '20');
         $this->requestData['orders']   = $this->input('orders', null);
         $this->requestData['id']       = $this->input('id', null);
+        $this->requestData['key']      = $this->input('key', null);
 
         //2 查找用户信息
         $data = AdminGroup::model()->getPageList($this->requestData);

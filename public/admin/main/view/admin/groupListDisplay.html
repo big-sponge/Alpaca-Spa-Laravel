@@ -25,12 +25,19 @@
 </table>
 
 <script>
-    var editGroup = function(id){
-        Alpaca.to("#/main/admin/groupEditView/"+id,{id:id});
+    var editGroup = function (id) {
+        Alpaca.to("#/main/admin/groupEditView/" + id, {id: id});
     };
 
-    var deleteGroup= function(id){
-        Alpaca.to("#/main/admin/groupDelete/"+id,{id:id});
+    var deleteGroup = function (id) {
+        var param = {
+            id: id,
+            url: API['admin_group_delete'],
+            callback: function () {
+                Alpaca.to("#/main/admin/memberListView");
+            }
+        };
+        Alpaca.to("#/main/index/delete/" + id, param);
     };
 
 </script>

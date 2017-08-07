@@ -44,9 +44,10 @@ return array(
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
     'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
-    'Crontab\\' => array($baseDir . '/crontab'),
+    'Crontab\\' => array($baseDir . '/bootstrap/crontab'),
     'Cron\\' => array($vendorDir . '/mtdowling/cron-expression/src/Cron'),
+    'Console\\' => array($baseDir . '/bootstrap/Console'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
-    'Builder\\' => array($baseDir . '/builder'),
+    'Builder\\' => array($baseDir . '/bootstrap/builder'),
     'App\\' => array($baseDir . '/app'),
 );

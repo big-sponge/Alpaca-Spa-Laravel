@@ -23,7 +23,7 @@ class CrontabController extends BaseController
      * @date   2016年10月23日 20:39:25
      * @return array
      */
-    protected function withoutLoginActions()
+    protected function noLogin()
     {
         return [];
     }
@@ -34,7 +34,7 @@ class CrontabController extends BaseController
      * @date   2016年10月23日 20:39:25
      * @return array
      */
-    protected function withoutAuthActions()
+    protected function noAuth()
     {
         // 以下Action不需要角色权限
         return [];

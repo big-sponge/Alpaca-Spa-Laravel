@@ -28,6 +28,7 @@ namespace EasyWeChat\Foundation;
 
 use Doctrine\Common\Cache\Cache as CacheInterface;
 use Doctrine\Common\Cache\FilesystemCache;
+use EasyWeChat\Core\AbstractAPI;
 use EasyWeChat\Core\AccessToken;
 use EasyWeChat\Core\Http;
 use EasyWeChat\Support\Log;
@@ -129,6 +130,8 @@ class Application extends Container
         $this->initializeLogger();
 
         Http::setDefaultOptions($this['config']->get('guzzle', ['timeout' => 5.0]));
+
+        AbstractAPI::maxRetries($this['config']->get('max_retries', 2));
 
         $this->logConfiguration($config);
     }

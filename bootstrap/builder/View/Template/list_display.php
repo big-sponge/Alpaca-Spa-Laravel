@@ -25,7 +25,7 @@
     </tr>
     </thead>
     <tbody>
-    {{ foreach(it.list as key => item): }}
+    <?php echo "<?spa foreach(it.list as key => item): ?>\n" ?>
         <tr>
 <?php foreach($this->fields as $f): ?>
 <?php if($f['in_type'] == 'string'){ ?>
@@ -39,17 +39,24 @@
                 <button type="button" class="btn btn-default btn-xs" onclick='delete<?php echo $this->className; ?>("{{= item.id }}")'><i class="icon-cross2 position-left"></i>删除</button>
             </td>
         </tr>
-    {{ endForeach; }}
+    <?php echo "<?spa endForeach; ?>\n" ?>
     </tbody>
 </table>
 
 <script>
-    var editGroup = function(id){
-        Alpaca.to("#/"+id,{id:id});
+    var edit<?php echo $this->className; ?> = function(id){
+        Alpaca.to("#/main/<?php echo $this->classNameLc ?>/<?php echo $this->classNameLc ?>EditView/"+id,{id:id});
     };
 
-    var deleteGroup= function(id){
-        Alpaca.to("#/"+id,{id:id});
+    var delete<?php echo $this->className; ?>= function(id){
+        var param = {
+            id: id,
+            url: API['<?php echo $this->classNameLc ?>_delete'],
+            callback: function () {
+                Alpaca.to("#/main/<?php echo $this->classNameLc ?>/<?php echo $this->classNameLc ?>ListView");
+            }
+        };
+        Alpaca.to("#/main/index/delete/" + id, param);
     };
 
 </script>

@@ -76,9 +76,49 @@ class BaseModel extends Model
             $this->$_key_creator = Visitor::user()->name;
         }
 
-        parent::save($options);
+        return parent::save($options);
     }
 
+    /**
+     * 处理分页参数
+     * @author Chengcheng
+     * @date 2017-6-23
+     * @param array
+     * @param array
+     * @return static
+     */
+    public function initPaged($query,$data)
+    {
+        $pageSize = isset($data['pageSize']) ? $data['pageSize'] : 0;
+        $pageNum  = isset($data['pageNum']) ? $data['pageNum'] : 1;
+        if (!empty($pageSize)) {
+            $query= $query->limit($pageSize);
+        }
+        if (!empty($pageSize) && !empty($pageNum)) {
+            $query = $query->offset(($pageNum - 1) * $pageSize);
+        }
+        return $query;
+    }
+
+    /**
+     * 处理排序参数
+     * @author Chengcheng
+     * @date 2017-6-23
+     * @param array
+     * @param array
+     * @return static
+     */
+    public function initOrdered($query,$data)
+    {
+        if (!empty($data['orders'])) {
+            foreach ($data['orders'] as $order) {
+                $query = $query->orderBy($order[0], $order[1]);
+            }
+        } else {
+            $query = $query->orderBy('id', 'desc');
+        }
+        return $query;
+    }
     /**
      * 覆盖getDates方法，去掉laravel自动格式化时间功能
      * @author Chengcheng
@@ -86,7 +126,8 @@ class BaseModel extends Model
      * @param array
      * @return static
      */
-    public function getDates(){
+    public function getDates()
+    {
         return [];
     }
 }

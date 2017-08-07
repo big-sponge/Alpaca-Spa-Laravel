@@ -5,13 +5,10 @@ Alpaca.MainModule.AdminController = {
     memberListViewAction: function () {
         var view = new Alpaca.MainModule.pageView();
         view.ready(function () {
-            var display = function () {
+            var display = function (param) {
                 getDisplayList({
-                    getParam: function () {
-                        var request = {};
-                        request.key = $('#table-page-key').val() ? $('#table-page-key').val() : undefined;
-                        return request;
-                    },
+                    place:"#member-list-view",
+                    param: param,
                     url: API['admin_member_list'],
                     callback: function (data) {
                         Alpaca.to('#/main/admin/memberListDisplay', data);
@@ -20,7 +17,9 @@ Alpaca.MainModule.AdminController = {
             };
 
             $('#table-page-search').click(function () {
-                display();
+                var request = {};
+                request.key = $('#table-page-key').val() ? $('#table-page-key').val() : undefined;
+                display(request);
             });
 
             display();
@@ -32,6 +31,11 @@ Alpaca.MainModule.AdminController = {
     memberListDisplayAction: function (data) {
         var view = new Alpaca.View({to: '.page-table-body', data: data});
         view.ready(function () {
+
+            //查找条件
+            if (data.request.key) {
+                $('#table-page-key').val(data.request.key);
+            }
 
             // 表格 - 可以折叠
             $('.table-togglable').footable();
@@ -169,13 +173,10 @@ Alpaca.MainModule.AdminController = {
     groupListViewAction: function () {
         var view = new Alpaca.MainModule.pageView();
         view.ready(function () {
-            var display = function () {
+            var display = function (param) {
                 getDisplayList({
-                    getParam: function () {
-                        var request = {};
-                        request.key = $('#table-page-key').val() ? $('#table-page-key').val() : undefined;
-                        return request;
-                    },
+                    place:"#group-list-view",
+                    param: param,
                     url: API['admin_group_list'],
                     callback: function (data) {
                         Alpaca.to('#/main/admin/groupListDisplay', data);
@@ -184,7 +185,9 @@ Alpaca.MainModule.AdminController = {
             };
 
             $('#table-page-search').click(function () {
-                display();
+                var request = {};
+                request.key = $('#table-page-key').val() ? $('#table-page-key').val() : undefined;
+                display(request);
             });
 
             display();
@@ -240,7 +243,7 @@ Alpaca.MainModule.AdminController = {
                         }
                     },
                 });
-            }else{
+            } else {
                 $('#group-edit input[name ="id"]').parent('.form-group').hide();
             }
 

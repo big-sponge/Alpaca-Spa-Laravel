@@ -179,6 +179,33 @@ composer.lock
 
 ```
 
+### 开发流程
+
+```
+    后端关注三部分：
+
+    控制器 ： 查找方法，编辑方法，删除方法
+        路径：/app/Modules/Manage/Controllers/{name}Controller.php
+    模型 ： 查找方法，编辑方法
+        路径：/app/Models/{name}.php
+    路由配置：配置查找、编辑、删除三个路由
+        路径：/app/Modules/Manage/router.php
+
+
+    前端关注：
+
+    控制器 ：{name}ListView方法，{name}ListDisplay方法，{name}EditView方法
+        路径：/public/admin/controller/{name}.js
+    页面：listView页面，listViewDisplay页面
+        路径：/public/admin/view/{name}/{name}ListView.html
+              /public/admin/view/{name}/{name}ListDisplay.html
+              /public/admin/view/{name}/{name}EditView.html
+    配置菜单：
+        路径：/public/admin/view/layout/part/pageSidebar.html
+    配置后台接口：
+        路径：/public/admin/main/main.js 中的API变量
+
+```
 
 ##  交流方式
 

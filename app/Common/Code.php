@@ -21,6 +21,7 @@ class Code
     const SYSTEM_ERROR_FIND_NULL        = 9907;    //数据未找到
     const SYSTEM_ERROR_USER_DENY        = 9908;    //当前用户没有操作权限
     const SYSTEM_IMAGE_OVER_SIZE        = 9909;    //上传图片尺寸超出最大值
+    const SYSTEM_NOT_ENOUGH             = 9910;    //条件不足
     const SYSTEM_ERROR                  = 9999;    //系统错误
 
     /**
@@ -77,15 +78,9 @@ class Code
     /**
      * 工作信息3
      */
-    const WORKER           = 300;   //'工作信息';
-    const WORKER_INFO_EXIT = 301;   //'所选用户已经添加了员工信息';
+    const  JT                = 300;   //'';
+    const  JT_NO_WORK_DAY    = 301;   //'不是工作日';
+    const  JT_NO_LESS_MEMBER = 302;   //'人数不足';
+    const  JT_NO_EXIST       = 303;   //'当前日期已经排班';
 
-    /**
-     * 报名信息
-     */
-    const SIGN_FIND_NULL   = 401;   //'没有找到报名信息';
-    const SIGN_NOT_BEGIN   = 402;   //'报名时间没有开始';
-    const SIGN_END         = 403;   //'报名时间已经结束';
-    const SIGN_BOT_PUBLISH = 404;   //'报名没有发布';
-    const SIGN_SUBMIT_OK   = 405;   // '报名成功';
 }

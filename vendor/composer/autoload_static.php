@@ -112,6 +112,7 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         array (
             'Crontab\\' => 8,
             'Cron\\' => 5,
+            'Console\\' => 8,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -281,11 +282,15 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         ),
         'Crontab\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/crontab',
+            0 => __DIR__ . '/../..' . '/bootstrap/crontab',
         ),
         'Cron\\' => 
         array (
             0 => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron',
+        ),
+        'Console\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/bootstrap/Console',
         ),
         'Carbon\\' => 
         array (
@@ -293,7 +298,7 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         ),
         'Builder\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/builder',
+            0 => __DIR__ . '/../..' . '/bootstrap/builder',
         ),
         'App\\' => 
         array (
@@ -353,14 +358,11 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
 
     public static $classMap = array (
         'App\\Common\\Code' => __DIR__ . '/../..' . '/app/Common/Code.php',
-        'App\\Common\\Lib\\CurlService' => __DIR__ . '/../..' . '/app/Common/Lib/CurlService.php',
         'App\\Common\\Lib\\Validate' => __DIR__ . '/../..' . '/app/Common/Lib/Validate.php',
         'App\\Common\\Msg' => __DIR__ . '/../..' . '/app/Common/Msg.php',
-        'App\\Common\\Service\\WeihomeApiService' => __DIR__ . '/../..' . '/app/Common/Service/WeihomeApiService.php',
-        'App\\Common\\Service\\YoutuService' => __DIR__ . '/../..' . '/app/Common/Service/YoutuService.php',
         'App\\Common\\Visitor' => __DIR__ . '/../..' . '/app/Common/Visitor.php',
-        'App\\Console\\Commands\\Inspire' => __DIR__ . '/../..' . '/app/Console/Commands/Inspire.php',
-        'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Common\\Wechat\\Lib\\WxUser' => __DIR__ . '/../..' . '/app/Common/Wechat/lib/WxUser.php',
+        'App\\Common\\Wechat\\WeChat' => __DIR__ . '/../..' . '/app/Common/Wechat/WeChat.php',
         'App\\ExceptionHandler' => __DIR__ . '/../..' . '/app/ExceptionHandler.php',
         'App\\Models\\AdminAuth' => __DIR__ . '/../..' . '/app/Models/AdminAuth.php',
         'App\\Models\\AdminGroup' => __DIR__ . '/../..' . '/app/Models/AdminGroup.php',
@@ -368,25 +370,32 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'App\\Models\\AdminMember' => __DIR__ . '/../..' . '/app/Models/AdminMember.php',
         'App\\Models\\AdminMemberGroup' => __DIR__ . '/../..' . '/app/Models/AdminMemberGroup.php',
         'App\\Models\\Base\\BaseModel' => __DIR__ . '/../..' . '/app/Models/Base/BaseModel.php',
-        'App\\Models\\Card' => __DIR__ . '/../..' . '/app/Models/Card.php',
-        'App\\Models\\HistoryList' => __DIR__ . '/../..' . '/app/Models/HistoryList.php',
+        'App\\Models\\Job' => __DIR__ . '/../..' . '/app/Models/Job.php',
+        'App\\Models\\JobTeam' => __DIR__ . '/../..' . '/app/Models/JobTeam.php',
+        'App\\Models\\Team' => __DIR__ . '/../..' . '/app/Models/Team.php',
+        'App\\Models\\Workday' => __DIR__ . '/../..' . '/app/Models/Workday.php',
         'App\\Modules\\Manage\\Auth\\Auth' => __DIR__ . '/../..' . '/app/Modules/Manage/Auth/Auth.php',
         'App\\Modules\\Manage\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/AdminController.php',
         'App\\Modules\\Manage\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/AuthController.php',
         'App\\Modules\\Manage\\Controllers\\Base\\BaseController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/Base/BaseController.php',
         'App\\Modules\\Manage\\Controllers\\CrontabController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/CrontabController.php',
-        'App\\Modules\\Manage\\Controllers\\DataController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/DataController.php',
         'App\\Modules\\Manage\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/IndexController.php',
-        'App\\Modules\\Manage\\Controllers\\MonitorController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/MonitorController.php',
-        'App\\Modules\\Manage\\Controllers\\WeihomeController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/WeihomeController.php',
+        'App\\Modules\\Manage\\Controllers\\JobController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/JobController.php',
+        'App\\Modules\\Manage\\Controllers\\JobTeamController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/JobTeamController.php',
+        'App\\Modules\\Manage\\Controllers\\SellerController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/SellerController.php',
+        'App\\Modules\\Manage\\Controllers\\TeamController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/TeamController.php',
+        'App\\Modules\\Manage\\Controllers\\WorkdayController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/WorkdayController.php',
         'App\\Modules\\Manage\\Service\\AdminService' => __DIR__ . '/../..' . '/app/Modules/Manage/Service/AdminService.php',
         'App\\Modules\\Manage\\Service\\EmailService' => __DIR__ . '/../..' . '/app/Modules/Manage/Service/EmailService.php',
+        'App\\Modules\\Manage\\Service\\WechatService' => __DIR__ . '/../..' . '/app/Modules/Manage/Service/WechatService.php',
         'App\\RouteProvider' => __DIR__ . '/../..' . '/app/RouteProvider.php',
-        'Builder\\Controller' => __DIR__ . '/../..' . '/builder/Controller.php',
-        'Builder\\View\\View' => __DIR__ . '/../..' . '/builder/View/View.php',
+        'Builder\\Controller' => __DIR__ . '/../..' . '/bootstrap/builder/Controller.php',
+        'Builder\\View\\View' => __DIR__ . '/../..' . '/bootstrap/builder/View/View.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
+        'Console\\Commands\\Inspire' => __DIR__ . '/../..' . '/bootstrap/Console/Commands/Inspire.php',
+        'Console\\Kernel' => __DIR__ . '/../..' . '/bootstrap/Console/Kernel.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/DayOfMonthField.php',
@@ -397,11 +406,14 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'Cron\\MinutesField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/MonthField.php',
         'Cron\\YearField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/YearField.php',
-        'Crontab\\Auth\\Auth' => __DIR__ . '/../..' . '/crontab/Auth/Auth.php',
-        'Crontab\\Controllers\\Base\\BaseController' => __DIR__ . '/../..' . '/crontab/Controllers/Base/BaseController.php',
-        'Crontab\\Library\\Crontab\\AlpacaCrontab' => __DIR__ . '/../..' . '/crontab/Library/Crontab/AlpacaCrontab.php',
-        'Crontab\\Library\\Crontab\\AlpacaDaemon' => __DIR__ . '/../..' . '/crontab/Library/Crontab/AlpacaDaemon.php',
-        'Crontab\\Library\\Crontab\\AlpacaWorker' => __DIR__ . '/../..' . '/crontab/Library/Crontab/AlpacaWorker.php',
+        'Crontab\\Auth\\Auth' => __DIR__ . '/../..' . '/bootstrap/crontab/Auth/Auth.php',
+        'Crontab\\Common\\Code' => __DIR__ . '/../..' . '/bootstrap/crontab/Common/Code.php',
+        'Crontab\\Common\\Msg' => __DIR__ . '/../..' . '/bootstrap/crontab/Common/Msg.php',
+        'Crontab\\Controllers\\Base\\BaseController' => __DIR__ . '/../..' . '/bootstrap/crontab/Controllers/Base/BaseController.php',
+        'Crontab\\Controllers\\IndexController' => __DIR__ . '/../..' . '/bootstrap/crontab/Controllers/IndexController.php',
+        'Crontab\\Library\\Crontab\\AlpacaCrontab' => __DIR__ . '/../..' . '/bootstrap/crontab/Library/Crontab/AlpacaCrontab.php',
+        'Crontab\\Library\\Crontab\\AlpacaDaemon' => __DIR__ . '/../..' . '/bootstrap/crontab/Library/Crontab/AlpacaDaemon.php',
+        'Crontab\\Library\\Crontab\\AlpacaWorker' => __DIR__ . '/../..' . '/bootstrap/crontab/Library/Crontab/AlpacaWorker.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
         'DeepCopy\\Filter\\Doctrine\\DoctrineCollectionFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Filter/Doctrine/DoctrineCollectionFilter.php',

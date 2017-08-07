@@ -25,7 +25,7 @@
 <!-- Content area -->
 <div class="content">
     <!-- Basic responsive configuration -->
-    <div class="panel panel-flat">
+    <div class="panel panel-flat" id="group-list-view">
         <div class="panel-heading">
             <button type="button" class="btn btn-primary" onclick='Alpaca.to("#/main/admin/groupEditView")'><i class="icon-diff-added position-left"></i> 添加分组</button>
         </div>
@@ -37,7 +37,7 @@
 
             <div class="dataTables_length">
                 <span>每页:</span>
-                <select style="height: 36px; border: 1px solid #ddd;" id ="table-page-size" >
+                <select style="height: 36px; border: 1px solid #ddd;" name ="table-page-size" >
                     <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
@@ -48,10 +48,10 @@
         <div class="page-table-body"></div>
         <div class="datatable-footer">
             <div class="dataTables_info">
-                <span id="table-page-info">显示 1 到 10 共 15 行</span>
+                <span name="table-page-info">显示 1 到 10 共 15 行</span>
             </div>
             <div class="dataTables_paginate">
-                <input type="hidden" id ="table-page-num">
+                <input type="hidden" name ="table-page-num">
                 <ul class="pagination-flat pagination-sm table-pagination"></ul>
             </div>
         </div>

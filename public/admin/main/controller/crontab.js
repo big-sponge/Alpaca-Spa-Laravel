@@ -38,6 +38,7 @@ Alpaca.MainModule.CrontabController = {
                         request.key = $('#table-page-key').val() ? $('#table-page-key').val() : undefined;
                         return request;
                     },
+                    place:"#index-list-view",
                     url: API['crontab_list'],
                     callback: function (data) {
                         Alpaca.to('#/main/crontab/taskListDisplay', data);

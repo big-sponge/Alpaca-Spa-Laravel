@@ -1,0 +1,3 @@
+<?php echo $this->classNameLc; ?>_list: '/manage/<?php echo $this->classNameLc; ?>/get<?php echo $this->className; ?>List',                 //列表
+<?php echo $this->classNameLc; ?>_edit: '/manage/<?php echo $this->classNameLc; ?>/edit<?php echo $this->className; ?>',                    //编辑
+<?php echo $this->classNameLc; ?>_delete: '/manage/<?php echo $this->classNameLc; ?>/delete<?php echo $this->className; ?>',                //删除

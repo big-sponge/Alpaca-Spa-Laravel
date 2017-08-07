@@ -16,7 +16,11 @@
 <tr>
     <td>{{= item.id }}</td>
     <td><a >{{= item.name }}</a></td>
-    <td>{{= "分组" }}</td>
+    <td>
+        {{ for(var i in item.group){ }}
+        {{= item.group[i]['name'] }} &nbsp;
+        {{ } }}
+    </td>
     <td> - </td>
     <td>{{= item.email }}</td>
     <td>{{= item.mobile }}</td>

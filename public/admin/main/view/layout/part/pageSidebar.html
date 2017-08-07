@@ -5,12 +5,25 @@
 
             <!-- 首页 -->
             <li class="navigation-header"><span>菜单</span> <i class="icon-menu" title="菜单"></i></li>
-            <li><a href="#/main/index/index" class=""><i class="icon-home4"></i> <span>首页</span></a></li>
+            <li class="main-index-calendarDisplay"><a href="#/main/index/index"><i class="icon-home4"></i> <span>首页</span></a></li>
             <!-- /首页 -->
 
+<!--
+            &lt;!&ndash; 商家管理 &ndash;&gt;
+            <li class="navigation-header"><span>排班</span> <i class="icon-menu" title="商家管理"></i></li>
+            <li>
+                <a><i class="icon-pencil3"></i> <span>排班管理</span></a>
+                <ul>
+                    <li class="main-job-jobEditView main-job-jobTeamListView main-job-jobTeamListDisplay"><a class="power-menu power-menu-1" href="#/main/job/jobListView" >工作管理</a></li>
+                    <li class="main-team-teamEditView main-team-teamJobListView main-team-teamJobListDisplay"><a class="power-menu power-menu-2" href="#/main/team/teamListView" >工作班管理</a></li>
+                    <li class="main-workday-workdayListDisplay"><a class="power-menu  power-menu-3" href="#/main/workday/workdayListView" >日期设置</a></li>
+                </ul>
+            </li>
+-->
+
             <!-- 定时任务 -->
-            <li class="navigation-header"><span>定时任务</span> <i class="icon-sort-time-asc" title="定时任务"></i></li>
-            <li><a href="#/main/crontab/index"><i class="icon-sort-time-asc"></i> <span>定时任务</span></a> </li>
+           <li class="navigation-header"><span>定时任务</span> <i class="icon-sort-time-asc" title="定时任务"></i></li>
+            <li ><a href="#/main/crontab/index"><i class="icon-sort-time-asc"></i> <span>定时任务</span></a> </li>
             <!-- /定时任务 -->
 
             <!-- 用户管理 -->
@@ -18,8 +31,8 @@
             <li>
                 <a><i class="icon-pencil3"></i> <span>管理员用户（后台）</span></a>
                 <ul>
-                    <li class="main-admin-memberEditView"><a href="#/main/admin/memberListView" >用户管理</a></li>
-                    <li class="main-admin-groupEditView"><a href="#/main/admin/groupListView" >分组管理</a></li>
+                    <li class="main-admin-memberEditView"><a class="power-menu  power-menu-4" href="#/main/admin/memberListView" >用户管理</a></li>
+                    <li class="main-admin-groupEditView"><a class="power-menu  power-menu-5" href="#/main/admin/groupListView" >分组管理</a></li>
                 </ul>
             </li>
             <li class="hidden">
@@ -36,8 +49,8 @@
             <li>
                 <a href="#"><i class="icon-grid"></i> <span>个人信息</span></a>
                 <ul>
-                    <li><a href="#/main/auth/myInfoView">个人信息</a></li>
-                    <li><a href="#/main/auth/resetPasswordView">修改密码</a></li>
+                    <li><a class="power-menu  power-menu-6" href="#/main/auth/myInfoView">个人信息</a></li>
+                    <li ><a class="power-menu  power-menu-7"  href="#/main/auth/resetPasswordView">修改密码</a></li>
                 </ul>
             </li>
             <li>

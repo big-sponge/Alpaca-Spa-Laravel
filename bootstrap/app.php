@@ -15,7 +15,11 @@ $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
 
+
+
 /* 设置环境变量 */
+$app->useEnvironmentPath(base_path().'/config');
+
 $mode = strtoupper(getenv('MOD_ENV'));
 if($mode == "PRODUCTION"){
     /*生产环境*/
@@ -47,7 +51,7 @@ $app->singleton(
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
+    Console\Kernel::class
 );
 
 $app->singleton(

@@ -25,13 +25,6 @@ class Auth
     const LOGIN_YES = 1;  //登录用户
     const LOGIN_NO  = 2;  //未登录用户
 
-    //福利企业ID
-    const CORP_ID       = 'CORP_ID';                  //福利ID，为 0时，为普通商城
-    const CORP_DISCOUNT = 'CORP_DISCOUNT';            //福利DISCOUNT
-
-    //自动进入福利企业
-    const AUTO_IN_CORP  = true;                  //自动进入福利企业
-
     //单例
     private static $instance = null;
 

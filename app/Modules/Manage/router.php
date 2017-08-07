@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Admin Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -91,3 +91,4 @@ Route::any('crontab/removeTask', "CrontabController@removeTask");
 
 /* crontab - listTask  获取定时任务列表 */
 Route::any('crontab/listTask', "CrontabController@listTask");
+

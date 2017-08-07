@@ -77,16 +77,9 @@ class Msg
     /**
      * 工作信息3
      */
-    const WORKER           = '工作信息';
-    const WORKER_INFO_EXIT = '所选用户已经添加了员工信息';
-
-    /**
-     * 报名信息
-     */
-    const SIGN_FIND_NULL   = '没有找到报名信息';
-    const SIGN_NOT_BEGIN   = '报名时间没有开始';
-    const SIGN_END         = '报名时间已经结束';
-    const SIGN_BOT_PUBLISH = '报名没有发布';
-    const SIGN_SUBMIT_OK   = '报名成功';
+    const  JT                = '';
+    const  JT_NO_WORK_DAY    = '不是工作日';
+    const  JT_NO_LESS_MEMBER = '人数不足';
+    const  JT_NO_EXIST       = '当前日期已经排班';
 
 }

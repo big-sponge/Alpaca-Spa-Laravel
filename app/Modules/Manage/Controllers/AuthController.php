@@ -1,6 +1,7 @@
 <?php
 namespace App\Modules\Manage\Controllers;
 
+use App\Common\Wechat\WeChat;
 use App\Modules\Manage\Controllers\Base\BaseController;
 use App\Common\Code;
 use App\Common\Msg;
@@ -22,11 +23,12 @@ class AuthController extends BaseController
      * @date   2016年10月23日 20:39:25
      * @return array
      */
-    protected function withoutLoginActions()
+    protected function noLogin()
     {
         return [
             'loginByEmail',
             'logout',
+            'wxLogin',
         ];
     }
 
@@ -36,11 +38,12 @@ class AuthController extends BaseController
      * @date   2016年10月23日 20:39:25
      * @return array
      */
-    protected function withoutAuthActions()
+    protected function noAuth()
     {
         return [
             'loginByEmail',
             'logout',
+            'wxLogin',
         ];
     }
 
@@ -192,5 +195,84 @@ class AuthController extends BaseController
         $result["msg"]  = Msg::SYSTEM_OK;
         $result["data"] = Auth::auth()->getLoginInfo();
         return $this->ajaxReturn($result);
+    }
+
+
+    /**
+     * 微信登录
+     * @author Chengcheng
+     * @date 2016-10-21 09:00:00
+     * @return string
+     */
+    public function actionWxLogin()
+    {
+        //获取code
+        $this->requestData['code'] = $this->input('code', 0);
+
+        //检查code
+        if (empty($this->requestData['code'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_NULL;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_NULL, 'code');
+            return $this->ajaxReturn($result);
+        }
+
+        //调用微信登录
+        $wxLoginResult = WeChat::user()->wxLogin($this->requestData['code']);
+
+        //根据状态设置返回结果
+        if ($wxLoginResult['code'] == CodeTable::WX_LOGIN_USER_OK) {
+            //登录成功,获取访客OpenId成功，并且通过OpenId找到用户已经注册系统账号，即：微信账号绑定了系统账号
+
+            //设置系统账号登录信息
+            ShopAuth::auth()->login($wxLoginResult['data']['member']);
+            //设置微信账号登录信息
+            ShopAuth::auth()->loginWx($wxLoginResult['data']['member_wechat']);
+            //返回结果
+            $result["code"] = CodeTable::SYSTEM_OK;
+            $result["msg"]  = MsgTable::USER_LOGIN_OK;
+            $result["data"] = ShopAuth::auth()->getLoginInfo();
+            return $this->displayToJson($result);
+        } elseif ($wxLoginResult['code'] == CodeTable::WX_LOGIN_USER_NULL) {
+            //系统账号登录失败,获取访客OpenId成功，但是没有通过OpenId找到用户已经注册系统账号，即：微信账号未绑定系统账号
+
+            //设置微信账号登录信息
+            ShopAuth::auth()->loginWx($wxLoginResult['data']['member_wechat']);
+            //返回结果
+            $result["code"] = CodeTable::WX_LOGIN_USER_NULL;
+            $result["msg"]  = MsgTable::WX_LOGIN_USER_NULL;
+            return $this->displayToJson($result);
+        } elseif ($wxLoginResult['code'] == CodeTable::WX_LOGIN_FIRST_USER_NULL) {
+            //登录失败,用户首次微信端访问，获取访客OpenId成功，微信账号未绑定系统账号，
+
+            //设置微信账号登录信息
+            ShopAuth::auth()->loginWx($wxLoginResult['data']['member_wechat']);
+            //返回结果
+            $result["code"] = CodeTable::WX_LOGIN_FIRST_USER_NULL;
+            $result["msg"]  = MsgTable::WX_LOGIN_FIRST_USER_NULL;
+            return $this->displayToJson($result);
+        } elseif ($wxLoginResult['code'] == CodeTable::WX_LOGIN_USER_ERROR) {
+            //登录失败,获取访客OpenId成功，但是通过OpenId找用户系统账号时出错
+
+            //设置微信账号登录信息
+            ShopAuth::auth()->loginWx($wxLoginResult['data']['member_wechat']);
+            //返回结果
+            $result["code"] = CodeTable::WX_LOGIN_USER_ERROR;
+            $result["msg"]  = MsgTable::WX_LOGIN_USER_ERROR;
+            return $this->displayToJson($result);
+        }elseif ($wxLoginResult['code'] == CodeTable::USER_STATUS_FREEZE) {
+            //登录失败,获取访客OpenId成功，系统账号啊被冻结
+
+            //设置微信账号登录信息
+            ShopAuth::auth()->loginWx($wxLoginResult['data']['member_wechat']);
+            //返回结果
+            $result["code"] = CodeTable::USER_STATUS_FREEZE;
+            $result["msg"]  = MsgTable::USER_STATUS_FREEZE;
+            return $this->displayToJson($result);
+        }else {
+            //登录失败,系统错误，获取openId失败,不容许访问动作
+            $result["code"] = CodeTable::WX_LOGIN_OPENID_NULL;
+            $result["msg"]  = MsgTable::WX_LOGIN_OPENID_NULL;
+            return $this->displayToJson($result);
+        }
     }
 }

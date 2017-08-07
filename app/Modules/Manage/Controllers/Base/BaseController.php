@@ -41,7 +41,7 @@ class BaseController extends Controller
      * @date   2016年10月23日 20:39:25
      * @return array
      */
-    protected function withoutLoginActions()
+    protected function noLogin()
     {
         return [];
     }
@@ -52,7 +52,7 @@ class BaseController extends Controller
      * @date   2016年10月23日 20:39:25
      * @return array
      */
-    protected function withoutAuthActions()
+    protected function noAuth()
     {
         return [];
     }
@@ -119,9 +119,9 @@ class BaseController extends Controller
         /* 1 判断Action动作是否需要登录，默认需要登录 */
         $isNeedLogin = true;
         //判断当前控制器是否设置了所有Action动作不需要登录，或者，当前Action动作在不需要登录列表中
-        $withoutLoginActions = $this->withoutLoginActions();
-        $withoutLoginActions = !empty($withoutLoginActions) ? $withoutLoginActions : [];
-        if (in_array($actionID, $withoutLoginActions) || $this->isNoLogin) {
+        $noLogin = $this->noLogin();
+        $noLogin = !empty($noLogin) ? $noLogin : [];
+        if (in_array($actionID, $noLogin) || $this->isNoLogin) {
             //不需要登录
             $isNeedLogin = false;
         }
@@ -146,20 +146,14 @@ class BaseController extends Controller
 
         /* 1. 执行动作不需要用户登录,*/
         if ($isNeedLogin == false) {
-            /*         //设置框架user信息，默认为unLogin
-            Mod::app()->user->setUserUnLogin();
-            //如果系统账号已经登录，使用系统账号设置框架user
-            if ($memberResult['code'] == AppAuth::LOGIN_YES) {
-                Mod::app()->user->setUserFromMember($this->requestData['SVisitUser']['member']);
-            }*/
+            /* 设置框架user信息，默认为unLogin */
             //返回结果，容许访问
             return true;
         }
 
         /* 2.1 执行动作需要登录，用户使用系统账号登录，容许访问*/
         if ($memberResult['code'] == Auth::LOGIN_YES) {
-            //设置框架user信息，兼容框架DB操作
-            /*Mod::app()->user->setUserFromMember($this->requestData['SVisitUser']['member']);*/
+            /* 设置框架user信息 */
             return true;
         }
 
@@ -201,18 +195,18 @@ class BaseController extends Controller
 
         /* 1.1 判断Action动作是否需要登录，默认需要登录 */
         //判断当前控制器是否设置了所有Action动作不需要登录，或者，当前Action动作在不需要登录列表中
-        $withoutLoginActions = $this->withoutLoginActions();
-        $withoutLoginActions = !empty($withoutLoginActions) ? $withoutLoginActions : [];
-        if (in_array($actionID, $withoutLoginActions) || $this->isNoLogin) {
+        $noLogin = $this->noLogin();
+        $noLogin = !empty($noLogin) ? $noLogin : [];
+        if (in_array($actionID, $noLogin) || $this->isNoLogin) {
             //不需要登录
             return true;
         }
 
         /* 1.2 判断Action动作是否需要验证权限，默认需要验证 */
         //判断当前控制器是否设置了所有Action动作不需要登录，或者，当前Action动作在不需要登录列表中
-        $withoutAuthActions = $this->withoutAuthActions();
-        $withoutAuthActions = !empty($withoutAuthActions) ? $withoutAuthActions : [];
-        if (in_array($actionID, $withoutAuthActions) || $this->isNoAuth) {
+        $noAuth = $this->noAuth();
+        $noAuth = !empty($noAuth) ? $noAuth : [];
+        if (in_array($actionID, $noAuth) || $this->isNoAuth) {
             //不需要权限
             return true;
         }
@@ -246,8 +240,8 @@ class BaseController extends Controller
         }
 
         /* 4.2 检查自定义权限 */
-        if (!empty($withoutAuthActions[$actionID])) {
-            $powerCheck = $withoutAuthActions[$actionID]($powerCheck);
+        if (!empty($noAuth[$actionID])) {
+            $powerCheck = $noAuth[$actionID]($powerCheck,$userInfo['auth']);
         }
 
         if ($powerCheck) {

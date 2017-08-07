@@ -80,6 +80,9 @@ class AdminMember extends BaseModel
         if (isset($data['id'])) {
             $query = $query->where('id', $data['id']);
         }
+        if (isset($data['key'])) {
+            $query = $query->where('name', 'like', "%".$data['key']."%");
+        }
 
         //总数
         $total = $query->count();

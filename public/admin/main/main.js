@@ -5,37 +5,71 @@ var g_interval = {};
 var API = {
 
     //登录、注册权限相关
-    admin_auth_info: '/manage/auth/info',                 //用户信息
-    admin_auth_get_token: '/manage/auth/GetToken',             //获取token
+    admin_auth_info: '/manage/auth/info',                  //用户信息
+    admin_auth_get_token: '/manage/auth/GetToken',         //获取token
     admin_auth_login: '/manage/auth/loginByEmail',         //登录-邮箱密码
-    admin_auth_login_token: '/manage/auth/loginByToken',         //登录-token
-    admin_auth_logout: '/manage/auth/logout',               //注销
-    admin_auth_pwd: '/manage/auth/resetPwdByOld',        //重置密码
+    admin_auth_login_token: '/manage/auth/loginByToken',   //登录-token
+    admin_auth_logout: '/manage/auth/logout',              //注销
+    admin_auth_pwd: '/manage/auth/resetPwdByOld',          //重置密码
 
     //管用员用户（后台）
     admin_member_list: '/manage/admin/getMemberList',        //用户信息
     admin_member_edit: '/manage/admin/editMember',           //编辑
-    admin_member_delete: '/manage/admin/deleteMember',         //删除
-    admin_group_list: '/manage/admin/getGroupList',        //分组列表
-    admin_group_edit: '/manage/admin/editGroup',           //添加分组
+    admin_member_delete: '/manage/admin/deleteMember',       //删除
+    admin_group_list: '/manage/admin/getGroupList',          //分组列表
+    admin_group_edit: '/manage/admin/editGroup',             //添加分组
     admin_group_delete: '/manage/admin/deleteGroup',         //删除
-    admin_auth_list: '/manage/admin/getAuthList',          //获取权限列表
+    admin_auth_list: '/manage/admin/getAuthList',            //获取权限列表
 
-    //管用员用户（后台）
+    //管用员用户（前台）
     user_member_list: '/home/user/getUserList',             //用户信息
     user_member_edit: '/home/user/editUser',                //编辑
-    user_member_delete: '/home/user/deleteUser',              //删除
+    user_member_delete: '/home/user/deleteUser',            //删除
 
     // 定时任务
-    crontab_list: '/manage/crontab/listTask',    // 获取定时任务列表
-    crontab_start: '/manage/crontab/start',      // 开启定时任务进程
-    crontab_stop: '/manage/crontab/stop',       // 停止定时任务进程
-    crontab_status: '/manage/crontab/status',       // 获取状态
-    crontab_change: '/manage/crontab/changeTaskStatus',       // 改变任务状态
-    crontab_info: '/manage/crontab/getIndexTask',       // 获取单条任务信息
-    crontab_remove: '/manage/crontab/removeTask',       // 删除任务
-    crontab_edit: '/manage/crontab/editTask',       // 编辑任务
+    crontab_list: '/manage/crontab/listTask',            // 获取定时任务列表
+    crontab_start: '/manage/crontab/start',              // 开启定时任务进程
+    crontab_stop: '/manage/crontab/stop',                // 停止定时任务进程
+    crontab_status: '/manage/crontab/status',            // 获取状态
+    crontab_change: '/manage/crontab/changeTaskStatus',  // 改变任务状态
+    crontab_info: '/manage/crontab/getIndexTask',        // 获取单条任务信息
+    crontab_remove: '/manage/crontab/removeTask',        // 删除任务
+    crontab_edit: '/manage/crontab/editTask',            // 编辑任务
 
+    team_list: '/manage/team/getTeamList',                 //列表
+    team_edit: '/manage/team/editTeam',                    //编辑
+    team_delete: '/manage/team/deleteTeam',                //删除
+
+    job_list: '/manage/job/getJobList',                 //列表
+    job_edit: '/manage/job/editJob',                    //编辑
+    job_delete: '/manage/job/deleteJob',                //删除
+
+    workday_list: '/manage/workday/getWorkdayList',                 //列表
+    workday_edit: '/manage/workday/editWorkday',                    //编辑
+    workday_delete: '/manage/workday/deleteWorkday',                //删除
+
+    jobTeam_list: '/manage/jobTeam/getJobTeamList',                 //列表-全部-首页用
+    jobTeam_forJob: '/manage/jobTeam/listsForJob',                  //列表-job
+    jobTeam_forTeam: '/manage/jobTeam/listsForTeam',                //列表-team
+    jobTeam_edit: '/manage/jobTeam/editJobTeam',                    //编辑
+    jobTeam_delete: '/manage/jobTeam/deleteJobTeam',                //删除
+
+};
+
+Date.prototype.format = function (fmt) { //author: meizz
+    var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
 };
 
 //弹出提示
@@ -110,11 +144,13 @@ AlpacaAjax = function (param) {
                     backgroundColor: '#666',
                     opacity: 0.8,
                     cursor: 'wait',
+                    'z-index':3000,
                 },
                 css: {
                     border: 0,
                     padding: 0,
-                    backgroundColor: 'transparent'
+                    backgroundColor: 'transparent',
+                    'z-index':3000,
                 }
             });
         },
@@ -292,6 +328,7 @@ Alpaca.MainModule = {
             $('.navigation a').each(function () {
                 var href = $(this).attr('href');
                 if (href && href.indexOf('#/' + mName + '/' + cName + '/' + aName) >= 0) {
+
                     $(this).parent('li').addClass("active");
                 }
             });
@@ -306,24 +343,56 @@ Alpaca.MainModule = {
                 return;
             }
             var groups = userInfo['member']['group'];
+            for (var i in groups) {
+                if (groups[i]['id'] == 1) {
+                    return;
+                }
+            }
+            if (userInfo['member']['id'] == 1) {
+                return;
+            }
 
-            // 首先 隐藏所有子菜单
-            $('.power-menu').addClass("hidden");
+            // 首先 隐藏所有子菜单（.power-menu 加在li上面）
+/*            $('.power-menu').addClass("hidden");
             var auth = userInfo['member']['auth'];
 
             // 根据权限显示子菜单  --
-            if(auth[100]){
+            if (auth[28]) {
                 $('.power-menu-1').removeClass("hidden");
             }
 
+            if (auth[24]) {
+                $('.power-menu-2').removeClass("hidden");
+            }
+
+            if (auth[34]) {
+                $('.power-menu-3').removeClass("hidden");
+            }
+
+            if (auth[5]) {
+                $('.power-menu-4').removeClass("hidden");
+            }
+
+            if (auth[8]) {
+                $('.power-menu-5').removeClass("hidden");
+            }
+
+            if (auth[2]) {
+                $('.power-menu-6').removeClass("hidden");
+            }
+
+            if (auth[3]) {
+                $('.power-menu-7').removeClass("hidden");
+            }*/
+
             // 控制 父级菜单以及菜单标题 显示状态
-            $('.navigation-header').each(function(){
+            $('.navigation-header').each(function () {
                 var pheader = this;
                 $(pheader).addClass("hidden");
                 $(pheader).next().addClass("hidden");
                 var s = $(this).next().find('a');
-                s.each(function(){
-                    if( $(this).attr('href') && !$(this).hasClass('hidden')){
+                s.each(function () {
+                    if ($(this).attr('href') && !$(this).hasClass('hidden')) {
                         $(pheader).removeClass("hidden");
                         $(pheader).next().removeClass("hidden");
                         return false;
@@ -337,6 +406,7 @@ Alpaca.MainModule = {
         layout.addChild(header);
         layout.addChild(sidebar);
         layout.ready(function () {
+            $("title").html('后台管理DEMO');
             $('body').removeAttr('class');
             $('body').removeAttr('style');
             LayoutInit();
@@ -388,35 +458,41 @@ Alpaca.MainModule = {
 //获取后台数据-ajax请求
 var getDisplayList = function (setting) {
 
-    var param    = setting.getParam ? setting.getParam() : {};
+    var place    = setting.place;
+    var param    = setting.param ? setting.param : {};
     var url      = setting.url;
     var callback = setting.callback;
 
-    var c_data = AlpacaCache.get(url);
-    c_data     = c_data ? c_data : {};
+    //var cache_data = AlpacaCache.get(url);
+    //cache_data     = cache_data ? cache_data : {};
 
-    var request      = {};
-    request.pageNum  = c_data.pageNum ? c_data.pageNum : 1;
-    request.pageSize = c_data.pageSize ? c_data.pageSize : ($("#table-page-size").val() ? $("#table-page-size").val() : 10);
-    request          = $.extend(request, param);
+    var request = {};
+    if (JSON.stringify(param) == '{}') {
+        //request = cache_data;
+    }
+    request.pageNum  = request.pageNum ? request.pageNum : 1;
+    request.pageSize = request.pageSize ? request.pageSize : ($(place + ' [name ="table-page-size" ]').val() ? $(place + ' [name ="table-page-size" ]').val() : 10);
 
-    AlpacaCache.set(url, request, 60);
+    for (var index in param) {
+        request[index] = param[index];
+    }
+    //AlpacaCache.set(url, request, 60);
 
     AlpacaAjax({
         url: g_url + url,
         data: request,
         success: function (data) {
             if (data.code == 9900) {
-                data.data.request          = request;
-                data.data.request.callback = function (newParam) {
-                    var inParam = function () {
-                        var request = param;
-                        request     = $.extend(request, newParam);
-                        return request
-                    };
-
+                data.data.request           = request;
+                data.data.request._param    = param;
+                data.data.place             = place;
+                data.data.request._callback = function (param, newParam) {
+                    for (var index in newParam) {
+                        param[index] = newParam[index];
+                    }
                     getDisplayList({
-                        getParam: inParam,
+                        place: place,
+                        param: param,
                         url: url,
                         callback: callback
                     });
@@ -459,23 +535,26 @@ var tablePageDisplay = function (data) {
         data.to = data.total;
     }
 
+
+    var place = data.place;
+
     //设置当前页码
-    $("#table-page-num").val(data.num);
+    $(place + ' [name ="table-page-num" ]').val(data.num);
 
     //设置页面
-    $("#table-page-info").text("显示 " + data.from + " 到 " + data.to + " 共 " + data.total + " 行");
+    $(place + ' [name ="table-page-info" ]').text("显示 " + data.from + " 到 " + data.to + " 共 " + data.total + " 行");
 
     //设置页面大小
-    $("#table-page-size option[value='" + data.size + "']").attr("selected", true);
+    $(place + ' [name ="table-page-size" ]' + " option[value='" + data.size + "']").attr("selected", true);
 
     // Set number of visible pages
-    $('.table-pagination').empty();
-    $('.table-pagination').removeData("twbs-pagination");
-    $('.table-pagination').unbind("page");
+    $(place + ' .table-pagination').empty();
+    $(place + ' .table-pagination').removeData("twbs-pagination");
+    $(place + ' .table-pagination').unbind("page");
     if (!data.totalNum) {
         data.totalNum = 1;
     }
-    $('.table-pagination').twbsPagination({
+    $(place + ' .table-pagination').twbsPagination({
         totalPages: data.totalNum,
         visiblePages: 5,
         startPage: parseInt(data.num),
@@ -485,12 +564,12 @@ var tablePageDisplay = function (data) {
         last: '&#8677;',
         initiateStartPageClick: false,
         onPageClick: function (event, page) {
-            data.request.callback({pageNum: page, pageSize: $("#table-page-size").val()});
+            data.request._callback(data.request._param, {pageNum: page, pageSize: $(place + ' [name ="table-page-size" ]').val()});
         }
     });
 
-    $("#table-page-size").unbind();
-    $("#table-page-size").change(function () {
-        data.request.callback({pageSize: $("#table-page-size").val(), pageNum: 1});
+    $(place + ' [name ="table-page-size" ]').unbind();
+    $(place + ' [name ="table-page-size" ]').change(function () {
+        data.request._callback(data.request._param, {pageSize: $(place + ' [name ="table-page-size" ]').val(), pageNum: 1});
     });
 };

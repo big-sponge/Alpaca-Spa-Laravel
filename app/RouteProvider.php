@@ -47,7 +47,7 @@ class RouteProvider extends ServiceProvider
         });
 
         if(App::environment() == 'local'){
-            Route::prefix('builder')->namespace('Builder') ->group(base_path('builder/router.php'));
+            Route::prefix('builder')->namespace('Builder') ->group(base_path('bootstrap/builder/router.php'));
         }
     }
 
@@ -72,6 +72,6 @@ class RouteProvider extends ServiceProvider
      */
     protected function mapCrontabRoutes()
     {
-        Route::prefix('crontab')->namespace('Crontab\Controllers') ->group(base_path('crontab/router.php'));
+        Route::prefix('crontab')->namespace('Crontab\Controllers') ->group(base_path('bootstrap/crontab/router.php'));
     }
 }

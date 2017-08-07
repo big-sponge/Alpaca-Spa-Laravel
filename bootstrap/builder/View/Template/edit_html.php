@@ -20,7 +20,7 @@
 <!-- Content area -->
 <div class="content">
     <!-- Basic responsive configuration -->
-    <form id="<?php echo $this->className; ?>-edit">
+    <form id="<?php echo $this->classNameLc; ?>-edit">
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <div class="row">
@@ -46,7 +46,7 @@
 <?php }elseif($f['in_type'] == 'enum'){?>
                         <div class="form-group">
                             <label><?php echo $f['in_name']; ?>:</label>
-                            <select multiple="multiple" class="select" name="<?php echo $f['field']; ?>">
+                            <select  class="form-control select" name="<?php echo $f['field']; ?>">
 <?php foreach($f['in_enum'] as $e): ?>
                             <option value="<?php echo $e['value']; ?>"><?php echo $e['label']; ?></option>
 <?php endForeach; ?>
@@ -74,7 +74,7 @@
     /* 填充表单 */
     var fill<?php echo $this->className; ?> = function (data) {
 <?php foreach($this->fields as $f): ?>
-        $('#<?php echo $this->className; ?>-edit input[name ="<?php echo $f['field'];?>"]').val(data.<?php echo $f['field']; ?>);
+        $('#<?php echo $this->classNameLc; ?>-edit input[name ="<?php echo $f['field'];?>"]').val(data.<?php echo $f['field']; ?>);
 <?php endForeach; ?>
     };
 
@@ -82,21 +82,21 @@
     /* 提交表单 */
     var submit<?php echo $this->className; ?> = function () {
         var request  = {};
-        request.id = $('#<?php echo $this->className; ?>-edit input[name ="id"]').val();
+        request.id = $('#<?php echo $this->classNameLc; ?>-edit input[name ="id"]').val();
 <?php foreach($this->fields as $f): ?>
 <?php if($f['field'] == 'id'){ continue; } ?>
-        request.<?php echo $f['field']; ?> = $('#<?php echo $this->className; ?>-edit input[name ="<?php echo $f['field']; ?>"]').val();
+        request.<?php echo $f['field']; ?> = $('#<?php echo $this->classNameLc; ?>-edit input[name ="<?php echo $f['field']; ?>"]').val();
 <?php endForeach; ?>
 
         AlpacaAjax({
-            url: g_url + API['XXX_edit'],
+            url: g_url + API['<?php echo $this->classNameLc; ?>_edit'],
             data: request,
             async: false,
             success: function (data) {
                 console.log(data);
                 Notific(data.msg);
                 if(data.code == 9900){
-                    Alpaca.to("#/XXX");
+                    Alpaca.to("#/main/<?php echo $this->classNameLc; ?>/<?php echo $this->classNameLc; ?>ListView");
                 }
             },
         });
@@ -104,7 +104,7 @@
 
     /* 取消 */
     var cancel = function () {
-        Alpaca.to("#/XXX");
+        Alpaca.to("#/main/<?php echo $this->classNameLc; ?>/<?php echo $this->classNameLc; ?>ListView");
     }
 
 </script>
