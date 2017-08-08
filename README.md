@@ -102,7 +102,7 @@ composer.lock
 
   1)如果当前控制器下的某一个动作不需要登录权限：
 
-      protected function withoutLoginActions()
+      protected function noLogin()
       {
           // 以下Action不需要登录权限
           return ['action1','action2'];
@@ -111,7 +111,7 @@ composer.lock
 
   2)如果当前控制器下的所有动作都不需要登录权限：
 
-      protected function withoutLoginActions()
+      protected function noLogin()
       {
           this->isNoLogin =true;
       }
@@ -130,7 +130,7 @@ composer.lock
 
   2)如果当前控制器下的所有动作都不需要登录权限：
 
-      protected function withoutAuthActions()
+      protected function noAuth()
       {
           this->isNoAuth =true;
       }
@@ -138,7 +138,7 @@ composer.lock
 
   3)重写当前控制器下某一个动作的角色权限
 
-      protected function withoutAuthActions()
+      protected function noAuth()
       {
           return [
                 'actionName'=>function($result){
