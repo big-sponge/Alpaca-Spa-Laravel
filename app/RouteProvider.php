@@ -28,6 +28,8 @@ class RouteProvider extends ServiceProvider
     {
         $this->mapWebRoutes();
 
+        $this->mapServeRoutes();
+
         $this->mapAdminRoutes();
 
         $this->mapCrontabRoutes();
@@ -61,6 +63,18 @@ class RouteProvider extends ServiceProvider
     protected function mapAdminRoutes()
     {
         Route::prefix('manage')->namespace('App\Modules\Manage\Controllers') ->group(base_path('app/Modules/Manage/router.php'));
+    }
+
+    /**
+     * Define the "serve" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapServeRoutes()
+    {
+        Route::prefix('serve')->namespace('App\Modules\Serve\Controllers') ->group(base_path('app/Modules/Serve/router.php'));
     }
 
     /**

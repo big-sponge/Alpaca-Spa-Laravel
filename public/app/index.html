@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Alpaca - App</title>
+    <link rel="shortcut icon" href="/app/favicon.ico">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+
+    <!-- END THEME STYLES -->
+    <style>
+        .line-right {
+            text-align: right;
+        }
+    </style>
+
+    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src="/app/common/js/alpaca-spa-2.0.js"></script>
+
+    <!-- /theme JS files -->
+    <script src="/app/main/main.js" type="text/javascript"></script>
+    <script src="/app/main/controller/index.js" type="text/javascript"></script>
+    <script src="/app/main/controller/auth.js" type="text/javascript"></script>
+    <script>
+        var g_baseUrl = "/";
+        var g_url = "/";
+        $(document).ready(function () {
+            g_url                 = "http://" + window.location.host;
+            g_baseUrl             = g_url + "/app/";
+            Alpaca.Config.baseUrl = "/app/";
+            Alpaca.run("#/main/index/index");
+        });
+    </script>
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body>
+</body>
+<!-- END BODY -->
+</html>
