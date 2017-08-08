@@ -223,6 +223,26 @@
                         </li>
                     </ul>
                 </div>
+
+                <div class="content-block-title">自动复制到对应目录</div>
+                <div class="list-block">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-toggle"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">复制到对应目录</div>
+                                    <div class="item-input line-right">
+                                        <label class="label-switch">
+                                            <input type="checkbox" checked name="is_auto_copy">
+                                            <div class="checkbox"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <div class="content-block">
                     <div class="row">
                         <div class="col-50"><a href="#" class="button button-big button-fill button-danger">取消</a></div>

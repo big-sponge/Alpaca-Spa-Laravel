@@ -40,14 +40,14 @@
 <?php if($f['field'] == 'id'){ continue; } ?>
  <?php if($f['in_type'] == 'string'){ ?>
                         <div class="form-group">
-                            <label><?php echo $f['in_name']; ?>:</label>
+                            <label><?php echo $f['in_common']; ?>:</label>
                             <input type="text" class="form-control" placeholder="请输入<?php echo $f['in_name']; ?>" name="<?php echo $f['field']; ?>">
                         </div>
 <?php }elseif($f['in_type'] == 'enum'){?>
                         <div class="form-group">
-                            <label><?php echo $f['in_name']; ?>:</label>
+                            <label><?php echo $f['in_common']; ?>:</label>
                             <select  class="form-control select" name="<?php echo $f['field']; ?>">
-<?php foreach($f['in_enum'] as $e): ?>
+<?php foreach($f['in_value'] as $e): ?>
                             <option value="<?php echo $e['value']; ?>"><?php echo $e['label']; ?></option>
 <?php endForeach; ?>
                             </select>
@@ -74,7 +74,7 @@
     /* 填充表单 */
     var fill<?php echo $this->className; ?> = function (data) {
 <?php foreach($this->fields as $f): ?>
-        $('#<?php echo $this->classNameLc; ?>-edit input[name ="<?php echo $f['field'];?>"]').val(data.<?php echo $f['field']; ?>);
+        $('#<?php echo $this->classNameLc; ?>-edit [name ="<?php echo $f['field'];?>"]').val(data.<?php echo $f['field']; ?>);
 <?php endForeach; ?>
     };
 
@@ -82,10 +82,10 @@
     /* 提交表单 */
     var submit<?php echo $this->className; ?> = function () {
         var request  = {};
-        request.id = $('#<?php echo $this->classNameLc; ?>-edit input[name ="id"]').val();
+        request.id = $('#<?php echo $this->classNameLc; ?>-edit [name ="id"]').val();
 <?php foreach($this->fields as $f): ?>
 <?php if($f['field'] == 'id'){ continue; } ?>
-        request.<?php echo $f['field']; ?> = $('#<?php echo $this->classNameLc; ?>-edit input[name ="<?php echo $f['field']; ?>"]').val();
+        request.<?php echo $f['field']; ?> = $('#<?php echo $this->classNameLc; ?>-edit [name ="<?php echo $f['field']; ?>"]').val();
 <?php endForeach; ?>
 
         AlpacaAjax({

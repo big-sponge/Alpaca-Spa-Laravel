@@ -17,7 +17,7 @@ foreach ($this->fields as $f)
 
     if($f['in_type'] == 'enum'){
         $constField = [];
-        foreach($f['in_enum'] as $enum){
+        foreach($f['in_value'] as $enum){
             $constField[] = $enum['const'];
         }
         array_push($constFields,$constField);

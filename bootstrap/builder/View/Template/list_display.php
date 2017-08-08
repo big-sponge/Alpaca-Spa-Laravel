@@ -2,7 +2,7 @@
 <?php foreach($this->fields as $f): ?>
 <?php if($f['in_type'] == 'enum'){ ?>
     var enum_<?php echo $f['field']; ?> = function(value){
-<?php foreach($f['in_enum'] as $e): ?>
+<?php foreach($f['in_value'] as $e): ?>
         if(value == '<?php echo $e['value']; ?>'){
             return "<?php echo $e['label']; ?>";
         }
