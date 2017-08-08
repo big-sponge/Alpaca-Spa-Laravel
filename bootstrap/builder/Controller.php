@@ -17,6 +17,14 @@ class Controller
         die();
     }
 
+    public function view()
+    {
+        $view         = View::tbl('view', ['name' => 'test']);
+        $view->layout = false;
+        echo $view->html();
+        die();
+    }
+
     public function builder()
     {
 
