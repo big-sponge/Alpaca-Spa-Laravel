@@ -7,6 +7,16 @@
 &emsp;&emsp;Alpaca-Spa-Laravel 是用Alpaca-Spa + Laravel 前后端分离开发的一款后台管理系统的DEMO. 主要功能模块有登录、定时任务管理、用户管理、权限管理、个人信息管理等。在实际开发中可以根据具体的需求添加新的功能。
 开发模式为前后分离开发，Alpaca-Spa负责实现前端功能，包括组织页面结构，渲染页面数据、样式，交互逻辑等，Laravel负责提供后台功能，访问数据库，处理业务逻辑，提供数据接口给前端，
 
+### 安装方式
+
+```
+下载好源码之后，你需要配置你的 Web 服务器的根目录为 public 目录。 这个目录的  index.php 文件作为所有 HTTP 请求进入应用的前端处理器。
+
+你需要配置一些权限 。 storage 和 bootstrap 目录应该允许你的 Web 服务器写入，否则 Laravel 将无法写入。
+
+```
+
+
 ### 演示地址
 
 Alpaca-Spa-Laravel :   http://full.tkc8.com
