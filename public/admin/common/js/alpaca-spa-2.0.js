@@ -998,19 +998,19 @@ Alpaca = function () {
         this.Router        = this.NewRouter;
         this.Router.Alpaca = this;
 
-        //根据hash创建路由对象
+        /* 根据hash创建路由对象 */
         var router = this.Router.run(inHash);
 
-        //检查路由对象是否正确
+        /* 检查路由对象是否正确 */
         var runAction = obj.check(router);
 
-        //执行动作
+        /* 执行动作 */
         if (!data) {
             data = {};
         }
         var result = obj.doAction(runAction, router, data, inHash);
 
-        //返回结果
+        /* 返回结果 */
         return result;
     };
 
@@ -1124,7 +1124,7 @@ Alpaca = function () {
         /* 执行分发后的事件 */
         obj.release(router);
 
-        //清空路由中的has
+        /* 清空路由中的hash */
         router.InHash = null;
         /* 返回结果 */
         return result;
