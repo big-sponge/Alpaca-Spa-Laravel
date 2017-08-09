@@ -283,7 +283,8 @@ class BaseController extends Controller
         if (empty($type)) $type = 'JSON';
         switch (strtoupper($type)) {
             case 'JSON' :
-                // 返回JSON数据格式到客户端 包含状态信息
+                header("Access-Control-Allow-Origin: *"); // 允许任意域名发起的跨域请求
+                header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With');
                 return response()->json($data,200,[],JSON_UNESCAPED_UNICODE);
             case 'XML'  :
                 // 返回xml格式数据
