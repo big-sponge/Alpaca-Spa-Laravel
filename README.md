@@ -14,7 +14,6 @@
 下载好源码之后，你需要配置你的 Web 服务器的根目录为 public 目录。 这个目录的  index.php 文件作为所有 HTTP 请求进入应用的前端处理器。
 
 你需要配置一些权限 。 storage 和 bootstrap 目录应该允许你的 Web 服务器写入，否则 Laravel 将无法写入。
-
 ```
 
 
