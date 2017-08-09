@@ -30,21 +30,21 @@ Alpaca-Spa :   http://www.tkc8.com
 ```
 -app
 　 -Common
-　 -Console
 　 -Models
 　 -Modules
 　  ExceptionHandler.php
 　  RouteProvider.php
 -bootstrap
--builder
+　 -Console
+   -builder
+   -crontab
 -config
--crontab
+    .env
 -public
 　 -admin
    index.php
 -storage
 -vendor
-.env.development
 composer.json
 composer.lock
 
@@ -61,7 +61,7 @@ composer.lock
 
 4.config存放配置文件
 
-5.builder 中是一个自动生成代码的工具，这里先不做详细介绍
+5.bootstrap/builder 中是一个自动生成代码的工具，这里先不做详细介绍
 
 6.bootstrap 是Laravel框架本身自带的一个目录，主要功能是提供应用初始化的一些相关功能
 
