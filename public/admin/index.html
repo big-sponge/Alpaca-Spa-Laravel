@@ -53,12 +53,13 @@
     <script src="/admin/main/controller/admin.js" type="text/javascript"></script>
     <script src="/admin/main/controller/crontab.js" type="text/javascript"></script>
     <script>
-        var g_baseUrl = "/";
-        var g_url = "/";
+        var g_baseUrl = "/";  //前端资源根路径（js，css等，在视图模版中使用）
+        var g_url = "/";      //后端接口根路径
         $(document).ready(function () {
-            g_url                 = "http://" + window.location.host;
-            g_baseUrl             = g_url + "/admin/";
-            Alpaca.Config.baseUrl = "/admin/";
+            g_baseUrl             = "http://" + window.location.host + "/admin/";
+            g_url                 = "http://full.tkc8.com/";
+            //g_url = "http://" + window.location.host;
+            Alpaca.Config.baseUrl = "/admin/"; //alpaca-spa根路径
             Alpaca.run("#/main/index/index");
         });
     </script>

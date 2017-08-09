@@ -135,6 +135,10 @@ AlpacaAjax = function (param) {
         url: g_url + "",
         data: {},
         dataType: "json",
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         async: true,
         beforeSend: function () {
             var block = $('body');
