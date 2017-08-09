@@ -35,25 +35,6 @@ var API = {
     crontab_info: '/manage/crontab/getIndexTask',        // 获取单条任务信息
     crontab_remove: '/manage/crontab/removeTask',        // 删除任务
     crontab_edit: '/manage/crontab/editTask',            // 编辑任务
-
-    team_list: '/manage/team/getTeamList',                 //列表
-    team_edit: '/manage/team/editTeam',                    //编辑
-    team_delete: '/manage/team/deleteTeam',                //删除
-
-    job_list: '/manage/job/getJobList',                 //列表
-    job_edit: '/manage/job/editJob',                    //编辑
-    job_delete: '/manage/job/deleteJob',                //删除
-
-    workday_list: '/manage/workday/getWorkdayList',                 //列表
-    workday_edit: '/manage/workday/editWorkday',                    //编辑
-    workday_delete: '/manage/workday/deleteWorkday',                //删除
-
-    jobTeam_list: '/manage/jobTeam/getJobTeamList',                 //列表-全部-首页用
-    jobTeam_forJob: '/manage/jobTeam/listsForJob',                  //列表-job
-    jobTeam_forTeam: '/manage/jobTeam/listsForTeam',                //列表-team
-    jobTeam_edit: '/manage/jobTeam/editJobTeam',                    //编辑
-    jobTeam_delete: '/manage/jobTeam/deleteJobTeam',                //删除
-
 };
 
 Date.prototype.format = function (fmt) { //author: meizz
