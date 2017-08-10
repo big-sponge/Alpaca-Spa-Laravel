@@ -313,7 +313,6 @@ Alpaca.MainModule = {
             $('.navigation a').each(function () {
                 var href = $(this).attr('href');
                 if (href && href.indexOf('#/' + mName + '/' + cName + '/' + aName) >= 0) {
-
                     $(this).parent('li').addClass("active");
                 }
             });

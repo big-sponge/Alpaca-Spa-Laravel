@@ -215,8 +215,6 @@ Alpaca.MainModule.CrontabController = {
     //添加,编辑任务-视图
     editViewAction: function (data) {
 
-        console.log(data);
-
         var view = new Alpaca.View({to: "#modal_form_vertical", data: data});
         view.ready(function () {
             $('#modal_form_vertical').modal();
@@ -250,6 +248,8 @@ Alpaca.MainModule.CrontabController = {
             }else{
                 $('#edit-task-form-id').hide();
             }
+
+            typeChange();
 
         });
         return view;

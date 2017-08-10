@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Crontab\Common\Code;
 use Crontab\Common\Msg;
-use Illuminate\Support\Facades\Log;
 
 /**
  * 模块控制器父类
@@ -91,6 +90,10 @@ class BaseController extends Controller
         if ($authResult !== true) {
             return $this->ajaxReturn($authResult);
         }
+
+        // 忽略客户端断开,设置执行不超时
+        ignore_user_abort(true);
+        set_time_limit(0);
         return parent::callAction($method, $parameters);
     }
 

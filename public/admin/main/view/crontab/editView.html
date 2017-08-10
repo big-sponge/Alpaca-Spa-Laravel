@@ -34,14 +34,14 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3">类型：</label>
                     <div class="col-sm-9">
-                        <select class="form-control" name="run-type">
+                        <select class="form-control" name="run-type" onchange="typeChange()">
                             <option value='1'>执行一次</option>
                             <option value='2'>循环执行</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group run-type-2">
                     <label class="control-label col-sm-3">时间间隔</label>
                     <div class="col-sm-9">
                         <div class="input-group">
@@ -65,7 +65,7 @@
                         <input type="text" placeholder="请输入开始时间" class="form-control datetime-picker" name="begin-time">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group run-type-2">
                     <label class="control-label col-sm-3">截止时间:</label>
                     <div class="col-sm-9">
                         <input type="text" placeholder="请输入截止时间" class="form-control datetime-picker" name="end-time">
@@ -97,6 +97,16 @@
 </div>
 
 <script>
+    /* 类型改变时候 */
+    var typeChange =function(){
+        var type = $('#edit-task-form select[name="run-type"]').val();
+        if(type ==1){
+            $('.run-type-2').hide();
+        }else {
+            $('.run-type-2').show();
+        }
+    };
+
     /* 提交表单 */
     var submitTask = function () {
         var request = {};

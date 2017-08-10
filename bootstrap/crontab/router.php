@@ -11,3 +11,6 @@ Route::any('index/stop', "IndexController@stop");
 
 /* index - task  停止定时任务 */
 Route::any('index/task', "IndexController@task");
+
+/* task - test  停止定时任务 */
+Route::any('task/test', "TaskController@test");
