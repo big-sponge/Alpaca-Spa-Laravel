@@ -117,8 +117,8 @@ Alpaca.MainModule.CrontabController = {
             });
 
             display();
-            getStatus();
 
+            getStatus();
         });
         return view;
     },
