@@ -237,8 +237,18 @@ Alpaca.MainModule = {
 
     //进入模块时执行
     init: function () {
-        Alpaca.ViewModel.DefaultLayoutCaptureTo = "body";
-        Alpaca.ViewModel.DefaultViewCaptureTo   = "body";
+        Alpaca.ViewModel.DefaultLayoutCaptureTo = ".page-group";
+        Alpaca.ViewModel.DefaultViewCaptureTo   = ".page-group";
+    },
+
+    View:function(data){
+        var view = new Alpaca.View(data);
+        view.ready(function () {
+            $('.back').click(function () {
+                history.go(-1);
+            });
+        });
+        return view;
     },
 
     //获取用户信息
