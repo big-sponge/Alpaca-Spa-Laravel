@@ -65,10 +65,10 @@ class Auth
             );
 
             //设置session.nam
-            ini_set('session.name', 'SERVE_MEMBER_ID');
+            ini_set('session.name', 'MANAGE_MEMBER_ID');
 
             //设置session.save_path
-            ini_set('session.save_path', base_path('storage') . '/Session/Serve');
+            ini_set('session.save_path', base_path('storage') . '/Session/Manage');
 
             //创建session
             self::$instance->initSession();
