@@ -4,7 +4,7 @@
             <h1 class='title'>登录</h1>
         </header>
         <div class="content">
-            <div class="list-block">
+            <div class="list-block login-form">
                 <ul>
                     <li>
                         <div class="item-content">
@@ -12,7 +12,7 @@
                             <div class="item-inner">
                                 <div class="item-title label">邮箱</div>
                                 <div class="item-input">
-                                    <input type="email" placeholder="输入邮箱">
+                                    <input type="email" name="email" placeholder="输入邮箱" value="user@tkc8.com">
                                 </div>
                             </div>
                         </div>
@@ -23,17 +23,17 @@
                             <div class="item-inner">
                                 <div class="item-title label">密码</div>
                                 <div class="item-input">
-                                    <input type="password" placeholder="输入密码" class="">
+                                    <input type="password" name="password" placeholder="输入密码" value="111111">
                                 </div>
                             </div>
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div
             <div class="content-block">
                 <div class="row">
-                    <div class="col-50"><a class="button button-big button-fill button-danger">取消</a></div>
-                    <div class="col-50"><a class="button button-big button-fill button-success">登录</a></div>
+                    <div class="col-50"><a class="button button-big button-fill button-danger" onclick="history.go(-1)">取消</a></div>
+                    <div class="col-50"><a class="button button-big button-fill button-success btn-sub-login">登录</a></div>
                 </div>
             </div>
         </div>

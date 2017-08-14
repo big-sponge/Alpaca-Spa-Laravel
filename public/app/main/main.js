@@ -3,29 +3,13 @@ var g_interval = {};
 
 //后台接口列表
 var API = {
-
     //登录、注册权限相关
-    admin_auth_info: '/manage/auth/info',                  //用户信息
-    admin_auth_get_token: '/manage/auth/GetToken',         //获取token
-    admin_auth_login: '/manage/auth/loginByEmail',         //登录-邮箱密码
-    admin_auth_login_token: '/manage/auth/loginByToken',   //登录-token
-    admin_auth_logout: '/manage/auth/logout',              //注销
-    admin_auth_pwd: '/manage/auth/resetPwdByOld',          //重置密码
-
-    //管用员用户（后台）
-    admin_member_list: '/manage/admin/getMemberList',        //用户信息
-    admin_member_edit: '/manage/admin/editMember',           //编辑
-    admin_member_delete: '/manage/admin/deleteMember',       //删除
-    admin_group_list: '/manage/admin/getGroupList',          //分组列表
-    admin_group_edit: '/manage/admin/editGroup',             //添加分组
-    admin_group_delete: '/manage/admin/deleteGroup',         //删除
-    admin_auth_list: '/manage/admin/getAuthList',            //获取权限列表
-
-    //管用员用户（前台）
-    user_member_list: '/home/user/getUserList',             //用户信息
-    user_member_edit: '/home/user/editUser',                //编辑
-    user_member_delete: '/home/user/deleteUser',            //删除
-
+    wx_Login: '/server/auth/wxLogin',                      //登录-微信
+    email_login: '/server/auth/loginByEmail',              //登录-邮箱密码
+    get_wxLogin_url: '/server/index/index',                //获取微信授权url
+    auth_info: '/server/auth/info',                        //获取当前登录用户信息
+    auth_wxInfo: '/server/auth/wxInfo',                    //获取当前登录用户微信信息
+    auth_logout: '/server/auth/logout',                    //注销
 };
 
 Date.prototype.format = function (fmt) { //author: meizz
@@ -68,10 +52,7 @@ Notific = function (param) {
         }
     }
 
-    var notice = new PNotify(setting);
-    notice.get().click(function () {
-        notice.remove();
-    });
+    alert(setting.text);
 };
 
 //封装Ajax
@@ -109,22 +90,6 @@ AlpacaAjax = function (param) {
         dataType: "json",
         async: true,
         beforeSend: function () {
-            var block = $('body');
-            $(block).block({
-                message: '<i class="icon-spinner4 spinner"></i><span style="vertical-align:middle"> 正在加载，请稍后......</span>',
-                overlayCSS: {
-                    backgroundColor: '#666',
-                    opacity: 0.8,
-                    cursor: 'wait',
-                    'z-index':3000,
-                },
-                css: {
-                    border: 0,
-                    padding: 0,
-                    backgroundColor: 'transparent',
-                    'z-index':3000,
-                }
-            });
         },
         success: function (data) {
             for (var index in successFunc) {
@@ -134,9 +99,7 @@ AlpacaAjax = function (param) {
             }
         },
         complete: function () {
-            setTimeout(function () {
-                $('body').unblock();
-            }, 1);
+
         },
         error: function () {
             Notific({heading: "访问远程服务提示", content: '访问出错了'});
@@ -241,7 +204,7 @@ Alpaca.MainModule = {
         Alpaca.ViewModel.DefaultViewCaptureTo   = ".page-group";
     },
 
-    View:function(data){
+    View: function (data) {
         var view = new Alpaca.View(data);
         view.ready(function () {
             $('.back').click(function () {

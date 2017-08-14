@@ -74,7 +74,7 @@ class RouteProvider extends ServiceProvider
      */
     protected function mapServeRoutes()
     {
-        Route::prefix('serve')->namespace('App\Modules\Serve\Controllers') ->group(base_path('app/Modules/Serve/router.php'));
+        Route::prefix('server')->namespace('App\Modules\Server\Controllers') ->group(base_path('app/Modules/Server/router.php'));
     }
 
     /**

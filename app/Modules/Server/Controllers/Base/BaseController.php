@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Modules\Serve\Controllers\Base;
+namespace App\Modules\Server\Controllers\Base;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
-use App\Modules\Serve\Auth\Auth;
+use App\Modules\Server\Auth\Auth;
 use App\Common\Code;
 use App\Common\Msg;
 
@@ -110,9 +110,10 @@ class BaseController extends Controller
         $actionID = $action['method'];
 
         // [0] 设置系统相关的参数,访问者客户端, 访问者IP,访问时间
-        $this->requestData['visitUserAgent'] = empty($_SERVER['HTTP_USER_AGENT']) ? 'unknown' : $_SERVER['HTTP_USER_AGENT'];
-        $this->requestData['visitIP']        = $_SERVER["REMOTE_ADDR"];
-        $this->requestData['visitTime']      = date('Y-m-d H:i:s');
+        $this->requestData['visitor']          = [];
+        $this->requestData['visitor']['agent'] = empty($_SERVER['HTTP_USER_AGENT']) ? 'unknown' : $_SERVER['HTTP_USER_AGENT'];
+        $this->requestData['visitor']['ip']    = $_SERVER["REMOTE_ADDR"];
+        $this->requestData['visitor']['time']  = date('Y-m-d H:i:s');
 
         // [1] 检查访问Action动作权限要求，检查访问用户登录情况，
 
@@ -131,7 +132,7 @@ class BaseController extends Controller
         //如果用户已经登录，保存用户信息，
         if ($memberResult['code'] == Auth::LOGIN_YES) {
             //如果用户已经登录，设置用户member信息
-            $this->requestData['visitUser']['member'] = $memberResult['data'];
+            $this->requestData['visitor']['member'] = $memberResult['data'];
         }
 
         //* 3.1 检查用户是否登录-微信openid登录 */
@@ -139,11 +140,10 @@ class BaseController extends Controller
         //如果用户已经微信授权登录，保存用户微信信息，
         if ($wxResult['code'] == Auth::LOGIN_YES) {
             //如果用户已经微信授权登录，设置用户memberWechat信息
-            $this->requestData['visitUser']['memberWechat'] = $wxResult['data'];
+            $this->requestData['visitor']['wx'] = $wxResult['data'];
         }
 
         // [2] 下面分析执行的动作和用户登录行为
-
         /* 1. 执行动作不需要用户登录,*/
         if ($isNeedLogin == false) {
             /* 设置框架user信息，默认为unLogin */
@@ -162,15 +162,6 @@ class BaseController extends Controller
             //不容许访问动作，返回结果，提示用户已经获取openId登录，但是需要注册系统账号才能执行当前动作，
             $result["code"] = Code::WX_LOGIN_USER_NULL;
             $result["msg"]  = Msg::WX_LOGIN_USER_NULL;
-            return $result;
-        }
-
-        $isFromWx = Auth::auth()->isFromWx();
-        /* 4. 当前动作需要登录，系统账号未登录，微信未登录，客户来着微信端 */
-        if ($isFromWx) {
-            //不容许访问动作，返回结果，提示客户端可以使用微信登录，
-            $result["code"] = Code::USER_LOGIN_NULL;
-            $result["msg"]  = Msg::USER_LOGIN_NULL;
             return $result;
         }
 
@@ -241,7 +232,7 @@ class BaseController extends Controller
 
         /* 4.2 检查自定义权限 */
         if (!empty($noAuth[$actionID])) {
-            $powerCheck = $noAuth[$actionID]($powerCheck,$userInfo['auth']);
+            $powerCheck = $noAuth[$actionID]($powerCheck, $userInfo['auth']);
         }
 
         if ($powerCheck) {
@@ -266,7 +257,7 @@ class BaseController extends Controller
     {
         $value = Input::get($key, $value);
         if (isset($value)) {
-            clean_xss($value,true);
+            clean_xss($value, true);
         }
         return $value;
     }
@@ -284,14 +275,14 @@ class BaseController extends Controller
         switch (strtoupper($type)) {
             case 'JSON' :
                 // 返回JSON数据格式到客户端 包含状态信息
-                return response()->json($data,200,[],JSON_UNESCAPED_UNICODE);
+                return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
             case 'XML'  :
                 // 返回xml格式数据
                 header('Content-Type:text/xml; charset=utf-8');
                 return (xml_encode($data));
             case 'JSONP':
                 // 返回JSON数据格式到客户端 包含状态信息
-                return response()->json($data,200,[],JSON_UNESCAPED_UNICODE)->withCallback($this->input('callback'));
+                return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE)->withCallback($this->input('callback'));
             case 'EVAL' :
                 // 返回可执行的js脚本
                 header('Content-Type:text/html; charset=utf-8');

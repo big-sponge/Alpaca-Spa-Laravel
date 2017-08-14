@@ -67,22 +67,22 @@ class WxUser
      * @author Chengcheng
      * @date 2016年11月5日 14:47:40
      * @param string $redirect
-     * @param bool   $isBase
-     * @return object 返回结果
+     * @param string $scope
+     * @return string 返回结果
      */
-    public function getWxAuthUrl($redirect = null, $isBase = true)
+    public function getWxAuthUrl($redirect = null, $scope = 'base')
     {
         if (empty($redirect)) {
-            $redirect = 'http://meishe.jjjtech.cn/manage/index/index';
+            $redirect = '/';
         }
-        $reurl   = 'http://' . $_SERVER['HTTP_HOST'] . $redirect;
+        $reurl  = 'http://' . $_SERVER['HTTP_HOST'] . $redirect;
         $baseUrl = urlencode($reurl);
 
         $urlObj["appid"] = $this->config['appid'];
 
         $urlObj["redirect_uri"]  = "$baseUrl";
         $urlObj["response_type"] = "code";
-        if ($isBase) {
+        if ($scope == 'base') {
             $urlObj["scope"] = "snsapi_base";
         } else {
             $urlObj["scope"] = "snsapi_userinfo";

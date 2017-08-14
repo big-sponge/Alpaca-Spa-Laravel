@@ -2,18 +2,7 @@
 Alpaca.MainModule.IndexController = {
     //test,  默认渲染到
     testAction: function () {
-        var view = new Alpaca.MainModule.pageView();
-
-        var header = new Alpaca.Part({name: "headerNav", to: "#ap-header-nav"});
-
-        view.Layout.addChild(header);
-
-        view.ready(function () {
-            console.log('sss');
-            $.modal('sss');
-            $.alert('这是一段提示消息');
-            //$.init();
-        });
+        var view = new Alpaca.MainModule.View();
         return view;
     },
     //index,  默认渲染到

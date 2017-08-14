@@ -32,34 +32,16 @@ Route::any('auth/resetPwdByOld', "AuthController@resetPwdByOld");
 /* auth - logout */
 Route::any('auth/logout', "AuthController@logout");
 
-/* auth - logout */
+/* auth - info */
 Route::any('auth/info', "AuthController@info");
 
-/*
-|--------------------------------------------------------------------------
-| Admin
-|--------------------------------------------------------------------------
-*/
+/* auth - wxLogin */
+Route::any('auth/wxLogin', "AuthController@wxLogin");
 
-/* admin - getMemberList */
-Route::any('admin/getMemberList', "AdminController@getMemberList");
+/* auth - wxInfo */
+Route::any('auth/wxInfo', "AuthController@wxInfo");
 
-/* admin - editMember */
-Route::any('admin/editMember', "AdminController@editMember");
 
-/* admin - deleteMember */
-Route::any('admin/deleteMember', "AdminController@deleteMember");
 
-/* admin - getGroupList */
-Route::any('admin/getGroupList', "AdminController@getGroupList");
-
-/* admin - editGroup */
-Route::any('admin/editGroup', "AdminController@editGroup");
-
-/* admin - deleteGroup */
-Route::any('admin/deleteGroup', "AdminController@deleteGroup");
-
-/* admin - getAuthList */
-Route::any('admin/getAuthList', "AdminController@getAuthList");
 
 

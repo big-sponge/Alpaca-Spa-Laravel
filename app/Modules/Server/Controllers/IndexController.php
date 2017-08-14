@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Modules\Serve\Controllers;
+namespace App\Modules\Server\Controllers;
 
+use App\Common\Code;
+use App\Common\Msg;
 use App\Common\Wechat\WeChat;
-use App\Modules\Serve\Controllers\Base\BaseController;
+use App\Modules\Server\Controllers\Base\BaseController;
 
 class IndexController extends BaseController
 {
@@ -32,24 +34,18 @@ class IndexController extends BaseController
 
     public function index()
     {
+        //1 获取输入参数
+        $redirect = $this->input('redirect_uri');
+        $scope    = $this->input('scope', 'base');
 
-        $app =WeChat::app();
+        //2 生成url
+        $str = WeChat::user()->getWxAuthUrl($redirect, $scope);
 
-        $str =  WeChat::user()->getWxAuthUrl();
-
-       //$id =  WeChat::user()->getOpenId('ssss');
-
-        var_dump($str) ;
-
-        die;
-        //$index = AdminMember::findById(4);
-        //var_dump($index->toArray());
-
-    /*  die('sss');
-        return $this->ajaxReturn($index); */
-
-        echo date('Y-m-d H:i:s', time());
-        die();
+        //3 返回结果
+        $result["code"] = Code::SYSTEM_OK;
+        $result["msg"]  = Msg::SYSTEM_OK;
+        $result['data'] = $str;
+        return $this->ajaxReturn($result);
     }
 
     public function index2()
