@@ -41,7 +41,7 @@ class Controller
         $is_init_edit         = request()->input('is_init_edit');
         $is_init_f_controller = request()->input('is_init_f_controller');
         $is_init_inter        = request()->input('is_init_inter');
-        $is_auto_copy         = request()->input('is_auto_copy',false);
+        $is_auto_copy         = request()->input('is_auto_copy', false);
 
         if (empty($table_name)) {
             die('Table Name Is Null!');
@@ -143,6 +143,8 @@ class Controller
             array_push($fields, $field);
         }
 
+        $viewResult = [];
+
         //创建目录
         $filePath = base_path() . "\\bootstrap\\builder\\output\\{$table}\\";
         if (!is_dir($filePath)) {
@@ -157,12 +159,12 @@ class Controller
         $data['classNameLc']  = $classNameLc;
         $data['moduleNameLc'] = $moduleNameLc;
 
-        $data['b_module_name']  = $b_module_name;
-        $data['f_module_name'] = $f_module_name;
-        $data['b_module_name_lc']  = $b_module_name_lc;
+        $data['b_module_name']    = $b_module_name;
+        $data['f_module_name']    = $f_module_name;
+        $data['b_module_name_lc'] = $b_module_name_lc;
         $data['f_module_name_lc'] = $f_module_name_lc;
 
-        $data['orgName']      = $orgName;
+        $data['orgName'] = $orgName;
 
         //创建 - model
         if (!empty($is_init_model)) {
@@ -170,12 +172,16 @@ class Controller
             $view->layout = false;
             $html         = $view->html();
             $fileName     = $filePath . $className . '_M';
-            echo $fileName;
-            var_dump($html);
+
+            $resultItem             = [];
+            $resultItem['title']    = 'model-后端';
+            $resultItem['fileName'] = $fileName;
+            array_push($viewResult, $resultItem);
+
             file_put_contents($fileName, $html, LOCK_EX);
             /*拷贝到指定目录*/
             /*后端模型，目录*/
-            if($is_auto_copy){
+            if ($is_auto_copy) {
                 $models_dir       = base_path() . "\\app\\Models\\";
                 $models_file_name = $className;
                 if (!file_exists($models_dir . $models_file_name . '.php')) {
@@ -192,12 +198,16 @@ class Controller
             $view->layout = false;
             $html         = $view->html();
             $fileName     = $filePath . $className . '_Controller';
-            echo $fileName;
-            var_dump($html);
+
+            $resultItem             = [];
+            $resultItem['title']    = 'Controller-后端';
+            $resultItem['fileName'] = $fileName;
+            array_push($viewResult, $resultItem);
+
             file_put_contents($fileName, $html, LOCK_EX);
             /*拷贝到指定目录*/
             /*后端Controller，目录*/
-            if($is_auto_copy){
+            if ($is_auto_copy) {
                 $controller_dir       = base_path() . "\\app\\Modules\\{{$b_module_name}}\\Controllers\\";
                 $controller_file_name = $className . 'Controller';
                 if (!file_exists($controller_dir . $controller_file_name . '.php')) {
@@ -215,12 +225,16 @@ class Controller
             $view->layout = false;
             $html         = $view->html();
             $fileName     = $filePath . $className . '_ListView';
-            echo $fileName;
-            var_dump($html);
+
+            $resultItem             = [];
+            $resultItem['title']    = 'list页面-前端';
+            $resultItem['fileName'] = $fileName;
+            array_push($viewResult, $resultItem);
+
             file_put_contents($fileName, $html, LOCK_EX);
             /*拷贝到指定目录*/
             /*前端Controller，目录*/
-            if($is_auto_copy){
+            if ($is_auto_copy) {
                 $display_dir = base_path() . "\\public\\{{$f_module_name_lc}}\\main\\view\\" . $classNameLc . "\\";
                 if (!is_dir($display_dir)) {
                     mkdir($display_dir, 0777, true);
@@ -238,12 +252,16 @@ class Controller
             $view->layout = false;
             $html         = $view->html();
             $fileName     = $filePath . $className . '_ListDisplay';
-            echo $fileName;
-            var_dump($html);
+
+            $resultItem             = [];
+            $resultItem['title']    = 'list-table页面-前端';
+            $resultItem['fileName'] = $fileName;
+            array_push($viewResult, $resultItem);
+
             file_put_contents($fileName, $html, LOCK_EX);
             /*拷贝到指定目录*/
             /*前端Controller，目录*/
-            if($is_auto_copy){
+            if ($is_auto_copy) {
                 $display_dir = base_path() . "\\public\\{{$f_module_name_lc}}\\main\\view\\" . $classNameLc . "\\";
                 if (!is_dir($display_dir)) {
                     mkdir($display_dir, 0777, true);
@@ -263,12 +281,16 @@ class Controller
             $view->layout = false;
             $html         = $view->html();
             $fileName     = $filePath . $className . '_EditView';
-            echo $fileName;
-            var_dump($html);
+
+            $resultItem             = [];
+            $resultItem['title']    = 'edit-编辑页面-前端';
+            $resultItem['fileName'] = $fileName;
+            array_push($viewResult, $resultItem);
+
             file_put_contents($fileName, $html, LOCK_EX);
             /*拷贝到指定目录*/
             /*前端Controller，目录*/
-            if($is_auto_copy){
+            if ($is_auto_copy) {
                 $edit_dir = base_path() . "\\public\\{{$f_module_name_lc}}\\main\\view\\" . $classNameLc . "\\";
                 if (!is_dir($edit_dir)) {
                     mkdir($edit_dir, 0777, true);
@@ -288,12 +310,16 @@ class Controller
             $view->layout = false;
             $html         = $view->html();
             $fileName     = $filePath . $className . '_Controller_JS';
-            echo $fileName;
-            var_dump($html);
+
+            $resultItem             = [];
+            $resultItem['title']    = 'controller_js-前端';
+            $resultItem['fileName'] = $fileName;
+            array_push($viewResult, $resultItem);
+
             file_put_contents($fileName, $html, LOCK_EX);
             /*拷贝到指定目录*/
             /*前端Controller，目录*/
-            if($is_auto_copy){
+            if ($is_auto_copy) {
                 $controller_js_dir       = base_path() . "\\public\\{{$f_module_name_lc}}\\main\\controller\\";
                 $controller_js_file_name = $classNameLc . '';
                 if (!file_exists($controller_js_dir . $controller_js_file_name . '.js')) {
@@ -304,6 +330,7 @@ class Controller
             }
 
         }
+
         //创建 - 后台路由
         if (!empty($is_init_b_router)) {
             //创建 - Router
@@ -311,12 +338,16 @@ class Controller
             $view->layout = false;
             $html         = $view->html();
             $fileName     = $filePath . $className . '_Router';
-            echo $fileName;
-            var_dump($html);
+
+            $resultItem             = [];
+            $resultItem['title']    = 'router_路由-后端';
+            $resultItem['fileName'] = $fileName;
+            array_push($viewResult, $resultItem);
+
             file_put_contents($fileName, $html, LOCK_EX);
             /*拷贝到指定目录*/
             /*前端Controller，目录*/
-            if($is_auto_copy){
+            if ($is_auto_copy) {
                 $router_name = base_path() . "\\app\\Modules\\{{$b_module_name}}\\router.php";;
                 if (!file_exists($router_name)) {
 
@@ -332,12 +363,20 @@ class Controller
             $view->layout = false;
             $html         = $view->html();
             $fileName     = $filePath . $className . '_Config_js';
-            echo $fileName;
-            var_dump($html);
+
+            $resultItem             = [];
+            $resultItem['title']    = 'config_接口配置文件-前端';
+            $resultItem['fileName'] = $fileName;
+            array_push($viewResult, $resultItem);
+
             file_put_contents($fileName, $html, LOCK_EX);
         }
 
         //设置菜单
+        $result['result'] = $viewResult;
+        $view         = View::tbl('result',$result);
+        $view->layout = false;
+        echo $view->html();
         die();
     }
 }
