@@ -3,7 +3,6 @@
 namespace Crontab\Library\Crontab;
 /**
  * 定时任务
- * 登录验证，微信登录在这里
  * @author Chengcheng
  * @date 2016年10月21日 17:04:44
  */

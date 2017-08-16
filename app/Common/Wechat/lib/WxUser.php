@@ -82,6 +82,7 @@ class WxUser
 
         $urlObj["redirect_uri"]  = "$baseUrl";
         $urlObj["response_type"] = "code";
+
         if ($scope == 'base') {
             $urlObj["scope"] = "snsapi_base";
         } else {

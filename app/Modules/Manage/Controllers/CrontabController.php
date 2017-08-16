@@ -8,7 +8,6 @@ use Crontab\Library\Crontab\AlpacaWorker;
 use App\Modules\Manage\Controllers\Base\BaseController;
 use App\Common\Code;
 use App\Common\Msg;
-use Illuminate\Support\Facades\Input;
 
 /**
  * 定时任务管理控制器

@@ -71,16 +71,8 @@ Alpaca.MainModule.AuthController = {
         AlpacaCache.set('backData', backData);
 
         var back_uri = "/app/#/main/auth/wxLogin";
-        AlpacaAjax({
-            url: g_url + API['get_wxLogin_url'],
-            data: {redirect_uri: back_uri, scope: "user_info"},
-            newSuccess: function (data) {
-                console.log(data);
-                if (data.code == 9900) {
-                    window.location.replace(data.data);
-                }
-            },
-        });
+        var str = getWxAuthUrl(back_uri);
+        window.location.replace(str);
     },
 
     //发送code给后台，微信openid登录

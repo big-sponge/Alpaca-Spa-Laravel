@@ -414,3 +414,51 @@ var tablePageDisplay = function (data) {
         data.request._callback(data.request._param, {pageSize: $(place + ' [name ="table-page-size" ]').val(), pageNum: 1});
     });
 };
+
+
+var WX_APP_ID = 'wx030ea3d763b7c9fb';
+
+var getWxAuthUrl = function (redirect, scope) {
+
+    if (!redirect) {
+        redirect = '/app';
+    }
+    var reurl   = "http://" + window.location.host + '' + redirect;
+    var baseUrl = encodeURIComponent(reurl);
+
+    var urlObj              = {};
+    urlObj["appid"]         = WX_APP_ID;
+    urlObj["redirect_uri"]  = baseUrl;
+    urlObj["response_type"] = "code";
+
+    if (scope == 'base') {
+        urlObj["scope"] = "snsapi_base";
+    } else {
+        urlObj["scope"] = "snsapi_userinfo";
+    }
+    urlObj["state"] = "STATE" + "#wechat_redirect";
+
+    var toUrlParams = function (urlObj) {
+        var buff = "";
+        for (var k  in urlObj) {
+            var v = urlObj[k];
+            if (k != "sign") {
+                buff += k + "=" + v + "&";
+            }
+        }
+
+        if (buff.substr(0,1)=='&') {
+            buff=buff.substr(1);
+        }
+        var reg=/&$/gi;
+
+        buff=buff.replace(reg,"");
+
+        return buff;
+    };
+
+    var bizString = toUrlParams(urlObj);
+
+    var url = "https://open.weixin.qq.com/connect/oauth2/authorize?" + bizString;
+    return url;
+};

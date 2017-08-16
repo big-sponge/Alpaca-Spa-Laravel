@@ -10,19 +10,15 @@
 ### 安装方式
 
 ```
-
 下载好源码之后，你需要配置你的 Web 服务器的根目录为 public 目录。 这个目录的  index.php 文件作为所有 HTTP 请求进入应用的前端处理器。
 
 你需要配置一些权限 。 storage 和 bootstrap 目录应该允许你的 Web 服务器写入，否则 Laravel 将无法写入。
 ```
 
-
 ### 演示地址
 
 Alpaca-Spa-Laravel :   http://full.tkc8.com  (后台管理端)
-
 Alpaca-Spa :   http://www.tkc8.com （主页）
-
 Alpaca-Spa-Sui :   http://full.tkc8.com/app  (手机端)
 
 登录账号是一个测试帐号，权限只有浏览功能，没有编辑等修改功能。
@@ -30,67 +26,48 @@ Alpaca-Spa-Sui :   http://full.tkc8.com/app  (手机端)
 ## 目录结构
 
 ```
--app
-　 -Common
-　 -Models
-　 -Modules
-　  ExceptionHandler.php
-　  RouteProvider.php
--bootstrap
-　 -Console
-   -builder
-   -crontab
--config
-    .env
--public
-　 -admin
-   index.php
--storage
--vendor
-composer.json
-composer.lock
+|--app
+|　 --Common                  -- 用来放置一些公共的类、函数等
+|　 --Models                  -- 用来放置与数据库对应的实体类文件
+|　 --Modules                 -- 存放模块相关信息，里面包含控制器，业务逻辑等，
+|     |--Manage               -- 后台管理模块儿后端（服务端）代码，前后分离开发，这里只返回Json格式的接口
+|     |--Server               -- 用户前台模块儿后端（服务端）代码，同上，只返回Json格式的接口
+|　 ExceptionHandler.php      -- 异常处理配置
+|　 RouteProvider.php         -- 路由配置
+|--bootstrap                  -- 是Laravel框架本身自带的一个目录，主要功能是提供应用初始化的一些相关功能，需要读写权限（含子目录）
+|　 --Console                 -- Laravel Cli
+|   --builder                 -- 代码自动生成工具
+|   --crontab                 -- 定时任务工具（非linux shell）
+|--config                     -- 配置文件目录
+|   .env                      -- 将原来Laravel在外层的.env也挪到了config目录下面
+|--public                     -- 入口目录，配置服务器时，应该将网站根目录设置为public
+|　 --admin                   -- 后台管理模块儿的前端（客户端）部分（这里是前后分离开发，这里不含有任何php代码，也可以独立部署）
+|   --app                     -- 用户前台模块儿的前端（客户端）部分（这里是前后分离开发，同上）
+|   index.php                 -- php入口文件
+|--storage                    -- 存放程序运行时的log、cache、session等文件，需要读写权限（含子目录）
+|--vendor                     -- composer相关目录
+|composer.json
+|composer.lock
 
 ```
 
-```
-1.app/Common用来放置一些公共的类、函数等
 
-2.app/Models用来放置与数据库对应的实体类文件
-
-3.app/Modules存放模块相关信息，里面包含控制器，业务逻辑等，
-
-             本示例中只有一个Manage模块，用来实现后台管理的相关功能
-
-4.config存放配置文件
-
-5.bootstrap/builder 中是一个自动生成代码的工具，这里先不做详细介绍
-
-6.bootstrap 是Laravel框架本身自带的一个目录，主要功能是提供应用初始化的一些相关功能
-
-7.storage 中存放应用运行时候的文件，例如log，cache等
-
-8.vendor 中存放通过composer加载的相关插件
-
-9.public 入口目录，配置服务器时，应该将网站根目录设置为public
-
-10.public\index,php 后台服务Laravel框架的入口文件
-
-11.public\admin 后台服务Laravel框架的入口文件
-
-```
 ### 路由功能
+
+推荐每一个模块拥有自己的一个路由配置文件
 
 ```
 1 app/RouteProvider.php中可以配置整个系统的路由组织结构
-
-2 app/Modules/Manage/Route.php配置Manage模块的相关路由，推荐每一个模块拥有自己的一个路由配置文件
-
+2 app/Modules/Manage/router.php配置Manage模块的相关路由
+3 app/Modules/Server/router.php配置Server模块的相关路由
+4 bootstrap/builder/router.php配置代码生成工具的路由
+5 bootstrap/crontab/router.php配置定时任务工具的路由
 ```
 
 ### 配置文件
 
 ```
-1 配置文件存放在config目录中
+1 配置文件存放在config目录中，与原Laravel的规则一样
 
 2 处理与系统环境相关的配置。
 
@@ -182,11 +159,8 @@ composer.lock
 
 ```
     public\admin中存放前端代码，
-
     public\admin\index.html是前端入口文件，
-
     public\admin\main\controller存放前端main模块的控制器，
-
     public\admin\main\view存放前端main模块的视图页面，
 
 ```

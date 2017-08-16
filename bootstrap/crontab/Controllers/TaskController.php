@@ -20,18 +20,51 @@ class TaskController extends BaseController
      */
     protected function withoutLoginActions()
     {
+
     }
 
     /**
-     * 停止定时任务
+     * 测试任务
      * @author Chengcheng
      * @date 2016-10-23 20:34:00
      */
     public function test()
     {
-
         //执行定时任务
         Log::info('task  ---  run --- :'.date('Y-m-d H:i:s'));
+
+        //返回结果
+        return $this->ajaxReturn('ok');
+    }
+
+    /**
+     * 测试任务 1
+     * @author Chengcheng
+     * @date 2016-10-23 20:34:00
+     */
+    public function test1()
+    {
+        //执行任务test1的代码
+
+        /*。。。。*/
+
+        //test1执行完成后，执行下一个任务test2
+        AlpacaWorker::worker()->action(['REQUEST_URI'=>"/crontab/task/test2"]);
+
+        //返回结果
+        return $this->ajaxReturn('ok');
+    }
+
+    /**
+     * 测试任务 2
+     * @author Chengcheng
+     * @date 2016-10-23 20:34:00
+     */
+    public function test2()
+    {
+        //执行任务test2代码
+
+        /*。。。。*/
 
         //返回结果
         return $this->ajaxReturn('ok');

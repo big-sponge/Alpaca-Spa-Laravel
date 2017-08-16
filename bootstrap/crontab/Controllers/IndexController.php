@@ -67,7 +67,7 @@ class IndexController extends BaseController
     }
 
     /**
-     * 停止定时任务
+     * 执行定时任务
      * @author Chengcheng
      * @date 2016-10-23 20:34:00
      */
