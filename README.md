@@ -11,7 +11,7 @@ Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的D
 用户管理
 权限管理
 个人信息管理
-定时任务管理
+定时任务管理    
 
 ![图片名称](http://www.tkc8.com/images/sucai/img_show_1.png)
 
