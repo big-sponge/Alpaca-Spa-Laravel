@@ -174,27 +174,31 @@
 ### 开发流程
 
 ```
-    后端关注三部分：
+    后端（服务端）部分：
 
-    控制器 ： 查找方法，编辑方法，删除方法
-        路径：/app/Modules/Manage/Controllers/{name}Controller.php
-    模型 ： 查找方法，编辑方法
-        路径：/app/Models/{name}.php
-    路由配置：配置查找、编辑、删除三个路由
-        路径：/app/Modules/Manage/router.php
+    1 建立数据表
+    2 编写模型类，放在/app/Models
+    3 编写控制器类，放在模块的Controllers目录下面，例如: /app/Modules/Manage/Controllers/{name}Controller.php
+    4 *（可选）如果有比较复杂的业务逻辑需要处理，可以加一个Service层，放在模块的Service目录下面
+    5 路由配置：路由一般放在当前模块目录下面，例如：/app/Modules/Manage/router.php
 
+    前端（客户端）部分：
 
-    前端关注：
-
-    控制器 ：{name}ListView方法，{name}ListDisplay方法，{name}EditView方法
-        路径：/public/admin/controller/{name}.js
-    页面：listView页面，listViewDisplay页面
-        路径：/public/admin/view/{name}/{name}ListView.html
-              /public/admin/view/{name}/{name}ListDisplay.html
-              /public/admin/view/{name}/{name}EditView.html
-    配置菜单：
+    项目采用前后分离开发，因此前端代码会更独立，html文件中不含有任何php代码
+    1 编写列表显示页面（两个html）
+       /public/admin/view/{name}/{name}ListView.html       页面主体
+       /public/admin/view/{name}/{name}ListDisplay.html    页面table部分
+    2 编写编辑页面（新增和修改用一个）
+       /public/admin/view/{name}/{name}EditView.html
+    3 编写前端控制器，实现与后端数据交互， ：
+       路径：/public/admin/controller/{name}.js
+       一般有三个方法：
+       {name}ListView方法，        显示列表页面，调用后台数据接口查找列表数据
+       {name}ListDisplay方法，     渲染显示数据
+       {name}EditView方法          显示编辑页面，调用后台接口
+    4 配置菜单：
         路径：/public/admin/view/layout/part/pageSidebar.html
-    配置后台接口：
+    5 配置后端接口，建议是把后端地址写在配置文件里面：
         路径：/public/admin/main/main.js 中的API变量
 
 ```
