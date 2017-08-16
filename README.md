@@ -24,7 +24,7 @@
 ### 安装方式 （一定要注意storage、bootstrap目录及其子目录、文件的权限）
 
 
-```   
+```
     下载好源码之后，你需要配置你的 Web 服务器的根目录为 public 目录。
     这个目录的  index.php 文件作为所有 HTTP 请求进入应用的前端处理器。
 
@@ -84,7 +84,6 @@
   如果设置了环境变量MOD_ENV = PRODUCTION，系统会加载.env.production配置文件
   如果设置了环境变量MOD_ENV = TEST，系统会加载.env.test配置文件
   否则会默认加载.envt配置文件
-
 ```
 
 ### 权限控制
@@ -166,7 +165,6 @@
 
     实现原理及更详细的内容请参考下面这篇文章：
     https://my.oschina.net/u/3381391/blog/1510260
-
 ```
 ![图片名称](http://www.tkc8.com/images/sucai/dsrw.png)
 
@@ -174,18 +172,15 @@
 ### 前端功能
 
 ```
-
     public\admin中存放前端代码，
     public\admin\index.html是前端入口文件，
     public\admin\main\controller存放前端main模块的控制器，
     public\admin\main\view存放前端main模块的视图页面，
-
 ```
 
 ### 开发流程
 
 ```
-
     后端（服务端）部分：
 
     1 建立数据表
@@ -212,7 +207,6 @@
         路径：/public/admin/view/layout/part/pageSidebar.html
     5 配置后端接口，建议是把后端地址写在配置文件里面：
         路径：/public/admin/main/main.js 中的API变量
-
 ```
 
 ##  交流方式
