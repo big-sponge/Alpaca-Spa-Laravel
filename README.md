@@ -4,8 +4,6 @@
 
 ### Alpaca-Spa-Laravel 简介
 
-&emsp;&emsp;Alpaca-Spa-Laravel 是前后端分类开发的一个后台管理系统的DEMO。
-
 &emsp;&emsp;Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的DEMO。**Laravel**用来实现后端功能，**Alpaca-Spa**用来实现前端功能，前后端之间通过Json交换数据。
 &emsp;&emsp;示例中主要功能有登录、注销、用户管理、权限管理、个人信息管理，定时任务管理等。在实际开发中可以根据具体的需求添加新的功能。
 
