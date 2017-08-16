@@ -4,18 +4,10 @@
 
 ### Alpaca-Spa-Laravel 简介
 
-&emsp;&emsp;Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的DEMO。**Laravel**用来实现后端功能，**Alpaca-Spa**用来实现前端功能，前后端之间通过Json交换数据。
+&emsp;&emsp;Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的DEMO。**Laravel**用来实现后端功能，**Alpaca-Spa**用来实现前端功能，前后端之间通过Json交换数据。   
 &emsp;&emsp;示例中主要功能有登录、注销、用户管理、权限管理、个人信息管理，定时任务管理等。在实际开发中可以根据具体的需求添加新的功能。
 
 ![图片名称](http://www.tkc8.com/images/sucai/img_show_1.png)
-
-### 安装方式 （一定要注意storage、bootstrap目录及其子目录、文件的权限）
-
-
-下载好源码之后，你需要配置你的 Web 服务器的根目录为 public 目录。 这个目录的  index.php 文件作为所有 HTTP 请求进入应用的前端处理器。
-
-你需要配置一些权限 。 storage 和 bootstrap 目录应该允许你的 Web 服务器写入，否则 Laravel 将无法写入。
-
 
 ### 演示地址
 
@@ -27,6 +19,14 @@
 |Alpaca-Spa-Sui | 手机端sui  |http://full.tkc8.com/app  |
 
 后台管理端登录账号是一个测试帐号，权限只有浏览功能，没有编辑等修改功能。
+
+
+### 安装方式 （一定要注意storage、bootstrap目录及其子目录、文件的权限）
+
+
+下载好源码之后，你需要配置你的 Web 服务器的根目录为 public 目录。 这个目录的  index.php 文件作为所有 HTTP 请求进入应用的前端处理器。
+
+你需要配置一些权限 。 storage 和 bootstrap 目录应该允许你的 Web 服务器写入，否则 Laravel 将无法写入。
 
 
 ### 目录结构
