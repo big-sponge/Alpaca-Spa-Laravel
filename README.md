@@ -4,7 +4,7 @@
 
 ### Alpaca-Spa-Laravel 简介
 
-&emsp;&emsp;Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的DEMO。**Laravel**用来实现后端功能，**Alpaca-Spa**用来实现前端功能，前后端之间通过Json交换数据。   
+&emsp;&emsp;Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的DEMO。**Laravel**用来实现后端功能，**Alpaca-Spa**用来实现前端功能，前后端之间通过Json交换数据。
 &emsp;&emsp;示例中主要功能有登录、注销、用户管理、权限管理、个人信息管理，定时任务管理等。在实际开发中可以根据具体的需求添加新的功能。
 
 ![图片名称](http://www.tkc8.com/images/sucai/img_show_1.png)
@@ -168,7 +168,6 @@
 ```
 ![图片名称](http://www.tkc8.com/images/sucai/dsrw.png)
 
-
 ### 前端功能
 
 ```
@@ -177,6 +176,31 @@
     public\admin\main\controller存放前端main模块的控制器，
     public\admin\main\view存放前端main模块的视图页面，
 ```
+
+
+### 自动生成代码
+
+
+![图片名称](http://www.tkc8.com/images/sucai/img_show_1.png)
+
+
+```
+    项目中提供了生成代码的工具：Alpaca-Builder
+    目的用来快速的编写代码，减少一些重复的工作，主要功能是根据输入的数据库表名声生成一下内容：
+
+    1 生成后端实体类
+    2 生成后端控制器
+    3 生成后端路由
+    4 生成前端JS控制器
+    5 生成前端编辑页面
+    6 生成前端列表页面
+    7 生成配置接口url
+    8 选择是否复制到对应页面
+
+    访问方式，浏览器中输入地址：你的域名\builder
+    （注意： 只有当配置文件中APP_ENV=local时，才容许访问）
+```
+
 
 ### 开发流程
 
