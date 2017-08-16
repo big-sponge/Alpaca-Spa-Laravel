@@ -27,6 +27,9 @@ Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的D
 |Alpaca-Spa | 主页 | http://www.tkc8.com |
 |Alpaca-Spa-Laravel | 后台管理端  | http://full.tkc8.com  |
 |Alpaca-Spa-Sui | 手机端sui  |http://full.tkc8.com/app  |
+|oschina | 代码  |http://git.oschina.net/cc-sponge/Alpaca-Spa-Laravel  |
+|github | 代码  |https://github.com/big-sponge/Alpaca-Spa-Laravel  |
+
 
 后台管理端登录账号是一个测试帐号，权限只有浏览功能，没有编辑等修改功能。
 
