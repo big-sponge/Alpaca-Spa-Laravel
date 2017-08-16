@@ -17,13 +17,12 @@
 
 ### 演示地址
 
-|  |  | |
 | -------- | -------- |-------- |
 |Alpaca-Spa | 主页 | http://www.tkc8.com |
 |Alpaca-Spa-Laravel | 后台管理端  | http://full.tkc8.com  |
 |Alpaca-Spa-Sui | 手机端sui  |http://full.tkc8.com/app  |
 
-登录账号是一个测试帐号，权限只有浏览功能，没有编辑等修改功能。
+后台管理端登录账号是一个测试帐号，权限只有浏览功能，没有编辑等修改功能。
 
 ## 目录结构
 
