@@ -4,7 +4,7 @@
 
 ### Alpaca-Spa-Laravel 简介
 
-&emsp;&emsp;Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的DEMO。**Laravel**用来实现后端功能，**Alpaca-Spa**用来实现前端功能，前后端之间通过Json交换数据。   
+&emsp;&emsp;Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的DEMO。**Laravel**用来实现后端功能，**Alpaca-Spa**用来实现前端功能，前后端之间通过Json交换数据。
 &emsp;&emsp;示例中主要功能有登录、注销、用户管理、权限管理、个人信息管理，定时任务管理等。在实际开发中可以根据具体的需求添加新的功能。
 
 ![图片名称](http://www.tkc8.com/images/sucai/img_show_1.png)
@@ -155,7 +155,11 @@
 ### 定时任务功能
 
 ```
-    框架提供了php处理定时任务的方法，具体可以参见演示地址
+    示例中提供了PHP实现定时任务（非linux-shell方式，与操作系统无关）功能。
+    适用于定时精确时间不低于1秒。web服务重启、或者php重启。该定时任务不会自动重启。可以用来处理大部分定时任务的结局方案，商城定时自动收货，关闭评论，订单回滚；定时发送邮件，数据备份等
+
+    实现原理及更详细的内容请参考下面这篇文章：
+    https://my.oschina.net/u/3381391/blog/1510260
 
 ```
 ![图片名称](http://www.tkc8.com/images/sucai/dsrw.png)
