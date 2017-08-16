@@ -181,7 +181,7 @@
 ### 自动生成代码
 
 
-![图片名称](http://www.tkc8.com/images/sucai/img_show_1.png)
+![图片名称](http://www.tkc8.com/images/sucai/img_show_2.png)
 
 
 ```
