@@ -38,11 +38,54 @@ Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的D
 
 
 ```
+
+    保证开发环境满足以下要求：
+
+    PHP版本 >= 5.6.4
+    PHP扩展：OpenSSL
+    PHP扩展：PDO
+    PHP扩展：Mbstring
+    PHP扩展：Tokenizer
+    PHP扩展：XML
+
+    （详细参考：Laravel 5.4）
+
     下载好源码之后，你需要配置你的 Web 服务器的根目录为 public 目录。
     这个目录的  index.php 文件作为所有 HTTP 请求进入应用的前端处理器。
 
     你需要配置一些权限。
     storage 和 bootstrap 目录应该允许你的 Web 服务器写入，否则 Laravel 将无法写入。
+
+    关于配置文件：
+
+    下载好源码之后，请在在/config目录下创建 .env文件，当然你也可以复制.env.development重命名为.env。
+    不建议将.env加入git版本控制，因为配置文件中可能保存着你个人的数据库访问账户。
+    配置文件详情请参考文档中 “配置文件”一章节
+
+    数据库脚本：
+    /storage/sql/db_full.sql
+
+
+    如果你只想在你本地查看前端功能，请将/public/admin/index.html中 g_url 的值设置为 "http://full.tkc8.com/"。
+
+    这样你就可以前端用本地的，服务端用full.tkc8.com提供。
+
+    假设你本地配置的域名为： 127.0.0.1
+    访问： 127.0.0.1/admin
+
+    <script>
+            var g_baseUrl = "/";  //前端资源根路径（js，css等，在视图模版中使用）
+            var g_url = "/";      //后端接口根路径
+            $(document).ready(function () {
+                g_baseUrl             = "http://" + window.location.host + "/admin/";
+                g_url                 = "http://" + window.location.host;
+                //g_url                 = "http://full.tkc8.com/";
+                Alpaca.Config.baseUrl = "/admin/"; //alpaca-spa根路径
+                Alpaca.run("#/main/index/index");
+            });
+    </script>
+
+
 ```
 
 ### 目录结构
