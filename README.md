@@ -68,23 +68,22 @@ Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的D
 
     如果你只想在你本地查看前端功能，请将/public/admin/index.html中 g_url 的值设置为 "http://full.tkc8.com/"。
 
-    这样你就可以前端用本地的，服务端用full.tkc8.com提供。
-
-    假设你本地配置的域名为： 127.0.0.1
-    访问： 127.0.0.1/admin
-
     <script>
             var g_baseUrl = "/";  //前端资源根路径（js，css等，在视图模版中使用）
             var g_url = "/";      //后端接口根路径
             $(document).ready(function () {
                 g_baseUrl             = "http://" + window.location.host + "/admin/";
-                g_url                 = "http://" + window.location.host;
-                //g_url                 = "http://full.tkc8.com/";
+                // g_url                 = "http://" + window.location.host;
+                g_url                 = "http://full.tkc8.com";
                 Alpaca.Config.baseUrl = "/admin/"; //alpaca-spa根路径
                 Alpaca.run("#/main/index/index");
             });
     </script>
 
+    这样你就可以使用本地的前端，访问服务端（full.tkc8.com）提供的接口。
+
+    假设你本地配置的域名为： 127.0.0.1
+    访问： 127.0.0.1/admin
 
 ```
 
