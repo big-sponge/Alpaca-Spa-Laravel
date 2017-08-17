@@ -24,7 +24,7 @@ class ExceptionHandler extends Handler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -35,18 +35,26 @@ class ExceptionHandler extends Handler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception               $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
-        if ( ($exception instanceof ModelNotFoundException ||
-            $exception instanceof NotFoundHttpException) && $request->expectsJson()){
-            $result = [];
-            $result['msg'] = "URL未正常识别！";
+
+        if (($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) && $request->expectsJson()) {
+            $result         = [];
+            $result['msg']  = "URL未正常识别！请确认路由配置是否正确。";
             $result['code'] = "9999";
-            return response()->json($result,200,[],JSON_UNESCAPED_UNICODE);
+            return response()->json($result, 200, [], JSON_UNESCAPED_UNICODE);
+        }
+
+        if ($request->expectsJson()) {
+            $msg            = $exception->getMessage();
+            $result         = [];
+            $result['msg']  = empty($msg) ? '系统错误请联系管理员' : $msg;
+            $result['code'] = "9999";
+            return response()->json($result, 200, [], JSON_UNESCAPED_UNICODE);
         }
         return parent::render($request, $exception);
     }
