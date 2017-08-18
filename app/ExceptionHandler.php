@@ -41,7 +41,6 @@ class ExceptionHandler extends Handler
      */
     public function render($request, Exception $exception)
     {
-
         if (($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) && $request->expectsJson()) {
             $result         = [];
             $result['msg']  = "URL未正常识别！请确认路由配置是否正确。";
