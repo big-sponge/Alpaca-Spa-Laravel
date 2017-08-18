@@ -2,7 +2,7 @@
 
 namespace Console\Commands;
 
-use App\Modules\WsServer\Controllers\IndexController;
+use App\Modules\WsServer\Router;
 use GatewayWorker\BusinessWorker;
 use GatewayWorker\Gateway;
 use GatewayWorker\Register;
@@ -99,22 +99,7 @@ class WsServer extends Command
      */
     public static function onMessage($client_id, $message)
     {
-        $message = json_decode($message, true);
-        $action  = $message['action'];
-        $data    = $message['data'];
-        switch ($action) {
-            case 'test':
-                IndexController::model($client_id, $data)->test();
-                break;
-            case 'login':
-                IndexController::model($client_id, $data)->login();
-                break;
-            case 'index':
-                IndexController::model($client_id, $data)->index();
-                break;
-            default:
-                WsSender::sendToCurrentClient('request format error.');
-        }
+        Router::init($client_id,$message);
     }
 
     /**
