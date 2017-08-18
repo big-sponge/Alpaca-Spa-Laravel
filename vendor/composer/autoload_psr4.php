@@ -39,6 +39,7 @@ return array(
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
+    'GatewayWorker\\' => array($vendorDir . '/workerman/gateway-worker/src'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
     'EasyWeChat\\' => array($vendorDir . '/overtrue/wechat/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),

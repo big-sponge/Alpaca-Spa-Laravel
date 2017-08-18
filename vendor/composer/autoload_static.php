@@ -93,6 +93,7 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'GatewayWorker\\' => 14,
         ),
         'F' => 
         array (
@@ -261,6 +262,10 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'GatewayWorker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/gateway-worker/src',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
@@ -404,6 +409,7 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
         'Console\\Commands\\Inspire' => __DIR__ . '/../..' . '/bootstrap/Console/Commands/Inspire.php',
+        'Console\\Commands\\WsServer' => __DIR__ . '/../..' . '/bootstrap/Console/Commands/WsServer.php',
         'Console\\Kernel' => __DIR__ . '/../..' . '/bootstrap/Console/Kernel.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
@@ -1014,6 +1020,14 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
+        'GatewayWorker\\BusinessWorker' => __DIR__ . '/..' . '/workerman/gateway-worker/src/BusinessWorker.php',
+        'GatewayWorker\\Gateway' => __DIR__ . '/..' . '/workerman/gateway-worker/src/Gateway.php',
+        'GatewayWorker\\Lib\\Context' => __DIR__ . '/..' . '/workerman/gateway-worker/src/Lib/Context.php',
+        'GatewayWorker\\Lib\\Db' => __DIR__ . '/..' . '/workerman/gateway-worker/src/Lib/Db.php',
+        'GatewayWorker\\Lib\\DbConnection' => __DIR__ . '/..' . '/workerman/gateway-worker/src/Lib/DbConnection.php',
+        'GatewayWorker\\Lib\\Gateway' => __DIR__ . '/..' . '/workerman/gateway-worker/src/Lib/Gateway.php',
+        'GatewayWorker\\Protocols\\GatewayProtocol' => __DIR__ . '/..' . '/workerman/gateway-worker/src/Protocols/GatewayProtocol.php',
+        'GatewayWorker\\Register' => __DIR__ . '/..' . '/workerman/gateway-worker/src/Register.php',
         'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',
         'GuzzleHttp\\ClientInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/ClientInterface.php',
         'GuzzleHttp\\Cookie\\CookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/CookieJar.php',
