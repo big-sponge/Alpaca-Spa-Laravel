@@ -2,6 +2,7 @@
 
 namespace Console\Commands;
 
+use App\Modules\WsServer\Controllers\IndexController;
 use GatewayWorker\BusinessWorker;
 use GatewayWorker\Gateway;
 use GatewayWorker\Register;
@@ -98,18 +99,34 @@ class WsServer extends Command
      */
     public static function onMessage($client_id, $message)
     {
-        WsSender::sendToCurrentClient('message:' . $message . '---' . $client_id);
+        $message = json_decode($message, true);
+        $action  = $message['action'];
+        $data    = $message['data'];
+        switch ($action) {
+            case 'test':
+                IndexController::model($client_id, $data)->test();
+                break;
+            case 'login':
+                IndexController::model($client_id, $data)->login();
+                break;
+            case 'index':
+                IndexController::model($client_id, $data)->index();
+                break;
+            default:
+                WsSender::sendToCurrentClient('request format error.');
+        }
     }
 
     /**
      * 当客户端连接时触发
      * 如果业务不需此回调可以删除onConnect
-     *
-     * @param int $client_id 连接id
      */
-    public static function onConnect($client_id)
+    public static function onConnect()
     {
-        WsSender::sendToCurrentClient("Your client_id is $client_id");
+        $result         = [];
+        $result['code'] = 9900;
+        $result['msg']  = '连接成功！';
+        WsSender::sendToCurrentClient(json_encode($result, JSON_UNESCAPED_UNICODE));
     }
 
     /**
