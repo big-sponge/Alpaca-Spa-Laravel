@@ -152,6 +152,14 @@ class UserMember extends BaseModel
             $model = self::findById($memberId);
         }
 
+        // $model为空
+        if (!$model) {
+            $result         = [];
+            $result['code'] = Code::SYSTEM_ERROR;
+            $result['msg']  = Msg::SYSTEM_ERROR;
+            return $result;
+        }
+
         // 记录登录信息
         $model->login_times     = $model->login_times + 1;      // 登录次数+1
         $model->last_login_time = $model->login_time;           // 上次登录时间

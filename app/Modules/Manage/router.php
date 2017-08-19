@@ -35,6 +35,9 @@ Route::any('auth/logout', "AuthController@logout");
 /* auth - logout */
 Route::any('auth/info', "AuthController@info");
 
+/* auth - getWsToken */
+Route::any('auth/getWsToken', "AuthController@getWsToken");
+
 /*
 |--------------------------------------------------------------------------
 | Admin

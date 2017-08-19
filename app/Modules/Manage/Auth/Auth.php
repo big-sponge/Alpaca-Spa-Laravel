@@ -13,13 +13,13 @@ class Auth
     //返回信息
     const SYSTEM_ERROR = 0;                   //系统错误
 
-    //Label是否登录
-    const LOGIN_MEMBER = "IS_LOGIN_MEMBER";   //系统账号是否登录
-    const LOGIN_WX     = "IS_LOGIN_WX";       //微信账号是否登录
+    //系统用户
+    const MEMBER_IS_LOGIN = "MEMBER_IS_LOGIN";   //系统账号是否登录
+    const MEMBER_INFO     = "MEMBER_INFO";       //系统账号数据
 
-    //Label登录信息
-    const LOGIN_INFO_MEMBER = "INFO_MEMBER";   //系统账号信息
-    const LOGIN_INFO_WX     = "INFO_WX";       //微信账号信息
+    //微信用户
+    const WX_IS_LOGIN = "WX_IS_LOGIN";   //系统账号是否登录
+    const WX_INFO     = "WX_INFO";       //系统账号数据
 
     //用户是否登录
     const LOGIN_YES = 1;  //登录用户
@@ -32,6 +32,7 @@ class Auth
      * 单例
      * @author Chengcheng
      * @date 2016-10-20 15:50:00
+     * @return static
      */
     public static function auth()
     {
@@ -94,17 +95,10 @@ class Auth
      * @param array $data
      * @return boolean
      */
-    public function login($data)
+    public function loginMember($data)
     {
-        $_SESSION[self::LOGIN_MEMBER]      = true;
-        $_SESSION[self::LOGIN_INFO_MEMBER] = $data;
-        if (!empty($_SERVER['HTTP_USER_AGENT'])) {
-            $_SESSION['HTTP_USER_AGENT'] = $_SERVER['HTTP_USER_AGENT'];
-        } else {
-            $_SESSION['HTTP_USER_AGENT'] = "Unknow";
-        }
-        $_SESSION['REMOTE_ADDR'] = $_SERVER["REMOTE_ADDR"];
-
+        $_SESSION[self::MEMBER_IS_LOGIN] = true;
+        $_SESSION[self::MEMBER_INFO]     = $data;
         return true;
     }
 
@@ -117,15 +111,8 @@ class Auth
      */
     public function loginWx($data)
     {
-        $_SESSION[self::LOGIN_WX]      = true;
-        $_SESSION[self::LOGIN_INFO_WX] = $data;
-        if (!empty($_SERVER['HTTP_USER_AGENT'])) {
-            $_SESSION['HTTP_USER_AGENT'] = $_SERVER['HTTP_USER_AGENT'];
-        } else {
-            $_SESSION['HTTP_USER_AGENT'] = "Unknow";
-        }
-        $_SESSION['REMOTE_ADDR'] = $_SERVER["REMOTE_ADDR"];
-
+        $_SESSION[self::WX_IS_LOGIN] = true;
+        $_SESSION[self::WX_INFO]     = $data;
         return true;
     }
 
@@ -138,12 +125,12 @@ class Auth
     public function logClear()
     {
         //清空系统账号信息
-        $_SESSION[self::LOGIN_MEMBER]      = false;
-        $_SESSION[self::LOGIN_INFO_MEMBER] = null;
+        $_SESSION[self::MEMBER_IS_LOGIN] = false;
+        $_SESSION[self::MEMBER_INFO]     = null;
 
         //清空微信账号登录信息
-        $_SESSION[self::LOGIN_WX]      = false;
-        $_SESSION[self::LOGIN_INFO_WX] = null;
+        $_SESSION[self::WX_IS_LOGIN] = false;
+        $_SESSION[self::WX_INFO]     = null;
 
         return true;
     }
@@ -161,12 +148,11 @@ class Auth
             setcookie(session_name(), '', time() - 4200, ' / ');
         }
         session_destroy();
-
         return true;
     }
 
     /**
-     * 判断当前用户是否登录 - 注册用户系统账号登录
+     * 判断当前用户是否登录 - 系统账号
      * @author Chengcheng
      * @date 2016-10-20 15:50:00
      */
@@ -179,15 +165,15 @@ class Auth
 
         try {
             //检查用户是否登录-系统账号
-            if (empty($_SESSION[self::LOGIN_MEMBER])) {
+            if (empty($_SESSION[self::MEMBER_IS_LOGIN])) {
                 $result["code"] = self::LOGIN_NO;
                 $result["msg"]  = "没有登录！";
                 return $result;
             }
 
             //系统账号-登录用户访问，返回用户信息
-            if (!empty($_SESSION[self::LOGIN_INFO_MEMBER])) {
-                $result["data"] = $_SESSION[self::LOGIN_INFO_MEMBER];
+            if (!empty($_SESSION[self::MEMBER_INFO])) {
+                $result["data"] = $_SESSION[self::MEMBER_INFO];
             }
 
         } catch (\Exception $e) {
@@ -199,7 +185,7 @@ class Auth
     }
 
     /**
-     * 判断当前用户是否登录 - 微信登录
+     * 判断当前用户是否登录 - 微信账号
      * @author Chengcheng
      * @date 2016-10-20 15:50:00
      */
@@ -212,15 +198,15 @@ class Auth
 
         try {
             //检查用户是否登录-微信授权
-            if (empty($_SESSION[self::LOGIN_WX])) {
+            if (empty($_SESSION[self::WX_IS_LOGIN])) {
                 $result["code"] = self::LOGIN_NO;
                 $result["msg"]  = "没有登录！";
                 return $result;
             }
 
             //微信授权登录，用户访问，返回用户微信账号信息
-            if (!empty($_SESSION[self::LOGIN_INFO_WX])) {
-                $result["data"] = $_SESSION[self::LOGIN_INFO_WX];
+            if (!empty($_SESSION[self::WX_INFO])) {
+                $result["data"] = $_SESSION[self::WX_INFO];
             }
 
         } catch (\Exception $e) {
@@ -232,62 +218,24 @@ class Auth
     }
 
     /**
-     * 判断其他三方登录
-     * @author Chengcheng
-     * @date 2016-10-20 15:50:00
-     * @return boolean
-     */
-    public function checkThirdLogin()
-    {
-        //如果用户来自微信客户端，
-        if ($this->isFromWx() == true) {
-            //调用微信登录
-            $result = null;
-            $wxLogin = self::auth()->checkLoginWx();
-            if ($wxLogin['code'] == self::LOGIN_YES) {
-                $result['third'] = $wxLogin["data"];
-            }
-            return $result;
-        }
-
-        return null;
-    }
-
-    /**
-     * 判断当前用户来自微信客户端
-     * @author Chengcheng
-     * @date 2016-10-20 15:50:00
-     * @return boolean
-     */
-    public function isFromWx()
-    {
-        if (strpos($_SERVER["HTTP_USER_AGENT"], "MicroMessenger") !== false /*&&
-            /*strpos($_SERVER["HTTP_USER_AGENT"], "WindowsWechat") === false*/
-        ) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * 获取用户登录信息
      * @author Chengcheng
      * @date 2016-10-20 15:50:00
      * @return boolean
      */
-    public function getLoginInfo(){
-
+    public function getLoginInfo()
+    {
         //1 获取用户信息
-        $info['member']        = empty($_SESSION[self::LOGIN_INFO_MEMBER])? [] : $_SESSION[self::LOGIN_INFO_MEMBER];
-        $info['memberWechat']  = empty($_SESSION[self::LOGIN_INFO_WX]) ? [] : $_SESSION[self::LOGIN_INFO_WX];
-        $info['isMemberLogin'] = $_SESSION[self::LOGIN_MEMBER] ? 1 : 0;
-        $info['isWxLogin']     = !empty($_SESSION[self::LOGIN_WX]) ? 1 : 0;
+        $info['member']        = empty($_SESSION[self::MEMBER_INFO]) ? [] : $_SESSION[self::MEMBER_INFO];
+        $info['wx']            = empty($_SESSION[self::WX_INFO]) ? [] : $_SESSION[self::WX_INFO];
+        $info['isMemberLogin'] = !empty($_SESSION[self::MEMBER_IS_LOGIN]) ? 1 : 0;
+        $info['isWxLogin']     = !empty($_SESSION[self::WX_IS_LOGIN]) ? 1 : 0;
 
-        //3 过滤掉openId,密码Passwd信息等
-        unset($info['memberWechat']['wechatOpenId']);
-        unset($info['member']['memberWechat']['mechatOpenId']);
+        //2 过滤掉openId,密码Passwd信息等
+        unset($info['wx']['open_id']);
         unset($info['member']['passwd']);
 
+        //3 返回结果
         return $info;
     }
 
@@ -301,28 +249,26 @@ class Auth
     public function updateLoginInfo($loginType = null)
     {
         //1.更新系统账号信息
-        if ($_SESSION[self::LOGIN_MEMBER] && (empty($loginType) || $loginType = self::LOGIN_INFO_MEMBER)) {
-
+        if (isset($_SESSION[self::MEMBER_INFO]) && (empty($loginType) || $loginType = self::MEMBER_INFO)) {
             //查找用户信息
-            $memberId = $_SESSION[self::LOGIN_INFO_MEMBER]['id'];
-            $data     = AdminMember::model()->getMemberInfo($memberId);
+            $memberId = $_SESSION[self::MEMBER_INFO]['id'];
+            $data     = AdminMember::model()->info($memberId);
 
             //更新用户信息到session中
-            $_SESSION[self::LOGIN_INFO_MEMBER] = $data;
+            $_SESSION[self::MEMBER_INFO] = $data;
         } else {
-            $_SESSION[self::LOGIN_INFO_MEMBER] = null;
+            $_SESSION[self::MEMBER_INFO] = null;
         }
 
         //2.更新微信账号信息
-        if (!empty($_SESSION[self::LOGIN_WX]) && (empty($loginType) || $loginType = self::LOGIN_INFO_MEMBER)) {
+        if (!empty($_SESSION[self::WX_INFO]) && (empty($loginType) || $loginType = self::WX_INFO)) {
             //查找微信用户信息
-            $memberWechatId = $_SESSION[self::LOGIN_INFO_WX]['FId'];
-            $data           = MemberWechat::getMemberWechatInfo($memberWechatId);
-
+            $userWxId = $_SESSION[self::WX_INFO]['id'];
+            //$data     = UserWx::model()->info($userWxId);
             //更新微信用户信息到session中
-            $_SESSION[self::LOGIN_INFO_WX] = $data;
+            $_SESSION[self::WX_INFO] = $data;
         } else {
-            $_SESSION[self::LOGIN_INFO_WX] = null;
+            $_SESSION[self::WX_INFO] = null;
         }
     }
 }

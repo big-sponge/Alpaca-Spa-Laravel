@@ -165,15 +165,6 @@ class BaseController extends Controller
             return $result;
         }
 
-        $isFromWx = Auth::auth()->isFromWx();
-        /* 4. 当前动作需要登录，系统账号未登录，微信未登录，客户来着微信端 */
-        if ($isFromWx) {
-            //不容许访问动作，返回结果，提示客户端可以使用微信登录，
-            $result["code"] = Code::USER_LOGIN_NULL;
-            $result["msg"]  = Msg::USER_LOGIN_NULL;
-            return $result;
-        }
-
         // [3] 当前动作需要登录，返回 false,用户未登录，不容许访问
         $result["code"] = Code::USER_LOGIN_NULL;
         $result["msg"]  = Msg::USER_LOGIN_NULL;

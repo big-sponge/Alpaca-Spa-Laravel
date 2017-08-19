@@ -1,8 +1,10 @@
 <?php
 namespace App\Models;
 
+use App\Common\Code;
 use App\Models\Base\BaseModel;
-use Illuminate\Support\Facades\DB;
+use App\Common\Visitor;
+use Crontab\Common\Msg;
 
 /**
  *
@@ -118,23 +120,47 @@ class AdminMember extends BaseModel
     }
 
     /**
-     * 保存用户登录信息
+     * 登录,并且返回用户信息
      * @author ChengCheng
      * @date 2016年10月20日 16:12:06
-     * @param string $visitIP 登录IP
-     * @param string $visitTime 登录时间
+     * @param string $memberId
+     * @return array
      */
-    public function login($visitIP, $visitTime)
+    public function login($memberId = null)
     {
-        //记录登录信息
-        $this->login_times     = $this->login_times + 1;      // 登录次数+1
-        $this->last_login_time = $this->login_time;           // 上次登录时间
-        $this->last_login_ip   = $this->login_ip;             // 登录IP
-        $this->login_time      = $visitTime;                  // 登录时间
-        $this->login_ip        = $visitIP;                    // 登录IP
+        $model = $this;
+        // 是否指定了memberId
+        if (!empty($memberId)) {
+            $model = self::findById($memberId);
+        }
+
+        // $model为空
+        if (!$model) {
+            $result         = [];
+            $result['code'] = Code::SYSTEM_ERROR;
+            $result['msg']  = Msg::SYSTEM_ERROR;
+            return $result;
+        }
+
+        // 记录登录信息
+        $model->login_times     = $model->login_times + 1;      // 登录次数+1
+        $model->last_login_time = $model->login_time;           // 上次登录时间
+        $model->last_login_ip   = $model->login_ip;             // 登录IP
+        $model->login_time      = Visitor::user()->time;       // 登录时间
+        $model->login_ip        = Visitor::user()->ip;         // 登录IP
 
         // 保存用户信息
-        $this->save();
+        $model->save();
+
+        // 获取用户信息
+        $info = $model->info();
+
+        // 返回结果
+        $result         = [];
+        $result['code'] = Code::SYSTEM_OK;
+        $result['msg']  = Msg::SYSTEM_OK;
+        $result['data'] = $info;
+        return $result;
     }
 
     /**
@@ -144,27 +170,28 @@ class AdminMember extends BaseModel
      * @param string $memberId
      * @return array
      */
-    public function getMemberInfo($memberId = null)
+    public function info($memberId = null)
     {
-        //是否指定了memberId
+        // 是否指定了memberId
         if (!empty($memberId)) {
             $this->id = $memberId;
         }
 
-        //关联分组查询member信息,auth信息
-        $member = self::model()->with('group.auth')->where('id', $this->id)->first()->toArray();
+        // 关联分组查询member信息,auth信息
+        $member = self::model()->with('group.auth')->where('id', $this->id)->first()->makeHidden('passwd')->toArray();
+
         //判断是否是管理员
         if ($this->id == self::MEMBER_ADMIN) {
             $member['isAdmin'] = true;
         } else {
             foreach ($member['group'] as $group) {
-                if ($group['id'] == AdminGroup::GROUP_ADMIN) {
+                if ($group['id'] == UserGroup::GROUP_ADMIN) {
                     $member['isAdmin'] = true;
                 }
             }
         }
 
-        //根据分组获取权限信息,合并权限
+        // 根据分组获取权限信息,合并权限
         $auth      = [];
         $groupAuth = array_column($member['group'], 'auth');
         foreach ($groupAuth as $value) {
@@ -174,7 +201,7 @@ class AdminMember extends BaseModel
         }
         $member['auth'] = $auth;
 
-        //返回结果
+        // 返回结果
         return $member;
     }
 }

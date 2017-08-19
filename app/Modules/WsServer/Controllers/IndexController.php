@@ -44,8 +44,7 @@ class IndexController extends BaseController
         $result['code'] = Code::SYSTEM_OK;
         $result['msg']  = Msg::SYSTEM_OK;
         $result['data'] = AdminMember::model()->get()->toArray();
-
-        WsSender::sendToCurrentClient($this->toJson($result));
+        return $result;
     }
 
     /**
@@ -58,7 +57,7 @@ class IndexController extends BaseController
         $result         = [];
         $result['code'] = Code::SYSTEM_OK;
         $result['msg']  = Msg::SYSTEM_OK;
-        WsSender::sendToCurrentClient($this->toJson($result));
+        return $result;
     }
 
     /**
@@ -68,6 +67,9 @@ class IndexController extends BaseController
      */
     public function testAction()
     {
-        WsSender::sendToCurrentClient('login ok :' . $this->requestData['name']);
+        $result         = [];
+        $result['code'] = Code::SYSTEM_OK;
+        $result['msg']  = Msg::SYSTEM_OK;
+        return $result;
     }
 }

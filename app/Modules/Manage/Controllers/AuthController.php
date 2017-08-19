@@ -2,12 +2,14 @@
 namespace App\Modules\Manage\Controllers;
 
 use App\Common\Wechat\WeChat;
+use App\Models\WsToken;
 use App\Modules\Manage\Controllers\Base\BaseController;
 use App\Common\Code;
 use App\Common\Msg;
 use App\Modules\Manage\Auth\Auth;
 use App\Common\Lib\Validate;
 use App\Modules\Manage\Service\EmailService;
+use Console\Commands\WsServer;
 
 /**
  * 权限控制器
@@ -44,6 +46,7 @@ class AuthController extends BaseController
             'loginByEmail',
             'logout',
             'wxLogin',
+            'getWsToken',
         ];
     }
 
@@ -55,11 +58,6 @@ class AuthController extends BaseController
      */
     public function loginByEmail()
     {
-        //0 判断是否已经有账号登录，
-        if (!empty($_SESSION[Auth::LOGIN_MEMBER])) {
-            //注销当前账号
-            Auth::auth()->logClear();
-        }
 
         //1 获取输入参数,email 手机号码,passwd 密码
         $this->requestData['email']  = $this->input('email', '');
@@ -86,53 +84,22 @@ class AuthController extends BaseController
             return $this->ajaxReturn($result);
         }
 
-        //3 检查其他三方登录
-        $thirdLogin = Auth::auth()->checkThirdLogin();
 
-        //4 系统账号登录
+        //3 系统账号登录
         $memberLogin = EmailService::loginEmail($this->requestData);
 
-        //5 判断登录结果
-
-        /* 5.1 系统账号登录失败*/
+        //4 登录失败
         if ($memberLogin['code'] != Code::SYSTEM_OK) {
-            $result["code"] = $memberLogin['code'];
-            $result["msg"]  = $memberLogin['msg'];
-            return $this->ajaxReturn($result);
-        }
-
-        /* 5.2 系统账号登录【成功】并且【没有第三方登录信息】,或者三方登录中的，用户信息与系统账号【一致】,*/
-        if (empty($thirdLogin['third']) || $thirdLogin['third']['member_id'] == $memberLogin['data']['id']) {
-            //登录成功，保存系统账号的登录信息
-            Auth::auth()->login($memberLogin['data']);
             $result["code"] = Code::SYSTEM_OK;
             $result["msg"]  = Msg::USER_LOGIN_OK;
-            return $this->ajaxReturn($result);
+            return $result;
         }
 
-        // 5.3  三方账号没有绑定系统账号，
-        if (empty($thirdLogin['third']['member'])) {
-            //登录成功，提示用户可以绑定三方账号
-            Auth::auth()->login($memberLogin['data']);
-            $result["code"]           = Code::SYSTEM_OK;
-            $result["msg"]            = Msg::USER_LOGIN_OK;
-            $result["data"]['exCode'] = Code::WX_MEMBER_BIND_NO;
-            $result["data"]['exMsg']  = '微信账号与系统账号未绑定,推荐绑定';
-            return $this->ajaxReturn($result);
-        }
-
-        // 5.4  三方登录中账号信息与系统账号登录信息【不一致】，并且不为空，【说明已绑定其他账号】，
-        if (!empty($thirdLogin['third']['member'])) {
-            //登录失败
-            $result["code"] = Code::WX_BIND_OTHER;
-            $result["msg"]  = Msg::WX_BIND_OTHER;
-            return $this->ajaxReturn($result);
-        }
+        //5 登录成功，保存信息到session
+        Auth::auth()->loginMember($memberLogin['data']);
 
         //6 返回结果
-        $result["code"] = Code::SYSTEM_ERROR;
-        $result["msg"]  = Msg::SYSTEM_ERROR;
-        return $this->ajaxReturn($result);
+        return $this->ajaxReturn($memberLogin);
     }
 
     /**
@@ -159,7 +126,7 @@ class AuthController extends BaseController
         //1 获取输入参数,email 邮箱,passwd 用户密码，token 手机验证码，
         $this->requestData['old_passwd'] = $this->input('oldPasswd', '');
         $this->requestData['new_passwd'] = $this->input('newPasswd', '');
-        $this->requestData['member_id'] = $this->requestData['visitUser']['member']['id'];
+        $this->requestData['member_id']  = $this->requestData['visitUser']['member']['id'];
 
         //2.1 验证FEmail是否为空
         if (empty($this->requestData['old_passwd'])) {
@@ -197,82 +164,25 @@ class AuthController extends BaseController
         return $this->ajaxReturn($result);
     }
 
-
     /**
-     * 微信登录
+     * 用户注销
      * @author Chengcheng
      * @date 2016-10-21 09:00:00
      * @return string
      */
-    public function actionWxLogin()
+    public function getWsToken()
     {
-        //获取code
-        $this->requestData['code'] = $this->input('code', 0);
+        //获取参数
+        $memberId = $this->requestData['visitUser']['member']['id'];
 
-        //检查code
-        if (empty($this->requestData['code'])) {
-            $result["code"] = Code::SYSTEM_PARAMETER_NULL;
-            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_NULL, 'code');
-            return $this->ajaxReturn($result);
-        }
+        //生成token
+        $token = WsToken::model()->generate($memberId, WsToken::MEMBER_TYPE_ADMIN);
 
-        //调用微信登录
-        $wxLoginResult = WeChat::user()->wxLogin($this->requestData['code']);
-
-        //根据状态设置返回结果
-        if ($wxLoginResult['code'] == CodeTable::WX_LOGIN_USER_OK) {
-            //登录成功,获取访客OpenId成功，并且通过OpenId找到用户已经注册系统账号，即：微信账号绑定了系统账号
-
-            //设置系统账号登录信息
-            ShopAuth::auth()->login($wxLoginResult['data']['member']);
-            //设置微信账号登录信息
-            ShopAuth::auth()->loginWx($wxLoginResult['data']['member_wechat']);
-            //返回结果
-            $result["code"] = CodeTable::SYSTEM_OK;
-            $result["msg"]  = MsgTable::USER_LOGIN_OK;
-            $result["data"] = ShopAuth::auth()->getLoginInfo();
-            return $this->displayToJson($result);
-        } elseif ($wxLoginResult['code'] == CodeTable::WX_LOGIN_USER_NULL) {
-            //系统账号登录失败,获取访客OpenId成功，但是没有通过OpenId找到用户已经注册系统账号，即：微信账号未绑定系统账号
-
-            //设置微信账号登录信息
-            ShopAuth::auth()->loginWx($wxLoginResult['data']['member_wechat']);
-            //返回结果
-            $result["code"] = CodeTable::WX_LOGIN_USER_NULL;
-            $result["msg"]  = MsgTable::WX_LOGIN_USER_NULL;
-            return $this->displayToJson($result);
-        } elseif ($wxLoginResult['code'] == CodeTable::WX_LOGIN_FIRST_USER_NULL) {
-            //登录失败,用户首次微信端访问，获取访客OpenId成功，微信账号未绑定系统账号，
-
-            //设置微信账号登录信息
-            ShopAuth::auth()->loginWx($wxLoginResult['data']['member_wechat']);
-            //返回结果
-            $result["code"] = CodeTable::WX_LOGIN_FIRST_USER_NULL;
-            $result["msg"]  = MsgTable::WX_LOGIN_FIRST_USER_NULL;
-            return $this->displayToJson($result);
-        } elseif ($wxLoginResult['code'] == CodeTable::WX_LOGIN_USER_ERROR) {
-            //登录失败,获取访客OpenId成功，但是通过OpenId找用户系统账号时出错
-
-            //设置微信账号登录信息
-            ShopAuth::auth()->loginWx($wxLoginResult['data']['member_wechat']);
-            //返回结果
-            $result["code"] = CodeTable::WX_LOGIN_USER_ERROR;
-            $result["msg"]  = MsgTable::WX_LOGIN_USER_ERROR;
-            return $this->displayToJson($result);
-        }elseif ($wxLoginResult['code'] == CodeTable::USER_STATUS_FREEZE) {
-            //登录失败,获取访客OpenId成功，系统账号啊被冻结
-
-            //设置微信账号登录信息
-            ShopAuth::auth()->loginWx($wxLoginResult['data']['member_wechat']);
-            //返回结果
-            $result["code"] = CodeTable::USER_STATUS_FREEZE;
-            $result["msg"]  = MsgTable::USER_STATUS_FREEZE;
-            return $this->displayToJson($result);
-        }else {
-            //登录失败,系统错误，获取openId失败,不容许访问动作
-            $result["code"] = CodeTable::WX_LOGIN_OPENID_NULL;
-            $result["msg"]  = MsgTable::WX_LOGIN_OPENID_NULL;
-            return $this->displayToJson($result);
-        }
+        //返回结果
+        $result["code"] = Code::SYSTEM_OK;
+        $result["msg"]  = Msg::SYSTEM_OK;
+        $result["data"] = $token;
+        return $this->ajaxReturn($result);
     }
+
 }

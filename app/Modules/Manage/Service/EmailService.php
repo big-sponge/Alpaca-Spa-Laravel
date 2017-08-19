@@ -42,15 +42,17 @@ class EmailService
         }
 
         //3 保存用户登录信息
-        $member->login($requestData['visitIP'], $requestData['visitTime']);
 
-        //4 提取用户信息-扩展信息等（微信，分组，权限等）
-        $memberInfo = $member->getMemberInfo();
+        //获取用户系统账号信息
+        $memberLoginResult = AdminMember::model()->login($member->id);
+        if ($memberLoginResult['code'] != Code::SYSTEM_OK) {
+            return $memberLoginResult;
+        }
 
         //5 登录成功，返回结果
         $result["code"] = Code::SYSTEM_OK;
         $result["msg"]  = Msg::USER_LOGIN_OK;
-        $result["data"] = $memberInfo;
+        $result["data"] = $memberLoginResult['data'];
         return $result;
     }
 

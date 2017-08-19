@@ -13,15 +13,23 @@ use App\Models\UserWx;
 class Auth
 {
     //返回信息
-    const SYSTEM_ERROR = 0;                   //系统错误
+    const SYSTEM_ERROR = 0;                       //系统错误
 
     //系统用户
-    const MEMBER_IS_LOGIN = "MEMBER_IS_LOGIN";   //系统账号是否登录
-    const MEMBER_INFO     = "MEMBER_INFO";       //系统账号数据
+    const MEMBER_IS_LOGIN = "MEMBER_IS_LOGIN";    //系统账号是否登录
+    const MEMBER_INFO     = "MEMBER_INFO";        //系统账号数据
+
+    //系统用户-ADMIN
+    const ADMIN_IS_LOGIN = "ADMIN_IS_LOGIN";      //系统账号是否登录
+    const ADMIN_INFO     = "ADMIN_INFO";          //系统账号数据
+
+    //系统用户-USER
+    const USER_IS_LOGIN = "USER_IS_LOGIN";        //系统账号是否登录
+    const USER_INFO     = "USER_INFO";            //系统账号数据
 
     //微信用户
-    const WX_IS_LOGIN = "WX_IS_LOGIN";   //系统账号是否登录
-    const WX_INFO     = "WX_INFO";       //系统账号数据
+    const WX_IS_LOGIN = "WX_IS_LOGIN";            //系统账号是否登录
+    const WX_INFO     = "WX_INFO";                //系统账号数据
 
     //用户是否登录
     const LOGIN_YES = 1;  //登录用户
@@ -105,6 +113,34 @@ class Auth
     }
 
     /**
+     * 登录-系统账号 -Admin
+     * @author Chengcheng
+     * @date 2016-10-20 15:50:00
+     * @param array $data
+     * @return boolean
+     */
+    public function loginAdmin($data)
+    {
+        $_SESSION[self::ADMIN_IS_LOGIN] = true;
+        $_SESSION[self::ADMIN_INFO]     = $data;
+        return true;
+    }
+
+    /**
+     * 登录-系统账号 -User
+     * @author Chengcheng
+     * @date 2016-10-20 15:50:00
+     * @param array $data
+     * @return boolean
+     */
+    public function loginUser($data)
+    {
+        $_SESSION[self::USER_IS_LOGIN] = true;
+        $_SESSION[self::USER_INFO]     = $data;
+        return true;
+    }
+
+    /**
      * 登录-微信账号
      * @author Chengcheng
      * @date 2016-10-20 15:50:00
@@ -158,7 +194,7 @@ class Auth
      * @author Chengcheng
      * @date 2016-10-20 15:50:00
      */
-    public function checkLoginMember()
+    public function checkLoginUserMember()
     {
         $result         = array();
         $result["code"] = self::LOGIN_YES;
@@ -167,15 +203,48 @@ class Auth
 
         try {
             //检查用户是否登录-系统账号
-            if (empty($_SESSION[self::MEMBER_IS_LOGIN])) {
+            if (empty($_SESSION[self::USER_IS_LOGIN])) {
                 $result["code"] = self::LOGIN_NO;
                 $result["msg"]  = "没有登录！";
                 return $result;
             }
 
             //系统账号-登录用户访问，返回用户信息
-            if (!empty($_SESSION[self::MEMBER_INFO])) {
-                $result["data"] = $_SESSION[self::MEMBER_INFO];
+            if (!empty($_SESSION[self::USER_INFO])) {
+                $result["data"] = $_SESSION[self::USER_INFO];
+            }
+
+        } catch (\Exception $e) {
+            $result["code"] = "0";
+            $result["msg"]  = $e->getMessage();
+        }
+
+        return $result;
+    }
+
+    /**
+     * 判断当前用户是否登录 - 系统账号
+     * @author Chengcheng
+     * @date 2016-10-20 15:50:00
+     */
+    public function checkLoginAdminMember()
+    {
+        $result         = array();
+        $result["code"] = self::LOGIN_YES;
+        $result["msg"]  = "登录状态！";
+        $result["data"] = null;
+
+        try {
+            //检查用户是否登录-系统账号
+            if (empty($_SESSION[self::ADMIN_IS_LOGIN])) {
+                $result["code"] = self::LOGIN_NO;
+                $result["msg"]  = "没有登录！";
+                return $result;
+            }
+
+            //系统账号-登录用户访问，返回用户信息
+            if (!empty($_SESSION[self::ADMIN_INFO])) {
+                $result["data"] = $_SESSION[self::ADMIN_INFO];
             }
 
         } catch (\Exception $e) {
@@ -217,6 +286,44 @@ class Auth
         }
 
         return $result;
+    }
+
+    /**
+     * 获取用户登录信息 - Admin
+     * @author Chengcheng
+     * @date 2016-10-20 15:50:00
+     * @return boolean
+     */
+    public function getAdminInfo()
+    {
+        //1 获取用户信息
+        $info['member']        = empty($_SESSION[self::ADMIN_INFO]) ? [] : $_SESSION[self::ADMIN_INFO];
+        $info['isMemberLogin'] = !empty($_SESSION[self::ADMIN_IS_LOGIN]) ? 1 : 0;
+
+        //2 过滤掉openId,密码Passwd信息等
+        unset($info['member']['passwd']);
+
+        //3 返回结果
+        return $info;
+    }
+
+    /**
+     * 获取用户登录信息 - User
+     * @author Chengcheng
+     * @date 2016-10-20 15:50:00
+     * @return boolean
+     */
+    public function getUserInfo()
+    {
+        //1 获取用户信息
+        $info['member']        = empty($_SESSION[self::USER_INFO]) ? [] : $_SESSION[self::USER_INFO];
+        $info['isMemberLogin'] = !empty($_SESSION[self::USER_IS_LOGIN]) ? 1 : 0;
+
+        //2 过滤掉openId,密码Passwd信息等
+        unset($info['member']['passwd']);
+
+        //3 返回结果
+        return $info;
     }
 
     /**
