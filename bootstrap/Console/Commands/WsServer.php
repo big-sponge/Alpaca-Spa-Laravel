@@ -69,23 +69,23 @@ class WsServer extends Command
         $argv[1] = $action;
         $argv[2] = $this->option('d') ? '-d' : '';
 
-        // BusinessWorker
-        new Register('text://0.0.0.0:1238');                                      // register 服务必须是text协议
+        // BusinessWorker -- 必须是text协议
+        new Register('text://0.0.0.0:'.config('gateway.register.port'));
 
         // BusinessWorker
         $worker                  = new BusinessWorker();
         $worker->name            = 'BusinessWorker';
         $worker->count           = 1;
-        $worker->registerAddress = '127.0.0.1:1238';
+        $worker->registerAddress = config('gateway.register.host').':'.config('gateway.register.port');
         $worker->eventHandler    = 'Console\Commands\WsServer';
 
         // Gateway
-        $gateway                  = new Gateway("websocket://0.0.0.0:8082");
+        $gateway                  = new Gateway("websocket://0.0.0.0:".config('gateway.port'));
         $gateway->name            = 'Gateway';
         $gateway->count           = 1;
         $gateway->lanIp           = '127.0.0.1';
         $gateway->startPort       = 4000;
-        $gateway->registerAddress = '127.0.0.1:1238';
+        $gateway->registerAddress = config('gateway.register.host').':'.config('gateway.register.port');
         $gateway->pingInterval    = 10;
         $gateway->pingData        = '{"cmd":"1","data":"0"}';
 

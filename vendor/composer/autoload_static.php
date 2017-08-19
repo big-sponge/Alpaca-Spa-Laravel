@@ -94,6 +94,7 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
             'GatewayWorker\\' => 14,
+            'GatewayClient\\' => 14,
         ),
         'F' => 
         array (
@@ -266,6 +267,10 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         array (
             0 => __DIR__ . '/..' . '/workerman/gateway-worker/src',
         ),
+        'GatewayClient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/gatewayclient',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
@@ -402,6 +407,11 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'App\\Modules\\Server\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Modules/Server/Controllers/IndexController.php',
         'App\\Modules\\Server\\Service\\EmailService' => __DIR__ . '/../..' . '/app/Modules/Server/Service/EmailService.php',
         'App\\Modules\\Server\\Service\\WxService' => __DIR__ . '/../..' . '/app/Modules/Server/Service/WxService.php',
+        'App\\Modules\\WsServer\\Auth\\Auth' => __DIR__ . '/../..' . '/app/Modules/WsServer/Auth/Auth.php',
+        'App\\Modules\\WsServer\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Modules/WsServer/Controllers/AdminController.php',
+        'App\\Modules\\WsServer\\Controllers\\Base\\BaseController' => __DIR__ . '/../..' . '/app/Modules/WsServer/Controllers/Base/BaseController.php',
+        'App\\Modules\\WsServer\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Modules/WsServer/Controllers/IndexController.php',
+        'App\\Modules\\WsServer\\Router' => __DIR__ . '/../..' . '/app/Modules/WsServer/Router.php',
         'App\\RouteProvider' => __DIR__ . '/../..' . '/app/RouteProvider.php',
         'Builder\\Controller' => __DIR__ . '/../..' . '/bootstrap/builder/Controller.php',
         'Builder\\View\\View' => __DIR__ . '/../..' . '/bootstrap/builder/View/View.php',
@@ -1020,6 +1030,9 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
+        'GatewayClient\\Context' => __DIR__ . '/..' . '/workerman/gatewayclient/Gateway.php',
+        'GatewayClient\\Gateway' => __DIR__ . '/..' . '/workerman/gatewayclient/Gateway.php',
+        'GatewayClient\\GatewayProtocol' => __DIR__ . '/..' . '/workerman/gatewayclient/Gateway.php',
         'GatewayWorker\\BusinessWorker' => __DIR__ . '/..' . '/workerman/gateway-worker/src/BusinessWorker.php',
         'GatewayWorker\\Gateway' => __DIR__ . '/..' . '/workerman/gateway-worker/src/Gateway.php',
         'GatewayWorker\\Lib\\Context' => __DIR__ . '/..' . '/workerman/gateway-worker/src/Lib/Context.php',

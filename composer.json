@@ -11,6 +11,7 @@
         "mews/purifier": "^2.0",
         "overtrue/wechat": "~3.1",
         "workerman/gateway-worker": "^3.0",
+        "workerman/gatewayclient": "^3.0",
         "workerman/workerman": "^3.4"
     },
     "require-dev": {

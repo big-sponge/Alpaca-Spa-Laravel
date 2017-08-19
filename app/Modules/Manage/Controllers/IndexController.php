@@ -3,6 +3,7 @@
 namespace App\Modules\Manage\Controllers;
 
 use App\Common\Wechat\WeChat;
+use App\Common\WsServer\Client;
 use App\Modules\Manage\Controllers\Base\BaseController;
 
 class IndexController extends BaseController
@@ -32,7 +33,9 @@ class IndexController extends BaseController
 
     public function index()
     {
+        Client::sendToAll('asdasdasdasdasd');
 
+        die('sssss');
         $app =WeChat::app();
 
         $str =  WeChat::user()->getWxAuthUrl();

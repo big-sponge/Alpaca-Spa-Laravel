@@ -2,6 +2,7 @@
 
 namespace App\Modules\WsServer;
 
+use App\Modules\WsServer\Controllers\AdminController;
 use App\Modules\WsServer\Controllers\IndexController;
 
 use GatewayWorker\Lib\Gateway as WsSender;
@@ -23,6 +24,9 @@ class Router
                 break;
             case 'index':
                 IndexController::model($client_id, $data)->index();
+                break;
+            case 'admin_test':
+                AdminController::model($client_id, $data)->test();
                 break;
             default:
                 WsSender::sendToCurrentClient('request format error.');

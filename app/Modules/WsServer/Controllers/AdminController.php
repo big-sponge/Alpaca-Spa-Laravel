@@ -8,7 +8,7 @@ use App\Models\AdminMember;
 use App\Modules\WsServer\Controllers\Base\BaseController;
 use GatewayWorker\Lib\Gateway as WsSender;
 
-class IndexController extends BaseController
+class AdminController extends BaseController
 {
     /**
      * 设置不需要登录的的Action
@@ -18,7 +18,7 @@ class IndexController extends BaseController
      */
     protected function noLogin()
     {
-        return ['index', 'login'];
+        return ['test', 'login'];
     }
 
     /**
@@ -68,6 +68,10 @@ class IndexController extends BaseController
      */
     public function testAction()
     {
-        WsSender::sendToCurrentClient('login ok :' . $this->requestData['name']);
+        $result         = [];
+        $result['code'] = Code::SYSTEM_OK;
+        $result['msg']  = Msg::SYSTEM_OK;
+        $result['data']  = "sssss222";
+        WsSender::sendToAll($this->toJson($result));
     }
 }
