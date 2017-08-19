@@ -4,6 +4,7 @@ namespace App\Modules\WsServer\Controllers;
 
 use App\Common\Code;
 use App\Common\Msg;
+use App\Common\Visitor;
 use App\Models\AdminMember;
 use App\Models\WsToken;
 use App\Modules\WsServer\Auth\Auth;
@@ -22,18 +23,6 @@ class AdminController extends BaseController
     protected function noLogin()
     {
         return ['login'];
-    }
-
-    /**
-     * 设置不需要权限的的Action
-     * @author Chengcheng
-     * @date   2016年10月23日 20:39:25
-     * @return array
-     */
-    protected function noAuth()
-    {
-        // 当前控制器所有方法均不需要权限
-        return ['index'];
     }
 
     /**
@@ -58,7 +47,7 @@ class AdminController extends BaseController
         $memberResult = Auth::auth()->checkLoginAdminMember();
         if ($isNeedLogin == false || $memberResult['code'] == Auth::LOGIN_YES) {
             // 设置框架user信息，默认为unLogin
-            $this->requestData['visitor']['member'] = $memberResult['data'];
+            Visitor::adminMember()->load($memberResult['data']);
             //返回结果，容许访问
             return true;
         }
@@ -121,7 +110,7 @@ class AdminController extends BaseController
         $result         = [];
         $result['code'] = Code::SYSTEM_OK;
         $result['msg']  = Msg::SYSTEM_OK;
-        $result['data'] = Auth::auth()->getAdminInfo();
+        $result['data'] = Visitor::adminMember()->toArray();
         return $result;
     }
 }

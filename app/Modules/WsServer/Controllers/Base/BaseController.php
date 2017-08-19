@@ -4,6 +4,7 @@ namespace App\Modules\WsServer\Controllers\Base;
 
 use App\Common\Code;
 use App\Common\Msg;
+use App\Common\Visitor;
 use GatewayWorker\Lib\Gateway as WsSender;
 use App\Modules\WsServer\Auth\Auth;
 
@@ -106,7 +107,7 @@ class BaseController
         $memberResult = Auth::auth()->checkLoginUserMember();
         if ($isNeedLogin == false || $memberResult['code'] == Auth::LOGIN_YES) {
             // 设置框架user信息，默认为unLogin
-            $this->requestData['visitor']['member'] = $memberResult['data'];
+            Visitor::userMember()->load($memberResult['data']);
             //返回结果，容许访问
             return true;
         }

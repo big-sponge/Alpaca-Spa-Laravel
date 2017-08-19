@@ -1,6 +1,7 @@
 <?php
 namespace App\Modules\Server\Controllers;
 
+use App\Common\Visitor;
 use App\Modules\Server\Controllers\Base\BaseController;
 use App\Common\Code;
 use App\Common\Msg;
@@ -122,7 +123,7 @@ class AuthController extends BaseController
         //1 获取输入参数,email 邮箱,passwd 用户密码，token 手机验证码，
         $this->requestData['old_passwd'] = $this->input('oldPasswd', '');
         $this->requestData['new_passwd'] = $this->input('newPasswd', '');
-        $this->requestData['member_id']  = $this->requestData['visitUser']['member']['id'];
+        $this->requestData['member_id']  = Visitor::userMember()->id;
 
         //2.1 验证FEmail是否为空
         if (empty($this->requestData['old_passwd'])) {

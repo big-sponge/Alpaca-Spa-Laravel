@@ -2,6 +2,7 @@
 
 namespace App\Modules\Server\Controllers\Base;
 
+use App\Common\Visitor;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
@@ -133,6 +134,7 @@ class BaseController extends Controller
         if ($memberResult['code'] == Auth::LOGIN_YES) {
             //如果用户已经登录，设置用户member信息
             $this->requestData['visitor']['member'] = $memberResult['data'];
+            Visitor::userMember()->load($memberResult['data']);
         }
 
         //* 3.1 检查用户是否登录-微信openid登录 */
@@ -141,6 +143,7 @@ class BaseController extends Controller
         if ($wxResult['code'] == Auth::LOGIN_YES) {
             //如果用户已经微信授权登录，设置用户memberWechat信息
             $this->requestData['visitor']['wx'] = $wxResult['data'];
+            Visitor::userWx()->load($memberResult['data']);
         }
 
         // [2] 下面分析执行的动作和用户登录行为
@@ -203,7 +206,7 @@ class BaseController extends Controller
         }
 
         /* 2 判断用户是否有操作当前Action的权限 */
-        $userInfo = $this->requestData['visitUser']['member'];
+        $userInfo = Visitor::userMember()->toArray();
 
         /* 3 用户是不是管理员 */
         if ((!empty($userInfo['isAdmin'])) && $userInfo['isAdmin'] == true) {

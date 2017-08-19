@@ -1,6 +1,7 @@
 <?php
 namespace App\Modules\Manage\Controllers;
 
+use App\Common\Visitor;
 use App\Common\Wechat\WeChat;
 use App\Models\WsToken;
 use App\Modules\Manage\Controllers\Base\BaseController;
@@ -84,7 +85,6 @@ class AuthController extends BaseController
             return $this->ajaxReturn($result);
         }
 
-
         //3 系统账号登录
         $memberLogin = EmailService::loginEmail($this->requestData);
 
@@ -126,7 +126,7 @@ class AuthController extends BaseController
         //1 获取输入参数,email 邮箱,passwd 用户密码，token 手机验证码，
         $this->requestData['old_passwd'] = $this->input('oldPasswd', '');
         $this->requestData['new_passwd'] = $this->input('newPasswd', '');
-        $this->requestData['member_id']  = $this->requestData['visitUser']['member']['id'];
+        $this->requestData['member_id']  = Visitor::adminMember()->id;
 
         //2.1 验证FEmail是否为空
         if (empty($this->requestData['old_passwd'])) {
@@ -165,7 +165,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * 用户注销
+     * 获取token
      * @author Chengcheng
      * @date 2016-10-21 09:00:00
      * @return string
@@ -173,7 +173,7 @@ class AuthController extends BaseController
     public function getWsToken()
     {
         //获取参数
-        $memberId = $this->requestData['visitUser']['member']['id'];
+        $memberId = Visitor::adminMember()->id;
 
         //生成token
         $token = WsToken::model()->generate($memberId, WsToken::MEMBER_TYPE_ADMIN);

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Manage\Controllers\Base;
 
+use App\Common\Visitor;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
@@ -109,11 +110,6 @@ class BaseController extends Controller
         $action   = $this->getCurrentAction();
         $actionID = $action['method'];
 
-        // [0] 设置系统相关的参数,访问者客户端, 访问者IP,访问时间
-        $this->requestData['visitUserAgent'] = empty($_SERVER['HTTP_USER_AGENT']) ? 'unknown' : $_SERVER['HTTP_USER_AGENT'];
-        $this->requestData['visitIP']        = $_SERVER["REMOTE_ADDR"];
-        $this->requestData['visitTime']      = date('Y-m-d H:i:s');
-
         // [1] 检查访问Action动作权限要求，检查访问用户登录情况，
 
         /* 1 判断Action动作是否需要登录，默认需要登录 */
@@ -131,7 +127,7 @@ class BaseController extends Controller
         //如果用户已经登录，保存用户信息，
         if ($memberResult['code'] == Auth::LOGIN_YES) {
             //如果用户已经登录，设置用户member信息
-            $this->requestData['visitUser']['member'] = $memberResult['data'];
+            Visitor::adminMember()->load($memberResult['data']);
         }
 
         //* 3.1 检查用户是否登录-微信openid登录 */
@@ -139,7 +135,7 @@ class BaseController extends Controller
         //如果用户已经微信授权登录，保存用户微信信息，
         if ($wxResult['code'] == Auth::LOGIN_YES) {
             //如果用户已经微信授权登录，设置用户memberWechat信息
-            $this->requestData['visitUser']['memberWechat'] = $wxResult['data'];
+            Visitor::userWx()->load($memberResult['data']);
         }
 
         // [2] 下面分析执行的动作和用户登录行为
@@ -203,7 +199,7 @@ class BaseController extends Controller
         }
 
         /* 2 判断用户是否有操作当前Action的权限 */
-        $userInfo = $this->requestData['visitUser']['member'];
+        $userInfo = Visitor::adminMember()->toArray();
 
         /* 3 用户是不是管理员 */
         if ((!empty($userInfo['isAdmin'])) && $userInfo['isAdmin'] == true) {
