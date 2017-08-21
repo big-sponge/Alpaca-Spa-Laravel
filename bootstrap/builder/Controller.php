@@ -208,7 +208,7 @@ class Controller
             /*拷贝到指定目录*/
             /*后端Controller，目录*/
             if ($is_auto_copy) {
-                $controller_dir       = base_path() . "\\app\\Modules\\{{$b_module_name}}\\Controllers\\";
+                $controller_dir       = base_path() . "\\app\\Modules\\{$b_module_name}\\Controllers\\";
                 $controller_file_name = $className . 'Controller';
                 if (!file_exists($controller_dir . $controller_file_name . '.php')) {
                     copy($fileName, $controller_dir . $controller_file_name . '.php');
@@ -235,7 +235,7 @@ class Controller
             /*拷贝到指定目录*/
             /*前端Controller，目录*/
             if ($is_auto_copy) {
-                $display_dir = base_path() . "\\public\\{{$f_module_name_lc}}\\main\\view\\" . $classNameLc . "\\";
+                $display_dir = base_path() . "\\public\\{$f_module_name_lc}\\main\\view\\" . $classNameLc . "\\";
                 if (!is_dir($display_dir)) {
                     mkdir($display_dir, 0777, true);
                 }
@@ -262,7 +262,7 @@ class Controller
             /*拷贝到指定目录*/
             /*前端Controller，目录*/
             if ($is_auto_copy) {
-                $display_dir = base_path() . "\\public\\{{$f_module_name_lc}}\\main\\view\\" . $classNameLc . "\\";
+                $display_dir = base_path() . "\\public\\{$f_module_name_lc}\\main\\view\\" . $classNameLc . "\\";
                 if (!is_dir($display_dir)) {
                     mkdir($display_dir, 0777, true);
                 }
@@ -291,7 +291,7 @@ class Controller
             /*拷贝到指定目录*/
             /*前端Controller，目录*/
             if ($is_auto_copy) {
-                $edit_dir = base_path() . "\\public\\{{$f_module_name_lc}}\\main\\view\\" . $classNameLc . "\\";
+                $edit_dir = base_path() . "\\public\\{$f_module_name_lc}\\main\\view\\" . $classNameLc . "\\";
                 if (!is_dir($edit_dir)) {
                     mkdir($edit_dir, 0777, true);
                 }
@@ -320,7 +320,7 @@ class Controller
             /*拷贝到指定目录*/
             /*前端Controller，目录*/
             if ($is_auto_copy) {
-                $controller_js_dir       = base_path() . "\\public\\{{$f_module_name_lc}}\\main\\controller\\";
+                $controller_js_dir       = base_path() . "\\public\\{$f_module_name_lc}\\main\\controller\\";
                 $controller_js_file_name = $classNameLc . '';
                 if (!file_exists($controller_js_dir . $controller_js_file_name . '.js')) {
                     copy($fileName, $controller_js_dir . $controller_js_file_name . '.js');
@@ -348,7 +348,7 @@ class Controller
             /*拷贝到指定目录*/
             /*前端Controller，目录*/
             if ($is_auto_copy) {
-                $router_name = base_path() . "\\app\\Modules\\{{$b_module_name}}\\router.php";;
+                $router_name = base_path() . "\\app\\Modules\\{$b_module_name}\\router.php";;
                 if (!file_exists($router_name)) {
 
                 } else {

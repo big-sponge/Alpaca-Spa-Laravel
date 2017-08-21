@@ -19,8 +19,9 @@ class WsToken extends BaseModel
     protected $table = "tb_ws_token";
 
     // 枚举字段
-    const MEMBER_TYPE_USER  = 1;    //用户类型:用户
-    const MEMBER_TYPE_ADMIN = 2;    //用户类型:管理员
+    const MEMBER_TYPE_USER    = 1;    //用户类型:用户
+    const MEMBER_TYPE_ADMIN   = 2;    //用户类型:管理员
+    const MEMBER_TYPE_USER_WX = 3;    //用户类型:用户-微信
 
     /**
      * 分页查询
@@ -109,11 +110,11 @@ class WsToken extends BaseModel
         }
 
         //保存数据
-        $model              = new self;
-        $model->member_id   = $memberId;
-        $model->member_type = $type;
-        $model->token       = $token;
-        $model->available_time = date('Y-m-d H:i:s',strtotime("+5 minute"));
+        $model                 = new self;
+        $model->member_id      = $memberId;
+        $model->member_type    = $type;
+        $model->token          = $token;
+        $model->available_time = date('Y-m-d H:i:s', strtotime("+5 minute"));
         $model->save();
 
         //返回token

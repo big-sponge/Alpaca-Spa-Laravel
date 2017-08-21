@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>企鹅会员日</title>
+    <link rel="stylesheet" href="/shake/screen/assets/css/pc-page.css"/>
+</head>
+
+<body id="full-screen">
+
+<div class="bg"></div>
+
+<div class="main">
+    <div id="page-content">
+        <div class="page2">
+            <div class="counttime"></div>
+            <div class="tips">请稍等，正在连接 。。。</div>
+        </div>
+    </div>
+    <div class="bottomBar">
+        <div class="logoz">
+            <img class="logo" src="/shake/screen/assets/img/dy_logo.png"/>
+            <img class="logo endlogo" src="/shake/screen/assets/img/hy_logo.png"/>
+        </div>
+
+        <img class="fsbtn" src="/shake/screen/assets/img/fullscreen_btn.png">
+    </div>
+</div>
+<div class="error-box">
+    <div class="error">
+        <div class="close"></div>
+        <div class="err-top"><img src="/shake/screen/assets/img/error.png" width="284" height="327"/></div>
+        <div class="err-bottom">额~出现故障<br/>程序鹅正在努力排查中<br/>请耐心等待~</div>
+    </div>
+</div>
+<script type="text/javascript" src="/shake/screen/assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/shake/screen/assets/js/base.js"></script>
+<script type="text/javascript" src="/shake/common/js/alpaca-spa-2.0.js"></script>
+<script type="text/javascript" src="/shake/screen/screen.js"></script>
+<script type="text/javascript" src="/shake/screen/controller/index.js"></script>
+<script type="text/javascript">
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r   = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return (r[2]);
+        }
+        return null;
+    }
+</script>
+
+<script type="text/javascript">
+
+    //定义常量
+    var G_URL = "http://" + window.location.host;                   //* 服务器地址 */
+    var WS_URL = "ws://" + window.location.host + ":8082";          //* web-socket 地址 */
+    var WS = null;
+
+    var ACTIVITY_ID = GetQueryString('activity_id');                //* 活动ID */
+    var ITEM_ID = null;                                             //* 活动项目ID */
+    var ITEM_COUNT = 0;                                              //* 活动项目次数 */
+
+    $(function () {
+        Alpaca.Config.baseUrl = "/shake/";   //alpaca-spa根路径
+        Alpaca.run("#/screen/index/login");
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<div class="result">
+    {{ if(!it.record) { }}
+    <!-- 如果当前用户没有参加该轮次摇一摇 -->
+    <div class="user-box success">
+        <div class="avatar">
+            <img src="{{= it.record.avatar }}" alt="">
+        </div>
+        <div class="name">{{= it.record.nickname}}</div>
+    </div>
+    <div class="persent-box">
+        <div class="bar" style="width:0;"> 0次</div>
+    </div>
+    <div class="center-text">您没有参加该轮次摇一摇</div>
+    {{ }else{ }}
+    <div class="user-box success">
+        <div class="avatar">
+            <img src="{{= it.record.avatar }}" alt="">
+            {{ if(it.record.ticket_status!= 0) { }}
+            <div class="number">第{{= it.record.user_rank }}名</div>
+            {{ } }}
+        </div>
+        <div class="name">{{= it.record.nickname }}</div>
+    </div>
+    <div class="persent-box">
+        <div class="bar" style="width:{{= it.record.shake_count/ it.item.shake_limit * 100}}%;">
+            {{= it.record.shake_count }}次
+        </div>
+    </div>
+    <div class="center-text">
+        {{ if( it.record.ticket_status != 0) { }}
+        恭喜中奖！真是腕力惊人呢~
+        {{ } else { }}
+        好遗憾~就差一丢丢~
+        {{ } }}
+    </div>
+    {{ } }}
+
+    <div class="yanwo">
+        <img src="/shake/wapp/assets/images/qrcode.png" class="qrcode" alt="">
+        <p class="text">长按二维码关注“燕窝玩乐惠”<br/>更多<span>免费福利</span>和<span>体验活动</span>等着您哦</p>
+    </div>
+
+    <div class="btn"></div>
+</div>

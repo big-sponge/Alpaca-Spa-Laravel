@@ -5,6 +5,7 @@ use App\Common\Msg;
 use App\Common\Code;
 use App\Models\AdminMember;
 use App\Models\UserMember;
+use App\Models\UserWx;
 use App\Models\WsToken;
 
 /**
@@ -25,7 +26,7 @@ class TokenService
     public static function wsLogin($data)
     {
         //查找id
-        $memberId = WsToken::model()->check($data['token'],$data['type']);
+        $memberId = WsToken::model()->check($data['token'], $data['type']);
         if (empty($memberId)) {
             $result         = array();
             $result["code"] = Code::SYSTEM_ERROR;
@@ -34,9 +35,11 @@ class TokenService
         }
 
         //查找用户信息
-        if($data['type'] == WsToken::MEMBER_TYPE_ADMIN){
+        if ($data['type'] == WsToken::MEMBER_TYPE_ADMIN) {
             $memberLoginResult = AdminMember::model()->login($memberId);
-        }else{
+        } else if ($data['type'] == WsToken::MEMBER_TYPE_USER_WX) {
+            $memberLoginResult = UserWx::model()->login($memberId);
+        } else {
             $memberLoginResult = UserMember::model()->login($memberId);
         }
 

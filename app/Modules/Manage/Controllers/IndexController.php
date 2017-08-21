@@ -5,6 +5,7 @@ namespace App\Modules\Manage\Controllers;
 use App\Common\Wechat\WeChat;
 use App\Common\WsServer\Client;
 use App\Modules\Manage\Controllers\Base\BaseController;
+use Illuminate\Support\Facades\Cache;
 
 class IndexController extends BaseController
 {
@@ -33,7 +34,10 @@ class IndexController extends BaseController
 
     public function index()
     {
-        Client::sendToAll('asdasdasdasdasd');
+        Cache::forget('WS_ITEM_DOING_7');
+
+        //Client::sendToUid('SHAKE_ITEM_ADMIN_7',json_encode(['code'=>'2222','msg'=>'asdasdasd','action'=>'111111']));
+
 
         die('sssss');
         $app =WeChat::app();

@@ -41,6 +41,12 @@ Route::any('auth/wxLogin', "AuthController@wxLogin");
 /* auth - wxInfo */
 Route::any('auth/wxInfo', "AuthController@wxInfo");
 
+/* shake - getWsToken */
+Route::any('shake/getWsToken', "ShakeController@getWsToken");
+
+/* shake - wxLogin */
+Route::any('shake/wxLogin', "ShakeController@wxLogin");
+
 
 
 

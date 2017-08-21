@@ -25,7 +25,13 @@ Alpaca.MainModule.AuthController = {
                     success: function (data) {
                         Notific(data.msg);
                         if(data.code == 9900){
-                            Alpaca.to("#/main/index/index");
+                            var redirect = Alpaca.Router.getParams(0);
+                            if(redirect){
+                                window.location.replace(decodeURIComponent(redirect));
+                                return;
+                            }
+
+                           Alpaca.to("#/main/index/index");
                         }
                     },
                 });

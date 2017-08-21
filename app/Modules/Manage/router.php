@@ -35,9 +35,6 @@ Route::any('auth/logout', "AuthController@logout");
 /* auth - logout */
 Route::any('auth/info', "AuthController@info");
 
-/* auth - getWsToken */
-Route::any('auth/getWsToken', "AuthController@getWsToken");
-
 /*
 |--------------------------------------------------------------------------
 | Admin
@@ -95,3 +92,27 @@ Route::any('crontab/removeTask', "CrontabController@removeTask");
 /* crontab - listTask  获取定时任务列表 */
 Route::any('crontab/listTask', "CrontabController@listTask");
 
+
+/*
+|--------------------------------------------------------------------------
+| Shake
+|--------------------------------------------------------------------------
+*/
+
+/* shake - getWsToken */
+Route::any('shake/getWsToken', "ShakeController@getWsToken");
+
+/* shake - getQrCode */
+Route::any('shake/getQrCode', "ShakeController@getQrCode");
+
+/* shake - getActivity */
+Route::any('shake/getActivity', "ShakeController@getActivity");
+
+/* shake - getActivityList */
+Route::any('shake/getActivityList', "ShakeController@getActivityList");
+
+/* shake - editActivity */
+Route::any('shake/editActivity', "ShakeController@editActivity");
+
+/* shake - deleteActivity */
+Route::any('shake/deleteActivity', "ShakeController@deleteActivity");

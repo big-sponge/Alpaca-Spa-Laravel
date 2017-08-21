@@ -164,25 +164,4 @@ class AuthController extends BaseController
         return $this->ajaxReturn($result);
     }
 
-    /**
-     * 获取token
-     * @author Chengcheng
-     * @date 2016-10-21 09:00:00
-     * @return string
-     */
-    public function getWsToken()
-    {
-        //获取参数
-        $memberId = Visitor::adminMember()->id;
-
-        //生成token
-        $token = WsToken::model()->generate($memberId, WsToken::MEMBER_TYPE_ADMIN);
-
-        //返回结果
-        $result["code"] = Code::SYSTEM_OK;
-        $result["msg"]  = Msg::SYSTEM_OK;
-        $result["data"] = $token;
-        return $this->ajaxReturn($result);
-    }
-
 }

@@ -1,0 +1,180 @@
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}common/js/md5-min.js"></script>
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">活动管理</span> - 编辑活动</h4>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a><i class="icon-home2 position-left"></i> 活动管理</a></li>
+            <li class="active">编辑活动</li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <!-- Basic responsive configuration -->
+    <form id="shakeActivity-edit">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h5 class="panel-title">编辑活动<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group">
+                            <label>ID:</label>
+                            <input type="text" class="form-control" placeholder="id" name="id" readonly>
+                        </div>
+                         <div class="form-group">
+                            <label>所属商家ID:</label>
+                            <input type="text" class="form-control" placeholder="请输入所属商家ID" name="merchant_id">
+                        </div>
+                         <div class="form-group">
+                            <label>活动类型:</label>
+                            <select  class="form-control select" name="type">
+                            <option value="1">微摇奖</option>
+                            <option value="2">微夺宝</option>
+                            </select>
+                        </div>
+                         <div class="form-group">
+                            <label>名称:</label>
+                            <input type="text" class="form-control" placeholder="请输入名称" name="name">
+                        </div>
+                         <div class="form-group">
+                            <label>所属省:</label>
+                            <input type="text" class="form-control" placeholder="请输入所属省" name="province_id">
+                        </div>
+                         <div class="form-group">
+                            <label>所属城市:</label>
+                            <input type="text" class="form-control" placeholder="请输入所属城市" name="city_id">
+                        </div>
+                         <div class="form-group">
+                            <label>开始时间:</label>
+                            <input type="text" class="form-control" placeholder="请输入开始时间" name="start_time">
+                        </div>
+                         <div class="form-group">
+                            <label>结束时间:</label>
+                            <input type="text" class="form-control" placeholder="请输入结束时间" name="end_time">
+                        </div>
+                         <div class="form-group">
+                            <label>举办商家:</label>
+                            <input type="text" class="form-control" placeholder="请输入举办商家" name="business_name">
+                        </div>
+                         <div class="form-group">
+                            <label>商家LOGO:</label>
+                            <input type="text" class="form-control" placeholder="请输入商家LOGO" name="business_logo">
+                        </div>
+                         <div class="form-group">
+                            <label>兑奖地址:</label>
+                            <input type="text" class="form-control" placeholder="请输入兑奖地址" name="prize_address">
+                        </div>
+                         <div class="form-group">
+                            <label>大屏背景图片:</label>
+                            <input type="text" class="form-control" placeholder="请输入大屏背景图片" name="background_img">
+                        </div>
+                         <div class="form-group">
+                            <label>手机端公众号二维码:</label>
+                            <input type="text" class="form-control" placeholder="请输入手机端公众号二维码" name="wechat_qrcode">
+                        </div>
+                         <div class="form-group">
+                            <label>手机端公众号引导文案:</label>
+                            <input type="text" class="form-control" placeholder="请输入手机端公众号引导文案" name="wechat_qrcode_text">
+                        </div>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary" onclick="submitShakeActivity()"><i class="icon-checkmark3 position-left"></i>保存</button>
+                            <button type="button" class="btn btn-default" onclick="cancel()"><i class="icon-undo position-left"></i>取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- /basic responsive configuration -->
+    <!-- Footer -->
+    <div id="page-content-footer"></div>
+    <!-- /footer -->
+</div>
+<!-- /content area -->
+<script>
+
+    /* 填充表单 */
+    var fillShakeActivity = function (data) {
+        $('#shakeActivity-edit [name ="id"]').val(data.id);
+        $('#shakeActivity-edit [name ="merchant_id"]').val(data.merchant_id);
+        $('#shakeActivity-edit [name ="type"]').val(data.type);
+        $('#shakeActivity-edit [name ="name"]').val(data.name);
+        $('#shakeActivity-edit [name ="province_id"]').val(data.province_id);
+        $('#shakeActivity-edit [name ="city_id"]').val(data.city_id);
+        $('#shakeActivity-edit [name ="start_time"]').val(data.start_time);
+        $('#shakeActivity-edit [name ="end_time"]').val(data.end_time);
+        $('#shakeActivity-edit [name ="business_name"]').val(data.business_name);
+        $('#shakeActivity-edit [name ="business_logo"]').val(data.business_logo);
+        $('#shakeActivity-edit [name ="prize_address"]').val(data.prize_address);
+        $('#shakeActivity-edit [name ="background_img"]').val(data.background_img);
+        $('#shakeActivity-edit [name ="wechat_qrcode"]').val(data.wechat_qrcode);
+        $('#shakeActivity-edit [name ="wechat_qrcode_text"]').val(data.wechat_qrcode_text);
+    };
+
+
+    /* 提交表单 */
+    var submitShakeActivity = function () {
+        var request  = {};
+        request.id = $('#shakeActivity-edit [name ="id"]').val();
+        request.merchant_id = $('#shakeActivity-edit [name ="merchant_id"]').val();
+        request.type = $('#shakeActivity-edit [name ="type"]').val();
+        request.name = $('#shakeActivity-edit [name ="name"]').val();
+        request.province_id = $('#shakeActivity-edit [name ="province_id"]').val();
+        request.city_id = $('#shakeActivity-edit [name ="city_id"]').val();
+        request.start_time = $('#shakeActivity-edit [name ="start_time"]').val();
+        request.end_time = $('#shakeActivity-edit [name ="end_time"]').val();
+        request.business_name = $('#shakeActivity-edit [name ="business_name"]').val();
+        request.business_logo = $('#shakeActivity-edit [name ="business_logo"]').val();
+        request.prize_address = $('#shakeActivity-edit [name ="prize_address"]').val();
+        request.background_img = $('#shakeActivity-edit [name ="background_img"]').val();
+        request.wechat_qrcode = $('#shakeActivity-edit [name ="wechat_qrcode"]').val();
+        request.wechat_qrcode_text = $('#shakeActivity-edit [name ="wechat_qrcode_text"]').val();
+
+        AlpacaAjax({
+            url: g_url + API['shakeActivity_edit'],
+            data: request,
+            async: false,
+            success: function (data) {
+                console.log(data);
+                Notific(data.msg);
+                if(data.code == 9900){
+                    Alpaca.to("#/main/shake/shakeActivityListView");
+                }
+            },
+        });
+    };
+
+    /* 取消 */
+    var cancel = function () {
+        Alpaca.to("#/main/shake/shakeActivityListView");
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

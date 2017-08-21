@@ -1,7 +1,9 @@
 <?php 
 namespace App\Models; 
 
-use App\Models\Base\BaseModel; 
+use App\Common\Code;
+use App\Models\Base\BaseModel;
+use Crontab\Common\Msg;
 
 /** 
  * 
@@ -105,4 +107,30 @@ class UserWx extends BaseModel
         // 返回结果
         return $userWx;
     }
+
+    /**
+     * 获取微信登录信息
+     * @author ChengCheng
+     * @date 2016年10月20日 16:12:06
+     * @param string $userWxId
+     * @return array
+     */
+    public function login($userWxId = null)
+    {
+        // 是否指定了userWxId
+        if (!empty($userWxId)) {
+            $this->id = $userWxId;
+        }
+
+        // 关联分组查询member信息,auth信息
+        $userWx = self::model()->where('id', $this->id)->first()->toArray();
+
+        // 返回结果
+        $result         = [];
+        $result['code'] = Code::SYSTEM_OK;
+        $result['msg']  = Msg::SYSTEM_OK;
+        $result['data'] = $userWx;
+        return $result;
+    }
+
 }

@@ -35,6 +35,10 @@ var API = {
     crontab_info: '/manage/crontab/getIndexTask',        // 获取单条任务信息
     crontab_remove: '/manage/crontab/removeTask',        // 删除任务
     crontab_edit: '/manage/crontab/editTask',            // 编辑任务
+
+    shakeActivity_list: '/manage/shake/getActivityList',                 //列表
+    shakeActivity_edit: '/manage/shake/editActivity',                    //编辑
+    shakeActivity_delete: '/manage/shake/deleteActivity',                //删除
 };
 
 Date.prototype.format = function (fmt) { //author: meizz

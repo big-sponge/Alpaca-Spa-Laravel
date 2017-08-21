@@ -327,6 +327,25 @@ class Auth
     }
 
     /**
+     * 获取用户登录信息 - User
+     * @author Chengcheng
+     * @date 2016-10-20 15:50:00
+     * @return boolean
+     */
+    public function getWxInfo()
+    {
+        //1 获取用户信息
+        $info['wx']        = empty($_SESSION[self::WX_INFO]) ? [] : $_SESSION[self::WX_INFO];
+        $info['isWxLogin'] = !empty($_SESSION[self::WX_IS_LOGIN]) ? 1 : 0;
+
+        //2 过滤掉openId,密码Passwd信息等
+        unset($info['wx']['open_id']);
+
+        //3 返回结果
+        return $info;
+    }
+
+    /**
      * 获取用户登录信息
      * @author Chengcheng
      * @date 2016-10-20 15:50:00
