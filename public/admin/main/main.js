@@ -340,9 +340,15 @@ Alpaca.MainModule = {
                 return;
             }
 
+
+            var auth = userInfo['member']['auth'];
+            if (!auth[24]) {
+                $('.power-menu-24').addClass("hidden");
+            }
+
             // 首先 隐藏所有子菜单（.power-menu 加在li上面）
 /*            $('.power-menu').addClass("hidden");
-            var auth = userInfo['member']['auth'];
+
 
             // 根据权限显示子菜单  --
             if (auth[28]) {

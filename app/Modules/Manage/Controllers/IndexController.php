@@ -5,6 +5,7 @@ namespace App\Modules\Manage\Controllers;
 use App\Common\Wechat\WeChat;
 use App\Common\WsServer\Client;
 use App\Modules\Manage\Controllers\Base\BaseController;
+use App\Modules\WsServer\Controllers\ServerController;
 use Illuminate\Support\Facades\Cache;
 
 class IndexController extends BaseController
@@ -34,26 +35,24 @@ class IndexController extends BaseController
 
     public function index()
     {
-        Cache::forget('WS_ITEM_DOING_7');
 
-        //Client::sendToUid('SHAKE_ITEM_ADMIN_7',json_encode(['code'=>'2222','msg'=>'asdasdasd','action'=>'111111']));
+        Client::sendToGroup(ServerController::WS_GROUP_CLIENT . '7', json_encode(['code' => '2222', 'msg' => 'asdasdasd', 'action' => '111111']));
 
+        die('sssss2');
+        $app = WeChat::app();
 
-        die('sssss');
-        $app =WeChat::app();
+        $str = WeChat::user()->getWxAuthUrl();
 
-        $str =  WeChat::user()->getWxAuthUrl();
+        //$id =  WeChat::user()->getOpenId('ssss');
 
-       //$id =  WeChat::user()->getOpenId('ssss');
-
-        var_dump($str) ;
+        var_dump($str);
 
         die;
         //$index = AdminMember::findById(4);
         //var_dump($index->toArray());
 
-    /*  die('sss');
-        return $this->ajaxReturn($index); */
+        /*  die('sss');
+            return $this->ajaxReturn($index); */
 
         echo date('Y-m-d H:i:s', time());
         die();

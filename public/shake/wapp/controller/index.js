@@ -2,15 +2,8 @@ var shake_doing = null;
 
 var shakeEventDidOccur = function () {
 
-    var audio = document.getElementById('shake_audio');
+    audio.currentTime = 0;
     audio.play();
-    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
-        WeixinJSBridge.invoke('getNetworkType', {}, function (res) {
-            audio.currentTime = 0;
-            audio.play();
-        });
-    }
-
     Alpaca.to('#/wapp/index/upShake');
 };
 

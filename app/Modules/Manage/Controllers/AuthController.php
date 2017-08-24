@@ -90,9 +90,7 @@ class AuthController extends BaseController
 
         //4 登录失败
         if ($memberLogin['code'] != Code::SYSTEM_OK) {
-            $result["code"] = Code::SYSTEM_OK;
-            $result["msg"]  = Msg::USER_LOGIN_OK;
-            return $result;
+            return $memberLogin;
         }
 
         //5 登录成功，保存信息到session

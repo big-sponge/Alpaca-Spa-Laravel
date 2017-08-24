@@ -34,7 +34,7 @@ class ShakeController extends BaseController
     protected function noAuth()
     {
         // 当前控制器所有方法均不需要权限
-        return ['index','getQrCode','getWsToken','getActivity','getActivityList','getItemList'];
+        return ['index','getQrCode','getWsToken','getActivity','getItemList'];
     }
 
     /**

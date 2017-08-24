@@ -128,7 +128,16 @@
     var ACTIVITY_ID = GetQueryString('activity_id');                //* 活动ID */
     var ITEM_ID = null;                                             //* 活动项目ID */
 
+    var audio =0;
     $(function () {
+
+        audio = document.getElementById('shake_audio');
+
+        // 微信提供的事件，微信浏览器内部初始化完成后
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            audio.load();
+        }, false);
+
         Alpaca.Config.baseUrl = "/shake/";                          //alpaca-spa根路径
         Alpaca.run("#/wapp/auth/getWsToken");
     });

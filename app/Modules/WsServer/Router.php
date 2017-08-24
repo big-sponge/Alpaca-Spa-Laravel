@@ -21,18 +21,6 @@ class Router
 
         //路由
         switch ($action) {
-            case 'test':
-                $result = IndexController::model($client_id, $data)->test();
-                break;
-            case 'login':
-                $result = IndexController::model($client_id, $data)->login();
-                break;
-            case 'index':
-                $result = IndexController::model($client_id, $data)->index();
-                break;
-            case 'admin/test':
-                $result = AdminController::model($client_id, $data)->test();
-                break;
             case 'admin/login':
                 /*登录*/
                 $result = AdminController::model($client_id, $data)->login();

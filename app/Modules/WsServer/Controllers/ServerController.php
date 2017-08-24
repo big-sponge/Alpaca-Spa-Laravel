@@ -195,33 +195,7 @@ class ServerController extends BaseController
     }
 
     /**
-     * startItem - 游戏开始
-     * @author Chengcheng
-     * @date 2016-10-21 09:00:00
-     */
-    public function startItemAction()
-    {
-
-        $result["code"] = Code::SYSTEM_OK;
-        $result["msg"]  = Msg::SYSTEM_OK;
-        return $result;
-    }
-
-    /**
-     * stopItem - 游戏结束
-     * @author Chengcheng
-     * @date 2016-10-21 09:00:00
-     */
-    public function stopItemAction()
-    {
-
-        $result["code"] = Code::SYSTEM_OK;
-        $result["msg"]  = Msg::SYSTEM_OK;
-        return $result;
-    }
-
-    /**
-     * stopItem - 游戏结束
+     * stopItem - 上传摇一摇次数
      * @author Chengcheng
      * @date 2016-10-21 09:00:00
      */
@@ -278,7 +252,7 @@ class ServerController extends BaseController
     }
 
     /**
-     * stopItem - 游戏结束
+     * stopItem - 游戏结果
      * @author Chengcheng
      * @date 2016-10-21 09:00:00
      */
@@ -302,7 +276,7 @@ class ServerController extends BaseController
     }
 
     /**
-     * stopItem - 游戏结束
+     * stopItem - 发送实时数据到大屏幕
      * @author Chengcheng
      * @date 2016-10-21 09:00:00
      * @param $itemId
