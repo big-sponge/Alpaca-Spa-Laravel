@@ -4,8 +4,6 @@ namespace App\Modules\WsServer;
 
 use App\Common\Code;
 use App\Modules\WsServer\Controllers\AdminController;
-use App\Modules\WsServer\Controllers\IndexController;
-
 use App\Modules\WsServer\Controllers\ServerController;
 use GatewayWorker\Lib\Gateway as WsSender;
 
@@ -42,7 +40,7 @@ class Router
                 $result = AdminController::model($client_id, $data)->stopItem();
                 break;
             case 'admin/shake_users':
-                /*结束*/
+                /*获取参与用户*/
                 $result = AdminController::model($client_id, $data)->getItemUsers();
                 break;
             case 'server/login':
