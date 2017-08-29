@@ -70,24 +70,24 @@ class WsServer extends Command
         $argv[2] = $this->option('d') ? '-d' : '';
 
         // BusinessWorker -- 必须是text协议
-        new Register('text://0.0.0.0:'.config('gateway.register.port'));
+        new Register('text://0.0.0.0:' . config('gateway.register.port'));
 
         // BusinessWorker
         $worker                  = new BusinessWorker();
-        $worker->name            = 'BusinessWorker';
-        $worker->count           = 1;
-        $worker->registerAddress = config('gateway.register.host').':'.config('gateway.register.port');
+        $worker->name            = config('gateway.worker.name');
+        $worker->count           = config('gateway.worker.count');
+        $worker->registerAddress = config('gateway.register.host') . ':' . config('gateway.register.port');
         $worker->eventHandler    = 'Console\Commands\WsServer';
 
         // Gateway
-        $gateway                  = new Gateway("websocket://0.0.0.0:".config('gateway.port'));
-        $gateway->name            = 'Gateway';
-        $gateway->count           = 1;
-        $gateway->lanIp           = '127.0.0.1';
-        $gateway->startPort       = 4000;
-        $gateway->registerAddress = config('gateway.register.host').':'.config('gateway.register.port');
+        $gateway                  = new Gateway("websocket://0.0.0.0:" . config('gateway.port'));
+        $gateway->name            = config('gateway.gateway.name');
+        $gateway->count           = config('gateway.gateway.count');
+        $gateway->lanIp           = config('gateway.gateway.lan_ip');
+        $gateway->startPort       = config('gateway.gateway.startPort');
+        $gateway->registerAddress = config('gateway.register.host') . ':' . config('gateway.register.port');
         $gateway->pingInterval    = 10;
-        $gateway->pingData        = '{"cmd":"1","data":"0"}';
+        $gateway->pingData        = '{"action":"sys/ping","data":"0"}';
 
         Worker::runAll();
     }
@@ -99,7 +99,7 @@ class WsServer extends Command
      */
     public static function onMessage($client_id, $message)
     {
-        Router::init($client_id,$message);
+        Router::init($client_id, $message);
     }
 
     /**
@@ -108,9 +108,10 @@ class WsServer extends Command
      */
     public static function onConnect()
     {
-        $result         = [];
-        $result['code'] = 9900;
-        $result['msg']  = '连接成功！';
+        $result           = [];
+        $result['action'] = "sys/connect";
+        $result['msg']    = '连接成功！';
+        $result['code']   = 9900;
         WsSender::sendToCurrentClient(json_encode($result, JSON_UNESCAPED_UNICODE));
     }
 
