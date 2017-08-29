@@ -4,86 +4,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta content="" name="Keywords">
     <meta content="" name="Description">
-    <title>企鹅会员日</title>
-    <script>
-        !function (G, k) {
-            function D() {
-                var c = A.getBoundingClientRect().width;
-                c / B > 540 && (c = 540 * B);
-                var a = c / 10;
-                A.style.fontSize = a + "px", H.rem = G.rem = a
-            }
-
-            var J, w = G.document, A = w.documentElement, z = w.querySelector('meta[name="viewport"]'), C = w.querySelector('meta[name="flexible"]'), B = 0, q = 0, H = k.flexible || (k.flexible = {});
-            if (z) {
-                console.warn("将根据已有的meta标签来设置缩放比例");
-                var y = z.getAttribute("content").match(/initial\-scale=([\d\.]+)/);
-                y && (q = parseFloat(y[1]), B = parseInt(1 / q))
-            } else {
-                if (C) {
-                    var I = C.getAttribute("content");
-                    if (I) {
-                        var j = I.match(/initial\-dpr=([\d\.]+)/), F = I.match(/maximum\-dpr=([\d\.]+)/);
-                        j && (B = parseFloat(j[1]), q = parseFloat((1 / B).toFixed(2))), F && (B = parseFloat(F[1]), q = parseFloat((1 / B).toFixed(2)))
-                    }
-                }
-            }
-            if (!B && !q) {
-                var g = (G.navigator.appVersion.match(/android/gi), G.navigator.appVersion.match(/iphone/gi)), E = G.devicePixelRatio;
-                B = g ? E >= 3 && (!B || B >= 3) ? 3 : E >= 2 && (!B || B >= 2) ? 2 : 1 : 1, q = 1 / B
-            }
-            if (A.setAttribute("data-dpr", B), !z) {
-                if (z = w.createElement("meta"), z.setAttribute("name", "viewport"), z.setAttribute("content", "initial-scale=" + q + ", maximum-scale=" + q + ", minimum-scale=" + q + ", user-scalable=no"), A.firstElementChild) {
-                    A.firstElementChild.appendChild(z)
-                } else {
-                    var b = w.createElement("div");
-                    b.appendChild(z), w.write(b.innerHTML)
-                }
-            }
-            G.addEventListener("resize", function () {
-                clearTimeout(J), J = setTimeout(D, 300)
-            }, !1), G.addEventListener("pageshow", function (a) {
-                a.persisted && (clearTimeout(J), J = setTimeout(D, 300))
-            }, !1), "complete" === w.readyState ? w.body.style.fontSize = 12 * B + "px" : w.addEventListener("DOMContentLoaded", function () {
-                w.body.style.fontSize = 12 * B + "px"
-            }, !1), D(), H.dpr = G.dpr = B, H.refreshRem = D, H.rem2px = function (c) {
-                var a = parseFloat(c) * this.rem;
-                return "string" == typeof c && c.match(/rem$/) && (a += "px"), a
-            }, H.px2rem = function (c) {
-                var a = parseFloat(c) / this.rem;
-                return "string" == typeof c && c.match(/px$/) && (a += "rem"), a
-            }
-        }(window, window.lib || (window.lib = {}));
-    </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="stylesheet" href="/shake/wapp/assets/css/reset.css">
-    <link rel="stylesheet" href="/shake/wapp/assets/css/index.css">
 </head>
 
 <body>
 <div class="main">
     <div id="main-content">
-        <link rel="stylesheet" href="/shake/wapp/assets/css/index.css">
         <div class="rotate-box">
             <div class="start-phone"></div>
-            <!-- 倒计时部分 -->
         </div>
         <div class="tips-text">
             加载中 ...
         </div>
     </div>
-    <div class="copyright">
-        <div class="logos">
-            <div class="item">
-                <img src="/shake/wapp/assets/images/logo-dyw.png" alt=""/>
-            </div>
-            <div class="item">
-                <img src="/shake/wapp/assets/images/logo-qe.png" alt=""/>
-            </div>
-        </div>
-        <p class="text">本活动最终解释权归腾讯大燕网所有！</p>
-    </div>
-    <img src="/shake/wapp/assets/images/last-cover.png" alt="" class="cover">
 </div>
 
 <div class="popup">
@@ -99,11 +32,7 @@
         <div class="close"></div>
     </div>
 </div>
-<audio style="display:none; height:0px" src="/shake/wapp/assets/images/shake.mp3" id="shake_audio" preload="auto"></audio>
 <script type="text/javascript" src="/shake/wapp/assets/lib/zepto.min.js"></script>
-<script type="text/javascript" src="/shake/wapp/assets/lib/shake.js"></script>
-<!--<script type="text/javascript" src="/shake/wapp/assets/lib/page.js"></script>-->
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="/shake/common/js/alpaca-spa-2.0.js"></script>
 <script type="text/javascript" src="/shake/wapp/wapp.js"></script>
 <script type="text/javascript" src="/shake/wapp/controller/index.js"></script>
