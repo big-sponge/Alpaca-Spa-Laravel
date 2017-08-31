@@ -10,6 +10,14 @@ var API = {
     auth_info: '/server/auth/info',                        //获取当前登录用户信息
     auth_wxInfo: '/server/auth/wxInfo',                    //获取当前登录用户微信信息
     auth_logout: '/server/auth/logout',                    //注销
+
+    // web-socket
+    server_test_Login: '/server/shake/testLogin',             //* 测试登录登录 */
+    server_wx_Login: '/server/shake/wxLogin',                 //* 微信登录 */
+    user_shake_token: '/server/shake/getWsToken',             //* 获取token接口 */
+    ws_chat_user_login: 'chat/userLogin',                     //* WS 管理员账号登录（后台帐号） */
+    ws_chat_send: 'chat/send',                                //* WS 发送消息 */
+    ws_chat_online: 'chat/online',                            //* WS 获取在线人员 */
 };
 
 Date.prototype.format = function (fmt) { //author: meizz
@@ -61,9 +69,8 @@ AlpacaAjax = function (param) {
     var success = function (data) {
         //没有登录
         if (data.code == "112") {
-            setTimeout(function () {
-                Alpaca.to("#/main/auth/loginView");
-            }, 200);
+            var redirect = encodeURIComponent(window.location.href);
+            Alpaca.to("#/main/auth/loginView",{redirect:redirect});
             return false;
         }
         //没有权限

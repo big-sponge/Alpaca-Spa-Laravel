@@ -76,4 +76,25 @@ class WxService
             return $result;
         }
     }
+
+    /**
+     * 测试登录
+     * @author Chengcheng
+     * @param array $requestData
+     * @return array
+     */
+    public static function testLogin($requestData)
+    {
+        //1 判断邮箱是否存在
+        $member       = new UserWx();
+        $member->name = $requestData['name'];
+        $member->open_id='-';
+        $member->save();
+
+        //3 保存用户登录信息，并且返回用户详细信息
+        $result = $member->login();
+
+        //4 返回结果
+        return $result;
+    }
 }

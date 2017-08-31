@@ -113,7 +113,7 @@ class ChatController extends BaseController
     {
         //查询参数
         $param['token'] = $this->requestData['token'];
-        $param['type']  = WsToken::MEMBER_TYPE_USER;
+        $param['type']  = WsToken::MEMBER_TYPE_USER_WX;
 
         //验证token
         $login = TokenService::wsLogin($param);
@@ -123,6 +123,23 @@ class ChatController extends BaseController
 
         //保存登录信息
         Auth::auth()->loginUser($login['data']['member']);
+        Visitor::userMember()->load($login['data']['member']);
+        Visitor::userMember()->type = 'user_wx';
+
+        //保存登录信息到gateway的session
+        $member                = [];
+        $member['id']          = Visitor::userMember()->id;
+        $member['name']        = Visitor::userMember()->name;
+        $member['type']        = Visitor::userMember()->type;
+        $member['avatar']      = Visitor::userMember()->avatar;
+        $_SESSION['ws_member'] = $member;
+
+        //加入分组
+        $_SESSION['ws_client_group'] = static::WS_GROUP_CHAT;
+        WsSender::joinGroup($this->clientId, static::WS_GROUP_CHAT);
+
+        //通知上线
+        $this->notifyOnline();
 
         //返回结果
         $result         = [];

@@ -9,6 +9,7 @@ use App\Common\Wechat\WeChat;
 use App\Models\WsToken;
 use App\Modules\Server\Auth\Auth;
 use App\Modules\Server\Controllers\Base\BaseController;
+use App\Modules\Server\Service\EmailService;
 use App\Modules\Server\Service\WxService;
 
 class ShakeController extends BaseController
@@ -21,7 +22,7 @@ class ShakeController extends BaseController
      */
     protected function noLogin()
     {
-        return ['index','wxLogin'];
+        return ['index', 'wxLogin', 'testLogin','logout'];
     }
 
     /**
@@ -37,6 +38,21 @@ class ShakeController extends BaseController
     }
 
     /**
+     * 用户注销
+     * @author Chengcheng
+     * @date 2016-10-21 09:00:00
+     * @return string
+     */
+    public function logout()
+    {
+        //注销，清除session
+        Auth::auth()->logout();
+        $result["code"] = Code::SYSTEM_OK;
+        $result["msg"]  = Msg::USER_LOGOUT_OK;
+        return $this->ajaxReturn($result);
+    }
+
+    /**
      * 登录验证
      * @author Chengcheng
      * @date 2016年10月21日 17:04:44
@@ -47,7 +63,6 @@ class ShakeController extends BaseController
         /* 1 获取当前执行的action */
         $action   = $this->getCurrentAction();
         $actionID = $action['method'];
-
 
         /* 2 判断Action动作是否需要登录，默认需要登录 */
         $isNeedLogin = true;
@@ -67,9 +82,16 @@ class ShakeController extends BaseController
             Visitor::userWx()->load($wxResult['data']);
         }
 
+        $memberResult = Auth::auth()->checkLoginMember();
+        //如果用户已经微信授权登录，保存用户微信信息，
+        if ($memberResult['code'] == Auth::LOGIN_YES) {
+            //如果用户已经微信授权登录，设置用wx信息
+            Visitor::userMember()->load($memberResult['data']);
+        }
+
         // 4 下面分析执行的动作和用户登录行为
         /* 1. 执行动作不需要用户登录,*/
-        if ($isNeedLogin == false || $wxResult['code'] == Auth::LOGIN_YES) {
+        if ($isNeedLogin == false || $wxResult['code'] == Auth::LOGIN_YES || $memberResult['code'] == Auth::LOGIN_YES) {
             return true;
         }
 
@@ -113,6 +135,39 @@ class ShakeController extends BaseController
     }
 
     /**
+     * 微信登录
+     * @author Chengcheng
+     * @date 2016-10-21 09:00:00
+     * @return string
+     */
+    public function testLogin()
+    {
+        //1 获取code
+        $this->requestData['name'] = $this->input('testName');
+
+        //2 检查code
+        if (empty($this->requestData['name'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_NULL;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_NULL, 'test_name');
+            return $this->ajaxReturn($result);
+        }
+
+        //3 获取信息
+        $testLoginResult = WxService::testLogin($this->requestData);
+
+        //4 保存登录信息
+        if (!empty($testLoginResult['data'])) {
+            Auth::auth()->loginWx($testLoginResult['data']);
+            $result["code"] = Code::SYSTEM_OK;
+            $result["msg"]  = Msg::SYSTEM_OK;
+            return $this->ajaxReturn($result);
+        }
+
+        //5 返回结果
+        return $this->ajaxReturn($testLoginResult);
+    }
+
+    /**
      * 获取token
      * @author Chengcheng
      * @date 2016-10-21 09:00:00
@@ -121,7 +176,8 @@ class ShakeController extends BaseController
     public function getWsToken()
     {
         //获取参数
-        $memberId = Visitor::userWx()->id;
+        $memberId = Visitor::user()->id;
+        $type     = $this->input('type',WsToken::MEMBER_TYPE_USER_WX);
 
         //生成token
         $token = WsToken::model()->generate($memberId, WsToken::MEMBER_TYPE_USER_WX);

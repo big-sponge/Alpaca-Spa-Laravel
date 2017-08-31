@@ -30,7 +30,7 @@ Route::any('auth/loginByEmail', "AuthController@loginByEmail");
 Route::any('auth/resetPwdByOld', "AuthController@resetPwdByOld");
 
 /* auth - logout */
-Route::any('auth/logout', "AuthController@logout");
+Route::any('shake/logout', "ShakeController@logout");
 
 /* auth - info */
 Route::any('auth/info', "AuthController@info");
@@ -47,7 +47,8 @@ Route::any('shake/getWsToken', "ShakeController@getWsToken");
 /* shake - wxLogin */
 Route::any('shake/wxLogin', "ShakeController@wxLogin");
 
-
+/* shake - testLogin */
+Route::any('shake/testLogin', "ShakeController@testLogin");
 
 
 

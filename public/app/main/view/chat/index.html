@@ -1,0 +1,41 @@
+<style>
+    .btn-send {
+        top: 0 !important;
+        line-height: 1.4rem !important;
+        height: 1.4rem !important;
+    }
+</style>
+
+<div id="page-tab" class="page page-current">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">聊天</h1>
+    </header>
+
+    <div class="bar bar-standard bar-footer">
+        <div class="searchbar row">
+            <div class="search-input col-80"><input type="search" name="enter-message" placeholder="输入内容..."></div>
+            <a class="button button-fill button-primary col-20 btn-send" onclick="send()">发送</a></div>
+    </div>
+
+    <div class="content native-scroll">
+        <div class="list-block media-list">
+            <ul id="ws-chat-list">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    var send = function () {
+        var msg= $('[name ="enter-message"]').val();
+        if(!msg){
+            return;
+        }
+        $('[name ="enter-message"]').val('');
+        Alpaca.to("#/main/chat/send",{msg:msg});
+    };
+</script>

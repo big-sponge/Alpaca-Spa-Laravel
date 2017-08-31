@@ -56,22 +56,11 @@ Alpaca.MainModule.AuthController = {
         return view;
     },
 
-    //从后台获取微信登录授权地址
+    //获取微信登录授权地址
     getWxCodeAction: function (param) {
-
-        var backData  = {};
-        backData.url  = window.location.hash;
-        backData.data = {};
-        if (param.url) {
-            backData.url = param.url;
-        }
-        if (param.data) {
-            backData.url = param.data;
-        }
-        AlpacaCache.set('backData', backData);
-
-        var back_uri = "/app/#/main/auth/wxLogin";
-        var str = getWxAuthUrl(back_uri);
+        var redirect = Alpaca.Router.getParams(0);
+        var back_uri = "/app/#/main/auth/wxLogin/" + redirect;
+        var str      = getWxAuthUrl(back_uri);
         window.location.replace(str);
     },
 
@@ -88,21 +77,20 @@ Alpaca.MainModule.AuthController = {
 
         var code = GetQueryString('code');
         AlpacaAjax({
-            url: g_url + API['wx_Login'],
+            url: g_url + API['server_wx_Login'],
             data: {code: code},
             newSuccess: function (data) {
                 if (data.code == 9900) {
-                    var redirect_uri = "/app/#/main/auth/wxLoginSuccess";
-                    window.location.replace(redirect_uri);
-                } else {
-                    $.alert(data.msg, '', function () {
-                        var redirect_uri = "/app/#/main/auth/wxLoginSuccess";
-                        window.location.replace(redirect_uri);
-                    });
+                    console.log(data);
+                    var redirect = Alpaca.Router.getParams(0);
+                    if (redirect) {
+                        window.location.replace(decodeURIComponent(redirect));
+                    }
                 }
             },
         });
     },
+
 
     //微信openid登录成功
     wxLoginSuccessAction: function () {
@@ -116,4 +104,34 @@ Alpaca.MainModule.AuthController = {
         console.log(backData);
         Alpaca.to(url, data);
     },
+
+    //登录 - test
+    testLoginViewAction: function () {
+        var view     = new Alpaca.View();
+        var redirect = Alpaca.Router.getParams(0);
+        view.ready(function () {
+            $.init();
+            $('.btn-sub-login-wx').click(function () {
+                var back_uri = "/app/#/main/auth/wxLogin/" + redirect;
+                var str      = getWxAuthUrl(back_uri);
+                window.location.replace(str);
+            });
+
+            $('.btn-sub-login-test').click(function () {
+                var request    = {};
+                request.testName  = $('[name="test-name"]').val();
+                AlpacaAjax({
+                    url: g_url + API['server_test_Login'],
+                    data: request,
+                    success: function (data) {
+                        if (data.code == 9900) {
+                            window.location.replace(decodeURIComponent(redirect));
+                        }
+                    },
+                });
+
+            });
+        });
+        return view;
+    }
 };

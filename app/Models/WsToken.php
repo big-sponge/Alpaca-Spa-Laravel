@@ -105,9 +105,6 @@ class WsToken extends BaseModel
         if (empty($token)) {
             $token = md5(rand() . uniqid(time(), true));
         }
-        if ($type != static::MEMBER_TYPE_USER) {
-            $type = static::MEMBER_TYPE_ADMIN;
-        }
 
         //保存数据
         $model                 = new self;
@@ -134,9 +131,6 @@ class WsToken extends BaseModel
         // 判断参数
         if (empty($token)) {
             return null;
-        }
-        if ($type != static::MEMBER_TYPE_USER) {
-            $type = static::MEMBER_TYPE_ADMIN;
         }
 
         // 查找token

@@ -30,7 +30,7 @@ class TokenService
         if (empty($memberId)) {
             $result         = array();
             $result["code"] = Code::SYSTEM_ERROR;
-            $result["msg"]  = Msg::SYSTEM_ERROR;
+            $result["msg"]  = 'token不正确';
             return $result;
         }
 

@@ -44,6 +44,7 @@ class EmailService
         return $result;
     }
 
+
     /**
      * 重置密码-token方式
      * @author Chengcheng
