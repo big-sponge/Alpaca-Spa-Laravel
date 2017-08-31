@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\WsServer\Controllers;
+namespace App\Modules\WsServer\Controllers\Admin;
 
 use App\Common\Code;
 use App\Common\Msg;

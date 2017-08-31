@@ -1,0 +1,81 @@
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">WebSocket</span> - 示例</h4>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a><i class="icon-home2 position-left"></i> WebSocket - 示例 </a></li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+
+    <!-- Left -->
+    <div class="container-detached">
+        <div class="content-detached">
+            <!-- Line content divider -->
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title">聊天窗口</h6>
+                </div>
+
+                <div class="panel-body">
+                    <ul class="media-list chat-stacked content-group" id="ws-chat-list"> </ul>
+
+                    <textarea name="enter-message" class="form-control content-group" rows="3" cols="1" placeholder="请输入聊天内容..."></textarea>
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <button type="button" class="btn bg-teal-400 btn-labeled btn-labeled-right" onclick="send()"><b><i class="icon-circle-right2"></i></b> 发送</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /line content divider -->
+        </div>
+    </div>
+    <!-- /Left -->
+
+    <!-- Right -->
+    <div class="sidebar-detached affix-top">
+        <div class="sidebar sidebar-default">
+            <div class="sidebar-content">
+                <!-- Sub navigation -->
+                <div class="sidebar-category">
+                    <div class="category-title">
+                        <span>在线列表</span>
+                    </div>
+                    <div class="category-content">
+                        <ul class="media-list"  id="online-user-list"></ul>
+                    </div>
+                </div>
+                <!-- /sub navigation -->
+            </div>
+        </div>
+    </div>
+    <!-- /Right -->
+
+    <!-- Footer -->
+    <div id="page-content-footer"></div>
+    <!-- /footer -->
+</div>
+<!-- /content area -->
+<script>
+    var send = function () {
+        var msg= $('[name ="enter-message"]').val();
+        if(!msg){
+            return;
+        }
+        $('[name ="enter-message"]').val('');
+        Alpaca.to("#/main/ws/send",{msg:msg});
+    };
+</script>

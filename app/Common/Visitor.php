@@ -140,6 +140,7 @@ class Visitor
     {
         if (!static::$instance_admin_member) {
             $visitor                       = new static();
+            $visitor->type                 = 'admin';
             static::$instance_admin_member = $visitor;
         }
         return static::$instance_admin_member;
@@ -155,6 +156,7 @@ class Visitor
     {
         if (!static::$instance_user_member) {
             $visitor                      = new static();
+            $visitor->type                = 'user';
             static::$instance_user_member = $visitor;
         }
         return static::$instance_user_member;
@@ -170,6 +172,7 @@ class Visitor
     {
         if (!static::$instance_user_wx) {
             $visitor                  = new static();
+            $visitor->type            = 'user_wx';
             static::$instance_user_wx = $visitor;
         }
         return static::$instance_user_wx;

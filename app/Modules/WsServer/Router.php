@@ -3,8 +3,9 @@
 namespace App\Modules\WsServer;
 
 use App\Common\Code;
-use App\Modules\WsServer\Controllers\AdminController;
-use App\Modules\WsServer\Controllers\ServerController;
+use App\Modules\WsServer\Controllers\Admin\AdminController;
+use App\Modules\WsServer\Controllers\ChatController;
+use App\Modules\WsServer\Controllers\Server\ServerController;
 use GatewayWorker\Lib\Gateway as WsSender;
 
 class Router
@@ -19,46 +20,37 @@ class Router
 
         //路由
         switch ($action) {
+
+            /* chat 部分 聊天室示例 */
+            case 'chat/adminLogin':
+                /*登录 - 使用管理员帐号（后台帐号登录）*/
+                $result = ChatController::model($client_id, $data)->adminLogin();
+                break;
+            case 'chat/userLogin':
+                /*登录 - 前台用户帐号*/
+                $result = ChatController::model($client_id, $data)->userLogin();
+                break;
+            case 'chat/send':
+                /*发送消息*/
+                $result = ChatController::model($client_id, $data)->send();
+                break;
+            case 'chat/online':
+                /*获取在线人员*/
+                $result = ChatController::model($client_id, $data)->online();
+                break;
+
+            /* admin 部分 为管理端提供服务 */
             case 'admin/login':
                 /*登录*/
                 $result = AdminController::model($client_id, $data)->login();
                 break;
-            case 'admin/shake_activity':
-                /*获取活动信息*/
-                $result = AdminController::model($client_id, $data)->getShakeActivity();
-                break;
-            case 'admin/shake_pre_start':
-                /*倒计时开始*/
-                $result = AdminController::model($client_id, $data)->preStartItem();
-                break;
-            case 'admin/shake_start':
-                /*开始*/
-                $result = AdminController::model($client_id, $data)->startItem();
-                break;
-            case 'admin/shake_stop':
-                /*结束*/
-                $result = AdminController::model($client_id, $data)->stopItem();
-                break;
-            case 'admin/shake_users':
-                /*获取参与用户*/
-                $result = AdminController::model($client_id, $data)->getItemUsers();
-                break;
+
+            /* server 部分 为用户客户端提供服务 */
             case 'server/login':
                 /*结束*/
                 $result = ServerController::model($client_id, $data)->login();
                 break;
-            case 'server/shake_activity':
-                /*结束*/
-                $result = ServerController::model($client_id, $data)->getShakeActivity();
-                break;
-            case 'server/shake_up':
-                /*结束*/
-                $result = ServerController::model($client_id, $data)->shakeUp();
-                break;
-            case 'server/shake_result':
-                /*结束*/
-                $result = ServerController::model($client_id, $data)->shakeResult();
-                break;
+
             default:
                 $result = ['code' => Code::SYSTEM_ERROR, 'msg' => 'request format error.'];
         }
@@ -67,6 +59,15 @@ class Router
         //输出结果
         if (!empty($result)) {
             WsSender::sendToCurrentClient(json_encode($result, JSON_UNESCAPED_UNICODE));
+        }
+    }
+
+    //连接关闭
+    static public function close($client_id)
+    {
+        $group = $_SESSION['ws_client_group'];
+        if ($group == ChatController::WS_GROUP_CHAT) {
+            $result = ChatController::model($client_id, [])->offline();
         }
     }
 }

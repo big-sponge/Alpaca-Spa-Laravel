@@ -129,6 +129,6 @@ class WsServer extends Command
      */
     public static function onClose($client_id)
     {
-
+        Router::close($client_id);
     }
 }

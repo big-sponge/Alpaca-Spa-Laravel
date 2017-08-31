@@ -36,9 +36,11 @@ var API = {
     crontab_remove: '/manage/crontab/removeTask',        // 删除任务
     crontab_edit: '/manage/crontab/editTask',            // 编辑任务
 
-    shakeActivity_list: '/manage/shake/getActivityList',                 //列表
-    shakeActivity_edit: '/manage/shake/editActivity',                    //编辑
-    shakeActivity_delete: '/manage/shake/deleteActivity',                //删除
+    // web-socket
+    admin_shake_token: '/manage/shake/getWsToken',            //* 获取token接口 */
+    ws_chat_admin_login: 'chat/adminLogin',                   //* WS 管理员账号登录（后台帐号） */
+    ws_chat_send: 'chat/send',                                //* WS 发送消息 */
+    ws_chat_online: 'chat/online',                            //* WS 获取在线人员 */
 };
 
 Date.prototype.format = function (fmt) { //author: meizz
@@ -126,20 +128,28 @@ AlpacaAjax = function (param) {
         crossDomain: true,
         async: true,
         beforeSend: function () {
+
+            if (param['loadingTo'] && param['loadingTo'] === false) {
+                return;
+            }
+
             var block = $('body');
+            if (param['loadingTo']) {
+                block = $(param['loadingTo']);
+            }
             $(block).block({
                 message: '<i class="icon-spinner4 spinner"></i><span style="vertical-align:middle"> 正在加载，请稍后......</span>',
                 overlayCSS: {
                     backgroundColor: '#666',
                     opacity: 0.8,
                     cursor: 'wait',
-                    'z-index':3000,
+                    'z-index': 3000,
                 },
                 css: {
                     border: 0,
                     padding: 0,
                     backgroundColor: 'transparent',
-                    'z-index':3000,
+                    'z-index': 3000,
                 }
             });
         },
@@ -151,8 +161,17 @@ AlpacaAjax = function (param) {
             }
         },
         complete: function () {
+
+            if (param['loadingTo'] && param['loadingTo'] === false) {
+                return;
+            }
+
             setTimeout(function () {
-                $('body').unblock();
+                if (param['loadingTo']) {
+                    $(param['loadingTo']).unblock();
+                } else {
+                    $('body').unblock();
+                }
             }, 1);
         },
         error: function () {
@@ -236,7 +255,7 @@ AlpacaCache = (function () {
     return cache;
 })();
 
-//
+//hash改变时事件
 Alpaca.addHashChangeEvent(function () {
 
     $('.close').click();
@@ -341,43 +360,14 @@ Alpaca.MainModule = {
             }
 
 
+            //根据权限 - 隐藏，显示菜单
             var auth = userInfo['member']['auth'];
+
+            // 活动管理-活动列表
             if (!auth[24]) {
                 $('.power-menu-24').addClass("hidden");
             }
 
-            // 首先 隐藏所有子菜单（.power-menu 加在li上面）
-/*            $('.power-menu').addClass("hidden");
-
-
-            // 根据权限显示子菜单  --
-            if (auth[28]) {
-                $('.power-menu-1').removeClass("hidden");
-            }
-
-            if (auth[24]) {
-                $('.power-menu-2').removeClass("hidden");
-            }
-
-            if (auth[34]) {
-                $('.power-menu-3').removeClass("hidden");
-            }
-
-            if (auth[5]) {
-                $('.power-menu-4').removeClass("hidden");
-            }
-
-            if (auth[8]) {
-                $('.power-menu-5').removeClass("hidden");
-            }
-
-            if (auth[2]) {
-                $('.power-menu-6').removeClass("hidden");
-            }
-
-            if (auth[3]) {
-                $('.power-menu-7').removeClass("hidden");
-            }*/
 
             // 控制 父级菜单以及菜单标题 显示状态
             $('.navigation-header').each(function () {
