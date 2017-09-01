@@ -5,7 +5,16 @@
         </header>
         <div class="content">
             <div class="content-block">
-                <p>如果您已经关注了开发者的测试帐号，请使用微信登录</p>
+                <p>如果您已经关注了开发者的测试帐号，请使用微信登录<a style="font-size: 80%" onclick="qr_show()">点击关注</a></p>
+                <script>
+                    var qr_show =function(){
+                        $('#gz_qr').show();
+                    };
+                </script>
+                <div style="text-align: center; display: none" id="gz_qr">
+                    <p style="font-size: 60%">长按识别二维码，关注测试公众号</p>
+                    <img style="width: 40%" src="{{= g_baseUrl }}/common/img/cs_gz_qr.jpg">
+                </div>
                 <div class="row">
                     <div class="col-100"><a class="button button-big button-fill button-success btn-sub-login-wx">微信登录</a></div>
                 </div>
