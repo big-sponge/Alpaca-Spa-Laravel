@@ -103,7 +103,7 @@ Router = function () {
 
         /* 设置正在执行的hash，如果hash等于当前正在执行的hash，跳出，防止死循环 */
         if (this.InHash == inHash) {
-            return null;
+            //return null;
         }
         this.InHash = inHash;
 
@@ -138,7 +138,9 @@ Router = function () {
     /* 启动路由 */
     obj.run = function (inHash) {
         /* 解析hash,创建一个路由实例 */
-        return this.parser(inHash);
+        var router ={};
+        $.extend(router,this.parser(inHash));
+        return router;
     };
 
     /* 返回路由 */
@@ -439,6 +441,7 @@ ViewModel = function () {
                         view.Children[index].setData(view.ChildData[view.Children[index].Name]);
                     }
                     /* 渲染子视图 */
+                    view.Children[index].router =view.router;
                     view.Children[index].render();
                 }
             }
@@ -477,6 +480,7 @@ ViewModel = function () {
                     this.Layout.setChildData(data);
                 }
                 /* 渲染layout */
+                this.Layout.router =this.router;
                 this.Layout.render();
             } else {
                 /* 渲染自己 */
@@ -1119,13 +1123,14 @@ Alpaca = function () {
 
         /* 返回的结果是一个视图View对象时候 */
         if (result) {
+            result.router = router;
             result.display();
         }
         /* 执行分发后的事件 */
         obj.release(router);
 
         /* 清空路由中的hash */
-        router.InHash = null;
+        obj.Router.InHash = null;
         /* 返回结果 */
         return result;
     };

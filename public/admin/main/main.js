@@ -318,7 +318,7 @@ Alpaca.MainModule = {
 
         //边栏
         var sidebar = new Alpaca.Part({name: "pageSidebar", to: "#ap-page-sidebar"});
-        sidebar.ready(function () {
+        sidebar.ready(function (param) {
 
             //1 菜单中的a标签,绑定alpaca-router
             $('.navigation a').click(function () {
@@ -330,9 +330,9 @@ Alpaca.MainModule = {
             });
 
             //2 设置选中菜单
-            var mName = Alpaca.Router.Module;
-            var cName = Alpaca.Router.Controller;
-            var aName = Alpaca.Router.Action;
+            var mName = param.router.Module;
+            var cName = param.router.Controller;
+            var aName = param.router.Action;
             $('.navigation a').each(function () {
                 var href = $(this).attr('href');
                 if (href && href.indexOf('#/' + mName + '/' + cName + '/' + aName) >= 0) {
