@@ -101,6 +101,7 @@ class ChatController extends BaseController
         $result         = [];
         $result['code'] = Code::SYSTEM_OK;
         $result['msg']  = Msg::SYSTEM_OK;
+        $result['data']['member'] = $member;
         return $result;
     }
 
@@ -142,9 +143,10 @@ class ChatController extends BaseController
         $this->notifyOnline();
 
         //返回结果
-        $result         = [];
-        $result['code'] = Code::SYSTEM_OK;
-        $result['msg']  = Msg::SYSTEM_OK;
+        $result                   = [];
+        $result['code']           = Code::SYSTEM_OK;
+        $result['msg']            = Msg::SYSTEM_OK;
+        $result['data']['member'] = $member;
         return $result;
     }
 
