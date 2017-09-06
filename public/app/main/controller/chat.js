@@ -3,8 +3,8 @@ Alpaca.MainModule.ChatController = {
 
     //webServer配置
     webServer: {
-        ws: null,                                               //* web-socket 连接对象 */
-        url: "ws://" + window.location.host + ":8082",          //* web-socket 地址 */
+        ws: null,                                    //* web-socket 连接对象 */
+        url: "ws://full.tkc8.com"+ ":8082",          //* web-socket 地址 */
     },
 
     //onlineList 在线人员数据
