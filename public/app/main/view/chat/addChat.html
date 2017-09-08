@@ -1,21 +1,20 @@
-{{ if(it.member.isMy) { }}
-
-<!-- 自己的发言-->
-
-{{ }else{  }}
-
-<!-- 不是自己的发言-->
-
-{{ }  }}
-
-<li>
-    <div class="item-content">
-        <div class="item-media"><img src="{{= it.member.avatar}}" width="44"></div>
-        <div class="item-inner">
-            <div class="item-title-row">
-                <div class="item-title">{{= it.member.name}}</div>
-            </div>
-            <div class="item-subtitle">{{= it.msg}}</div>
-        </div>
+<div class="m-box">
+    {{ if(it.member.isMy) {}}
+    <div class="box me-box">
+        <a><img src="{{= it.member.avatar}}" width="40"/></a>
+        <dl class="me m1">
+            <dt>{{= it.member.name}}</dt>
+            <dd>{{= it.msg}}</dd>
+        </dl>
     </div>
-</li>
+    {{ }else{ }}
+    <div class="box he-box">
+        <a><img src="{{= it.member.avatar}}" width="40"/></a>
+        <dl class="he m1">
+            <dt>{{= it.member.name}}</dt>
+            <dd>{{= it.msg}}</dd>
+        </dl>
+    </div>
+    {{ }  }}
+</div>
+

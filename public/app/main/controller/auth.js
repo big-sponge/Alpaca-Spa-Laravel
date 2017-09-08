@@ -91,7 +91,6 @@ Alpaca.MainModule.AuthController = {
         });
     },
 
-
     //微信openid登录成功
     wxLoginSuccessAction: function () {
         var backData = AlpacaCache.get('backData');

@@ -1,3 +1,5 @@
+<link href="<?spa echo g_baseUrl ?>common/css/chatCss.css" rel="stylesheet" type="text/css"/>
+
 <style>
     .btn-send {
         top: 0 !important;
@@ -15,17 +17,16 @@
         <h1 class="title">聊天</h1>
     </header>
 
-    <div class="bar bar-standard bar-footer">
+    <div class="bar bar-standard bar-footer" style="position: fixed">
         <div class="searchbar row">
             <div class="search-input col-80"><input type="search" name="enter-message" placeholder="输入内容..."></div>
             <a class="button button-fill button-primary col-20 btn-send" onclick="send()">发送</a></div>
     </div>
 
     <div class="content native-scroll">
-        <div class="list-block media-list">
-            <ul id="ws-chat-list">
-            </ul>
-        </div>
+        <ul id="ws-chat-list" style="padding-bottom:20px;">
+        </ul>
+        <span id="msg_end" style="overflow:hidden"></span>
     </div>
 </div>
 

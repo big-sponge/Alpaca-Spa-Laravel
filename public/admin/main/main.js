@@ -95,8 +95,9 @@ AlpacaAjax = function (param) {
     var success = function (data) {
         //没有登录
         if (data.code == "112") {
+            var redirect = encodeURIComponent(window.location.href);
             setTimeout(function () {
-                Alpaca.to("#/main/auth/loginView");
+                Alpaca.to("#/main/auth/loginView/"+redirect);
             }, 200);
             return false;
         }

@@ -3,6 +3,9 @@ Alpaca.MainModule.AuthController = {
 
     //loginView,  登录页面
     loginViewAction: function () {
+
+        var redirect = Alpaca.Router.getParams(0);
+
         //视图默认渲染到#content位置，可以通过to对象改变渲染位置
         var view   = new Alpaca.View();
         var footer = Alpaca.MainModule.pageFooter();
@@ -25,7 +28,7 @@ Alpaca.MainModule.AuthController = {
                     success: function (data) {
                         Notific(data.msg);
                         if(data.code == 9900){
-                            var redirect = Alpaca.Router.getParams(0);
+                            console.log(redirect);
                             if(redirect){
                                 window.location.replace(decodeURIComponent(redirect));
                                 return;

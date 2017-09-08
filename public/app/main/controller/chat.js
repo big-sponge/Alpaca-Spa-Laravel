@@ -39,7 +39,6 @@ Alpaca.MainModule.ChatController = {
                     var ws_url = Alpaca.MainModule.ChatController.webServer.url;
                     var ws     = new WebSocket(ws_url);
 
-
                     //onOpen
                     console.log(data);
                     ws.onopen = function () {
@@ -167,6 +166,10 @@ Alpaca.MainModule.ChatController = {
         }
 
         var view  = Alpaca.View({data: data, to: "#ws-chat-list"});
+        view.ready(function(){
+            $('#msg_end')[0].scrollIntoView();
+        });
+
         view.show = function (to, html) {
             var that = this;
             $(to).append(html);
