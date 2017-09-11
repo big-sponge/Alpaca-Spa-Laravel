@@ -122,6 +122,8 @@ Alpaca.MainModule.WsController = {
         }
         Alpaca.MainModule.WsController.onlineList[uid] = data.data.member;
         Alpaca.to('#/main/ws/addOnline', data.data.member);
+
+        alert('有用户加入');
     },
 
     // 用户下线
