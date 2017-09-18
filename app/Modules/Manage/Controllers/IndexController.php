@@ -5,8 +5,7 @@ namespace App\Modules\Manage\Controllers;
 use App\Common\Wechat\WeChat;
 use App\Common\WsServer\Client;
 use App\Modules\Manage\Controllers\Base\BaseController;
-use App\Modules\WsServer\Controllers\ServerController;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class IndexController extends BaseController
 {
@@ -31,6 +30,37 @@ class IndexController extends BaseController
     {
         // 当前控制器所有方法均不需要权限
         $this->isNoAuth = true;
+    }
+
+    /**
+     * 文件上传 ForCkEditor
+     * @author Chengcheng
+     * @date   2016年10月23日 20:39:25
+     * @return array
+     */
+    protected function uploadForCk()
+    {
+        $file     = request()->file('upload');
+        $callback = request()->get("CKEditorFuncNum");
+
+        // 文件是否上传成功
+        if (!$file->isValid()) {
+            die;
+        }
+        // 获取文件相关信息
+        $originalName = $file->getClientOriginalName(); // 文件原名
+        $type         = $file->getClientMimeType();     // image/jpeg
+        $ext          = $file->getClientOriginalExtension();     // 扩展名
+        $realPath     = $file->getRealPath();   //临时文件的绝对路径
+
+        // 上传文件
+        $filename = date('YmdHis') . '-' . uniqid() . '.' . $ext;
+        Storage::disk('uploads')->put($filename, file_get_contents($realPath));
+
+        echo "<script type=\"text/javascript\">";
+        echo "window.parent.CKEDITOR.tools.callFunction(" . $callback . ",'" . "/uploads/" . $filename . "','')";
+        echo "</script>";
+        die;
     }
 
     public function index()

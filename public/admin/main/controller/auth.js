@@ -50,7 +50,7 @@ Alpaca.MainModule.AuthController = {
             newSuccess: function (data) {
                 if (data.code == 9900) {
                     AlpacaCache.clear();
-                    Alpaca.to("#/main/auth/loginView");
+                    window.location.href="/admin/#/main/auth/loginView";
                 } else {
                     AlpacaCache.clear();
                     alert(data.msg);
