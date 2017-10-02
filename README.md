@@ -258,6 +258,19 @@ Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的D
 
 
 
+
+### 运行WebSocket
+
+需要在linux环境下，项目根目录
+
+```
+#debug运行
+php artisan ws start
+#常驻后台运行
+php artisan ws start --d
+
+```
+
 ### 开发流程
 
 ```
