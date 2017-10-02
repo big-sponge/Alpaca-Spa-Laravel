@@ -1,0 +1,84 @@
+.bar .button {
+	color: #999;
+}
+
+.list-block .ion-chevron-right {
+	color: #999;
+	font-size: .65rem;
+}
+
+.p-img {
+	width: 3rem;
+	height: 3rem;
+	/*background-color: #efeff4;*/
+	border-radius: 100%;
+	margin-right: 12px;
+	box-sizing: border-box;
+	border: 2px solid #a9a6a6;
+}
+
+.clearfix .ion-chevron-right {
+	line-height: 3.6rem;
+}
+
+.p-name {
+	color: #999;
+	margin-right: 10px;
+	font-size: .7rem;
+}
+
+.list-block .item-inner {
+	padding: .6rem .75rem .6rem 0;
+}
+
+input.c-name {
+	width: 100%;
+	height: 40px;
+	border-radius: 2px;
+	border: none;
+	padding: 0 8px;
+}
+
+.rule {
+	margin-top: .75rem;
+	line-height: 1.5;
+	font-size: .6rem;
+	color: #999;
+}
+
+.button.close-popup {
+	color: #f23030;
+}
+
+.change-name {
+	width: 100%;
+	background-color: #f23030;
+	color: #fff;
+	border: none;
+	height: 40px;
+	border-radius: 2px;
+	margin-top: .75rem;
+}
+.person-back{
+	height: 100%;
+	width: 10%;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	text-align: center;
+}
+.common{
+	width: 90%;
+	height: 2rem;
+	background: #e9af29;
+	margin: auto;
+	margin-top: 1.4rem;
+	text-align: center;
+	line-height: 2rem;
+	font-size: .6rem;
+	color: white;
+	letter-spacing: 3px;
+	border-radius: 5px;
+}

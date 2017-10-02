@@ -1,0 +1,33 @@
+.mui-content>p>img{
+	width: 100%;
+}
+.content{
+	margin: 5px 10px;
+	
+}
+.content>span{
+	margin-bottom: 7px;
+	font-size: 14px;
+	display: block;
+}
+.content>span>img{
+	margin-right: 13px;
+}
+.content1{	
+	margin: 25px;
+}
+.content1>span:nth-child(1){	
+	margin-bottom: 16px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+.img{
+	display: block;
+	position: fixed;
+	bottom: 30px;
+	left: 25px;
+}
+.img>img{
+	width: 50%;
+}

@@ -173,7 +173,7 @@ Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的D
 
   1)如果当前控制器下的某一个动作不需要角色权限控制：
 
-      protected function withoutAuthActions()
+      protected function noAuth()
       {
           // 以下Action不需要登录权限
           return ['action1','action2'];

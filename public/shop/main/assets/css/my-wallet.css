@@ -1,0 +1,55 @@
+.bar .button {
+	color: #999;
+}
+
+.wallet {
+	padding: 1rem 0;
+	text-align: center;
+	background-color: #232323;
+	font-size: .7rem;
+}
+
+.wallet .col-33 span {
+	display: block;
+	height: 26px;
+	line-height: 26px;
+	color: #fff;
+}
+.wallet p {
+	margin-top: 4px;
+	color: #999;
+	font-size: .65rem;
+}
+
+.document {
+	margin-top: 12px;
+	padding: 1rem 0;
+	text-align: center;
+	background-color: #fff;
+	font-size: .7rem;
+}
+
+.document .col-33 span {
+	display: block;
+	height: 26px;
+	line-height: 26px;
+}
+.document p {
+	margin-top: 6px;
+	color: #999;
+	font-size: .65rem;
+}
+
+.icon-card {
+	color: #09f;
+}
+
+.icon-cz {
+	color: #9cc025;
+	font-size: 1.3rem;
+}
+
+.icon-tixian {
+	color: #f23030;
+	font-size: 1rem;
+}

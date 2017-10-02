@@ -1,0 +1,33 @@
+.bar .button {
+	color: #999;
+}
+
+.logout {
+	line-height: 2.2rem;
+	text-align: center;
+}
+
+.list-block .ion-chevron-right {
+	color: #999;
+	font-size: .65rem;
+}
+
+.list-block a {
+	color: #000;
+}
+
+.list-block ul {
+	margin-top: 12px;
+}
+
+.list-block ul:first-child {
+	margin-top: 0;
+}
+
+.binding {
+	color: #f23030;
+}
+
+.binding-mail {
+	color: #999;
+}

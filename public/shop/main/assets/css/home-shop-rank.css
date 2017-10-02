@@ -1,0 +1,162 @@
+.content {
+	background-color: #d82e2f;
+	padding-bottom: .75rem;
+}
+
+.header-img {
+	line-height: 0;
+}
+
+.header-img img {
+	width: 100%;
+}
+
+.address {
+	margin: 0 .75rem .75rem .75rem;
+	padding: 0 12px;
+	height: 32px;
+	background-color: #fff;
+	line-height: 32px;
+	border-radius: 4px;
+}
+
+.address .img {
+	margin: 6px 6px 0 0;
+	height: 18px;
+}
+
+.shop {
+	margin: 12px .75rem 0 .75rem;
+	padding: 12px;
+	background-color: #fff;
+}
+
+.shop a {
+	color: #000;
+}
+
+.shop-body {
+	display: block;
+	width: 100%;
+	display: box;
+	display: -moz-box;
+	display: -webkit-box;
+}
+
+.shop-img {
+	position: relative;
+	width: 80px;
+	height: 60px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.shop-img img {
+	height: 100%;
+}
+
+.shop-info {
+	position: relative;
+	margin-left: 8px;
+	box-flex: 1;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+}
+
+.shop-info p {
+	height: 20px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.shop-info img {
+	width: 12px;
+	margin-right: 4px;
+}
+
+.shop-info .shop-name {
+	line-height: 16px;
+}
+
+.shop-info .orderNum {
+	margin-left: 10px;
+	font-size: .65rem;
+	color: #666;
+	line-height: 24px;
+}
+
+.shop-info .transport {
+	font-size: .65rem;
+	color: #666;
+	line-height: 26px;
+}
+
+.shop-info .line {
+	color: #ccc;
+	font-size: .6rem;
+	padding: 0 5px;
+}
+
+.shop-info .shop-num1 {
+	position: absolute;
+	top: 20px;
+	right: 0;
+	height: 40px;
+	font-size: 1rem;
+	color: #d82e2f;
+	
+}
+
+.shop-info .shop-num2 {
+	position: absolute;
+	top: 26px;
+	right: -10px;
+	width: 32px;
+	height: 32px;
+	font-size: 1rem;
+	color: #d82e2f;
+	
+}
+
+.shop-info .shop-num3 {
+	position: absolute;
+	top: 20px;
+	right: -2px;
+	width: 20px;
+	height: 40px;
+	font-size: 1rem;
+	color: #d82e2f;
+	
+}
+
+.shop-footer {
+	margin-top: 12px;
+}
+
+.shop-footer p {
+	color: #999;
+	font-size: .65rem;
+	margin-top: 4px;
+}
+
+.shop-footer img {
+	width: 17px;
+	margin-right: 4px;
+	vertical-align: -3px;
+}
+
+img.rank {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 25px;
+	height: 25px;
+}
+
+.loading-state {
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+	font-size: .65rem;
+}

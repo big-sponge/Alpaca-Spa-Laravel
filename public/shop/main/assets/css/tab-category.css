@@ -1,0 +1,267 @@
+.category {
+	display: box;
+	display: -moz-box;
+	display: -webkit-box;
+	box-orient: horizontal;
+	-moz-box-orient: horizontal;
+	-webkit-box-orient: horizontal;
+}
+.header{
+	border-bottom: 1px solid #EAEEF1;
+}
+.category .category-nav {
+	width: 23.3333333%;
+	height: calc(100% - 110px);
+	height:-webkit-calc(100% - 110px);
+}
+
+.category .category-body {
+	box-flex: 1;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+}
+
+.category-nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	background-color: #fff;
+}
+
+.category-nav ul li {
+	height: 50px;
+	line-height: 50px;
+	border-right: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	font-size: .75rem;
+}
+
+/*.category-nav ul li.active {
+	background-color: white;
+	border-right: none;
+	color: #e2b02b;
+	border-left: 3px solid #e2b02b;
+}*/
+/*.category-nav>ul>li:nth-child(1){
+	background-color: white;
+	border-right: none;
+	color: #e2b02b;
+	border-left: 3px solid #e2b02b;
+}*/
+.category-ad {
+	display: block;
+	line-height: 0;
+	padding: 10px 10px 0 10px;
+}
+
+.category-ad img {
+	width: 100%;
+}
+
+.category-two {
+	margin: 10px 10px 0 10px;
+}
+
+
+.category-two p.name {
+	font-size: .6rem;
+	font-weight: 500;
+}
+
+.category-thr {
+	/*margin-top: 6px;*/
+	background-color: #fff;
+	/*padding: .15rem;*/
+}
+
+.category-thr a.col-33 {
+	display: block;
+	padding: .1rem;
+	text-align: center;
+	font-size: .6rem;
+	color: #666;
+}
+
+.category-thr .gimg {
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.category-thr .gimg img {
+	width: 100%;
+	height: auto;
+	overflow: auto;
+}
+
+.category-thr .img img {
+	width: 100%;
+}
+
+.category-thr p {
+	/*height: 1.5rem;*/
+	overflow: hidden;
+	/*margin-top: 4px;*/
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.tab-items a {
+	display: inline-block;
+	float: left;
+	width: 25%;
+	height: 2.2rem;
+	text-align: center;
+	line-height: 2.2rem;
+	color: #000;
+	font-size: 0.6rem;
+}
+
+.tab-items a.active {
+	color: #f23030;
+}
+
+.s-mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 2.2rem;
+}
+
+.m-bar .searchbar {
+	margin-left: 2.2rem;
+	padding-left: 0;
+}
+
+.m-bar {
+	padding-left: 0;
+	position: relative;
+}
+
+.ion-android-close {
+	font-size: 1.1rem;
+	width: 2.2rem;
+	height: 2.2rem;
+	text-align: center;
+	line-height: 2.2rem;
+	color: #898989;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.search-title {
+	padding: 10px 15px;
+}
+
+.search-title2 {
+	padding: 4px 15px 10px 15px;
+}
+
+.search-tags {
+	padding-left: 15px;
+	font-size: 0.6rem;
+}
+
+.search-tags span {
+	display: block;
+    width: 33%;
+    overflow: hidden;
+    padding-right: 10px;
+    padding-bottom: 7px;
+    float: left;
+}
+
+.search-tags span a {
+	height: 1.225rem;
+    line-height: 1.225rem;
+    border-radius: 1.225rem;
+    display: block;
+    width: 100%;
+    color: #848689;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+.row.no-gutter .col-33 {
+    width: 31.333333333333336%;
+    margin: 0;
+    padding-bottom: 5px;
+    text-align: center;
+    float: left;
+}
+.category-thr-signal{
+	width: 100%;
+	display: none;
+}
+.category-thr-color{
+	display: inline-block;
+	width: .5rem;
+	height: .5rem ;
+	background-color: red;
+	border-radius:2px;
+	/*line-height: 2rem;*/
+	vertical-align: middle;
+}
+.category-thr-name{
+	color: #141414;
+	letter-spacing: 1px;
+	font-size: .7rem;
+	/*font-weight: 600;*/
+	/*line-height: 2rem;*/
+	vertical-align: middle;
+	margin-left: 12px;
+	/*font-weight:00 ;*/
+}
+.category-thr-signal>p:before{
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+.category-thr-signal>p{
+	width: 100%;
+	height: 1.8rem;
+	background-color: #f3f3f3;
+	padding-left: 12px;
+	box-sizing: border-box;
+}
+.no-gutter{
+	width: 100%;
+	overflow: auto;
+}
+.category-thr-con{
+	width: 93%;
+    overflow: auto;
+    overflow: auto;
+    margin: 0 auto;
+}
+.category-thr-con>span{
+	margin-right: 3px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: pre;
+	width: calc(25% - 3px);
+	height: 2.5rem;
+	line-height: 2.5rem;
+	color: #666666;
+	font-size: 12px;
+	display: inline-block;
+	text-align: center;
+	float: left;
+	/*font-weight: 600;*/
+}
+.ab>li:first-child{
+	font-size: 17px;
+	background-color: white;
+	color:#e2b02b;
+	border-left:2px solid #e2b02b;
+}
+.row>div {
+    float: left;
+    padding-left: 0!important; 
+    padding-right: 0!important; 
+}

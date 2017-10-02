@@ -1,0 +1,297 @@
+.icon-shuaxin1:before {
+	content: "";
+}
+span{
+	display: inline-block;
+}
+.order-back1 {
+	display: inline-block;
+	height: 50px;
+	width: 15%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 10;
+	text-align: center;
+}
+header{
+	position: fixed!important;
+}
+.order-back1>img {
+	margin-top: 10px;
+}
+
+.top {
+	padding: 10px;
+	height: 70px;
+	/* background-color: beige; */
+	border-bottom: 1px solid #EEEEEE;
+	height: 5rem;
+}
+
+.top>div {
+	float: left;
+	height: 100%;
+}
+
+.top>div:nth-child(1) {
+	/*background-image: url(../img/cabbage.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;*/
+	width: 23%;
+    margin-right: 2%;
+}
+.size{
+	font-size: .7rem;
+}
+.top>div:nth-child(2) {
+	width: 75%;
+}
+
+.top_2>p {
+	height: 50%;
+}
+
+.top_2>div {
+	height: 50%;
+}
+.top_2>div>span:nth-child(1) {
+	width: 30%;
+	margin-right: 10%;
+	overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+}
+
+.top_2>div>span:nth-child(2) {
+	width: 30%;
+}
+.top_2>p>span:nth-child(1) {
+	width: 60%;
+	margin-right: 10%;
+	overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+}
+
+.top_2>p>span:nth-child(2) {
+	width: 30%;
+}
+
+
+.top_2>p:nth-child(2) {
+	font-size: 13px;
+	color: gray;
+}
+
+.top_3 {
+	margin-top: 15px;
+	height: 30px;
+	/* background-color: gainsboro; */
+	line-height: 30px;
+	font-size: 14px;
+}
+
+.top_3>span:nth-child(1) {
+	width: 80%;
+}
+
+.top_3>span:nth-child(2) {
+	width: 20%;
+	color: #e9af29;
+}
+
+.middle {
+	margin-top: 10px;
+	height: 40px;
+	line-height: 40px;
+	/*background-color: gold;*/
+}
+
+.middle>span {
+	float: left;
+}
+
+.middle>span:nth-child(1) {
+	padding-top: 6px;
+	width: 12%;
+	height: 90%;
+}
+
+.middle>span:nth-child(2) {
+	width: 83%;
+}
+
+.middle>span:nth-child(3) {
+	width: 5%;
+	padding-top: 3px;
+	height: 90%;
+}
+
+.middle>span:nth-child(3)>img {
+	width: 35%;
+}
+.middle_2{
+	margin-top: 15px;
+	height: 80px;
+	/* background-color: gold; */
+}
+.middle_2>div:nth-child(1){
+	width: 12%;
+	float: left;
+}
+.middle_2>div:nth-child(2){
+	width: 88%;
+	float: left;
+}
+.middle_2>div:nth-child(2)>p:nth-child(1)>span:nth-child(1){
+	width: 35%;
+}
+.middle_2>div:nth-child(2)>p:nth-child(2){
+	padding-top: 3px;
+    color: gray;
+    font-size: 13px;
+}
+.middle_3{
+	margin-top: 15px;
+}
+.middle_3>p{
+	height: 35px;
+    line-height: 35px;
+}
+.middle_3>p>span:nth-child(1){
+	width: 73%;
+	font-size: 16px;
+	color: gray;
+}
+.middle_3>p>span:nth-child(2){
+	width: 27%;
+}
+.col{
+	color: #e9af29;
+}
+.middle_4{
+	margin-top: 5px;
+	text-align: right;
+}
+.middle_4>p:nth-child(2){
+	color: gray;
+}
+.middle_4>p:nth-child(1){
+	font-size:17px;
+}
+.middle_4>p:nth-child(1)>span:nth-child(2){
+	font-size:25px;
+}
+.foot {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	background-color: white;
+	border-top: 1px solid #ddd; 
+	overflow: auto;
+    
+}
+
+.foot>span:nth-child(1) {
+	width: 65%;
+	text-align: left;
+	padding-left: 5%;
+	color: gray;
+	float: left;
+}
+
+.foot>span:nth-child(2) {
+	width: 35%;
+	font-size: 16px;
+	color: white;
+	background-color: #e9af29;
+	    float: right;
+}
+.top_2_z>span{
+	border: 1px solid;
+    text-align: center;
+    border-radius: 3px;
+    /*height: 21px;*/
+    line-height: 16px;
+    margin-right: .5rem;
+    font-size: .6rem;
+    padding: .05rem;
+    float: right;
+}
+.top_name>span:nth-child(1){
+	float: left;
+}
+.top_name>span:nth-child(2){
+	float: right;
+}
+.top_wa>div{
+	height: 30%;
+	overflow: auto;
+	margin-bottom: .3rem;
+}
+.top_wa2>div{
+	float: left;
+}
+.top_wa2>div:nth-child(1){
+	width: 35%;
+}
+.top_wa2>div:nth-child(2){
+	width: 65%;
+}
+.top_name>span:nth-child(1){
+	width: 45%;
+	margin-right: 10%;
+	font-size: .7rem;
+	overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+}
+.goods-d ,.wu-d ,.pay-wu{
+	border-bottom: 3px solid #f5f9fc;
+	border-top:3px solid #f5f9fc;
+	
+}
+.wu-d{
+	overflow: auto;
+}
+.goods ,.wu, .pay{
+	width: 92%;
+	margin: 0 auto;
+	
+}
+.black-all{
+    background-color: rgba(0,0,0,.4);
+    /* opacity: .4; */
+    width: 100%;
+    position: fixed;
+    z-index: 999999999;
+    top: 0;
+    display: none;
+}
+.wraap{
+	width: 80%;
+	
+	margin: 30% auto 0;
+	background-color: white;
+}
+.cancel{
+	position: absolute;
+    top: 7px;
+    right: 0;
+    width: 1.5rem;
+}
+.dcancel{
+	width: 100%;
+	height:1.5rem;
+	position: relative;
+}
+.cancel>img{
+	width: 1rem;
+}
+.wraapah{
+	overflow: scroll;
+	max-height: 15rem;
+}
+.ztop_wa2{
+	font-size: .7rem;
+}

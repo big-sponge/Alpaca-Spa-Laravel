@@ -1,0 +1,96 @@
+.bar .button {
+	color: #999;
+}
+
+.card {
+	margin-top: 12px;
+}
+
+.card:first-child {
+	margin-top: 0;
+}
+
+.card p {
+	min-height: 18px;
+	line-height: 18px;
+}
+
+.user-info span:nth-child(2) {
+	margin-right: 1rem;
+}
+
+.user-info .iconfont:first-child {
+	margin-right: 5px;
+}
+
+.user-info .iconfont {
+	font-size: .7rem;
+	vertical-align: 1px;
+	margin-right: 3px;
+	color: #f23030;
+}
+
+.user-addr {
+	margin-top: 6px;
+	font-size: .65rem;
+	color: #666;
+}
+
+.card-footer .pull-left {
+	color: #666;
+	font-size: .55rem;
+	padding: 2px 6px;
+	border-radius: 2px;
+	border: 1px solid #999;
+}
+
+.card-footer .pull-left.active {
+	color: #fff;
+	background-color: #e9af29;
+	border: none;
+}
+
+.card-footer .pull-right a {
+	color: #666;
+}
+
+.card-footer .pull-right i {
+	margin-right: 5px;
+	font-size: .8rem;
+}
+
+.card-footer .pull-right .icon-lajixiang {
+	font-size: .9rem;
+	margin-left: 12px;
+	margin-right: 3px;
+}
+
+.add-addr {
+	text-align: center;
+	color: #e9af29;
+	line-height: 2.2rem;
+}
+
+.empty-addr {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	margin-top: -100px;
+	text-align: center;
+}
+
+.empty-addr a {
+	padding: 2px 6px;
+	border: 1px solid #f23030;
+	border-radius: 3px;
+	font-size: .7rem;
+	color: #f23030;
+}
+.content{
+	padding-bottom: 2.2rem;
+}
+{
+	color: #fff;
+	background-color: #e9af29;
+	border: none;
+}

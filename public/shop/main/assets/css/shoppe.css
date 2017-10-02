@@ -1,0 +1,223 @@
+.h-info {
+	position: relative;
+	overflow: hidden;
+	height: 6.4rem;
+}
+
+.bar {
+	background: none;
+}
+
+.bar:after {
+	height: 0;
+}
+
+.h-img {
+	display: block;
+	width: 100%;
+	height: 6.4rem;
+}
+
+.h-mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .4);
+	z-index: 4;
+}
+
+.h-shop {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	padding: 0 .4rem.4rem;
+	z-index: 10;
+	display: -moz-box;
+	display: -webkit-box;
+}
+
+.h-shop .img {
+	width: 3.3rem;
+	height: 3.3rem;
+	line-height: 3.3rem;
+	text-align: center;
+	background: rgba(255, 255, 255, .4);
+}
+
+.h-shop .info {
+	padding-left: .4rem;
+	color: #fff;
+	-moz-box-flex: 1;
+	-webkit-box-flex: 1;
+}
+
+.h-shop .name {
+	height: 2.2rem;
+}
+
+.h-shop .follow {
+	height: 1.1rem;
+	font-size: .6rem;
+	line-height: 1.1rem;
+}
+
+.h-shop .follow button {
+	padding: 0 10px;
+	height: 1.1rem;
+	border: none;
+	background-color: #f23030;
+	font-size: .5rem;
+	line-height: 1.1rem;
+	border-radius: 3px;
+}
+
+.ion-ios-heart-outline {
+	font-size: .7rem;
+	vertical-align: -2px;
+	margin-right: 4px;
+}
+
+.shop-nav {
+	background-color: #fff;
+	text-align: center;
+	padding: .5rem 0;
+	color: #838689;
+	font-size: .5rem;
+}
+.shop-nav span {
+	display: block;
+	height: 1rem;
+	line-height: 1rem;
+	color: #232323;
+	font-size: .65rem;
+}
+
+.shop-nav .ion-android-laptop {
+	font-size: .8rem;
+}
+
+.shop-activity {
+	margin-top: .5rem;
+	background-color: #fff;
+	padding: .4rem .4rem .1rem .4rem;
+}
+
+.shop-activity img {
+	width: 100%;
+}
+
+.shop-activity .col-50:nth-child(odd) {
+	padding-right: .2rem;
+}
+.shop-activity .col-50:nth-child(even) {
+	padding-left: .2rem;
+}
+
+.card {
+	margin-top: .5rem;
+}
+
+.card .card-content .col-50:nth-child(1),
+.card .card-content .col-50:nth-child(2) {
+	/*margin-top: -4px;*/
+}
+
+.card .pimg {
+	display: block;
+	width: 100%;
+}
+
+.pimg img {
+	width: 100%;
+}
+
+.card .card-content {
+	background-color: #efeff4;
+}
+
+.card .card-content .col-50 {
+	background-color: #fff;
+	margin-top: 4px;
+}
+
+.card .card-content .col-50:nth-child(odd) {
+	border-right: 2px solid #efeff4;
+}
+
+.card .card-content .col-50:nth-child(even) {
+	border-left: 2px solid #efeff4;
+}
+
+.card .card-content .pname {
+	font-size: .6rem;
+	height: 1.8rem;
+	line-height: .9rem;
+	color: #333;
+	margin: 8px 5px 5px 5px;
+	text-align: justify;
+}
+
+.card .card-content .pinfo {
+	border-top: 1px dashed #efeff4;
+	height: 1.15rem;
+	line-height: 1.4rem;
+	margin: 0px 5px 5px 5px;
+	padding-top: 5;
+}
+
+.pinfo .pull-left {
+	color: #f23030;
+}
+
+.pinfo .pull-right {
+	color: #666;
+	font-size: .55rem;
+}
+
+.pinfo .pull-right i {
+	font-size: .7rem;
+	font-style: normal;
+	vertical-align: -1px;
+}
+
+
+.bar .icon {
+	color: rgba(255, 255, 255, .8);
+}
+
+.bar .ion-chevron-left {
+	font-size: .8rem;
+}
+
+.panel {
+	color: #333;
+}
+
+.p-category {
+	margin-top: 0;
+}
+
+.p-category .card-content {
+	text-align: center;
+	padding: .4rem .3rem .5rem .3rem;
+}
+
+.p-category .col-33 {
+	padding: .3rem;
+}
+
+.p-category .col-33 span {
+	display: block;
+	border: .5px solid #999;
+	padding: .2rem 0;
+	font-size: .6rem;
+	background-color: #fff;
+}
+
+.p-category .col-33 span:active {
+	background-color: #999;
+	color: #fff;
+}

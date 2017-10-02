@@ -1,0 +1,45 @@
+.bar .button {
+	color: #999;
+}
+
+.add-addr {
+	text-align: center;
+	line-height: 2.2rem;
+	background-color: #e9af28;
+	border: 0;
+	color: white;
+}
+
+.list-block,
+.list-block input[type="text"] {
+	font-size: .7rem;
+}
+
+.picker-modal button.close-picker {
+	font-size: .65rem;
+}
+
+.picker-item {
+	font-size: .75rem;
+	color: #333;
+}
+
+.list-block .item-media + .default-addr {
+	margin-left: 0;
+}
+
+.list-block .default-addr .item-title {
+	width: 80%;
+	text-align: left;
+}
+
+.default-addr p:nth-child(2) {
+	color: #999;
+	font-size: .5rem;
+}
+.mui-popup{
+	z-index: 999999999!important;
+}
+.mui-popup-backdrop{
+	z-index: 99999999!important;
+}

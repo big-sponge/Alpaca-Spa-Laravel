@@ -1,0 +1,153 @@
+.header{
+	    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+
+.top{
+	width: 100%;
+	position: fixed;
+	top: 51px;
+	left: 0px;
+	z-index: 80;
+	height: 40px;
+}
+span{
+	display: block;
+}
+.top>span{
+	background-color: white;
+	width: 100%;
+	height: 100%;
+	float: left;
+	text-align: center;
+	line-height: 40px;
+	font-size: 16px;
+}
+.top>span:nth-child(1){
+	width: 50%;
+}
+.top>span:nth-child(2){
+	width: 50%;
+}
+.foot{
+	position: fixed;
+	bottom: 0px ;
+	left: 0px;
+	text-align: center;
+	background-color: #e9af29;
+	height: 44px;
+	width: 100%;
+	line-height: 44px;
+	color: white;
+}
+#mine_ts>div:nth-child(1){
+	margin-top: 45px;
+}
+#ts{
+	margin-top: 5px;
+}#mine_ts>div{
+	margin-top: 10px;
+}
+.main1>p{
+	position: relative;
+	background-color: white;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: 1px solid #EFEFF4;
+}
+.main1>p>span{
+	float: left;
+	font-size: 15px;
+}
+.main1>p>span:nth-child(1) {
+    width: 35%;
+    padding-left: 5%;
+}
+.main1>p>span:nth-child(2){
+	width: 60%;
+}
+.main1>p:nth-child(1)>span:nth-child(2){
+	color: gray;
+}
+.main1>p:nth-child(3){
+	
+	border-bottom: 0px!important;
+}
+input{
+	width: 100%;
+	border: 0px;
+	text-indent:0;
+    font-size: 15px;
+    outline: 0;
+}
+.main2>span:nth-child(1){
+	width: 35%;
+	padding-left: 5%;
+}
+.main2>span:nth-child(2){
+	width: 35%!important;
+	color: #e9af29;
+}
+.main2>span:nth-child(3){
+	    text-align: center;
+	width: 25%;
+	    padding-top: 2%;
+    height: 85%;
+}
+.main3>span:nth-child(2){
+	color: black!important;
+}
+.complaint_de{
+	/* text-indent: 2rem; */
+	padding: 1rem;
+	font-size: .8rem;
+	padding-top: 66px;
+}
+textarea{
+	margin: auto;
+    width: calc(100% - 30px);
+    width: -moz-calc(100% - 30px);
+    width: -webkit-calc(100% - 30px);
+    padding: 10px 15px;
+    resize: none;
+    border: 0px;
+    outline: none;
+    height: 100px;
+}
+#tog{
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 50;
+}
+.tog{
+	    top: 154px;
+	background-color: #ccc;
+    width: 25%;
+    font-size: 15px;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+}
+.tog>p{
+	border-bottom: 1px solid #ddd;
+	    height: 30px;
+    line-height: 30px;
+	
+}
+#mine_ts{
+	display: none;
+}
+#top>span:nth-child(1){
+	color: #e9af29;
+	border-bottom: 2px solid #e9af29;
+}
+.abc{
+	margin-top: 100px;
+}

@@ -1,0 +1,81 @@
+.bar .button {
+	color: #999;
+}
+
+.empty-collect {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	margin-top: -100px;
+	text-align: center;
+}
+
+.empty-collect a {
+	padding: 2px 6px;
+	border: 1px solid #f23030;
+	border-radius: 3px;
+	font-size: .7rem;
+	color: #f23030;
+}
+
+.product {
+	margin-top: 12px;
+	padding: .75rem;
+	display: box;
+	display: -moz-box;
+	display: -webkit-box;
+	font-size: .6rem;
+	background-color: #fff;
+}
+
+.product a {
+	display: block;
+}
+
+.product:first-child {
+	margin-top: 0;
+}
+
+.p-img {
+	width: 3.3rem;
+	height: 3.3rem;
+	border: .5px solid #efeff4;
+}
+
+.p-info {
+	box-flex: 1;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	height: 3.3rem;
+	margin-left: 10px;
+}
+
+.p-name {
+	margin-top: -2px;
+	height: 2.4rem;
+	font-size: .7rem;
+	line-height: 1.2;
+	text-align: justify;
+	color: #666;
+	overflow: hidden;
+}
+
+.product .pull-left {
+	color: #f23030;
+	line-height: 1.3rem;
+}
+
+.product button {
+	padding: 0 .5rem;
+	height: 1rem;
+	line-height: .95rem;
+	border: 1px solid #999;
+	background: none;
+	border-radius: 2px;
+	color: #666;
+}
+
+.product i {
+	font-size: .8rem;
+	font-style: normal;
+}

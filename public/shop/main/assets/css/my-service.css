@@ -1,0 +1,136 @@
+.bar .button {
+	color: #999;
+}
+
+.service-header {
+	padding: 1.5rem 0;
+	background-color: rgba(0, 0, 0, .2);
+	text-align: center;
+}
+
+.service-header a {
+	display: block;
+	background-color: #ff7e45;
+	width: 3rem;
+	height: 3rem;
+	border-radius: 10px;
+	font-size: .6rem;
+	color: #fff;
+	margin: 0 auto;
+}
+
+.service-header div {
+	width: 3rem;
+	height: 3rem;
+	background-color: #000;
+	border-radius: 10px;
+	font-size: .6rem;
+	color: #fff;
+	margin: 0 auto;
+}
+
+.service-header i {
+	font-size: 1rem;
+	line-height: 2.2rem;
+}
+
+.service-header p {
+	line-height: 0;
+}
+
+i.icon-dianhua {
+	font-size: .9rem;
+}
+
+.content-block-title {
+	margin-top: 1rem;
+}
+
+.popup {
+	background-color: #efeff4;
+}
+
+.service {
+	text-align: center;
+	font-size: .65rem;
+	background-color: #fff;
+	padding: .4rem .25rem 1rem .25rem;
+}
+
+.service a {
+	display: block; 
+	border: .5px solid #999;
+	color: #666;
+	width: 3.4rem;
+	height: 32px;
+	line-height: 31px;
+	margin: .6rem auto 0 auto;
+}
+
+.textarea {
+	margin-top: 12px;
+}
+
+.textarea textarea {
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 5rem;
+	border: none;
+	border-radius: 0;
+	font-size: .65rem;
+	padding: .5rem;
+}
+
+input.phone {
+	margin-top: 9px;
+	width: 100%;
+	border: none;
+	border-radius: 0;
+	font-size: .65rem;
+	padding: .6rem .5rem;
+}
+
+input#picker {
+	border: none;
+	text-align: right;
+	margin-right: 4px;
+}
+
+.submit {
+	text-align: center;
+	line-height: 2.2rem;
+}
+
+.feedback-type {
+	background-color: #fff;
+	font-size: .65rem;
+	padding: .5rem .75rem .5rem .5rem;
+}
+
+.list-block,
+.list-block input[type="text"] {
+	font-size: .7rem;
+}
+
+.picker-modal button.close-picker {
+	font-size: .65rem;
+}
+
+.picker-item {
+	font-size: .75rem;
+	color: #333;
+}
+
+.list-block .item-media + .default-addr {
+	margin-left: 0;
+}
+
+.list-block .default-addr .item-title {
+	width: 80%;
+	text-align: left;
+}
+
+.default-addr p:nth-child(2) {
+	color: #999;
+	font-size: .5rem;
+}

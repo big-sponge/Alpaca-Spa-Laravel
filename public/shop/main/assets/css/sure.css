@@ -1,0 +1,118 @@
+.content{
+	padding-top: 2.2rem;
+}
+.content-d{
+	width: 100%;
+	height: 12.5rem;
+	background-color: white;
+}
+.content-d>p:nth-child(1){
+	color: black;
+	text-indent: 5%;
+	padding-top: .5rem;
+}
+.content-d>div:nth-child(2){
+	border-bottom: 1px solid #cccccc;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+.content-d>div:nth-child(2)>img{
+	width: 90%;
+	margin: .5rem 0;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px #cccccc;
+}
+.content-d>p:nth-child(3){
+	width: 100%;
+    height: 1.5rem;
+    margin-top: .5rem;
+    color: black;
+    text-align: right;
+    padding-right: 2rem;
+}
+.red{
+	color: #e9af29;
+}
+.accound{
+	height: 2.5rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+}
+.accound>div{
+	float: left;
+}
+.accound>div:nth-child(1){
+	width: 70%;
+	height: 100%;
+}
+.accound>div:nth-child(2){
+	width: 30%;
+    height: 100%;
+    background-color: #e9af29;
+    line-height: 2.5rem;
+    color: white;
+    text-align: center;
+}
+.all-pay>p{
+	height: 100%;
+	width: 100%;
+    color: black;
+    text-align: right;
+    padding-right: 2rem;
+    line-height: 2.5rem;
+}
+.way{
+    color: black;
+    background-color: white;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+.way>p:nth-child(1){
+    color: inherit;
+    text-indent:.8rem;
+    font-size: .8rem;
+}
+.way div{
+    margin-top: .6rem;
+    padding-left: 1rem;
+    height: 2rem;
+}
+.way1{
+    border-bottom: 1px solid #cccccc;
+}
+.way2{
+    /* border-bottom: 1px solid #cccccc; */
+}
+.way div span{
+    display: inline-block;
+    vertical-align: middle;
+}
+.img1{
+    width: 1.5rem;
+    vertical-align: middle;
+    margin: 0 .3rem;
+}
+.img2{
+    width: 1.9rem;
+    vertical-align: middle;
+    margin: 0 .3rem;
+}
+.img3{
+    width: 1.4rem;
+    vertical-align: middle;
+    margin: 0 .3rem;
+}
+.quan{
+    height: .8rem;
+    width: .8rem;
+    line-height: 1rem;
+    border-radius: 50%;
+    border: 1px solid #e9af29;
+    vertical-align: middle;
+}
+.addred{
+    background-color: #e9af29;
+}

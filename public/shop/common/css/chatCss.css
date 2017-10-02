@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+ul,dd,dl,dt {
+    list-style: none;
+}
+
+.m-box {
+    padding: 8px 10px 0 10px;
+    overflow: hidden;
+}
+.box{
+    position: relative;
+    overflow: hidden;
+}
+.me-box,.he-box{
+    padding:0 46px 0 46px;
+}
+.m1 {
+    position: relative;
+}
+
+.me-box a{
+    width: 40px;
+    height: 40px;
+    background: #efefef;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    top:0;
+    right:0;
+}
+.he-box a{
+    width: 40px;
+    height: 40px;
+    background: #efefef;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    top:0;
+    left:0;
+}
+.me-box a img,.he-box a img{
+    border-radius: 20px;
+}
+
+.m1 dd {
+    min-width: 50px;
+    border: 1px solid #efefef;
+    border-radius: 20px;
+    padding: 8px 10px;
+    background: #fff;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    color:#222;
+    position: relative;
+    font-size:16px;
+    margin-top:18px;
+}
+
+.m1 dd:before {
+    position: absolute;
+    top: 8px;
+    content: "";
+    background:url("../img/btnhe.png") no-repeat;
+    width:18px;
+    height:20px;
+}
+
+.m1.he dd:before {
+    left: -6px;
+}
+
+.m1.me dd{
+    background-color:#b6e573;
+}
+
+.m1.me dd:before{
+    right: -6px;
+    background:url("../img/btnme.png") no-repeat;
+}
+
+.m1.he dt {
+    float: left;
+}
+
+.m1.he dd {
+    margin-left: 6px;
+    margin-top: 20px;
+    float: left;
+}
+
+.m1.me dt {
+    float: right;
+    margin-left: 6px;
+}
+
+.m1.me dd {
+    float: right;
+    line-height: normal;
+    margin-right: 2px;
+}
+
+.m1.he dt{
+    display: block;
+    float: left;
+    margin-right: -200px;
+    color: #999;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.m1.me dt{
+    display: block;
+    float: right;
+    margin-left: -200px;
+    color: #999;
+    font-size: 14px;
+    margin-right: 10px;
+    line-height: normal;
+}
+

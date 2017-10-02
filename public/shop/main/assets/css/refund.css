@@ -1,0 +1,112 @@
+span {
+	display: block;
+}
+
+.top>p:nth-child(1) {
+	font-size: 18px;
+	font-weight: 700;
+	margin: 10px;
+}
+
+.top>span {
+	box-shadow: 0px 0px 2px #b7b8b7;
+	height: 50px;
+	border: 1px solid #eee;
+	line-height: 50px;
+	font-size: 17px;
+	padding-left: 15px;
+	background-color: white;
+}
+.money{
+	font-size: 14px;
+    display: inline-block!important;
+    color: grey;
+    font-weight: 400;
+    padding-left: 10px;
+}
+input,textarea {
+	font-size: 17px;
+	/*padding-left: 15px;*/
+	padding: 5px;
+	text-indent: 15px;
+	width: 100%;
+	height: 50px;
+	box-shadow: 0px 0px 2px #b7b8b7;
+	border: 0px;
+	resize: none;
+}
+textarea{
+	font-size: 14px!important;
+	height: 100px;
+	
+}
+.xing{
+	color: red;
+	display: inline-block!important;
+}
+#tanchu{
+	    width: 100%;
+    opacity: 0.5;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: black;
+}
+#tanchu1{
+	position: fixed;
+	display: none;
+	z-index: 100;
+	top: 25%;
+	margin-left: 5%;
+	/* margin: auto; */
+	width: 80%;
+	background-color: white;
+	padding: 0px 20px;
+}
+#tanchu1>p>span:nth-child(1){
+	display: inline-block!important;
+	width: 80%;
+}
+#tanchu1>p>span:nth-child(2){
+	line-height: 45px;
+	display: inline-block!important;
+	width: 20%;
+	float: right;
+	margin-top: 17px;
+	margin-right: 13px;
+	width: 20%;
+	display: block;
+	width: 10px;
+	border-radius: 50%;
+	height: 10px;
+	border: 7px solid #bbb;
+}
+#tanchu1>p{
+	height: 50px;
+	line-height: 50px;
+	border-bottom: 1px solid #DDDDDD;
+}
+.buttom{
+	width: 100%;
+	height: 5rem;
+}
+.buttom_goto{
+	width: 50%;
+	margin: 0 auto;
+	height: 2rem;
+	margin-top: 1.5rem;
+	text-align: center;
+	background-color: #e9af29;
+	color: white;
+	line-height: 2rem;
+	border-radius: 10px;
+}
+.avticesel{
+	background-color:#e9af29!important;
+}
+.top>p>span{
+	float: left;
+}
+.top>p{
+	overflow: auto;
+}
