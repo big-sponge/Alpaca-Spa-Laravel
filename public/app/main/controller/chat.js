@@ -177,4 +177,196 @@ Alpaca.MainModule.ChatController = {
         };
         view.display();
     },
+
+    videoAction:function(){
+
+        var view = new Alpaca.MainModule.View();
+
+        view.ready(function(){
+
+            var image = document.getElementById('receiver');
+
+            AlpacaAjax({
+                url: g_url + API['user_shake_token'],
+                data: {},
+                newSuccess: function (data) {
+
+                    if (data.code == "112") {
+                        var redirect = encodeURIComponent(window.location.href);
+                        Alpaca.to("#/main/auth/testLoginView/"+redirect);
+                        return false;
+                    }
+
+                    if (data.code != 9900) {
+                        return;
+                    }
+
+                    //请求正确,开启webSocket
+                    var ws_url = Alpaca.MainModule.ChatController.webServer.url;
+                    var ws     = new WebSocket(ws_url);
+
+                    //onOpen
+                    console.log(data);
+                    ws.onopen = function () {
+                        // 连接成功,登录webSocket
+                        var request    = {};
+                        request.action = API['ws_chat_user_login'];
+                        request.data   = {token: data.data};
+                        ws.send(JSON.stringify(request));
+                    };
+
+                    //onMessage
+                    ws.onmessage = function (event) {
+                        var acceptData = JSON.parse(event.data);
+                        console.log(acceptData);
+                        var action = acceptData.action;
+                        switch (action) {
+                            case 'chat/video':
+                                draw(acceptData);
+                                break;
+                        }
+                    };
+
+                    var p_data= [];
+
+                    var is_showing= false;
+
+                    var draw = function (data) {
+                        p_data.push(data.data);
+
+                        if(is_showing){
+                            return;
+                        }
+
+                        is_showing = true;
+                        var show = function(imgs){
+
+                            if(imgs.length<=0){
+                                is_showing =false;
+                                return;
+                            }
+
+                            var img =  imgs.shift();
+
+                            image.src=img;
+
+                            setTimeout(function(){
+                                show(imgs);
+                            },100);
+                        };
+                        var v_data = p_data.shift();
+
+                        show(v_data);
+
+                    };
+                },
+            });
+
+
+        });
+
+        return view;
+    },
+
+    cameraAction:function(){
+
+        var view = new Alpaca.MainModule.View();
+
+        view.ready(function(){
+
+            var capture = document.getElementById("capture");
+            var video = document.getElementById("video");
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+            window.URL = window.URL || window.webkitURL;
+
+            navigator.getUserMedia({video:true}, onSuccess, onError); //调用摄像头捕捉视频信息
+
+            function onSuccess(stream){
+                video.src = window.URL.createObjectURL(stream);
+            }
+            function onError(e){
+                console.log(e);
+                alert('获取视频出错');
+            }
+
+
+            AlpacaAjax({
+                url: g_url + API['user_shake_token'],
+                data: {},
+                newSuccess: function (data) {
+
+                    if (data.code == "112") {
+                        var redirect = encodeURIComponent(window.location.href);
+                        Alpaca.to("#/main/auth/testLoginView/"+redirect);
+                        return false;
+                    }
+
+                    if (data.code != 9900) {
+                        return;
+                    }
+
+                    //请求正确,开启webSocket
+                    var ws_url = Alpaca.MainModule.ChatController.webServer.url;
+                    var ws     = new WebSocket(ws_url);
+
+                    //onOpen
+                    console.log(data);
+                    ws.onopen = function () {
+                        // 连接成功,登录webSocket
+                        var request    = {};
+                        request.action = API['ws_chat_user_login'];
+                        request.data   = {token: data.data};
+                        ws.send(JSON.stringify(request));
+                    };
+
+                    //onMessage
+                    ws.onmessage = function (event) {
+                        var acceptData = JSON.parse(event.data);
+                        console.log(acceptData);
+                        var action = acceptData.action;
+                        switch (action) {
+                            case 'chat/userLogin':
+                                draw();
+                                break;
+                        }
+                    };
+
+                    var p_data = [];
+                    var n = 0;
+
+                    var draw = function () {
+                        try {
+                            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                        } catch (e) {
+                            if (e.name == "NS_ERROR_NOT_AVAILABLE") {
+                                return setTimeout(draw, 100);
+                            } else {
+                                throw e;
+                            }
+                        }
+                        if (video.src) {
+
+                            p_data[n++]=canvas.toDataURL("image/jpeg", 0.1);
+                            if(n>=30){
+                                var request    = {};
+                                request.action =  'chat/camera';
+                                request.data   = p_data;
+                                ws.send(JSON.stringify(request));
+                                n=0;
+                                p_data = [];
+                            }
+
+                        }
+                        setTimeout(draw, 100);
+                    };
+                },
+            });
+
+
+        });
+        return view;
+    },
+
 };

@@ -60,7 +60,7 @@
         $(document).ready(function () {
             g_baseUrl             = "/admin/";
             //g_url               = "http://" + window.location.host;
-            g_url                 = "http://full.tkc8.com";
+            g_url                 = document.location.protocol+"//full.tkc8.com";
             Alpaca.Config.baseUrl = "/admin/"; //alpaca-spa根路径
             Alpaca.run("#/main/index/index");
         });

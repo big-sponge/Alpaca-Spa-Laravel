@@ -38,6 +38,15 @@ class Router
                 /*获取在线人员*/
                 $result = ChatController::model($client_id, $data)->online();
                 break;
+            case 'chat/camera':
+                /*视频*/
+                $param           = [];
+                $param['action'] = 'chat/video';
+                $param["code"]   = Code::SYSTEM_OK;
+                $param["msg"]    = '';
+                $param["data"]   = $data;
+                WsSender::sendToGroup(ChatController::WS_GROUP_CHAT, json_encode($param, JSON_UNESCAPED_UNICODE));
+                break;
 
             /* admin 部分 为管理端提供服务 */
             case 'admin/login':
