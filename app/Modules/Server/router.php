@@ -51,4 +51,13 @@ Route::any('shake/wxLogin', "ShakeController@wxLogin");
 Route::any('shake/testLogin', "ShakeController@testLogin");
 
 
+/* ticket - wxLogin */
+Route::any('ticket/wxLogin', "TicketController@wxLogin");
+
+/* ticket - testLogin */
+Route::any('ticket/testLogin', "TicketController@testLogin");
+
+/* ticket - buy */
+Route::any('ticket/buy', "TicketController@buy");
+
 

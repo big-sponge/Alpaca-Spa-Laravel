@@ -52,6 +52,9 @@ class AlpacaCrontab
     public function listTask()
     {
         $tasks = json_decode(file_get_contents($this->task_json));
+        if(empty($tasks)){
+            return [];
+        }
         $i = 0;
         foreach ($tasks as $task)
         {

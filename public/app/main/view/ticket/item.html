@@ -1,0 +1,115 @@
+<style>
+
+    .div-btn-up {
+        line-height: 200px;
+        width: 195px;
+        height: 195px;
+        overflow: hidden;
+        text-align: center;
+        background-color: #ddd;
+    }
+
+    .img-loading {
+
+        margin-bottom: auto;
+    }
+
+</style>
+
+<div id="page-picker" class="page page-current">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">picker</h1>
+    </header>
+    <div class="content native-scroll">
+        <div class="content-block-title">头像</div>
+
+        <div class="content-block">
+            <div class="div-btn-up div-btn-up-14">
+                <div class="img-loading" onclick="clickbt()"  ><img id='image-box' src="" alt="+点击上传图片"></div>
+                <input type="file" id="file-up"  onchange="fileUp(this)" >
+            </div>
+        </div>
+        <div class="content-block-title">联系电话</div>
+        <div class="content-block">
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">联系电话</div>
+                                <div class="item-input">
+                                    <input type="text" placeholder="Phone">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-block-title">选择座位</div>
+        <div class="content-block">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">区域</div>
+                                <div class="item-input">
+                                    <input type="text" placeholder="区域" id="picker" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">排</div>
+                                <div class="item-input">
+                                    <input type="text" placeholder="排" id="picker-row" value="" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">列</div>
+                                <div class="item-input">
+                                    <input type="text" placeholder="列" id="picker-col" value="" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <div class="row">
+                <div class="col-100"><a class="button button-big button-fill button-success">确认</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var clickbt =function (){
+        document.getElementById("file-up").click();
+    };
+    var fileUp = function (me) {
+        base64Image({
+            file: me,                              /*【必填】对应的上传元素 */
+            callback: function (imageUrl) {        /*【必填】处理成功后的回调函数 */
+                /*imageUrl为得到的图片base64数据，这里可以进行上传到服务器或者其他逻辑操作 */
+                $("#image-box").attr('src',imageUrl);
+            },
+            width:750,                          /*【选填】宽度默认750，如果图片尺寸大于该宽度，图片将被设置为该宽度*/
+            ratio:0.75,                         /*【选填】压缩率默认0.75 */
+        });
+    };
+</script>

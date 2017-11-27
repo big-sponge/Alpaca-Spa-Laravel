@@ -5,6 +5,13 @@ Alpaca.MainModule.IndexController = {
         var view = new Alpaca.MainModule.View();
         return view;
     },
+
+    //test,  默认渲染到
+    ticketAction: function () {
+        var view = new Alpaca.MainModule.View();
+        return view;
+    },
+
     //index,  默认渲染到
     indexAction: function () {
         var view = new Alpaca.MainModule.View();

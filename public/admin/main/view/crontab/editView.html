@@ -45,7 +45,7 @@
                     <label class="control-label col-sm-3">时间间隔</label>
                     <div class="col-sm-9">
                         <div class="input-group">
-                            <input type="number" class="form-control" placeholder="周期" name="task-time"/>
+                            <input type="number" class="form-control" placeholder="周期" name="task-time" value="1"/>
                                 <span class="input-group-btn" style="width: 140px;">
                                     <select class="bs-select form-control" onchange="" name="task-time-unit">
                                         <option value="second">秒（second）</option>
@@ -98,11 +98,11 @@
 
 <script>
     /* 类型改变时候 */
-    var typeChange =function(){
+    var typeChange = function () {
         var type = $('#edit-task-form select[name="run-type"]').val();
-        if(type ==1){
+        if (type == 1) {
             $('.run-type-2').hide();
-        }else {
+        } else {
             $('.run-type-2').show();
         }
     };
@@ -127,7 +127,11 @@
         request['STATUS'] = $('#edit-task-form select[name="task-status"]').val();
 
         /*时间间隔*/
-        request['INTERVAL'] = $('#edit-task-form input[name="task-time"]').val() + " " + $('#edit-task-form select[name="task-time-unit"]').val();
+        var i = $('#edit-task-form input[name="task-time"]').val();
+        if (!i) {
+            i = 1;
+        }
+        request['INTERVAL'] = i + " " + $('#edit-task-form select[name="task-time-unit"]').val();
 
         AlpacaAjax({
             url: g_url + API['crontab_edit'],
