@@ -180,16 +180,7 @@ class BaseController extends Controller
         $actionID     = $action['method'];
         $controllerID = $action['controller'];
 
-        /* 1.1 判断Action动作是否需要登录，默认需要登录 */
-        //判断当前控制器是否设置了所有Action动作不需要登录，或者，当前Action动作在不需要登录列表中
-        $noLogin = $this->noLogin();
-        $noLogin = !empty($noLogin) ? $noLogin : [];
-        if (in_array($actionID, $noLogin) || $this->isNoLogin) {
-            //不需要登录
-            return true;
-        }
-
-        /* 1.2 判断Action动作是否需要验证权限，默认需要验证 */
+        /* 1.1 判断Action动作是否需要验证权限，默认需要验证 */
         //判断当前控制器是否设置了所有Action动作不需要登录，或者，当前Action动作在不需要登录列表中
         $noAuth = $this->noAuth();
         $noAuth = !empty($noAuth) ? $noAuth : [];
@@ -207,28 +198,24 @@ class BaseController extends Controller
         }
 
         /* 4.1 检查用户Auth */
-        if (empty($userInfo) || empty($userInfo['group'])) {
-            $result["code"] = Code::USER_POWER_ERROR;
-            $result["msg"]  = Msg::USER_POWER_ERROR;
-            return $result;
-        }
-        $power = strtoupper($controllerID . "_" . $actionID);
-        if (empty($userInfo['auth'])) {
-            $result["code"] = Code::USER_POWER_ERROR;
-            $result["msg"]  = Msg::USER_POWER_ERROR;
-            $this->ajaxReturn($result);
-        }
         $powerCheck = false;
-        foreach ($userInfo['auth'] as $item) {
-            if (strtoupper($item['controller'] . "_" . $item['action']) == $power) {
-                $powerCheck = true;
-                break;
+        $power      = strtoupper($controllerID . "_" . $actionID);
+        if (!empty($userInfo) && !empty($userInfo['group']) && !empty($userInfo['auth']) ){
+            foreach ($userInfo['auth'] as $item) {
+                if (strtoupper($item['controller'] . "_" . $item['action']) == $power) {
+                    $powerCheck = true;
+                    break;
+                }
             }
         }
 
         /* 4.2 检查自定义权限 */
         if (!empty($noAuth[$actionID])) {
-            $powerCheck = $noAuth[$actionID]($powerCheck,$userInfo['auth']);
+            $auth=[];
+            if(!empty($userInfo)&&!empty($userInfo['auth'])){
+                $auth = $userInfo['auth'];
+            }
+            $powerCheck = $noAuth[$actionID]($powerCheck, $auth);
         }
 
         if ($powerCheck) {
@@ -253,7 +240,7 @@ class BaseController extends Controller
     {
         $value = Input::get($key, $value);
         if (isset($value)) {
-            clean_xss($value,true);
+            clean_xss($value, true);
         }
         return $value;
     }
@@ -274,14 +261,15 @@ class BaseController extends Controller
                 header("Access-Control-Allow-Origin: {$origin}"); // 允许任意域名发起的跨域请求
                 header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With');
                 header("Access-Control-Allow-Credentials: true");
-                return response()->json($data,200,[],JSON_UNESCAPED_UNICODE);
+                header('Content-type:application/json; charset=utf-8');
+                return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
             case 'XML'  :
                 // 返回xml格式数据
                 header('Content-Type:text/xml; charset=utf-8');
                 return (xml_encode($data));
             case 'JSONP':
                 // 返回JSON数据格式到客户端 包含状态信息
-                return response()->json($data,200,[],JSON_UNESCAPED_UNICODE)->withCallback($this->input('callback'));
+                return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE)->withCallback($this->input('callback'));
             case 'EVAL' :
                 // 返回可执行的js脚本
                 header('Content-Type:text/html; charset=utf-8');

@@ -77,10 +77,6 @@ class AlpacaDaemon
         $data['code']="1000";
         $data['message']="Start";
         file_put_contents($this->daemon_json,json_encode($data),LOCK_EX);
-        
-        ignore_user_abort(true);     // 忽略客户端断开
-        set_time_limit(0);           // 设置执行不超时
-
 
         while(true){
             $data = json_decode(file_get_contents($this->daemon_json) , true);

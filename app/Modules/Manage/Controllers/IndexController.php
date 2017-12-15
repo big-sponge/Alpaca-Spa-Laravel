@@ -2,6 +2,8 @@
 
 namespace App\Modules\Manage\Controllers;
 
+use App\Common\Code;
+use App\Common\Msg;
 use App\Common\Wechat\WeChat;
 use App\Common\WsServer\Client;
 use App\Modules\Manage\Controllers\Base\BaseController;
@@ -17,7 +19,7 @@ class IndexController extends BaseController
      */
     protected function noLogin()
     {
-        return ['index'];
+        return ['index','index2','index3'];
     }
 
     /**
@@ -86,10 +88,5 @@ class IndexController extends BaseController
 
         echo date('Y-m-d H:i:s', time());
         die();
-    }
-
-    public function index2()
-    {
-        die('sss - index2');
     }
 }

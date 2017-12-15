@@ -73,4 +73,10 @@ Alpaca.MainModule.IndexController = {
             });
         return;
     },
+
+
+    index2Action: function () {
+        var view = new Alpaca.MainModule.pageView({data:{name:'cheng'}});
+        return view;
+    }
 };

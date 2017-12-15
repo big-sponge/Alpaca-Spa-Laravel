@@ -66,7 +66,7 @@ class Code
     const USER_EMAIL_ERROR          = 136;     //E-MAIL不存在
     const USER_EMAIL_CODE_ERROR     = 137;     //E-MAIL验证码错误
     const USER_EMAIL_CODE_OVERTIME  = 138;     //E-MAIL验证码超时
-    const USER_POWER_ERROR          = 139;     //用户没有权限
+    const USER_POWER_ERROR          = 139;     //用户没aa有权限
     const DEPART_NAME_EXIT          = 140;     //部门名已经注册
 
     /**

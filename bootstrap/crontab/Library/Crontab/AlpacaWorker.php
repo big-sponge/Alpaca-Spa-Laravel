@@ -43,21 +43,26 @@ class AlpacaWorker
 
         $url=$url."?accessToken=".$this->accessToken;
 
-        //使用fsockopen方式异步调用action
-        $fp = fsockopen("$ip", $port, $errno, $errstr,1);
-        if (!$fp) {
-            return 'worker error:'."$errstr ($errno)<br />\n";
-        } else {
-            $out = "POST $url HTTP/1.1\r\n";
-            $out .= "Host: $ip\r\n";
-            $out .= "Content-Type:application/x-www-form-urlencoded; charset=UTF-8\r\n";
-            $out .= "Content-Length: " . strlen($postData) . "\r\n";
-            $out .= "Connection: close\r\n";
-            $out .="\r\n";
-            $out .=$postData;
-            fputs($fp, $out);
-            fclose($fp);
-        }       
+        try{
+            //使用fsockopen方式异步调用action
+            $fp = fsockopen("$ip", $port, $errno, $errstr,1);
+            if (!$fp) {
+                return 'worker error:'."$errstr ($errno)<br />\n";
+            } else {
+                $out = "POST $url HTTP/1.1\r\n";
+                $out .= "Host: $ip\r\n";
+                $out .= "Content-Type:application/x-www-form-urlencoded; charset=UTF-8\r\n";
+                $out .= "Content-Length: " . strlen($postData) . "\r\n";
+                $out .= "Connection: close\r\n";
+                $out .="\r\n";
+                $out .=$postData;
+                fputs($fp, $out);
+                fclose($fp);
+            }
+        }catch(\Exception $e){
+
+        }
+
         return 'worker success!';
     }
 }

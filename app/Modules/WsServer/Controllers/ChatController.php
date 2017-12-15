@@ -73,6 +73,7 @@ class ChatController extends BaseController
 
         //验证token
         $login = TokenService::wsLogin($param);
+
         if ($login['code'] != Code::SYSTEM_OK) {
             return $login;
         }

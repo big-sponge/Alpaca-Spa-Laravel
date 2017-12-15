@@ -34,10 +34,13 @@ class IndexController extends BaseController
      */
     public function start()
     {
-
         //开始守护进程
         $result['code'] = Code::SYSTEM_OK;
         $result['msg']  = Msg::SYSTEM_OK;
+
+
+        ignore_user_abort(true);     // 忽略客户端断开
+        set_time_limit(0);           // 设置执行不超时
 
         //在守护进程中注入定时任务
         $events = ['0'=>function(){

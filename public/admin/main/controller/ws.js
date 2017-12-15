@@ -38,7 +38,6 @@ Alpaca.MainModule.WsController = {
                     //请求正确,开启webSocket
                     var ws_url = Alpaca.MainModule.WsController.webServer.url;
                     var ws     = new WebSocket(ws_url);
-
                     //onOpen
                     ws.onopen = function () {
                         // 连接成功,登录webSocket
