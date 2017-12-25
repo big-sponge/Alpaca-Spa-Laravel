@@ -288,6 +288,10 @@
                     "showMenuContentMsgType":'' //1:图文信息 2:图片 3:语音 4:视频
                 }
             },
+        created:function(){
+            this.menu_selected('',0);
+
+        },
         methods:{
             menu_data_completing:function () {
                 for(var i=0;i<this.menu.button.length;i++){
