@@ -19,7 +19,7 @@ class IndexController extends BaseController
      */
     protected function noLogin()
     {
-        return ['index','index2','index3'];
+        return ['index','wxBack','index3'];
     }
 
     /**
@@ -32,6 +32,17 @@ class IndexController extends BaseController
     {
         // 当前控制器所有方法均不需要权限
         $this->isNoAuth = true;
+    }
+
+    /**
+     * index
+     * @author Chengcheng
+     * @date   2016年10月23日 20:39:25
+     * @return array
+     */
+    public function index()
+    {
+        die('hello world');
     }
 
     /**
@@ -65,28 +76,48 @@ class IndexController extends BaseController
         die;
     }
 
-    public function index()
+    /**
+     * 微信回调
+     * @author Chengcheng
+     * @date   2016年10月23日 20:39:25
+     * @return array
+     */
+    public function wxBack()
     {
+        WeChat::app()->server->setMessageHandler(function ($message) {
+            // $message['FromUserName'] // 用户的 openid
+            // $message['MsgType'] // 消息类型：event, text....
+            switch ($message->MsgType) {
+                case 'event':
+                    return '收到事件消息';
+                    break;
+                case 'text':
+                    return '收到文字消息';
+                    break;
+                case 'image':
+                    return '收到图片消息';
+                    break;
+                case 'voice':
+                    return '收到语音消息';
+                    break;
+                case 'video':
+                    return '收到视频消息';
+                    break;
+                case 'location':
+                    return '收到坐标消息';
+                    break;
+                case 'link':
+                    return '收到链接消息';
+                    break;
+                // ... 其它消息
+                default:
+                    return '收到其它消息';
+                    break;
+            }
+        });
 
-        Client::sendToGroup(ServerController::WS_GROUP_CLIENT . '7', json_encode(['code' => '2222', 'msg' => 'asdasdasd', 'action' => '111111']));
+        $response = WeChat::app()->server->serve();
 
-        die('sssss2');
-        $app = WeChat::app();
-
-        $str = WeChat::user()->getWxAuthUrl();
-
-        //$id =  WeChat::user()->getOpenId('ssss');
-
-        var_dump($str);
-
-        die;
-        //$index = AdminMember::findById(4);
-        //var_dump($index->toArray());
-
-        /*  die('sss');
-            return $this->ajaxReturn($index); */
-
-        echo date('Y-m-d H:i:s', time());
-        die();
+        return $response;
     }
 }
