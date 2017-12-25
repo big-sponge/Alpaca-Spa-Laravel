@@ -74,8 +74,8 @@ Alpaca.MainModule.IndexController = {
         return;
     },
 
-
-    index2Action: function () {
+    //微信菜单
+    wxMenuAction: function () {
         var view = new Alpaca.MainModule.pageView({data:{name:'cheng'}});
         return view;
     }
