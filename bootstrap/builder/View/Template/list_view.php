@@ -9,14 +9,14 @@
 <div class="page-header page-header-default">
     <div class="page-header-content">
         <div class="page-title">
-            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">XX管理</span> - XX列表</h4>
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"><?php echo $this->table_name_cn; ?>管理</span> - <?php echo $this->table_name_cn; ?>列表</h4>
         </div>
     </div>
 
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
-            <li><a><i class="icon-home2 position-left"></i> XX管理</a></li>
-            <li class="active">XX列表</li>
+            <li><a><i class="icon-home2 position-left"></i> <?php echo $this->table_name_cn; ?>管理</a></li>
+            <li class="active"><?php echo $this->table_name_cn; ?>列表</li>
         </ul>
     </div>
 </div>
@@ -27,7 +27,7 @@
     <!-- Basic responsive configuration -->
     <div class="panel panel-flat" id="<?php echo $this->classNameLc; ?>-list-view">
         <div class="panel-heading">
-            <button type="button" class="btn btn-primary" onclick='Alpaca.to("#/main/<?php echo $this->classNameLc; ?>/<?php echo $this->classNameLc; ?>EditView")'><i class="icon-diff-added position-left"></i> 添加XX</button>
+            <button type="button" class="btn btn-primary" onclick='Alpaca.to("#/main/<?php echo $this->classNameLc; ?>/<?php echo $this->classNameLc; ?>EditView")'><i class="icon-diff-added position-left"></i> 添加<?php echo $this->table_name_cn; ?></button>
         </div>
         <div class="datatable-header">
             <div class="dataTables_filter">

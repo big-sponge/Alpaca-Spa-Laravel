@@ -4,14 +4,14 @@
 <div class="page-header page-header-default">
     <div class="page-header-content">
         <div class="page-title">
-            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">XXX管理</span> - 编辑XX</h4>
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"><?php echo $this->table_name_cn; ?>管理</span> - 编辑<?php echo $this->table_name_cn; ?></h4>
         </div>
     </div>
 
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
-            <li><a><i class="icon-home2 position-left"></i> XXX管理</a></li>
-            <li class="active">编辑XX</li>
+            <li><a><i class="icon-home2 position-left"></i> <?php echo $this->table_name_cn; ?>管理</a></li>
+            <li class="active">编辑<?php echo $this->table_name_cn; ?></li>
         </ul>
     </div>
 </div>
@@ -25,7 +25,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <h5 class="panel-title">编辑XXX<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+                        <h5 class="panel-title">编辑<?php echo $this->table_name_cn; ?><a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
                     </div>
                 </div>
             </div>

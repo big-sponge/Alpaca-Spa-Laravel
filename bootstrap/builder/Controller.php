@@ -56,6 +56,7 @@ class Controller
 
         $className  = ucwords(str_replace(array('.', '-', '_'), ' ', $table));
         $moduleName = explode(',', $className)[0];
+        $moduleName = str_replace(' ', '', $moduleName);
 
         if (!empty($sub_module_name)) {
             $moduleName = $sub_module_name;
@@ -163,6 +164,8 @@ class Controller
         $data['f_module_name']    = $f_module_name;
         $data['b_module_name_lc'] = $b_module_name_lc;
         $data['f_module_name_lc'] = $f_module_name_lc;
+
+        $data['table_name_cn'] = $table_name_cn;
 
         $data['orgName'] = $orgName;
 
