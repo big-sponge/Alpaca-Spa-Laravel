@@ -3,7 +3,21 @@ Alpaca.MainModule.WechatController = {
 
     //微信菜单
     menuAction: function () {
+
+
+
         var view = new Alpaca.MainModule.pageView({data:{name:'cheng'}});
+
+        view.ready(function(){
+
+
+
+
+        });
+
+
         return view;
+
+
     }
 };

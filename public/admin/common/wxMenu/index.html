@@ -265,6 +265,9 @@
         data:function () {
                 return {
                     "gzh_name":'实时预览',
+                   /* "menu":{
+                        "button":[]
+                    },*/
                      "menu":{
                         "button":[
                             {"type":"click","name":"歌手简介","key":"V1001_TODAY_SINGER","url":"","sub_button":[]},
@@ -287,9 +290,16 @@
                 }
             },
         created:function(){
-            this.menu_selected('',0);
 
         },
+
+        mounted:function(){
+            //console.log($("#menuList li").length);
+             if($("#menuList li").length >1){
+              this.menu_selected('',0);
+             }
+        },
+
         methods:{
             menu_data_completing:function () {
                 for(var i=0;i<this.menu.button.length;i++){
