@@ -4,10 +4,12 @@ namespace App\Modules\Manage\Controllers;
 
 use App\Common\Code;
 use App\Common\Msg;
+use App\Common\UEditor\UEditorServer;
 use App\Common\Wechat\WeChat;
 use App\Common\WsServer\Client;
 use App\Modules\Manage\Controllers\Base\BaseController;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class IndexController extends BaseController
 {
@@ -19,7 +21,7 @@ class IndexController extends BaseController
      */
     protected function noLogin()
     {
-        return ['index','wxBack','index3'];
+        return ['index', 'wxBack', 'index3'];
     }
 
     /**
@@ -42,6 +44,19 @@ class IndexController extends BaseController
      */
     public function index()
     {
+
+        $userId     = 'otUf91eXE58FXeWLC8ycZ84TT_Eo';
+        $templateId = 'R_eVqey3i_QnfWG7wbJmiQyWeHTVgXncN65AT8KyHjE';
+        $url        = 'http://full.tkc8.com/app';
+        $data       = array(
+            "first"  => "恭喜你购买成功！",
+            "name"   => "巧克力",
+            "price"  => "39.8元",
+            "remark" => "欢迎再次购买！",
+        );
+
+        $result = WeChat::app()->notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($userId)->send();
+        var_dump($result);
         die('hello world');
     }
 

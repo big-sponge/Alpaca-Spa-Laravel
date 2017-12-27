@@ -73,4 +73,13 @@ Alpaca.MainModule.FormController = {
         });
         return view;
     },
+
+    //ueditor,  ueditor富文本编辑器
+    ueditorAction: function (){
+        var view = new Alpaca.MainModule.pageView();
+        view.ready(function () {
+            var ue = UE.getEditor("ue-content");
+        });
+        return view;
+    }
 };

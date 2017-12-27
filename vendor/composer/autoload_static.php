@@ -23,6 +23,7 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'cb61d74ad51d00867155534456b38b23' => __DIR__ . '/..' . '/mews/purifier/src/helpers.php',
         '9e090711773bfc38738f5dbaee5a7f14' => __DIR__ . '/..' . '/overtrue/wechat/src/Payment/helpers.php',
+        '841780ea2e1d6545ea3a253239d59c05' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/functions.php',
         'a91583c364b51d577595747f044a772e' => __DIR__ . '/../..' . '/app/Common/functions.php',
     );
 
@@ -68,6 +69,10 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'R' => 
         array (
             'Ramsey\\Uuid\\' => 12,
+        ),
+        'Q' => 
+        array (
+            'Qiniu\\' => 6,
         ),
         'P' => 
         array (
@@ -234,6 +239,10 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
+        ),
+        'Qiniu\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu',
         ),
         'Psy\\' => 
         array (
@@ -412,8 +421,17 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
 
     public static $classMap = array (
         'App\\Common\\Code' => __DIR__ . '/../..' . '/app/Common/Code.php',
+        'App\\Common\\Lib\\Base64Image' => __DIR__ . '/../..' . '/app/Common/Lib/Base64Image.php',
         'App\\Common\\Lib\\Validate' => __DIR__ . '/../..' . '/app/Common/Lib/Validate.php',
         'App\\Common\\Msg' => __DIR__ . '/../..' . '/app/Common/Msg.php',
+        'App\\Common\\UEditor\\Lists' => __DIR__ . '/../..' . '/app/Common/UEditor/Lists.php',
+        'App\\Common\\UEditor\\ListsQiniu' => __DIR__ . '/../..' . '/app/Common/UEditor/ListsQiniu.php',
+        'App\\Common\\UEditor\\UEditorServer' => __DIR__ . '/../..' . '/app/Common/UEditor/UEditorServer.php',
+        'App\\Common\\UEditor\\Uploader\\Upload' => __DIR__ . '/../..' . '/app/Common/UEditor/Uploader/Upload.php',
+        'App\\Common\\UEditor\\Uploader\\UploadCatch' => __DIR__ . '/../..' . '/app/Common/UEditor/Uploader/UploadCatch.php',
+        'App\\Common\\UEditor\\Uploader\\UploadFile' => __DIR__ . '/../..' . '/app/Common/UEditor/Uploader/UploadFile.php',
+        'App\\Common\\UEditor\\Uploader\\UploadQiniu' => __DIR__ . '/../..' . '/app/Common/UEditor/Uploader/UploadQiniu.php',
+        'App\\Common\\UEditor\\Uploader\\UploadScrawl' => __DIR__ . '/../..' . '/app/Common/UEditor/Uploader/UploadScrawl.php',
         'App\\Common\\Visitor' => __DIR__ . '/../..' . '/app/Common/Visitor.php',
         'App\\Common\\Wechat\\Lib\\WxUser' => __DIR__ . '/../..' . '/app/Common/Wechat/lib/WxUser.php',
         'App\\Common\\Wechat\\WeChat' => __DIR__ . '/../..' . '/app/Common/Wechat/WeChat.php',
@@ -425,6 +443,9 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'App\\Models\\AdminMember' => __DIR__ . '/../..' . '/app/Models/AdminMember.php',
         'App\\Models\\AdminMemberGroup' => __DIR__ . '/../..' . '/app/Models/AdminMemberGroup.php',
         'App\\Models\\Base\\BaseModel' => __DIR__ . '/../..' . '/app/Models/Base/BaseModel.php',
+        'App\\Models\\Ticket' => __DIR__ . '/../..' . '/app/Models/Ticket.php',
+        'App\\Models\\TicketOrder' => __DIR__ . '/../..' . '/app/Models/TicketOrder.php',
+        'App\\Models\\TicketOrderDeatil' => __DIR__ . '/../..' . '/app/Models/TicketOrderDeatil.php',
         'App\\Models\\UserAuth' => __DIR__ . '/../..' . '/app/Models/UserAuth.php',
         'App\\Models\\UserGroup' => __DIR__ . '/../..' . '/app/Models/UserGroup.php',
         'App\\Models\\UserGroupAuth' => __DIR__ . '/../..' . '/app/Models/UserGroupAuth.php',
@@ -438,6 +459,7 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'App\\Modules\\Manage\\Controllers\\Base\\BaseController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/Base/BaseController.php',
         'App\\Modules\\Manage\\Controllers\\CrontabController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/CrontabController.php',
         'App\\Modules\\Manage\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/IndexController.php',
+        'App\\Modules\\Manage\\Controllers\\ShakeController' => __DIR__ . '/../..' . '/app/Modules/Manage/Controllers/ShakeController.php',
         'App\\Modules\\Manage\\Service\\AdminService' => __DIR__ . '/../..' . '/app/Modules/Manage/Service/AdminService.php',
         'App\\Modules\\Manage\\Service\\EmailService' => __DIR__ . '/../..' . '/app/Modules/Manage/Service/EmailService.php',
         'App\\Modules\\Manage\\Service\\WechatService' => __DIR__ . '/../..' . '/app/Modules/Manage/Service/WechatService.php',
@@ -446,12 +468,17 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'App\\Modules\\Server\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Modules/Server/Controllers/AuthController.php',
         'App\\Modules\\Server\\Controllers\\Base\\BaseController' => __DIR__ . '/../..' . '/app/Modules/Server/Controllers/Base/BaseController.php',
         'App\\Modules\\Server\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Modules/Server/Controllers/IndexController.php',
+        'App\\Modules\\Server\\Controllers\\ShakeController' => __DIR__ . '/../..' . '/app/Modules/Server/Controllers/ShakeController.php',
+        'App\\Modules\\Server\\Controllers\\TicketController' => __DIR__ . '/../..' . '/app/Modules/Server/Controllers/TicketController.php',
         'App\\Modules\\Server\\Service\\EmailService' => __DIR__ . '/../..' . '/app/Modules/Server/Service/EmailService.php',
+        'App\\Modules\\Server\\Service\\TicketsService' => __DIR__ . '/../..' . '/app/Modules/Server/Service/TicketsService.php',
         'App\\Modules\\Server\\Service\\WxService' => __DIR__ . '/../..' . '/app/Modules/Server/Service/WxService.php',
         'App\\Modules\\WsServer\\Auth\\Auth' => __DIR__ . '/../..' . '/app/Modules/WsServer/Auth/Auth.php',
-        'App\\Modules\\WsServer\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Modules/WsServer/Controllers/AdminController.php',
+        'App\\Modules\\WsServer\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Modules/WsServer/Controllers/Admin/AdminController.php',
         'App\\Modules\\WsServer\\Controllers\\Base\\BaseController' => __DIR__ . '/../..' . '/app/Modules/WsServer/Controllers/Base/BaseController.php',
+        'App\\Modules\\WsServer\\Controllers\\ChatController' => __DIR__ . '/../..' . '/app/Modules/WsServer/Controllers/ChatController.php',
         'App\\Modules\\WsServer\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Modules/WsServer/Controllers/IndexController.php',
+        'App\\Modules\\WsServer\\Controllers\\Server\\ServerController' => __DIR__ . '/../..' . '/app/Modules/WsServer/Controllers/Server/ServerController.php',
         'App\\Modules\\WsServer\\Router' => __DIR__ . '/../..' . '/app/Modules/WsServer/Router.php',
         'App\\Modules\\WsServer\\Service\\TokenService' => __DIR__ . '/../..' . '/app/Modules/WsServer/Service/TokenService.php',
         'App\\RouteProvider' => __DIR__ . '/../..' . '/app/RouteProvider.php',
@@ -3283,6 +3310,22 @@ class ComposerStaticInit6a6a778089c2eb9515eb45409463891f
         'Psy\\VersionUpdater\\GitHubChecker' => __DIR__ . '/..' . '/psy/psysh/src/Psy/VersionUpdater/GitHubChecker.php',
         'Psy\\VersionUpdater\\IntervalChecker' => __DIR__ . '/..' . '/psy/psysh/src/Psy/VersionUpdater/IntervalChecker.php',
         'Psy\\VersionUpdater\\NoopChecker' => __DIR__ . '/..' . '/psy/psysh/src/Psy/VersionUpdater/NoopChecker.php',
+        'Qiniu\\Auth' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Auth.php',
+        'Qiniu\\Cdn\\CdnManager' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Cdn/CdnManager.php',
+        'Qiniu\\Config' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Config.php',
+        'Qiniu\\Etag' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Etag.php',
+        'Qiniu\\Http\\Client' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Http/Client.php',
+        'Qiniu\\Http\\Error' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Http/Error.php',
+        'Qiniu\\Http\\Request' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Http/Request.php',
+        'Qiniu\\Http\\Response' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Http/Response.php',
+        'Qiniu\\Processing\\ImageUrlBuilder' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Processing/ImageUrlBuilder.php',
+        'Qiniu\\Processing\\Operation' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Processing/Operation.php',
+        'Qiniu\\Processing\\PersistentFop' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Processing/PersistentFop.php',
+        'Qiniu\\Storage\\BucketManager' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Storage/BucketManager.php',
+        'Qiniu\\Storage\\FormUploader' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Storage/FormUploader.php',
+        'Qiniu\\Storage\\ResumeUploader' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Storage/ResumeUploader.php',
+        'Qiniu\\Storage\\UploadManager' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Storage/UploadManager.php',
+        'Qiniu\\Zone' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Zone.php',
         'QrReader' => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib/QrReader.php',
         'Ramsey\\Uuid\\BinaryUtils' => __DIR__ . '/..' . '/ramsey/uuid/src/BinaryUtils.php',
         'Ramsey\\Uuid\\Builder\\DefaultUuidBuilder' => __DIR__ . '/..' . '/ramsey/uuid/src/Builder/DefaultUuidBuilder.php',

@@ -23,6 +23,13 @@ Route::any('index/uploadForCk', "IndexController@uploadForCk");
 /* index - Index */
 Route::any('index/wxBack', "IndexController@wxBack");
 
+
+
+
+
+/* index - upload 文件上传*/
+Route::any('tools/ueditor', "ToolsController@ueditor");
+
 /*
 |--------------------------------------------------------------------------
 | Auth
