@@ -42,26 +42,26 @@ CREATE TABLE `tb_admin_auth` (
 -- ----------------------------
 -- Records of tb_admin_auth
 -- ----------------------------
-INSERT INTO `tb_admin_auth` VALUES ('1', '一般权限', '', '', null, null, '1', '0', '1', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('2', '个人信息', '', 'auth', 'info', '', '1', '1', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('3', '修改密码', '', 'auth', 'resetPwdByOld', '', '1', '1', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('4', '用户管理（后台）', '', '', '', '', '1', '0', '1', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('5', '查看用户列表', '', 'admin', 'getMemberList', null, '1', '4', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('6', '编辑用户', null, 'admin', 'editMember', '', '1', '4', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('7', '删除用户', null, 'admin', 'deleteMember', null, '1', '4', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('8', '查看分组列表', null, 'admin', 'getGroupList', null, '1', '4', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('9', '编辑分组', null, 'admin', 'editGroup', null, '1', '4', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('10', '删除分组', null, 'admin', 'deleteGroup', null, '1', '4', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('11', '查看权限列表', null, 'admin', 'getAuthList', null, '1', '4', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('12', '定时任务', null, '', '', null, '1', '0', '1', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('13', '查看定时任务进程状态', null, 'crontab', 'status', null, '1', '12', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('14', '开始定时任务进程', null, 'crontab', 'start', null, '1', '12', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('15', '停止定时任务进程', null, 'crontab', 'stop', null, '1', '12', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('16', '编辑定时任务', null, 'crontab', 'editTask', null, '1', '12', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('17', '设置指定定时任务状态', null, 'crontab', 'changeTaskStatus', '', '1', '12', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('18', '获取指定定时任务', null, 'crontab', 'getIndexTask', null, '1', '12', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('19', '删除指定定时任务', null, 'crontab', 'removeTask', '', '1', '12', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
-INSERT INTO `tb_admin_auth` VALUES ('20', '获取定时任务列表', null, 'crontab', 'listTask', null, '1', '12', '2', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('1', '一般权限', '', '', null, null, '1', '0', '1', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('2', '个人信息', '', 'auth', 'info', '', '1', '1', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('3', '修改密码', '', 'auth', 'resetPwdByOld', '', '1', '1', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('4', '用户管理（后台）', '', '', '', '', '1', '0', '1', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('5', '查看用户列表', '', 'admin', 'getMemberList', null, '1', '4', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('6', '编辑用户', null, 'admin', 'editMember', '', '1', '4', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('7', '删除用户', null, 'admin', 'deleteMember', null, '1', '4', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('8', '查看分组列表', null, 'admin', 'getGroupList', null, '1', '4', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('9', '编辑分组', null, 'admin', 'editGroup', null, '1', '4', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('10', '删除分组', null, 'admin', 'deleteGroup', null, '1', '4', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('11', '查看权限列表', null, 'admin', 'getAuthList', null, '1', '4', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('12', '定时任务', null, '', '', null, '1', '0', '1', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('13', '查看定时任务进程状态', null, 'crontab', 'status', null, '1', '12', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('14', '开始定时任务进程', null, 'crontab', 'start', null, '1', '12', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('15', '停止定时任务进程', null, 'crontab', 'stop', null, '1', '12', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('16', '编辑定时任务', null, 'crontab', 'editTask', null, '1', '12', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('17', '设置指定定时任务状态', null, 'crontab', 'changeTaskStatus', '', '1', '12', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('18', '获取指定定时任务', null, 'crontab', 'getIndexTask', null, '1', '12', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('19', '删除指定定时任务', null, 'crontab', 'removeTask', '', '1', '12', '2', '1', null, null, null, '', '', null);
+INSERT INTO `tb_admin_auth` VALUES ('20', '获取定时任务列表', null, 'crontab', 'listTask', null, '1', '12', '2', '1', null, null, null, '', '', null);
 
 -- ----------------------------
 -- Table structure for tb_admin_group
@@ -158,7 +158,7 @@ CREATE TABLE `tb_admin_member` (
 -- ----------------------------
 -- Records of tb_admin_member
 -- ----------------------------
-INSERT INTO `tb_admin_member` VALUES ('1', 'admin', null, '1', null, '0', null, null, null, null, '$2y$10$xtn/IRD/AWRYs1/Veoy.yuNyW3GbI.r5bL2RVT9TDGRdvjoQ6.Ufu', '0', '', 'admin@tkc8.com', '0', '0', '263', null, '2017-12-12 11:14:41', '221.238.11.98', '2017-12-12 11:14:41', '221.238.11.98', '0', '1', '2018-01-06 21:29:29', '0000-00-00 00:00:00', null, '', 'admin', '221.238.11.98');
+INSERT INTO `tb_admin_member` VALUES ('1', 'admin', null, '1', null, '0', null, null, null, null, '$2y$10$xtn/IRD/AWRYs1/Veoy.yuNyW3GbI.r5bL2RVT9TDGRdvjoQ6.Ufu', '0', '', 'admin@tkc8.com', '0', '0', '263', null, '2017-12-12 11:14:41', '221.238.11.98', '2017-12-12 11:14:41', '221.238.11.98', '0', '1', '2018-01-06 21:29:29', null, null, '', 'admin', '221.238.11.98');
 INSERT INTO `tb_admin_member` VALUES ('2', '测试账号', null, '1', null, '0', null, null, null, null, '$2y$10$4HoqxdcEx0F9PffYOEIso.nlDpqh5SHeLPn/Z.PHRm601N7PRXq..', '0', '', 'test@tkc8.com', '0', '0', '4896', null, '2018-01-06 21:29:38', '220.115.236.125', '2018-01-06 20:59:32', '220.115.236.125', '0', '1', '2018-01-06 21:29:38', '2017-07-04 17:03:00', null, 'gust', 'gust', '220.115.236.125');
 
 -- ----------------------------
@@ -183,7 +183,7 @@ CREATE TABLE `tb_admin_member_group` (
 -- ----------------------------
 -- Records of tb_admin_member_group
 -- ----------------------------
-INSERT INTO `tb_admin_member_group` VALUES ('1', '1', '1', '0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '', '', null);
+INSERT INTO `tb_admin_member_group` VALUES ('1', '1', '1', '0', '1', null, null, null, '', '', null);
 INSERT INTO `tb_admin_member_group` VALUES ('2', '2', '2', '0', '1', '2018-01-06 21:26:56', '2018-01-06 21:26:56', null, 'admin', 'admin', '220.115.236.125');
 
 -- ----------------------------
@@ -431,7 +431,7 @@ CREATE TABLE `tb_ws_token` (
   `member_id` char(50) NOT NULL COMMENT '用户id',
   `member_type` tinyint(2) DEFAULT '1' COMMENT '用户类型，枚举|1-用户-USER|2-管理员-ADMIN',
   `token` varchar(65) DEFAULT '' COMMENT 'TOKEN',
-  `available_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '有效截至时间',
+  `available_time` datetime DEFAULT null COMMENT '有效截至时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `delete_time` datetime DEFAULT NULL COMMENT '删除时间',
