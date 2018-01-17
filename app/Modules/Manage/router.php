@@ -23,8 +23,8 @@ Route::any('index/uploadForCk', "IndexController@uploadForCk");
 /* index - Index */
 Route::any('index/wxBack', "IndexController@wxBack");
 
-
-
+/* index - Index */
+Route::any('index/youtu', "IndexController@youtu");
 
 
 /* index - upload 文件上传*/

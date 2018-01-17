@@ -5,6 +5,7 @@ namespace App\Modules\WsServer;
 use App\Common\Code;
 use App\Modules\WsServer\Controllers\Admin\AdminController;
 use App\Modules\WsServer\Controllers\ChatController;
+use App\Modules\WsServer\Controllers\OcrController;
 use App\Modules\WsServer\Controllers\Server\ServerController;
 use GatewayWorker\Lib\Gateway as WsSender;
 
@@ -58,6 +59,12 @@ class Router
             case 'server/login':
                 /*结束*/
                 $result = ServerController::model($client_id, $data)->login();
+                break;
+
+            /* ocr 部分 */
+            case 'ocr/setDeviceId':
+                /*设置设备号*/
+                $result = OcrController::model($client_id, $data)->setDeviceId();
                 break;
 
             default:

@@ -5,8 +5,10 @@ namespace App\Modules\Manage\Controllers;
 use App\Common\Msg;
 use App\Common\Visitor;
 use App\Common\WsServer\Client;
+use App\Models\AdminGroup;
 use App\Models\ShakeActivity;
 use App\Models\ShakeItem;
+use App\Models\UserWx;
 use App\Models\WsToken;
 use App\Modules\Manage\Controllers\Base\BaseController;
 use App\Common\Code;
@@ -22,7 +24,7 @@ class ShakeController extends BaseController
      */
     protected function noLogin()
     {
-        return ['index','getQrCode'];
+        return ['index', 'getQrCode'];
     }
 
     /**
@@ -34,7 +36,7 @@ class ShakeController extends BaseController
     protected function noAuth()
     {
         // 当前控制器所有方法均不需要权限
-        return ['index','getQrCode','getWsToken','getActivity','getItemList'];
+        return ['index', 'getQrCode', 'getWsToken', 'getActivity', 'getItemList'];
     }
 
     /**
@@ -67,9 +69,9 @@ class ShakeController extends BaseController
     public function getQrCode()
     {
         $activityId = $this->input('activity_id');
-        $url    = 'http://' . $_SERVER['HTTP_HOST'] . '/shake/wapp.html?activity_id='.$activityId;
-        $logo   = base_path('public') . '/shake/screen/assets/img/qrcode_logo.png';
-        $qrCode = new QrCode();
+        $url        = 'http://' . $_SERVER['HTTP_HOST'] . '/shake/wapp.html?activity_id=' . $activityId;
+        $logo       = base_path('public') . '/shake/screen/assets/img/qrcode_logo.png';
+        $qrCode     = new QrCode();
         $qrCode->setText($url)->setSize(300)->setMargin(10)->setBackgroundColor(array("r" => 255, "g" => 255, "b" => 255));
         if ($logo) {
             $qrCode->setLogoPath($logo)->setLogoWidth(60);
@@ -95,13 +97,13 @@ class ShakeController extends BaseController
          * orders               排序，数组结构，支持多维度排序
          * id                   ID
          * */
-        $this->requestData['pageNum']   = $this->input('pageNum', null);
-        $this->requestData['pageSize']  = $this->input('pageSize', null);
-        $this->requestData['orders']    = $this->input('orders', null);
-        $this->requestData['id']        = $this->input('id', null);
+        $this->requestData['pageNum']  = $this->input('pageNum', null);
+        $this->requestData['pageSize'] = $this->input('pageSize', null);
+        $this->requestData['orders']   = $this->input('orders', null);
+        $this->requestData['id']       = $this->input('id', null);
 
         //2 查找信息
-        $data = ShakeActivity::model()->lists($this->requestData);
+        $data = UserWx::model()->lists($this->requestData);
 
         //3 设置返回结果
         $result['code'] = Code::SYSTEM_OK;
@@ -137,20 +139,20 @@ class ShakeController extends BaseController
          * wechat_qrcode       手机端公众号二维码
          * wechat_qrcode_text  手机端公众号引导文案
          * */
-        $this->requestData['id']                = $this->input('id', null);
-        $this->requestData['merchant_id']       = $this->input('merchant_id', null);
-        $this->requestData['type']              = $this->input('type', null);
-        $this->requestData['name']              = $this->input('name', null);
-        $this->requestData['province_id']       = $this->input('province_id', null);
-        $this->requestData['city_id']           = $this->input('city_id', null);
-        $this->requestData['start_time']        = $this->input('start_time', null);
-        $this->requestData['end_time']          = $this->input('end_time', null);
-        $this->requestData['business_name']     = $this->input('business_name', null);
-        $this->requestData['business_logo']     = $this->input('business_logo', null);
-        $this->requestData['prize_address']     = $this->input('prize_address', null);
-        $this->requestData['background_img']    = $this->input('background_img', null);
-        $this->requestData['wechat_qrcode']     = $this->input('wechat_qrcode', null);
-        $this->requestData['wechat_qrcode_text']= $this->input('wechat_qrcode_text', null);
+        $this->requestData['id']                 = $this->input('id', null);
+        $this->requestData['merchant_id']        = $this->input('merchant_id', null);
+        $this->requestData['type']               = $this->input('type', null);
+        $this->requestData['name']               = $this->input('name', null);
+        $this->requestData['province_id']        = $this->input('province_id', null);
+        $this->requestData['city_id']            = $this->input('city_id', null);
+        $this->requestData['start_time']         = $this->input('start_time', null);
+        $this->requestData['end_time']           = $this->input('end_time', null);
+        $this->requestData['business_name']      = $this->input('business_name', null);
+        $this->requestData['business_logo']      = $this->input('business_logo', null);
+        $this->requestData['prize_address']      = $this->input('prize_address', null);
+        $this->requestData['background_img']     = $this->input('background_img', null);
+        $this->requestData['wechat_qrcode']      = $this->input('wechat_qrcode', null);
+        $this->requestData['wechat_qrcode_text'] = $this->input('wechat_qrcode_text', null);
 
         //2 编辑信息
         $data = ShakeActivity::model()->edit($this->requestData);
@@ -248,10 +250,10 @@ class ShakeController extends BaseController
          * orders               排序，数组结构，支持多维度排序
          * id                   ID
          * */
-        $this->requestData['pageNum']   = $this->input('pageNum', null);
-        $this->requestData['pageSize']  = $this->input('pageSize', null);
-        $this->requestData['orders']    = $this->input('orders', null);
-        $this->requestData['id']        = $this->input('id', null);
+        $this->requestData['pageNum']  = $this->input('pageNum', null);
+        $this->requestData['pageSize'] = $this->input('pageSize', null);
+        $this->requestData['orders']   = $this->input('orders', null);
+        $this->requestData['id']       = $this->input('id', null);
 
         //2 查找信息
         $data = ShakeItem::model()->lists($this->requestData);
@@ -279,9 +281,9 @@ class ShakeController extends BaseController
          * shake_limit         摇一摇次数(达到次数,活动结束)
          * win_limit           中奖人数限制
          * */
-        $this->requestData['id']                = $this->input('id', null);
-        $this->requestData['shake_limit']       = $this->input('shake_limit', null);
-        $this->requestData['win_limit']         = $this->input('win_limit', null);
+        $this->requestData['id']          = $this->input('id', null);
+        $this->requestData['shake_limit'] = $this->input('shake_limit', null);
+        $this->requestData['win_limit']   = $this->input('win_limit', null);
 
         //2 编辑信息
         $data = ShakeItem::model()->edit($this->requestData);

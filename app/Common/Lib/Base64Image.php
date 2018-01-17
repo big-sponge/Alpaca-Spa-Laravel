@@ -14,7 +14,7 @@ class Base64Image
     {
         $img = $data['img'];
         $checkString = substr($img, 0, 100);
-        $filename = date('YmdHis') . '-' . uniqid() . '.' . ".jpg";
+        $filename = date('YmdHis') . '-' . uniqid() . '.' . "jpg";
         if(!empty($data['filename'])){
             $filename = $data['filename'];
         }
@@ -25,12 +25,11 @@ class Base64Image
             $fileInfo = base64_decode(str_replace($result[1], '', $img));
 
             //保存图片
-            Storage::disk('uploads_tickets')->put($filename, $fileInfo);
+            Storage::disk('uploads')->put($filename, $fileInfo);
 
             //文件路径
             $path = '/uploads/'.$filename;
         }
-
         return $path;
 
     }

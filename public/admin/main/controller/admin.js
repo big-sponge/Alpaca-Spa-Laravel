@@ -1,3 +1,5 @@
+var com_data={};
+
 /* 1 定义AdminController，用户管理（后台用户） */
 Alpaca.MainModule.AdminController = {
 

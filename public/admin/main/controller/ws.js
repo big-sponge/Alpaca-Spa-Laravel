@@ -39,7 +39,7 @@ Alpaca.MainModule.WsController = {
                     var ws_url = Alpaca.MainModule.WsController.webServer.url;
                     var ws     = new WebSocket(ws_url);
                     //onOpen
-                    ws.onopen = function () {
+                    ws.onopen  = function () {
                         // 连接成功,登录webSocket
                         var request    = {};
                         request.action = API['ws_chat_admin_login'];
@@ -81,6 +81,9 @@ Alpaca.MainModule.WsController = {
                 break;
             case 'chat/notifyMsg':
                 Alpaca.to('#/main/ws/notifyMsg', acceptData);
+                break;
+            case 'index/ocr':
+                Alpaca.to('#/main/ws/pocr', acceptData);
                 break;
         }
     },
@@ -175,6 +178,67 @@ Alpaca.MainModule.WsController = {
             that.onLoad();
         };
         view.display();
+    },
+
+    ocrAction: function (data) {
+
+        function guid() {
+            return 'xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        var token = '1' + guid();
+
+        var view = new Alpaca.View({data: {token: token}});
+
+        return view;
+    },
+    ocr2Action: function (data) {
+        var view = new Alpaca.MainModule.pageView();
+
+        return view;
+
+    },
+    pocrAction: function (event) {
+
+        var acceptData = JSON.parse(event.data);
+        console.log(acceptData);
+        var action = acceptData.action;
+
+        if (action == 'index/ocr_token') {
+            var deviceId = acceptData.data;
+            $('#table-page-key').val(deviceId);
+
+            if (deviceId) {
+                var request    = {};
+                request.action = API['ws_ocr_setDeviceId'];
+                request.data   = {device_id: deviceId};
+                ws_ocr.send(JSON.stringify(request));
+            }
+            return;
+        }
+
+        if (action != 'index/ocr') {
+            return;
+        }
+
+        var url = "https://www.baidu.com";
+
+        console.log(acceptData);
+        if (acceptData.data.items) {
+            var if_id = 1;
+            for (var i in acceptData.data.items) {
+                var s = acceptData.data.items[i];
+                if (s['itemstring']) {
+                    url = "https://www.baidu.com/s?rsv_idx=1&wd=" + s['itemstring'];
+                    $("#mainframe-" + if_id).attr("src", url);
+                    if_id++;
+                    console.log(s['itemstring']);
+                }
+            }
+        }
     },
 
 };

@@ -1,0 +1,74 @@
+<div id="page-ptr" class="page page-current">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title">OCR功能</h1>
+    </header>
+    <div class="content native-scroll" style="">
+        <!-- 下面是正文 -->
+        <div class="card-container">
+            <div class="card">
+                <div class="card-header">COR功能示例</div>
+                <div class="card-content">
+                    <div class="card-content-inner">通过手机拍照或者上传图片到服务器，服务器进行文字识别，然后把文字进行百度搜索，并将结果显示在对应的PC端</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">PC端设备号</div>
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        <p>用PC端访问地址：http://full.tkc8.com/admin#/main/ws/ocr</p>
+                        <p>然后输入设备号：<b id="device-id"></b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">识别结果：</div>
+                <div class="card-content-inner" id="result-id"></div>
+            </div>
+        </div>
+        <div class="content-block">
+            <input type="file" style="display: none" onchange="fileUp(this)" id="file-up2">
+            <p><a class="needsclick button button-fill  button-big" onclick="$('#file-up2').click();" id="btn-a">点我上传图片</a></p>
+        </div>
+        <div id="image-list"></div>
+    </div>
+</div>
+<script>
+    var fileUp = function (me) {
+        base64Image({
+            file: me,
+            callback: function (imageUrl) {
+                var img = new Image();
+                img.src = imageUrl;
+                /* 获取设备号*/
+                AlpacaAjax({
+                    url: g_url + API['user_ocr_youTu'],
+                    data: {image: imageUrl},
+                    beforeSend: function () {
+                        $('#result-id').html('正在识别 ...');
+                        $('#btn-a').html('正在识别 ...');
+
+                    },
+                    newSuccess: function (data) {
+                        if (data.code == "112") {
+                            var redirect = encodeURIComponent(window.location.href);
+                            Alpaca.to("#/main/auth/testLoginView/" + redirect);
+                            return false;
+                        }
+                        $('#result-id').html(data.msg);
+                        console.log(data);
+                    },
+                    complete: function () {
+                        $('#result-id').html('识别结果已同步到PC端！');
+                        $('#btn-a').html('点我上传图片');
+                    },
+                });
+
+
+            },
+        });
+    };
+</script>

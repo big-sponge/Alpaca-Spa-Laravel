@@ -61,3 +61,12 @@ Route::any('ticket/testLogin', "TicketController@testLogin");
 Route::any('ticket/buy', "TicketController@buy");
 
 
+/* ocr - getDeviceId */
+Route::any('ocr/getDeviceId', "OcrController@getDeviceId");
+/* ocr - getDeviceId */
+Route::any('ocr/youTu', "OcrController@youTu");
+/* ocr - getDeviceId */
+Route::any('ocr/qrCode', "OcrController@qrCode");
+
+
+

@@ -3,11 +3,14 @@
 namespace App\Modules\Manage\Controllers;
 
 use App\Common\Code;
+use App\Common\Lib\Base64Image;
 use App\Common\Msg;
 use App\Common\UEditor\UEditorServer;
 use App\Common\Wechat\WeChat;
 use App\Common\WsServer\Client;
+use App\Common\Youtu\YouTu;
 use App\Modules\Manage\Controllers\Base\BaseController;
+use App\Modules\WsServer\Controllers\ChatController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -21,7 +24,7 @@ class IndexController extends BaseController
      */
     protected function noLogin()
     {
-        return ['index', 'wxBack', 'index3'];
+        return ['index', 'wxBack', 'index3','youtu'];
     }
 
     /**
@@ -44,6 +47,9 @@ class IndexController extends BaseController
      */
     public function index()
     {
+
+        die;
+
 
         $userId     = 'otUf91eXE58FXeWLC8ycZ84TT_Eo';
         $templateId = 'R_eVqey3i_QnfWG7wbJmiQyWeHTVgXncN65AT8KyHjE';
@@ -89,6 +95,31 @@ class IndexController extends BaseController
         echo "window.parent.CKEDITOR.tools.callFunction(" . $callback . ",'" . "/uploads/" . $filename . "','')";
         echo "</script>";
         die;
+    }
+
+    /**
+     * youtu
+     * @author Chengcheng
+     * @date   2016年10月23日 20:39:25
+     * @return array
+     */
+    public function youtu()
+    {
+        $image = request()->get("image");
+
+        $path = 'http://full.tkc8.com'.Base64Image::up(['img'=>$image]);
+        $data = YouTu::generalocr($path);
+
+        $result         = [];
+        $result['code'] = Code::SYSTEM_OK;
+        $result['msg']  = Msg::SYSTEM_OK;
+        $result['data'] = $data;
+        $result['action'] = 'index/ocr';
+
+        Client::sendToGroup(ChatController::WS_GROUP_CHAT,json_encode($result));
+
+        return $this->ajaxReturn($result);
+
     }
 
     /**

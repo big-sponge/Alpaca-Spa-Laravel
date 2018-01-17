@@ -1,0 +1,98 @@
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">OCR</span> - 示例</h4>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a><i class="icon-home2 position-left"></i> OCR - 示例 ：通过手机拍照或者上传图片到服务器，服务器进行文字识别，然后把文字进行百度搜索，并将结果显示在对应的PC端</a></li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+
+    <!-- Left -->
+    <div class="panel panel-flat" style="margin-bottom: 0;border: 0">
+        <div class="panel panel-flat">
+            <div class="datatable-header">
+                <div class="dataTables_filter"><input type="text" class="" placeholder="请输入设备号码" id="table-page-key">
+                    <button type="button" class="btn btn-primary" style="vertical-align: top" onclick="submitDeviceId()">提交设备号</button>
+                    <p>(获取设备号：手机访问 http://full.tkc8.com/app/#/main/test/ocr 或者扫下面的二维码) </p>
+                    <div style="text-align: center"> <img src="/server/ocr/qrCode?token={{= it.token}}" style="width: 180px"> </div>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div style="height: 420px;" class="col-lg-6">
+                        <iframe id='mainframe-1' frameborder="no" src="http://www.baidu.com" style="width: 100%; height: 100%"></iframe>
+                    </div>
+                    <div style="height: 420px;" class="col-lg-6">
+                        <iframe id='mainframe-2' frameborder="no" src="http://www.baidu.com" style="width: 100%; height: 100%"></iframe>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style="height: 420px;" class="col-lg-6">
+                        <iframe id='mainframe-3' frameborder="no" src="http://www.baidu.com" style="width: 100%; height: 100%"></iframe>
+                    </div>
+                    <div style="height: 420px;" class="col-lg-6">
+                        <iframe id='mainframe-4' frameborder="no" src="http://www.baidu.com" style="width: 100%; height: 100%"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Left -->
+
+    <!-- Right -->
+    <div class="sidebar-detached affix-top">
+
+    </div>
+    <!-- /Right -->
+
+    <!-- Footer -->
+    <div id="page-content-footer"></div>
+    <!-- /footer -->
+</div>
+
+<script>
+
+    var token     = "{{= it.token}}";
+    console.log(token);
+    var ws_url = Alpaca.MainModule.WsController.webServer.url;
+    var ws_ocr     = new WebSocket(ws_url);
+
+    ws_ocr.onopen = function () {
+        if(token){
+            var request    = {};
+            request.action = API['ws_ocr_setDeviceId'];
+            request.data   = {device_id: 'token_'+token};
+            ws_ocr.send(JSON.stringify(request));
+        }
+    };
+
+
+    ws_ocr.onmessage = function (event) {
+        Alpaca.to('#/main/ws/pocr', event);
+    };
+
+    var submitDeviceId =function(){
+        var deviceId= $('#table-page-key').val();
+        if(!deviceId){
+            return;
+        }
+
+        var request    = {};
+        request.action = API['ws_ocr_setDeviceId'];
+        request.data   = {device_id: deviceId};
+        console.log(request);
+        ws_ocr.send(JSON.stringify(request));
+        alert('设置完成、现在可以在手机上传图片了。');
+    }
+</script>

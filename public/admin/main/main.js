@@ -41,6 +41,8 @@ var API = {
     ws_chat_admin_login: 'chat/adminLogin',                   //* WS 管理员账号登录（后台帐号） */
     ws_chat_send: 'chat/send',                                //* WS 发送消息 */
     ws_chat_online: 'chat/online',                            //* WS 获取在线人员 */
+
+    ws_ocr_setDeviceId: 'ocr/setDeviceId',                  //设置ocr deviceId */
 };
 
 Date.prototype.format = function (fmt) { //author: meizz
@@ -97,7 +99,7 @@ AlpacaAjax = function (param) {
         if (data.code == "112") {
             var redirect = encodeURIComponent(window.location.href);
             setTimeout(function () {
-                Alpaca.to("#/main/auth/loginView/"+redirect);
+                Alpaca.to("#/main/auth/loginView/" + redirect);
             }, 200);
             return false;
         }
