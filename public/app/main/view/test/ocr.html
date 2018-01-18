@@ -25,8 +25,8 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-header">识别结果：</div>
-                <div class="card-content-inner" id="result-id"></div>
+                <div class="card-header">识别结果：<span id="result-id" style="font-size: 0.7rem"></span></div>
+                <div class="card-content-inner" id="result-text"></div>
             </div>
         </div>
         <div class="content-block">
@@ -59,6 +59,15 @@
                             return false;
                         }
                         $('#result-id').html(data.msg);
+
+                        var text="";
+
+                        if(data.data.items){
+                            for(var i in data.data.items){
+                                text += data.data.items[i].itemstring;
+                            }
+                        }
+                        $('#result-text').html(text);
                         console.log(data);
                     },
                     complete: function () {
