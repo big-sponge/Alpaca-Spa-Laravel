@@ -83,9 +83,6 @@ Alpaca.MainModule.WsController = {
             case 'chat/notifyMsg':
                 Alpaca.to('#/main/ws/notifyMsg', acceptData);
                 break;
-            case 'index/ocr':
-                Alpaca.to('#/main/ws/pocr', acceptData);
-                break;
         }
     },
 
