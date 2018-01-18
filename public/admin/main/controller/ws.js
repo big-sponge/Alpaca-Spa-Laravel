@@ -3,8 +3,9 @@ Alpaca.MainModule.WsController = {
 
     //webServer配置
     webServer: {
-        ws: null,                                               //* web-socket 连接对象 */
+        ws: null,                                //* web-socket 连接对象 */
         url: "ws://full.tkc8.com:8082",          //* web-socket 地址 */
+        ws_ocr:null,
     },
 
     //onlineList 在线人员数据
@@ -191,15 +192,9 @@ Alpaca.MainModule.WsController = {
 
         var token = '1' + guid();
 
-        var view = new Alpaca.View({data: {token: token}});
+        var view = new Alpaca.MainModule.pageView({data: {token: token}});
 
         return view;
-    },
-    ocr2Action: function (data) {
-        var view = new Alpaca.MainModule.pageView();
-
-        return view;
-
     },
     pocrAction: function (event) {
 
