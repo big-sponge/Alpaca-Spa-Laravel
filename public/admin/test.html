@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cos-js-sdk-v5-demo</title>
+    <script src="/admin/common/js/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+<input id="file-selector" type="file">
+<script src="/admin/common/qcos/cos-js-sdk-v5.js"></script>
+<script>
+    var Bucket = 'tkc8-full-1251560914';
+    var Region = 'ap-chengdu';
+
+    // 初始化实例
+    var cos = new COS({
+        getAuthorization: function (options, callback) {
+            console.log(options);
+            // 异步获取签名
+            $.ajax({
+                url: "http://full.tkc8.com/manage/index/qCos",
+                data: {
+                    method: (options.Method || 'get').toLowerCase(),
+                    pathname: '/' + (options.Key || '')
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 9900) {
+                        callback(data.data);
+                    }
+                },
+            });
+        }
+    });
+
+    // 监听选文件
+    document.getElementById('file-selector').onchange = function () {
+
+        var file = this.files[0];
+        if (!file) return;
+
+        // 分片上传文件
+        cos.sliceUploadFile({
+            Bucket: Bucket,
+            Region: Region,
+            Key: 'test/'+file.name,
+            Body: file,
+        }, function (err, data) {
+            console.log(err, data);
+        });
+
+    };
+</script>
+
+</body>
+</html>

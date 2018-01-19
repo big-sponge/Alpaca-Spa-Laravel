@@ -5,6 +5,7 @@ namespace App\Modules\Manage\Controllers;
 use App\Common\Code;
 use App\Common\Lib\Base64Image;
 use App\Common\Msg;
+use App\Common\QCos\QCos;
 use App\Common\UEditor\UEditorServer;
 use App\Common\Wechat\WeChat;
 use App\Common\WsServer\Client;
@@ -24,7 +25,7 @@ class IndexController extends BaseController
      */
     protected function noLogin()
     {
-        return ['index', 'wxBack', 'index3','youtu'];
+        return ['index', 'wxBack', 'index3', 'qCos'];
     }
 
     /**
@@ -48,8 +49,13 @@ class IndexController extends BaseController
     public function index()
     {
 
-        die;
+        $result         = [];
+        $result['code'] = Code::SYSTEM_OK;
+        $result['msg']  = Msg::SYSTEM_OK;
+        $result['data'] = $_POST;
+        return $this->ajaxReturn($result);
 
+        die;
 
         $userId     = 'otUf91eXE58FXeWLC8ycZ84TT_Eo';
         $templateId = 'R_eVqey3i_QnfWG7wbJmiQyWeHTVgXncN65AT8KyHjE';
@@ -98,25 +104,21 @@ class IndexController extends BaseController
     }
 
     /**
-     * youtu
+     * qCos - 获取腾讯cos签名
      * @author Chengcheng
      * @date   2016年10月23日 20:39:25
      * @return array
      */
-    public function youtu()
+    public function qCos()
     {
-        $image = request()->get("image");
+        $method   = $this->input('method', 'POST');
+        $pathname = $this->input('pathname', '/');
 
-        $path = 'http://full.tkc8.com'.Base64Image::up(['img'=>$image]);
-        $data = YouTu::generalocr($path);
+        $data = QCos::getAuthorization($method, $pathname);
 
-        $result         = [];
         $result['code'] = Code::SYSTEM_OK;
         $result['msg']  = Msg::SYSTEM_OK;
         $result['data'] = $data;
-        $result['action'] = 'index/ocr';
-
-        Client::sendToGroup(ChatController::WS_GROUP_CHAT,json_encode($result));
 
         return $this->ajaxReturn($result);
 
@@ -166,4 +168,5 @@ class IndexController extends BaseController
 
         return $response;
     }
+
 }

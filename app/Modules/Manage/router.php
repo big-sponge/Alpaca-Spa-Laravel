@@ -24,7 +24,7 @@ Route::any('index/uploadForCk', "IndexController@uploadForCk");
 Route::any('index/wxBack', "IndexController@wxBack");
 
 /* index - Index */
-Route::any('index/youtu', "IndexController@youtu");
+Route::any('index/qCos', "IndexController@qCos");
 
 
 /* index - upload 文件上传*/

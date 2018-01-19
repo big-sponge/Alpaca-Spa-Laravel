@@ -254,6 +254,7 @@ Alpaca.MainModule.IndexController = {
     photoBrowserAction: function () {
         var view = new Alpaca.MainModule.View();
         view.ready(function () {
+            $.init();
             var myPhotoBrowserStandalone = $.photoBrowser({
                 photos: [
                     '//img.alicdn.com/tps/i3/TB1kt4wHVXXXXb_XVXX0HY8HXXX-1024-1024.jpeg',
@@ -292,6 +293,13 @@ Alpaca.MainModule.IndexController = {
                     {
                         url: '//img.alicdn.com/tps/i4/TB1AdxNHVXXXXasXpXX0HY8HXXX-1024-1024.jpeg',
                     },
+                    {
+                        url: 'http://qqcos-full.tkc8.com/images/Hydrangeas.jpg',
+                    },
+                    {
+                        url: 'http://qqcos-full.tkc8.com/images/Hydrangeas.jpg',
+                    },
+
                 ],
                 theme: 'dark',
                 type: 'standalone'
