@@ -45,6 +45,24 @@ Alpaca.MainModule.PhotoController = {
             // 显示分页参数信息，并且关联相关事件
             tablePageDisplay(data);
 
+            if (!jQuery.fancybox) {
+                return;
+            }
+
+            if ($(".fancybox-button").size() > 0) {
+                $(".fancybox-button").fancybox({
+                    groupAttr: 'data-rel',
+                    prevEffect: 'none',
+                    nextEffect: 'none',
+                    closeBtn: true,
+                    helpers: {
+                        title: {
+                            type: 'inside'
+                        }
+                    }
+                });
+            }
+
         });
         return view;
     },

@@ -115,7 +115,7 @@ class PhotoController extends BaseController
          * id                  id
          * name                名称
          * size                大小
-         * path                 原图地址URL
+         * path                原图地址URL
          * */
         $this->requestData['id']          = $this->input('id', null);
         $this->requestData['name']        = $this->input('name', '');
