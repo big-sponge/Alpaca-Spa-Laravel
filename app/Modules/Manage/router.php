@@ -23,10 +23,6 @@ Route::any('index/uploadForCk', "IndexController@uploadForCk");
 /* index - Index */
 Route::any('index/wxBack', "IndexController@wxBack");
 
-/* index - Index */
-Route::any('index/qCos', "IndexController@qCos");
-
-
 /* index - upload 文件上传*/
 Route::any('tools/ueditor', "ToolsController@ueditor");
 
@@ -105,7 +101,6 @@ Route::any('crontab/removeTask', "CrontabController@removeTask");
 /* crontab - listTask  获取定时任务列表 */
 Route::any('crontab/listTask', "CrontabController@listTask");
 
-
 /*
 |--------------------------------------------------------------------------
 | Shake
@@ -129,3 +124,21 @@ Route::any('shake/editActivity', "ShakeController@editActivity");
 
 /* shake - deleteActivity */
 Route::any('shake/deleteActivity', "ShakeController@deleteActivity");
+
+/*
+|--------------------------------------------------------------------------
+| Photo
+|--------------------------------------------------------------------------
+*/
+
+/* photo - qCos */
+Route::any('photo/qCos', "PhotoController@qCos");
+
+/* photo - getPhotoStoreList */
+Route::any('photo/getStoreList', "PhotoController@getStoreList");
+
+/* photo - editPhotoStore */
+Route::any('photo/editStore', "PhotoController@editStore");
+
+/* photo - deletePhotoStore */
+Route::any('photo/deleteStore', "PhotoController@deleteStore");

@@ -1,0 +1,144 @@
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}common/js/md5-min.js"></script>
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">photo_store管理</span> - 编辑photo_store</h4>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a><i class="icon-home2 position-left"></i> photo_store管理</a></li>
+            <li class="active">编辑photo_store</li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <!-- Basic responsive configuration -->
+    <form id="photoStore-edit">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h5 class="panel-title">编辑photo_store<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group">
+                            <label>ID:</label>
+                            <input type="text" class="form-control" placeholder="id" name="id" readonly>
+                        </div>
+                         <div class="form-group">
+                            <label>名称:</label>
+                            <input type="text" class="form-control" placeholder="请输入名称" name="name">
+                        </div>
+                         <div class="form-group">
+                            <label>大小:</label>
+                            <input type="text" class="form-control" placeholder="请输入大小" name="size">
+                        </div>
+                         <div class="form-group">
+                            <label>原图地址URL:</label>
+                            <input type="text" class="form-control" placeholder="请输入原图地址URL" name="origin_path">
+                        </div>
+                         <div class="form-group">
+                            <label>常规图地址URL:</label>
+                            <input type="text" class="form-control" placeholder="请输入常规图地址URL" name="normal_path">
+                        </div>
+                         <div class="form-group">
+                            <label>缩略图地址URL:</label>
+                            <input type="text" class="form-control" placeholder="请输入缩略图地址URL" name="thumb_path">
+                        </div>
+                         <div class="form-group">
+                            <label>用户ID:</label>
+                            <input type="text" class="form-control" placeholder="请输入用户ID" name="member_id">
+                        </div>
+                         <div class="form-group">
+                            <label>用户类型:</label>
+                            <select  class="form-control select" name="member_type">
+                            <option value="1">用户</option>
+                            <option value="2">管理员</option>
+                            </select>
+                        </div>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary" onclick="submitPhotoStore()"><i class="icon-checkmark3 position-left"></i>保存</button>
+                            <button type="button" class="btn btn-default" onclick="cancel()"><i class="icon-undo position-left"></i>取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- /basic responsive configuration -->
+    <!-- Footer -->
+    <div id="page-content-footer"></div>
+    <!-- /footer -->
+</div>
+<!-- /content area -->
+<script>
+
+    /* 填充表单 */
+    var fillPhotoStore = function (data) {
+        $('#photoStore-edit [name ="id"]').val(data.id);
+        $('#photoStore-edit [name ="name"]').val(data.name);
+        $('#photoStore-edit [name ="size"]').val(data.size);
+        $('#photoStore-edit [name ="origin_path"]').val(data.origin_path);
+        $('#photoStore-edit [name ="normal_path"]').val(data.normal_path);
+        $('#photoStore-edit [name ="thumb_path"]').val(data.thumb_path);
+        $('#photoStore-edit [name ="member_id"]').val(data.member_id);
+        $('#photoStore-edit [name ="member_type"]').val(data.member_type);
+    };
+
+
+    /* 提交表单 */
+    var submitPhotoStore = function () {
+        var request  = {};
+        request.id = $('#photoStore-edit [name ="id"]').val();
+        request.name = $('#photoStore-edit [name ="name"]').val();
+        request.size = $('#photoStore-edit [name ="size"]').val();
+        request.origin_path = $('#photoStore-edit [name ="origin_path"]').val();
+        request.normal_path = $('#photoStore-edit [name ="normal_path"]').val();
+        request.thumb_path = $('#photoStore-edit [name ="thumb_path"]').val();
+        request.member_id = $('#photoStore-edit [name ="member_id"]').val();
+        request.member_type = $('#photoStore-edit [name ="member_type"]').val();
+
+        AlpacaAjax({
+            url: g_url + API['photoStore_edit'],
+            data: request,
+            async: false,
+            success: function (data) {
+                console.log(data);
+                Notific(data.msg);
+                if(data.code == 9900){
+                    Alpaca.to("#/main/photoStore/photoStoreListView");
+                }
+            },
+        });
+    };
+
+    /* 取消 */
+    var cancel = function () {
+        Alpaca.to("#/main/photoStore/photoStoreListView");
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

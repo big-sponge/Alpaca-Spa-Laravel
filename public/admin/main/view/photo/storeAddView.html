@@ -1,0 +1,211 @@
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}common/js/md5-min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}common/qcos/cos-js-sdk-v5.js"></script>
+
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">图片管理</span> - 图片列表</h4>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a><i class="icon-home2 position-left"></i> 图片管理</a></li>
+            <li class="active">上传图片</li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <!-- Basic responsive configuration -->
+    <form id="photoStore-edit">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h5 class="panel-title">上传图片<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group">
+                            <input id="file-selector" type="file" style="display: none" onchange="upFile(this)">
+                            <button type="button" class="btn btn-primary" onclick="upFileClick()"><i class="icon-diff-added position-left"></i>选择图片</button>
+                        </div>
+                        <div class="form-group">
+                            <label>名称:</label>
+                            <input type="text" class="form-control" placeholder="请输入名称" name="name">
+                            <input type="hidden" name="size">
+                            <input type="hidden" name="path">
+                        </div>
+                        <div class="form-group">
+                            <div id="image-box" style="text-align: center"></div>
+                        </div>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary" onclick="submitPhotoStore()"><i class="icon-checkmark3 position-left"></i>保存</button>
+                            <button type="button" class="btn btn-default" onclick="cancel()"><i class="icon-undo position-left"></i>取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- /basic responsive configuration -->
+    <!-- Footer -->
+    <div id="page-content-footer"></div>
+    <!-- /footer -->
+</div>
+<!-- /content area -->
+<script>
+
+    /* 随机文件名 */
+    function guid() {
+        function S4() {
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        }
+
+        return (S4() + S4() + "_" + S4() + "_" + S4() + "_" + S4() + "_" + S4() + S4() + S4());
+    }
+
+    /* cos */
+    var Bucket = 'tkc8-test-1251560914';
+    var Region = 'ap-shanghai';
+    var SubPath = 'images/';
+    var Name = guid();
+    var cos = new COS({
+        getAuthorization: function (options, callback) {
+            console.log(options);
+            /*异步获取签名*/
+            AlpacaAjax({
+                url: g_url + API['photoStore_qCos'],
+                data: {
+                    method: (options.Method || 'get').toLowerCase(),
+                    pathname: '/' + (options.Key || '')
+                },
+                success: function (data) {
+                    if (data.code == 9900) {
+                        callback(data.data);
+                    }
+                },
+            });
+        }
+    });
+
+    /* 选择图片 */
+    var upFileClick = function () {
+
+        if(!checkAuth(23)){
+            setTimeout(function () {
+                Notific({text: '没有权限'});
+            }, 200);
+            return false
+        }
+
+        $("#file-selector").click();
+    };
+
+    /* 上传图片 */
+    var upFile = function (me) {
+
+        var file = me.files[0];
+        if (!file) return;
+
+        $('#photoStore-edit [name ="name"]').val(file['name']);
+        $('#photoStore-edit [name ="size"]').val(file['size']);
+
+
+        var block = $('body');
+        $(block).block({
+            message: '<i class="icon-spinner4 spinner"></i><span style="vertical-align:middle"> 正在上传，请稍后......</span>',
+            overlayCSS: {
+                backgroundColor: '#666',
+                opacity: 0.8,
+                cursor: 'wait',
+                'z-index': 3000,
+            },
+            css: {
+                border: 0,
+                padding: 0,
+                backgroundColor: 'transparent',
+                'z-index': 3000,
+            }
+        });
+
+        /*分片上传文件*/
+        cos.sliceUploadFile({
+            Bucket: Bucket,
+            Region: Region,
+            Key: SubPath + guid(),
+            Body: file,
+        }, function (err, data) {
+            console.log(err, data);
+            if (!err && data.Key) {
+                var image = new Image();
+                image.src = "http://qqcos-test.tkc8.com/" + data.Key + "?imageView2/0/w/750/h/400/q/76";
+                $('#image-box').html('');
+                $('#image-box').append(image);
+                $('#photoStore-edit [name ="path"]').val(data.Key);
+            }
+
+            setTimeout(function () {
+                var block = $('body');
+                block.unblock();
+            }, 1);
+        });
+    };
+
+    /* 填充表单 */
+    var fillPhotoStore = function (data) {
+        $('#photoStore-edit [name ="id"]').val(data.id);
+        $('#photoStore-edit [name ="name"]').val(data.name);
+        $('#photoStore-edit [name ="size"]').val(data.size);
+        $('#photoStore-edit [name ="path"]').val(data.origin_path);
+    };
+
+    /* 提交表单 */
+    var submitPhotoStore = function () {
+
+        var request  = {};
+        request.name = $('#photoStore-edit [name ="name"]').val();
+        request.size = $('#photoStore-edit [name ="size"]').val();
+        request.path = $('#photoStore-edit [name ="path"]').val();
+
+        AlpacaAjax({
+            url: g_url + API['photoStore_edit'],
+            data: request,
+            async: false,
+            success: function (data) {
+                console.log(data);
+                Notific(data.msg);
+                if (data.code == 9900) {
+                    Alpaca.to("#/main/photo/storeListView");
+                }
+            },
+        });
+    };
+
+    /* 取消 */
+    var cancel = function () {
+        Alpaca.to("#/main/photo/storeListView");
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

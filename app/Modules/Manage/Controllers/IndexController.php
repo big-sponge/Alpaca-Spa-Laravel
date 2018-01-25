@@ -102,28 +102,6 @@ class IndexController extends BaseController
         echo "</script>";
         die;
     }
-
-    /**
-     * qCos - 获取腾讯cos签名
-     * @author Chengcheng
-     * @date   2016年10月23日 20:39:25
-     * @return array
-     */
-    public function qCos()
-    {
-        $method   = $this->input('method', 'POST');
-        $pathname = $this->input('pathname', '/');
-
-        $data = QCos::getAuthorization($method, $pathname);
-
-        $result['code'] = Code::SYSTEM_OK;
-        $result['msg']  = Msg::SYSTEM_OK;
-        $result['data'] = $data;
-
-        return $this->ajaxReturn($result);
-
-    }
-
     /**
      * 微信回调
      * @author Chengcheng

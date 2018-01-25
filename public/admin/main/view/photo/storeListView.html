@@ -9,14 +9,14 @@
 <div class="page-header page-header-default">
     <div class="page-header-content">
         <div class="page-title">
-            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold"><?php echo $this->table_name_cn; ?>管理</span> - <?php echo $this->table_name_cn; ?>列表</h4>
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">图片管理</span> - 图片列表</h4>
         </div>
     </div>
 
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
-            <li><a><i class="icon-home2 position-left"></i> <?php echo $this->table_name_cn; ?>管理</a></li>
-            <li class="active"><?php echo $this->table_name_cn; ?>列表</li>
+            <li><a><i class="icon-home2 position-left"></i> 图片管理</a></li>
+            <li class="active">图片列表</li>
         </ul>
     </div>
 </div>
@@ -24,15 +24,21 @@
 
 <!-- Content area -->
 <div class="content">
-    <!-- Basic responsive configuration -->
-    <div class="panel panel-flat" id="<?php echo $this->classNameLc; ?>-list-view">
-        <div class="panel-heading">
-            <button type="button" class="btn btn-primary" onclick='Alpaca.to("#/main/<?php echo $this->classNameLc; ?>/<?php echo $this->classNameLc; ?>EditView")'><i class="icon-diff-added position-left"></i> 添加<?php echo $this->table_name_cn; ?></button>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert bg-success alert-rounded">
+                <button type="button" class="close" data-dismiss="alert"><span>×</span><span class="sr-only">Close</span></button>
+                <span class="text-semibold"></span> 图片功能，使用的是腾讯云的<b>对象存储</b>功能。
+            </div>
         </div>
+    </div>
+    <!-- Basic responsive configuration -->
+    <div class="panel panel-flat" id="photoStore-list-view">
         <div class="datatable-header">
             <div class="dataTables_filter">
                 <input type="text" class="" placeholder="查找." id="table-page-key">
                 <button type="button" class="btn btn-primary" style="vertical-align: top" id="table-page-search"><i class="icon-search4 position-left"></i>查找</button>
+                <button type="button" class="btn btn-primary" style="vertical-align: top"  onclick='Alpaca.to("#/main/photo/storeAddView")'><i class="icon-diff-added position-left"></i> 上传图片</button>
             </div>
 
             <div class="dataTables_length">

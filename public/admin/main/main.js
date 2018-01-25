@@ -43,6 +43,34 @@ var API = {
     ws_chat_online: 'chat/online',                            //* WS 获取在线人员 */
 
     ws_ocr_setDeviceId: 'ocr/setDeviceId',                  //设置ocr deviceId */
+
+    photoStore_qCos: '/manage/photo/qCos',                  //获取微信签名
+    photoStore_list: '/manage/photo/getStoreList',          //列表
+    photoStore_edit: '/manage/photo/editStore',             //编辑
+    photoStore_delete: '/manage/photo/deleteStore',         //删除
+};
+
+
+//检查权限
+var checkAuth = function (code) {
+
+    var userInfo = Alpaca.MainModule.getUserInfo();
+
+    if(!userInfo ||!userInfo['member']){
+        return false;
+    }
+
+    if (userInfo['member']['isAdmin']) {
+        return true;
+    }
+
+    //根据权限 - 隐藏，显示菜单
+    var auth = userInfo['member']['auth'];
+
+    if (auth[code]) {
+        return true;
+    }
+    return false;
 };
 
 Date.prototype.format = function (fmt) { //author: meizz
