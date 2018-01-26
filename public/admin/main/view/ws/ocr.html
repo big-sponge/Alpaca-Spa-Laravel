@@ -22,9 +22,8 @@
         <div class="panel panel-flat">
             <div class="datatable-header">
                 <div class="dataTables_filter"><input type="text" class="" placeholder="请输入设备号码" id="table-page-key">
-                    <button type="button" class="btn btn-primary" style="vertical-align: top" onclick="submitDeviceId()">提交设备号</button>
-                    <p>(获取设备号：手机访问 http://full.tkc8.com/app/#/main/test/ocr 或者扫下面的二维码) </p>
-                    <div style="text-align: center"><img src="/server/ocr/qrCode?token={{= it.token}}" style="width: 180px"></div>
+                    <button type="button" class="btn btn-primary" style="vertical-align: top" onclick="submitDeviceId()">提交设备号</button>(获取设备号：手机访问 http://full.tkc8.com/app/#/main/test/ocr 或者扫下面的二维码)
+                    <div><img src="/server/ocr/qrCode?token={{= it.token}}" style="width: 180px"></div>
                 </div>
             </div>
 
