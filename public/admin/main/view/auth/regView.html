@@ -1,0 +1,177 @@
+{{ $('title').html("用户-注册"); }}
+
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/core/app.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}common/js/md5-min.js"></script>
+
+<!-- Main navbar -->
+<div class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <a class="navbar-brand"><img src="{{= g_baseUrl}}common/img/logo.png" alt=""></a>
+
+        <ul class="nav navbar-nav pull-right visible-xs-block">
+            <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+        </ul>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-mobile">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a>
+                    <i class="icon-display4"></i> <span class="visible-xs-inline-block position-right"> 首页</span>
+                </a>
+            </li>
+
+            <li>
+                <a>
+                    <i class="icon-user-tie"></i> <span class="visible-xs-inline-block position-right"> 联系管理员</span>
+                </a>
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-cog3"></i>
+                    <span class="visible-xs-inline-block position-right"> 设置</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /main navbar -->
+
+
+<!-- Page container -->
+<div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Content area -->
+            <div class="content">
+
+                <!-- Simple login form -->
+                <form id="login-form">
+                    <div class="panel panel-body login-form">
+                        <div class="text-center">
+                            <div class="icon-object border-success text-success"><i class="icon-plus3"></i></div>
+                            <h5 class="content-group">新用户注册</h5>
+                        </div>
+
+                        <div class="content-divider text-muted form-group"><span>请填写下面的信息</span></div>
+
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <div class="input-group">
+                                <input type="text" name="email" class="form-control" placeholder="请输入邮箱、即登录账号">
+                                <div class="form-control-feedback">
+                                    <i class="icon-mention text-muted"></i>
+                                </div>
+                                <span class="input-group-btn"><button class="btn bg-teal" type="button" onclick="sendEmail()">发送验证码</button></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" name="code" class="form-control" placeholder="请填写邮件中收到的验证码">
+                            <div class="form-control-feedback">
+                                <i class="icon-user-lock text-muted"></i>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" name="name" class="form-control" placeholder="姓名">
+                            <div class="form-control-feedback">
+                                <i class="icon-user-check text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" name="phone" class="form-control" placeholder="手机号码">
+                            <div class="form-control-feedback">
+                                <i class="icon-address-book  text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" name="place" class="form-control" placeholder="地区">
+                            <div class="form-control-feedback">
+                                <i class="icon-bag text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="password" name="passwd" class="form-control" placeholder="密码">
+                            <div class="form-control-feedback">
+                                <i class="icon-user-lock text-muted"></i>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="submitInfo()" class="btn bg-teal btn-block btn-lg">提交注册 <i class="icon-circle-right2 position-right"></i></button>
+                    </div>
+                </form>
+                <!-- /simple login form -->
+
+                <!-- Footer -->
+                <div id="page-content-footer"></div>
+                <!-- /footer -->
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+</div>
+<script>
+    var sendEmail = function () {
+        var request   = {};
+        request.email = $('#login-form [name ="email"]').val();
+        AlpacaAjax({
+            url: g_url + API['admin_auth_reg_code'],
+            data: request,
+            async: false,
+            success: function (data) {
+                if (data.code == 9900) {
+                    Notific("验证码发送成功，请注意查收");
+                } else {
+                    Notific(data.msg);
+                }
+            },
+        });
+    };
+    var submitInfo = function () {
+        var request   = {};
+        request.email = $('#login-form [name ="email"]').val();
+        request.code  = $('#login-form [name ="code"]').val();
+        request.name  = $('#login-form [name ="name"]').val();
+        request.phone = $('#login-form [name ="phone"]').val();
+        request.place = $('#login-form [name ="place"]').val();
+
+        if (!$('#login-form [name ="passwd"]').val()) {
+            Notific({text: "请输入密码！"});
+            return;
+        }
+        request.passwd = hex_md5($('#login-form [name ="passwd"]').val());
+
+        AlpacaAjax({
+            url: g_url + API['admin_auth_reg'],
+            data: request,
+            async: false,
+            success: function (data) {
+                if (data.code == 9900) {
+                    Notific("注册成功，正在跳转到登录页面！");
+                    setTimeout(function(){
+                        Alpaca.to("#/main/auth/loginView");
+                    },2000)
+                }else{
+                    Notific(data.msg);
+                }
+            },
+        });
+    };
+</script>
+

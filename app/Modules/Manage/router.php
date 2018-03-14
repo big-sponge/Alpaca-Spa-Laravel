@@ -44,6 +44,15 @@ Route::any('auth/logout', "AuthController@logout");
 /* auth - logout */
 Route::any('auth/info', "AuthController@info");
 
+/* auth - logout */
+Route::any('auth/getRegCode', "AuthController@getRegCode");
+
+/* auth - logout */
+Route::any('auth/register', "AuthController@register");
+
+/* auth - logout */
+Route::any('auth/resetPwdByCode', "AuthController@resetPwdByCode");
+
 /*
 |--------------------------------------------------------------------------
 | Admin

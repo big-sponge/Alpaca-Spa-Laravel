@@ -72,4 +72,38 @@ Alpaca.MainModule.AuthController = {
         return view;
     },
 
+    //RegView,  登录页面
+    regViewAction: function () {
+
+        //视图默认渲染到#content位置，可以通过to对象改变渲染位置
+        var view   = new Alpaca.View();
+        var footer = Alpaca.MainModule.pageFooter();
+        view.addChild(footer);
+        view.setCaptureTo('body');
+        view.ready(function () {
+            $('body').addClass('login-container');
+
+            //格式化页面
+            LayoutInit();
+        });
+        return view;
+    },
+
+    //RegView,  登录页面
+    forgetViewAction: function () {
+
+        //视图默认渲染到#content位置，可以通过to对象改变渲染位置
+        var view   = new Alpaca.View();
+        var footer = Alpaca.MainModule.pageFooter();
+        view.addChild(footer);
+        view.setCaptureTo('body');
+        view.ready(function () {
+            $('body').addClass('login-container');
+
+            //格式化页面
+            LayoutInit();
+        });
+        return view;
+    },
+
 };

@@ -2,15 +2,14 @@
 namespace App\Modules\Manage\Controllers;
 
 use App\Common\Visitor;
-use App\Common\Wechat\WeChat;
-use App\Models\WsToken;
+use App\Models\EmailCode;
 use App\Modules\Manage\Controllers\Base\BaseController;
 use App\Common\Code;
 use App\Common\Msg;
 use App\Modules\Manage\Auth\Auth;
 use App\Common\Lib\Validate;
 use App\Modules\Manage\Service\EmailService;
-use Console\Commands\WsServer;
+use App\Common\Lib\Email;
 
 /**
  * 权限控制器
@@ -31,7 +30,10 @@ class AuthController extends BaseController
         return [
             'loginByEmail',
             'logout',
+            'register',
+            'getRegCode',
             'wxLogin',
+            'resetPwdByCode'
         ];
     }
 
@@ -47,8 +49,94 @@ class AuthController extends BaseController
             'loginByEmail',
             'logout',
             'wxLogin',
+            'register',
+            'getRegCode',
             'getWsToken',
+            'resetPwdByCode'
         ];
+    }
+
+    /**
+     * 用户登录
+     * @author Chengcheng
+     * @date 2016-10-21 09:00:00
+     * @return string
+     */
+    public function getRegCode()
+    {
+
+        //1 获取输入参数,email 手机号码,passwd 密码
+        $this->requestData['email'] = $this->input('email', '');
+
+        //2.1 验证参数
+        if (empty($this->requestData['email'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_NULL;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_NULL, 'email');
+            return $this->ajaxReturn($result);
+        }
+        if (!Validate::isEmail($this->requestData['email'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_FORMAT_ERROR;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_FORMAT_ERROR, 'email');
+            return $this->ajaxReturn($result);
+        }
+
+        // 发送验证码
+        $emailCode = new EmailCode();
+        $emailCode->email = $this->requestData['email'];
+        $emailCode->code = rand(100000,999999);
+        $emailCode->available_time = date('Y-m-d H:i:s', strtotime("+5 minute"));
+        $emailCode->save();
+        Email::email()->send('验证码', $emailCode->email, "您的验证码为：".$emailCode->code);
+
+        //3 验证参数
+        $result["code"] = Code::SYSTEM_OK;
+        $result["msg"]  = Msg::SYSTEM_OK;
+        return $this->ajaxReturn($result);
+    }
+
+    /**
+     * 用户注册 - 邮件验证码方式
+     * @author Chengcheng
+     * @date 2016-10-21 09:00:00
+     * @return string
+     */
+    public function register()
+    {
+        //1 获取输入参数,email 手机号码,passwd 密码
+        $this->requestData['email']  = $this->input('email', '');
+        $this->requestData['phone']  = $this->input('phone', '');
+        $this->requestData['passwd'] = $this->input('passwd', '');
+        $this->requestData['code']   = $this->input('code', '');
+        $this->requestData['name']   = $this->input('name', '');
+        $this->requestData['place']  = $this->input('place', '');
+
+        //2.1 验证参数
+        if (empty($this->requestData['email'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_NULL;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_NULL, 'email');
+            return $this->ajaxReturn($result);
+        }
+        if (!Validate::isEmail($this->requestData['email'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_FORMAT_ERROR;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_FORMAT_ERROR, 'email');
+            return $this->ajaxReturn($result);
+        }
+
+        if (!empty($this->requestData['phone']) && !Validate::isMobile($this->requestData['phone'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_FORMAT_ERROR;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_FORMAT_ERROR, 'phone');
+            return $this->ajaxReturn($result);
+        }
+        if (empty($this->requestData['passwd'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_NULL;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_NULL, 'passwd');
+            return $this->ajaxReturn($result);
+        }
+
+        $result = EmailService::register($this->requestData);
+
+        //7 返回结果
+        return $this->ajaxReturn($result);
     }
 
     /**
@@ -142,6 +230,41 @@ class AuthController extends BaseController
         $result = EmailService::resetPasswordByOld($this->requestData);
 
         //4 返回结果
+        return $this->ajaxReturn($result);
+    }
+
+    /**
+     * 重置密码 - 通过验证码
+     * @author Chengcheng
+     */
+    public function resetPwdByCode()
+    {
+        //1 获取输入参数,email 手机号码,passwd 密码
+        $this->requestData['email']  = $this->input('email', '');
+        $this->requestData['passwd'] = $this->input('passwd', '');
+        $this->requestData['code']   = $this->input('code', '');
+
+        //2.1 验证参数
+        if (empty($this->requestData['email'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_NULL;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_NULL, 'email');
+            return $this->ajaxReturn($result);
+        }
+        if (!Validate::isEmail($this->requestData['email'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_FORMAT_ERROR;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_FORMAT_ERROR, 'email');
+            return $this->ajaxReturn($result);
+        }
+
+        if (empty($this->requestData['passwd'])) {
+            $result["code"] = Code::SYSTEM_PARAMETER_NULL;
+            $result["msg"]  = sprintf(Msg::SYSTEM_PARAMETER_NULL, 'passwd');
+            return $this->ajaxReturn($result);
+        }
+
+        $result = EmailService::resetPasswordByCode($this->requestData);
+
+        //7 返回结果
         return $this->ajaxReturn($result);
     }
 

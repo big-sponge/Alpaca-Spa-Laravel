@@ -11,6 +11,9 @@ var API = {
     admin_auth_login_token: '/manage/auth/loginByToken',   //登录-token
     admin_auth_logout: '/manage/auth/logout',              //注销
     admin_auth_pwd: '/manage/auth/resetPwdByOld',          //重置密码
+    admin_auth_reg: '/manage/auth/register',               //注册
+    admin_auth_reg_code: '/manage/auth/getRegCode',        //获取注册码
+    admin_auth_pwd_code: '/manage/auth/resetPwdByCode',    //获取注册码
 
     //管用员用户（后台）
     admin_member_list: '/manage/admin/getMemberList',        //用户信息
