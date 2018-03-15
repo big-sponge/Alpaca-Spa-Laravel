@@ -5,6 +5,7 @@
  *
  * @package  Laravel
  * @author   Taylor Otwell <taylor@laravel.com>
+ * @hacking ShiO
  */
 
 /*
@@ -54,3 +55,4 @@ $response = $kernel->handle($request = Illuminate\Http\Request::capture());
 $response->send();
 
 $kernel->terminate($request, $response);
+
