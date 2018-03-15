@@ -50,24 +50,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-lg-2">地点</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" readonly="readonly" value="{{= it.place }}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-lg-2">可创建的相册数量</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" readonly="readonly" value="{{= it.album_limit }}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-lg-2">已经创建的相册数量</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" readonly="readonly" value="{{= it.album_used }}">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="control-label col-lg-2">分组</label>
                         <div class="col-lg-10">
                             <input type="text" class="form-control" readonly="readonly" value="  {{ for(var i in it.group){ }}{{= it.group[i]['name'] }} &nbsp;{{ } }}">
