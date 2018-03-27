@@ -302,6 +302,18 @@ php artisan ws start --d
         路径：/public/admin/main/main.js 中的API变量
 ```
 
+### 其他
+
+#### 在程序中访问当前登录用户的信息
+
+```
+    $user     = Visitor::user();
+    $memberId = Visitor::user()->id;
+
+    具体可以参考 App\Common\Visitor 类。
+
+```
+
 ##  交流方式
 
 ### 联系我们
