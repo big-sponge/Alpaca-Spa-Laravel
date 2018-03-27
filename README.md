@@ -304,14 +304,13 @@ php artisan ws start --d
 
 ### 其他
 
-#### 在程序中访问当前登录用户的信息
+#### 1、在程序中访问当前登录用户的信息
 
 ```
     $user     = Visitor::user();
     $memberId = Visitor::user()->id;
 
     具体可以参考 App\Common\Visitor 类。
-
 ```
 
 ##  交流方式
