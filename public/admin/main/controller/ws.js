@@ -193,6 +193,7 @@ Alpaca.MainModule.WsController = {
 
         return view;
     },
+
     pocrAction: function (event) {
 
         var acceptData = JSON.parse(event.data);

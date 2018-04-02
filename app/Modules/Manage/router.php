@@ -17,6 +17,8 @@ Route::any('/', "IndexController@index");
 /* index - Index */
 Route::any('index/index', "IndexController@index");
 
+Route::any('index/index2', "IndexController@index2");
+
 /* index - upload 文件上传*/
 Route::any('index/uploadForCk', "IndexController@uploadForCk");
 

@@ -47,6 +47,10 @@ class PhotoStore extends BaseModel
             $query = $query->where('id', $data['id']);
         }
 
+        if (isset($data['page'])) {
+            $query = $query->where('pageSize', $data['id']);
+        }
+
         //总数
         $total = $query->count();
 
@@ -96,6 +100,7 @@ class PhotoStore extends BaseModel
         $model->path        = $data['path'];
         $model->member_id   = $data['member_id'];
         $model->member_type = $data['member_type'];
+
 
         // 保存信息
         $model->save();

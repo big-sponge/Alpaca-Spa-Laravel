@@ -147,4 +147,20 @@ class IndexController extends BaseController
         return $response;
     }
 
+
+    /**
+     * index
+     * @author Chengcheng
+     * @date   2016年10月23日 20:39:25
+     * @return array
+     */
+    public function index2(){
+
+
+
+        $result         = [];
+        $result['code'] = Code::SYSTEM_OK;
+        $result['msg']  = Msg::SYSTEM_OK;
+        return $this->ajaxReturn($result);
+    }
 }
