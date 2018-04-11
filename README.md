@@ -249,6 +249,13 @@ Alpaca-Spa-Laravel 是 **前后端分离** 开发的一个后台管理系统的D
 6 生成前端列表页面
 7 生成配置接口url
 8 选择是否复制到对应页面
+
+注：
+Builder工具还没有实现自动创建菜单、将生成配置接口url 填充到main.js文件中API数组中。
+因此你需要手动做这两件事
+配置菜单在/public/admin/main/view/layout/part/pageSidebar.html中
+API接口配置在/public/admin/main/main.js中
+
 ```
 ![图片名称](http://www.tkc8.com/images/sucai/img_show_2.png)
 
