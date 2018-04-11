@@ -103,7 +103,9 @@ $output.="        // 填充字段\n";
 foreach ($this->fields as $f)
 {
     if($f['field'] == 'id'){continue;};
-    $output.="        ".str_pad("\$model->".$f['field']."",30)."= \$data['".$f['field']."'];\n";
+    $output.="        "."if(isset(\$data['".$f['field']."'])){\n";
+    $output.="            ".str_pad("\$model->".$f['field']."",30)."= \$data['".$f['field']."'];\n";
+    $output.="        "."}\n";
 }
 $output.="        \n";
 $output.="        // 保存信息\n";

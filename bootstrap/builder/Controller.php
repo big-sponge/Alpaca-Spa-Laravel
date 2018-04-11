@@ -153,7 +153,7 @@ class Controller
         }
 
         $data                 = [];
-        $data['tableName']    = "tb_" . $table;
+        $data['tableName']    = $table_prefix.$table;
         $data['fields']       = $fields;
         $data['className']    = $className;
         $data['moduleName']   = $moduleName;

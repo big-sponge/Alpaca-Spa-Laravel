@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Alpaca - App</title>
+    <script type='text/javascript' src='http://m.sui.taobao.org/assets/js/zepto.js' charset='utf-8'></script>
+    <script> $.config = {router: false};</script>
+    <script src="/app/common/js/alpaca-spa-2.0.js" type="text/javascript"></script>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body>
+<a href="#/main/index/page1">去page1</a>
+<a href="#/main/index/page2">去page2</a>
+<a href="#/main/index/page3">去page3</a>
+<hr>
+<div class="content"></div>
+
+<!-- page 1 -->
+<script id='tpl_page1' type="text/x-dot-template">
+    <div>我是page1</div>
+</script>
+
+<!-- page 2 -->
+<script id='tpl_page2' type="text/x-dot-template">
+    <div>我是page2</div>
+</script>
+
+<!-- page 3 -->
+<script id='tpl_page3' type="text/x-dot-template">
+    <div>我是page3</div>
+</script>
+
+<script>
+    Alpaca.MainModule = {};
+    Alpaca.MainModule.IndexController = {
+        page1Action: function () {
+             return new Alpaca.View({from: "#tpl_page1", to: ".content"});
+        },
+        page2Action: function () {
+            return new Alpaca.View({from: "#tpl_page2", to: ".content"});
+        },
+        page3Action: function () {
+            return new Alpaca.View({from: "#tpl_page3", to: ".content"});
+        },
+    };
+
+    $(document).ready(function () {
+        Alpaca.run("#/main/index/page1");
+    });
+</script>
+
+
+</body>
+<!-- END BODY -->
+</html>

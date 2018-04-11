@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Alpaca - App</title>
+    <script type='text/javascript' src='http://m.sui.taobao.org/assets/js/zepto.js' charset='utf-8'></script>
+    <script> $.config = {router: false};</script>
+    <script src="http://full.tkc8.com/app/common/js/alpaca-spa-2.0.js" type="text/javascript"></script>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body>
+<a href="#/main/index/page1">去Page1(测试登录)</a><br>
+<a href="#/main/index/page2">去Page2(测试其他)</a><br>
+<hr>
+<div class="content"></div>
+
+<!-- page 1 -->
+<script id='tpl_page1' type="text/x-dot-template">
+    <div>
+        <h4>我是page1 用来测试登录</h4>
+        <a onclick='Alpaca.to("#/main/index/getCode")'>点我获取code</a>
+    </div>
+</script>
+<!-- page 1 -->
+<script id='tpl_page2' type="text/x-dot-template">
+    <div>
+        <h4>我是page2 用来测试别的</h4>
+    </div>
+</script>
+
+<!-- page wxBack -->
+<script id='tpl_wxBack' type="text/x-dot-template">
+    <div>
+        <h3>微信回调回来了</h3>
+        <h5>用Ajax 发送code到后端接口登录去吧</h5>
+        CODE={{= it.code}}
+    </div>
+</script>
+
+<script>
+    Alpaca.MainModule = {};
+    Alpaca.MainModule.IndexController = {
+        page1Action: function () {
+            return new Alpaca.View({from: "#tpl_page1", to: ".content"});
+        },
+        page2Action: function () {
+            return new Alpaca.View({from: "#tpl_page2", to: ".content"});
+        },
+        getCodeAction: function () {
+            var redirect = Alpaca.Router.getParams(0);
+            var back_uri = "/test-login.html#/main/index/wxBack/" + redirect;
+            var str      = getWxAuthUrl(back_uri);
+            window.location.replace(str);
+        },
+        wxBackAction: function () {
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r   = window.location.search.substr(1).match(reg);
+                if (r != null) {
+                    return (r[2]);
+                }
+                return null;
+            }
+            var code = GetQueryString('code');
+            //微信回调回来了，Ajax 发送code 去后端接口 登录去吧
+            return new Alpaca.View({data:{code:code},from: "#tpl_wxBack", to: ".content"});
+        },
+    };
+
+    $(document).ready(function () {
+        Alpaca.run("#/main/index/page1");
+    });
+</script>
+<script>
+    var WX_APP_ID = 'wx030ea3d763b7c9fb';
+    var getWxAuthUrl = function (redirect, scope) {
+
+        if (!redirect) {
+            redirect = '/';
+        }
+        var reurl   = "http://" + window.location.host + '' + redirect;
+        console.log(reurl);
+        var baseUrl = encodeURIComponent(reurl);
+
+        var urlObj              = {};
+        urlObj["appid"]         = WX_APP_ID;
+        urlObj["redirect_uri"]  = baseUrl;
+        urlObj["response_type"] = "code";
+
+        if (scope == 'base') {
+            urlObj["scope"] = "snsapi_base";
+        } else {
+            urlObj["scope"] = "snsapi_userinfo";
+        }
+        urlObj["state"] = "STATE" + "#wechat_redirect";
+
+        var toUrlParams = function (urlObj) {
+            var buff = "";
+            for (var k  in urlObj) {
+                var v = urlObj[k];
+                if (k != "sign") {
+                    buff += k + "=" + v + "&";
+                }
+            }
+
+            if (buff.substr(0, 1) == '&') {
+                buff = buff.substr(1);
+            }
+            var reg = /&$/gi;
+
+            buff = buff.replace(reg, "");
+
+            return buff;
+        };
+
+        var bizString = toUrlParams(urlObj);
+        var url = "https://open.weixin.qq.com/connect/oauth2/authorize?" + bizString;
+        return url;
+    };
+</script>
+
+</body>
+<!-- END BODY -->
+</html>
