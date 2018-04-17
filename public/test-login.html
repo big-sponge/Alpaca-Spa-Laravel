@@ -6,7 +6,7 @@
     <title>Alpaca - App</title>
     <script type='text/javascript' src='http://m.sui.taobao.org/assets/js/zepto.js' charset='utf-8'></script>
     <script> $.config = {router: false};</script>
-    <script src="http://full.tkc8.com/app/common/js/alpaca-spa-2.0.js" type="text/javascript"></script>
+    <script src="http://full.tkc8.com/admin/common/js/alpaca-spa-2.0.js" type="text/javascript"></script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -55,15 +55,7 @@
             window.location.replace(str);
         },
         wxBackAction: function () {
-            function GetQueryString(name) {
-                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-                var r   = window.location.search.substr(1).match(reg);
-                if (r != null) {
-                    return (r[2]);
-                }
-                return null;
-            }
-            var code = GetQueryString('code');
+            var code = Alpaca.Router.getParams('code');
             //微信回调回来了，Ajax 发送code 去后端接口 登录去吧
             return new Alpaca.View({data:{code:code},from: "#tpl_wxBack", to: ".content"});
         },
