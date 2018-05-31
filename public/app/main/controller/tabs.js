@@ -7,6 +7,9 @@ Alpaca.MainModule.TabsController = {
     },
     fixedTabAction: function () {
         var view = new Alpaca.MainModule.View();
+        view.ready(function(){
+            $('.buttons-tab').fixedTab({offset:44});
+        });
         return view;
     },
 };

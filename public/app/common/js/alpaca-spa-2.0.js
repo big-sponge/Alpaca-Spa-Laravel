@@ -58,14 +58,46 @@ Router = function () {
 
     /* 路由参数 */
     obj.Params = new Array();
+
+    /* 路由参数 ?参数 */
+    obj.QueryString = '';
+
     /* 获取路由中的参数 */
     obj.getParams = function (index, defaultValue) {
-
-        if (!defaultValue) {
-            defaultValue = 0;
+        var value = obj.Params[index];
+        if(value){
+            return value;
         }
-        var value = obj.Params[index] ? obj.Params[index] : defaultValue;
-        return value;
+
+       var getAlpacaQuery = function(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r   = obj.QueryString.match(reg);
+            if (r != null) {
+                return (r[2]);
+            }
+            return null;
+        };
+
+        value = getAlpacaQuery(index);
+        if(value){
+            return value;
+        }
+
+        var  getQueryStringUrl = function(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r   = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return (r[2]);
+            }
+            return null;
+        };
+
+        value = getQueryStringUrl(index);
+        if(value){
+            return value;
+        }
+
+        return defaultValue;
     };
 
     /* 解析路由 */
@@ -75,9 +107,9 @@ Router = function () {
         if (!inHash) {
             inHash = "";
         }
-
         /* 解析问号前面的 */
         if (inHash.indexOf("?") != -1) {
+            this.QueryString = inHash.slice(inHash.indexOf("?") + 1);
             inHash = inHash.slice(0, inHash.indexOf("?"));
         }
 

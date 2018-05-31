@@ -102,6 +102,7 @@ class IndexController extends BaseController
         echo "</script>";
         die;
     }
+
     /**
      * 微信回调
      * @author Chengcheng
@@ -146,7 +147,6 @@ class IndexController extends BaseController
 
         return $response;
     }
-
 
     /**
      * index

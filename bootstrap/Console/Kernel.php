@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \Console\Commands\Inspire::class,
         \Console\Commands\WsServer::class,
+        \Console\Commands\Daemon::class,
     ];
 
     /**
