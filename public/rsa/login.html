@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>RSA Login Test</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="./js/jsbn.js"></script>
+    <script type="text/javascript" src="./js/prng4.js"></script>
+    <script type="text/javascript" src="./js/rng.js"></script>
+    <script type="text/javascript" src="./js/rsa.js"></script>
+    <script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function cmdEncrypt() {
+            var passwd = $('#passwd').val();
+            var rsa = new RSAKey();
+            var modulus = "DB1EA572B55F5D9C8ADF092F5DCC3559CFEA8CE8BB54E3A71DA9B1AFBD7D17CF80ADB224FE4EA5379BC782F41C137748D8F1B5A36AD62A127EF5E87EFB25C209A66BCEE9925CE09631BF2271E81123E93438646625080FF04F4F2CF532B077E3E390486DF40E7586F0AE522C873F33170222F46BDB6084F55DE6B7031E55DBE7";
+            var exponent = "10001";
+            rsa.setPublic(modulus, exponent);
+            var res = rsa.encrypt(passwd);
+
+            $('#passwd').val(res);
+        }
+    </script>
+
+</head>
+<body>
+<form action="./login.php" method="post" >
+    <label for="username">用户名：</label><input type="text" name="username" id="username">
+    <label for="passwd">密  码：</label><input type="password" name="password" id="passwd">
+    <input type="submit" value="登录" onclick="cmdEncrypt();">
+</form>
+</body>
+</html>

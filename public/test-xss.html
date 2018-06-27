@@ -1,0 +1,118 @@
+<html>
+<head>
+    <script type='text/javascript' src='http://spa.tkc8.com/common/js/jquery-2.1.4.min.js'></script>
+    <script src="http://lpshow.linkphoto.cn/app_dev/common/js/empty.js" type="text/javascript"></script>
+    <script type="/text/javascript" src="/rsa/js/jsbn.js"></script>
+    <script type="text/javascript" src="/rsa/js/prng4.js"></script>
+    <script type="text/javascript" src="/rsa/js/rng.js"></script>
+    <script type="text/javascript" src="/rsa/js/rsa.js"></script>
+</head>
+<body>
+<button type="button" onclick="test()">TEST</button>
+<button type="button" onclick="cmdEncrypt()">TEST2</button>
+</body>
+<script type="text/javascript">
+    function cmdEncrypt() {
+        var passwd = '123123';
+        var rsa = new RSAKey();
+        var modulus = "DB1EA572B55F5D9C8ADF092F5DCC3559CFEA8CE8BB54E3A71DA9B1AFBD7D17CF80ADB224FE4EA5379BC782F41C137748D8F1B5A36AD62A127EF5E87EFB25C209A66BCEE9925CE09631BF2271E81123E93438646625080FF04F4F2CF532B077E3E390486DF40E7586F0AE522C873F33170222F46BDB6084F55DE6B7031E55DBE7";
+        var exponent = "10001";
+        rsa.setPublic(modulus, exponent);
+        var res = rsa.encrypt(passwd);
+        console.log(res);
+    }
+</script>
+
+<script>
+    //webSocket
+    AlpacaWs = {
+        ws: null,                                          //* web-socket 连接对象 */
+        url: "ws://testqq.jjjtech.com:8181",          //* web-socket 地址 */
+        success: function () {
+
+        },
+        init: function (func) {
+            if (!empty(func)) {
+                AlpacaWs.success = func;
+            }
+            if (AlpacaWs.ws) {
+                return AlpacaWs.ws;
+            }
+            var ws    = new WebSocket(AlpacaWs.url);
+            //onOpen
+            ws.onopen = function () {
+                // 连接成功,登录webSocket
+                var request = {};
+                request.cmd= 0;
+                request.data = {};
+                request.data.token = 'b0308409bf0c1c91130ef6d00d6b3034';
+                ws.send(JSON.stringify(request));
+                console.log('asd');
+            };
+
+            //onMessage
+            ws.onmessage = function (event) {
+                //AlpacaWs.router(event);
+                console.log(event.data);
+            };
+
+            //设置ws
+            AlpacaWs.ws = ws;
+        },
+        router: function (event) {
+            var acceptData = JSON.parse(event.data);
+            console.log(acceptData);
+            var action = acceptData.action;
+            switch (action) {
+                case 'album/userLogin':
+                    // 登录成功
+                    AlpacaWs.success();
+                    break;
+                case 'album/notifyNewRelease':
+                    // 收到发布图片
+                    Alpaca.to('#/main/online/newImage', acceptData.data);
+                    break;
+                case 'album/showDanmu':
+                    Alpaca.to('#/main/album/showDanmu', acceptData);
+                    break;
+            }
+        },
+        send: function (request) {
+            if (empty(AlpacaWs.ws)) {
+                alert('连接已经断开,请刷新页面!');
+                return;
+            }
+            AlpacaWs.ws.send(JSON.stringify(request));
+        },
+    };
+
+    var test = function () {
+        AlpacaWs.init();
+        return;
+
+        var ajaxParam = {
+            type: "post",
+            url: "https://618.tmall.com",
+            data: {openid: 'oV6_ss6FCmLY9CMAUk0ITO8jipwE', action: 'record', 'coin': 20},
+            dataType: "json",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            async: true,
+            success: function (data) {
+
+            },
+            complete: function () {
+
+
+            },
+            error: function () {
+
+            }
+        };
+
+        $.ajax(ajaxParam);
+    }
+</script>
+</html>

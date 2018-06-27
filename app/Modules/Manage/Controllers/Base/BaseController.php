@@ -81,6 +81,8 @@ class BaseController extends Controller
      */
     public function callAction($method, $parameters)
     {
+        $origin = request()->header("Origin");
+
         //检查登录权限
         $authResult = $this->auth();
         if ($authResult !== true) {
