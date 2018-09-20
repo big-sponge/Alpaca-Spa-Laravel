@@ -461,3 +461,21 @@ INSERT INTO `tb_ws_token` VALUES ('2977', '7', '2', '1b23ea0a603a1c0a4570f158948
 INSERT INTO `tb_ws_token` VALUES ('2978', '7', '2', '44e9d21d7e3439fa6edb204fa21f39e1', '2017-12-29 15:36:01', '2017-12-29 15:31:01', '2017-12-29 15:31:01', null, '测试账号', '测试账号', '58.100.142.51');
 INSERT INTO `tb_ws_token` VALUES ('2983', '7', '2', 'b1fe80a677577f2ff94780ff0801066a', '2017-12-29 16:11:52', '2017-12-29 16:06:52', '2017-12-29 16:06:52', null, '测试账号', '测试账号', '58.100.142.51');
 INSERT INTO `tb_ws_token` VALUES ('3070', '7', '2', '1e793fe657593cb57df445bf7e49ed56', '2018-01-05 13:43:03', '2018-01-05 13:38:03', '2018-01-05 13:38:03', null, '测试账号', '测试账号', '183.157.160.194');
+
+DROP TABLE IF EXISTS `tb_email_code`;
+CREATE TABLE `tb_email_code` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `member_id` char(50) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `member_type` tinyint(2) DEFAULT '2' COMMENT '用户类型，枚举|1-用户-USER|2-管理员-ADMIN',
+  `mobile` varchar(15) DEFAULT '' COMMENT '手机号',
+  `email` varchar(100) DEFAULT '' COMMENT '邮箱',
+  `code` varchar(65) DEFAULT '' COMMENT 'code',
+  `available_time` datetime DEFAULT NULL COMMENT '有效截至时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `delete_time` datetime DEFAULT NULL COMMENT '删除时间',
+  `creator` varchar(64) NOT NULL DEFAULT '' COMMENT '创建人信息',
+  `updater` varchar(64) NOT NULL DEFAULT '' COMMENT '更新人信息',
+  `ip` varchar(16) DEFAULT NULL COMMENT '加入IP',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COMMENT='email验证码code表';

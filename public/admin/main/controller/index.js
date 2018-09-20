@@ -73,4 +73,43 @@ Alpaca.MainModule.IndexController = {
             });
         return;
     },
+
+
+    //index,  默认渲染到
+    qrCodeCreateAction: function () {
+        var view = new Alpaca.MainModule.pageView();
+        view.ready(function () {
+
+        });
+        return view;
+    },
+    //index,  默认渲染到
+
+    doCreateAction: function (param) {
+
+        console.log(param);
+
+        var data     = {};
+        data.baseUrl = param.baseUrl;
+        data.list    = [];
+
+        var index = param.index;
+        var count = param.count;
+
+        if(count == 0){
+            data.list.push("");
+        }
+
+        for (var i = 0; i < count; i++) {
+            data.list.push(parseInt(index) + i);
+        }
+
+
+        var view = new Alpaca.View({to: ".page-table-body", data: data});
+        view.ready(function () {
+
+        });
+        return view;
+    },
+
 };

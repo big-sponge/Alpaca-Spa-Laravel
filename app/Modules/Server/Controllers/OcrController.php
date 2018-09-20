@@ -23,7 +23,7 @@ class OcrController extends BaseController
      */
     protected function noLogin()
     {
-        return ['qrCode'];
+        return ['qrCode','qrCodeCreate'];
     }
 
     /**
@@ -159,6 +159,24 @@ class OcrController extends BaseController
         $token = request()->get("token");
 
         $qrCode = new QrCode('http://full.tkc8.com/app/#/main/test/ocr/' . $token);
+
+        header('Content-Type: ' . $qrCode->getContentType());
+        echo $qrCode->writeString();
+    }
+
+    /**
+     * 二维码
+     * @author Chengcheng
+     * @date   2016年10月23日 20:39:25
+     * @return array
+     */
+    public function qrCodeCreate()
+    {
+        $url = request()->get("url","0");
+
+        $url = urldecode($url);
+
+        $qrCode = new QrCode($url);
 
         header('Content-Type: ' . $qrCode->getContentType());
         echo $qrCode->writeString();

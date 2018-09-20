@@ -1,0 +1,36 @@
+<table class="table table-togglable table-hover">
+    <thead>
+    <tr>
+        <!--<th data-toggle="true">编号</th>-->
+        <!-- <th data-hide="phone,tablet">描述</th>-->
+        <th data-hide="">图片</th>
+
+        <th data-hide="phone,tablet">地址url</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <?spa foreach(it.list as key => item): ?>
+    <tr>
+        <td>
+            <img src="http://full.tkc8.com/server/ocr/qrCodeCreate?url={{= encodeURIComponent(it.baseUrl+item)}}">
+        </td>
+        <td>{{= it.baseUrl}}{{= item}}</td>
+    </tr>
+    <?spa endForeach; ?>
+    </tbody>
+</table>
+
+<script>
+    var deletePhotoStore = function (id) {
+        var param = {
+            id: id,
+            url: API['photoStore_delete'],
+            callback: function () {
+                Alpaca.to("#/main/photo/storeListView");
+            }
+        };
+        Alpaca.to("#/main/index/delete/" + id, param);
+    };
+
+</script>

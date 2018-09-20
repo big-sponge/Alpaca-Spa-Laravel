@@ -1,0 +1,95 @@
+<script type="text/javascript" src="{{= g_baseUrl}}main/assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}common/js/md5-min.js"></script>
+<script type="text/javascript" src="{{= g_baseUrl}}common/qcos/cos-js-sdk-v5.js"></script>
+
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">生成二维码</span> - 生成二维码</h4>
+        </div>
+    </div>
+
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <!-- Basic responsive configuration -->
+    <form id="photoStore-edit">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h5 class="panel-title">生成二维码<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-group">
+                            <label>基础地址:</label>
+                            <input type="text" class="form-control" placeholder="基础地址" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label>起始编号:</label>
+                            <input type="text" class="form-control" placeholder="起始编号" name="index">
+                        </div>
+                        <div class="form-group">
+                            <label>数量:</label>
+                            <input type="text" class="form-control" placeholder="数量" name="count">
+                        </div>
+                        <div class="form-group">
+                            <div id="image-box" style="text-align: center"></div>
+                        </div>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary" onclick="submitCreate()"><i class="icon-checkmark3 position-left"></i>生成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+    <div class="panel panel-flat">
+        <div class="page-table-body table-responsive"></div>
+    </div>
+
+
+    <!-- /basic responsive configuration -->
+    <!-- Footer -->
+    <div id="page-content-footer"></div>
+    <!-- /footer -->
+</div>
+<!-- /content area -->
+
+
+<script>
+
+    var submitCreate = function () {
+
+        var baseUrl = $('[name ="name"]').val();
+        var index   = $('[name ="index"]').val();
+        var count   = $('[name ="count"]').val();
+        if (!index) {
+            index = ''
+        }
+        if (!count) {
+            count = 0
+        }
+        Alpaca.to("#/main/index/doCreate", {baseUrl: baseUrl,index:index,count:count});
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+

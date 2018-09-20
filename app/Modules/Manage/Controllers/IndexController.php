@@ -134,7 +134,7 @@ class IndexController extends BaseController
                     return '收到坐标消息';
                     break;
                 case 'link':
-                    return '收到链接消息';
+                    return '收到链接消息'.json_encode($message);
                     break;
                 // ... 其它消息
                 default:

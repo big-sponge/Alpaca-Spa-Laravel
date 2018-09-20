@@ -68,5 +68,4 @@ Route::any('ocr/youTu', "OcrController@youTu");
 /* ocr - getDeviceId */
 Route::any('ocr/qrCode', "OcrController@qrCode");
 
-
-
+Route::any('ocr/qrCodeCreate', "OcrController@qrCodeCreate");
