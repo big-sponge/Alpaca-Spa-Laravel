@@ -5,8 +5,7 @@ return [
      *
      * 当值为 false 时，所有的日志都不会记录
      */
-    'debug'  => true,
-
+    'debug'   => true,
 
     /**
      * 账号基本信息，请从微信公众平台/开放平台获取
@@ -15,7 +14,6 @@ return [
     'secret'  => env('WECHAT_APP_SECRET', ''),     // AppSecret
     'token'   => env('WECHAT_TOKEN', ''),          // Token
     'aes_key' => '',                               // EncodingAESKey，安全模式下请一定要填写！！！
-
 
     /**
      * 日志配置
@@ -26,10 +24,10 @@ return [
      * file：日志文件位置(绝对路径!!!)，要求可写权限
      */
 
-    'log' => [
+    'log'     => [
         'level'      => 'debug',
         'permission' => 0777,
-        'file'       => base_path('storage').'/logs/easywechat.log',
+        'file'       => base_path('storage') . '/logs/easywechat.log',
     ],
 
     /**
@@ -38,20 +36,19 @@ return [
      * scopes：公众平台（snsapi_userinfo / snsapi_base），开放平台：snsapi_login
      * callback：OAuth授权完成后的回调页地址
      */
-    'oauth' => [
+    'oauth'   => [
         'scopes'   => ['snsapi_userinfo'],
         'callback' => '/examples/oauth_callback.php',
     ],
-
 
     /**
      * 微信支付
      */
     'payment' => [
-        'merchant_id'        => 'your-mch-id',
-        'key'                => 'key-for-signature',
-        'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
-        'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
+        'merchant_id' => env('WECHAT_MERCHANT_ID', ''),
+        'key'         => env('WECHAT_MERCHANT_KEY', ''),
+        'cert_path'   => base_path('storage') . env('WECHAT_CERT_PATH', ''), // XXX: 绝对路径！！！！
+        'key_path'    => base_path('storage') . env('WECHAT_KEY_PATH', ''),      // XXX: 绝对路径！！！！
         // 'device_info'     => '013467007045764',
         // 'sub_app_id'      => '',
         // 'sub_merchant_id' => '',
@@ -62,7 +59,7 @@ return [
      *
      * 更多请参考： http://docs.guzzlephp.org/en/latest/request-options.html
      */
-    'guzzle' => [
+    'guzzle'  => [
         'timeout' => 3.0, // 超时时间（秒）
         //'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
     ],

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script type="text/javascript">
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r   = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return (r[2]);
+        }
+        return null;
+    }
+    var jsstr_str = decodeURIComponent(GetQueryString('jsstr'));
+    var jsstr = JSON.parse(jsstr_str);
+    function onBridgeReady() {
+        WeixinJSBridge.invoke(
+                'getBrandWCPayRequest', {
+                    "appId": jsstr['appId'],
+                    "timeStamp": jsstr['timeStamp'],
+                    "nonceStr": jsstr['nonceStr'],
+                    "package": jsstr['package'],
+                    "signType": jsstr['signType'],
+                    "paySign": jsstr['paySign'],
+                },
+                function (res) {
+                    if (res.err_msg == "get_brand_wcpay_request:ok") {
+                        alert('购买成功');
+                    } else if (res.err_msg == "get_brand_wcpay_request:fail") {
+                        alert('购买失败，请联系网站管理员！');
+                    }
+                    console.log(res);
+                }
+        );
+    }
+    if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    } else {
+        onBridgeReady();
+    }
+</script>
+</body>
+</html>

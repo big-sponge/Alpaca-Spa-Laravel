@@ -80,6 +80,9 @@ Alpaca.MainModule.AuthController = {
             url: g_url + API['server_wx_Login'],
             data: {code: code},
             newSuccess: function (data) {
+
+                console.log(data);
+
                 if (data.code == 9900) {
                     console.log(data);
                     var redirect = Alpaca.Router.getParams(0);

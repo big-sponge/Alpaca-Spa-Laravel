@@ -12,6 +12,52 @@ class WxUser
 
     public $config = [];
 
+
+    /**
+     * 获取微信用户openId
+     * @author Chengcheng
+     * @date 2016年11月5日 14:47:40
+     * @param string $code
+     * @return string;
+     */
+    public function auth($code)
+    {
+        //判断是否存在code
+        if (!isset($code)) {
+            //不存在code，返回null
+            return null;
+        } else {
+            //设置请求参数
+            $urlObj["appid"]      = $this->config['appid'];
+            $urlObj["secret"]     = $this->config['secret'];
+            $urlObj["code"]       = $code;
+            $urlObj["grant_type"] = "authorization_code";
+            $bizString            = $this->toUrlParams($urlObj);
+            $url                  = "https://api.weixin.qq.com/sns/oauth2/access_token?" . $bizString;
+
+            //初始化curl
+            $ch = curl_init();
+            //设置超时
+            curl_setopt($ch, CURLOPT_TIMEOUT, 600);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            //运行curl，结果以jason形式返回
+            $res = curl_exec($ch);
+            curl_close($ch);
+            //取出openid
+            if (empty($res)) {
+                return null;
+            }
+            $data = json_decode($res, true);
+            //返回结果
+            return $data;
+        }
+    }
+
     /**
      * 获取微信用户openId
      * @author Chengcheng
@@ -123,9 +169,10 @@ class WxUser
     {
         if (empty($accessToken)) {
             $accessToken = $this->getAccessToken();
+            $url  = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $accessToken . '&openid=' . $openId . '&lang=zh_CN';
+        }else{
+            $url  = 'https://api.weixin.qq.com/sns/userinfo?access_token=' . $accessToken . '&openid=' . $openId . '&lang=zh_CN';
         }
-
-        $url  = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $accessToken . '&openid=' . $openId . '&lang=zh_CN';
         $html = file_get_contents($url);
         $gets = json_decode($html, true);
         return $gets;

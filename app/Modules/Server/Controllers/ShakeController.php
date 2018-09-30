@@ -11,6 +11,8 @@ use App\Modules\Server\Auth\Auth;
 use App\Modules\Server\Controllers\Base\BaseController;
 use App\Modules\Server\Service\EmailService;
 use App\Modules\Server\Service\WxService;
+use EasyWeChat\Payment\Order;
+use Illuminate\Support\Facades\Log;
 
 class ShakeController extends BaseController
 {
@@ -22,7 +24,7 @@ class ShakeController extends BaseController
      */
     protected function noLogin()
     {
-        return ['index', 'wxLogin', 'testLogin','logout'];
+        return ['index', 'wxLogin', 'testLogin', 'logout', 'getJsPay' . 'wxPayBack'];
     }
 
     /**
@@ -177,7 +179,7 @@ class ShakeController extends BaseController
     {
         //获取参数
         $memberId = Visitor::user()->id;
-        $type     = $this->input('type',WsToken::MEMBER_TYPE_USER_WX);
+        $type     = $this->input('type', WsToken::MEMBER_TYPE_USER_WX);
 
         //生成token
         $token = WsToken::model()->generate($memberId, WsToken::MEMBER_TYPE_USER_WX);
@@ -187,6 +189,75 @@ class ShakeController extends BaseController
         $result["msg"]  = Msg::SYSTEM_OK;
         $result["data"] = $token;
         return $this->ajaxReturn($result);
+    }
+
+    /**
+     * getJsPay 方法 返回支付json串
+     * @author Chengcheng
+     * @date 2016-10-21 09:00:00
+     * @return static
+     */
+    public function getJsPay()
+    {
+        /* 输入参数  user_id */
+        $param['user_id']    = Visitor::user()->id;
+        $param['count']      = $this->input('count', 1);
+        $param['unit_price'] = 20000;
+
+        $openId  = "ovzxw1rK0KVc725tuYu-wExxafGQ";
+        $tradeNo = rand(1000000000, 9000000000);
+
+        /*  生成支付订单，保存到数据库，生成订单no */
+
+        /* 微信支付 统一下单 */
+        $payment    = WeChat::app()->payment;
+        $attributes = [
+            'trade_type'   => 'JSAPI', // JSAPI，NATIVE，APP...
+            'body'         => 'iPad mini 16G 白色',
+            'detail'       => 'iPad mini 16G 白色',
+            'out_trade_no' => $tradeNo,
+            'total_fee'    => 2, // 单位：分
+            'notify_url'   => 'http://' . $_SERVER['SERVER_NAME'] . '/server/shake/wxPayBack',
+            'openid'       => $openId,
+        ];
+
+        /* 生成支付JSON串 */
+        $resultWx = $payment->prepare(new Order($attributes));
+
+        if ($resultWx->return_code == 'SUCCESS' && $resultWx->result_code == 'SUCCESS') {
+            $prepayId       = $resultWx->prepay_id;
+            $data           = $payment->configForPayment($prepayId, false);
+            $result         = [];
+            $result['code'] = Code::SYSTEM_OK;
+            $result['msg']  = Msg::SYSTEM_OK;
+            $result['data'] = $data;
+            return $this->ajaxReturn($result);
+        }
+
+        /* 返回结果*/
+        $result         = [];
+        $result['code'] = Code::SYSTEM_ERROR;
+        $result['msg']  = $resultWx->return_msg;
+        return $this->ajaxReturn($result);
+    }
+
+    /**
+     * wxPayBack 微信回调函数
+     * @author Chengcheng
+     * @date 2016-10-21 09:00:00
+     * @return static
+     */
+    public function wxPayBack()
+    {
+        $response = WeChat::app()->payment->handleNotify(function ($notify, $successful) {
+
+            $out_trade_no = $notify->out_trade_no;
+            Log::info("asdad:." . $out_trade_no);
+
+            return true;
+        });
+        $response->send();
+        exit();
     }
 
 }

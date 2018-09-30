@@ -433,7 +433,7 @@ var tablePageDisplay = function (data) {
 };
 
 
-var WX_APP_ID = 'wx030ea3d763b7c9fb';
+var WX_APP_ID = 'wxd07b2ad48b8cb0fb';
 
 var getWxAuthUrl = function (redirect, scope) {
 

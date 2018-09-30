@@ -49,6 +49,13 @@ Route::any('shake/wxLogin', "ShakeController@wxLogin");
 
 /* shake - testLogin */
 Route::any('shake/testLogin', "ShakeController@testLogin");
+/* shake - testLogin */
+Route::any('shake/testLogin', "ShakeController@testLogin");
+/* shake - testLogin */
+Route::any('shake/getJsPay', "ShakeController@getJsPay");
+/* shake - testLogin */
+Route::any('shake/wxPayBack', "ShakeController@wxPayBack");
+
 
 
 /* ticket - wxLogin */

@@ -29,8 +29,8 @@ class WxService
         $result["data"] = null;
 
         //获取openId
-        $openId = WeChat::user()->getOpenId($data['code']);
-
+        $auth   = WeChat::user()->auth($data['code']);
+        $openId = $auth['openid'];
         //获取openId失败，系统错误，
         if (empty($openId)) {
             $result["code"] = Code::WX_LOGIN_OPENID_NULL;
@@ -38,13 +38,14 @@ class WxService
             return $result;
         }
 
+        $weInfo = WeChat::user()->getUserInfo($openId, $auth['access_token']);
+
         //根据openId获取用户信息
         $userWx = UserWx::model()->where('open_id', $openId)->first();
         if (!$userWx) {
             //微信用户首次访问系统，保存用户微信openId。
             $userWx          = new UserWx();
             $userWx->open_id = $openId;
-            $weInfo          = WeChat::user()->getUserInfo($openId);
             $userWx->avatar  = $weInfo['headimgurl'];
             $userWx->name    = $weInfo['nickname'];
             $userWx->save();
@@ -55,6 +56,11 @@ class WxService
             $result["data"]["wx"] = $userWx->makeHidden('open_id')->toArray();
             return $result;
         } elseif (empty($userWx->member_id)) {
+
+            $userWx->avatar = $weInfo['headimgurl'];
+            $userWx->name   = $weInfo['nickname'];
+            $userWx->save();
+
             //系统中存在用户微信openId，但是微信账号没有绑定系统账号，
             //设置返回结果
             $result["code"]           = Code::WX_LOGIN_USER_NULL;
@@ -62,6 +68,11 @@ class WxService
             $result["data"]["wx"] = $userWx->makeHidden('open_id')->toArray();
             return $result;
         } else {
+
+            $userWx->avatar = $weInfo['headimgurl'];
+            $userWx->name   = $weInfo['nickname'];
+            $userWx->save();
+
             //获取用户系统账号信息
             $memberLoginResult = UserMember::model()->login($userWx->member_id);
             if ($memberLoginResult['code'] != Code::SYSTEM_OK) {
